@@ -1,3 +1,4 @@
+Tes 1
 <?php $this->load->view('template/front/head_front');?>
 <div class="uk-container-center uk-margin-top" style="background:#ddd;">
   <nav class="uk-navbar"></nav>
