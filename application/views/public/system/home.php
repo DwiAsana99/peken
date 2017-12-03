@@ -1,7 +1,6 @@
 
 master test
 
-tesh branch
 
 <?php $this->load->view('template/front/head_front');?>
 <div class="uk-container-center uk-margin-top" style="background:#ddd;">
