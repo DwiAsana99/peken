@@ -1,0 +1,35 @@
+#detail {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 70vh;
+    grid-gap: 40px;
+}
+
+#detail>div:nth-child(1)>.col-xs-3> img {
+    height: 10vh;
+    width: 100%;
+    object-fit: cover;
+    border: 1px solid lightgray;
+    cursor: pointer;
+}
+
+#detail>div:nth-child(1)>img{
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+}
+
+.nav-tabs{
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 480px) {
+    #detail {
+        grid-template-columns: auto;
+        grid-template-rows: 55vh;
+    }
+
+    .contact{
+        width: 100%;
+    }
+}

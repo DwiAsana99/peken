@@ -1,0 +1,22 @@
+.my-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 5vh;
+}
+
+.my-container > div{
+    border: 1px solid lightgray;
+    padding: 10px;
+}
+
+
+
+@media screen and (max-width: 480px) {
+    .my-container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-gap: 70px 10px;
+    }
+}

@@ -1,142 +1,115 @@
-
-
-<?php
-$this->load->view('template/front/head_front');
-?>
-
-<div class="uk-container-center uk-margin-top" style="background:#ddd;">
-  <nav class="uk-navbar"></nav>
-  <div class=" uk-grid uk-container-center"  style="padding-top:30px; width: 1300px;" data-uk-grid-margin>
-    <div class="uk-width-2-6" style="background:#fff;padding-top:30px;padding-bottom: 30px; " data-uk-grid-margin uk-grid>
+<?php $title['tit']  = $product[0]->Name; $this->load->view('template/front/head_front',$title); ?>
+<?php $this->load->view('template/front/navigation'); ?>
+<div class="container">
+  <div id="detail">
+    <div>
       <?php $i = 1; foreach($product as $p){
         if ($i == 1 ) { ?>
-          <a href="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" data-lightbox-type="image" data-uk-lightbox="{group:'group'}" title="<?php echo $product[0]->Name; ?>">
-            <img src= "<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" style="height: 300px; widht: 300px; "   alt="">
-          </a><br>
+          <img src="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" id="image<?php echo $i ?>" class="image-toggle">
         <?php } elseif($i > 1 AND $i < 6) {?>
-          <a href="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" data-lightbox-type="image" data-uk-lightbox="{group:'group'}" title="<?php echo $product[0]->Name; ?>"> <img src= "<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" style="height: 75px; widht: 75px; "  alt=""></a>
-
+          <img src="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" title="image 2" alt="image 2" id="image<?php echo $i ?>" class="image-toggle" style="display:none;">
         <?php }
         $i++;
       }
       ?>
-
-    </div>
-    <div class="uk-width-3-6" style="background:#fff;padding-top:30px;padding-bottom: 30px;  border-right: 30px solid #ddd;" data-uk-grid-margin >
-
-      <h2 class=""><strong><?php echo $product[0]->Name; ?></strong></h2>
-      <p> <strong>Rp.<?php echo number_format($product[0]->Price, 0, '.', '.'); ?></strong>/<?php echo $product[0]->Unit; ?></p>
-
-      <p class="">Category: <?php echo $product[0]->ProductSubCategory; ?></p>
-      <p class="">Supply Ability : <?php echo number_format($product[0]->SupplyAbility, 0, '.', '.')." ".$product[0]->Unit; ?></p>
-      <p class="">Period Supply Ability: <?php echo $product[0]->PeriodSupplyAbility; ?></p>
-
-      <!-- This is a button toggling the modal -->
-      <a href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$product[0]->IdProduct."&"."id_supplier=".$p->IdSupplier ?>"
-        class="uk-button" >
-        Contact Supplier
-      </a>
-
-
-
-
-    </div>
-
-    <div class="uk-width-1-6" style="background:#fff;padding-top:30px;padding-bottom: 30px;"  data-uk-grid-margin>
-      <div class="uk-grid uk-grid-small uk-text-center">
-        <div class="uk-width-1-1" style="padding-right: 30px;">
-          <a href="<?php echo site_url('supplier/public_supplier_detail_view?')."id_supplier=".$p->IdSupplier ?>">
-          <p><img src="<?php echo base_url('assets/supplier_upload/').$p->ProfilImage;  ?>" width="100" height="100" alt=""></p>
-          <p><?php echo $p->CompanyName; ?></p>
-          </a>
+      <hr>
+      <?php $i = 1; foreach($product as $p){ ?>
+        <div class="col-xs-3">
+          <img class="img-responsive image-toggler" data-image-id="#image<?php echo $i ?>" src="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" />
         </div>
+        <?php $i++;  } ?>
       </div>
-    </div>
-
-    <div class="uk-width-medium-5-6" style="margin-left: -35px;">
-      <ul class="uk-tab bb-tab">
-        <li><a class="uk-h2 uk-active" href="#">Product Detail</a></li>
-
-
-        <li class="uk-tab-responsive uk-active uk-hidden" aria-haspopup="true" aria-expanded="false"><a>TAB ONE</a><div class="uk-dropdown uk-dropdown-small"><ul class="uk-nav uk-nav-dropdown"></ul><div></div></div></li>
-      </ul>
-      <div class="uk-switcher uk-tab-container uk-animation-slide-bottom">
-        <div class="uk-active" style="background: #fff!important;">
-          <div class="uk-tab-p">
-            <hr class="uk-hr">
-            <h3 class="">Product Description</h3>
-            <div class="uk-grid uk-margin uk-margin-bottom uk-bb-member">
-              <h4><?php echo $p->ProductDescription; ?></h4>
-            </div>
-            <hr class="uk-hr">
-            <h3 class="">Packaging & Delivery</h3>
-            <div class="uk-grid uk-margin uk-margin-bottom uk-bb-member">
-              <div class="uk-width-1-2">
-                <h4><?php echo $p->PkgDelivery; ?></h4>
-              </div>
-            </div>
-            <!-- <hr class="uk-hr">
-            <div class="uk-grid">
-              <div class="uk-width-medium-5-6">
-                <div style="background:#ddd;color:#212121;padding:10px;">
-                  <h3 class="uk-h3">About Factory</h3>
-                </div>
-                <div style="padding:20px;">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                </div>
-              </div>
-            </div>
-            <div class="uk-grid">
-              <div class="uk-width-medium-5-6">
-                <div style="background:#ddd;color:#212121;padding:10px;">
-                  <h3 class="uk-h3">Certifications</h3>
-                </div>
-                <div style="padding:20px;">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                </div>
-              </div>
-            </div>
-            <div class="uk-grid">
-              <div class="uk-width-medium-5-6">
-                <div style="background:#ddd;color:#212121;padding:10px;">
-                  <h3 class="uk-h3">FAQ</h3>
-                </div>
-                <div style="padding:20px;">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                </div>
-              </div>
-            </div>
-            <div class="uk-grid">
-              <div class="uk-width-medium-5-6">
-                <div style="background:#ddd;color:#212121;padding:10px;">
-                  <h3 class="uk-h3">Exhibition</h3>
-                </div>
-                <div style="padding:20px;">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                </div>
-              </div>
-            </div> -->
-
-
-
-
-
-
-
+      <div>
+        <h1><?php echo $product[0]->Name; ?></h1>
+        <h2>Rp.<?php echo number_format($product[0]->Price, 0, '.', '.'); ?></h2>
+        <p>Category : <?php echo $product[0]->ProductCategory; ?></p>
+        <p>Sub Category : <?php echo $product[0]->ProductSubCategory; ?></p>
+        <p>Supply Ability : <?php echo $product[0]->SupplyAbility; ?></p>
+        <p>Period Supply Ability : <?php echo $product[0]->PeriodSupplyAbility; ?></p>
+        <a class="btn btn-primary contact" href="#">Contact Supllier
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a href="#1a" data-toggle="tab">Description</a>
+          </li>
+          <li>
+            <a href="#2a" data-toggle="tab">Seller</a>
+          </li>
+        </ul>
+        <div class="tab-content clearfix">
+          <div class="tab-pane active" id="1a">
+            <p><?php echo $product[0]->ProductDescription; ?></p>
+          </div>
+          <div class="tab-pane" id="2a">
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus sapiente reprehenderit ut velit
+              quas dignissimos voluptatem at, eius debitis facere. Amet nam eum iusto officia nesciunt repudiandae
+              ullam nostrum odit. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus sapiente
+              reprehenderit ut velit quas dignissimos voluptatem at, eius debitis facere. Amet nam eum iusto
+              officia nesciunt repudiandae ullam nostrum odit.
+            </p>
           </div>
         </div>
       </div>
     </div>
+    <h2>Related products</h2>
+    <div class="my-container">
+      <div>
+        <img class="img-responsive" src="https://img10.jd.id/Indonesia/s800x800_/nHBfsgAABwAAAAYAJwAZ9QAAy9I.jpg?_ga=2.31647994.598327110.1516764553-1000888939.1509532365" alt="">
+        <h4>IDR Rp1.200.000 / pcs</h4>
+        <h5>Kesslers Diamonds</h5>
+        <h6>10 pcs (Supply Ability)</h6>
+        <h6>Daily (Period Ability)</h6>
+        <hr>
+        <div class="text-center">
+          <h6>Art Silver</h6>
+          <a href="#" class="btn btn-default">Contact Seller</a>
+        </div>
+      </div>
+      <div>
+        <img class="img-responsive" src="https://img10.jd.id/Indonesia/s800x800_/nHBfsgAABwAAAAYAJwAZ9QAAy9I.jpg?_ga=2.31647994.598327110.1516764553-1000888939.1509532365" alt="">
+        <h4>IDR Rp1.200.000 / pcs</h4>
+        <h5>Kesslers Diamonds</h5>
+        <h6>10 pcs (Supply Ability)</h6>
+        <h6>Daily (Period Ability)</h6>
+        <hr>
+        <div class="text-center">
+          <h6>Art Silver</h6>
+          <a href="#" class="btn btn-default">Contact Seller</a>
+        </div>
+      </div>
+      <div>
+        <img class="img-responsive" src="https://img10.jd.id/Indonesia/s800x800_/nHBfsgAABwAAAAYAJwAZ9QAAy9I.jpg?_ga=2.31647994.598327110.1516764553-1000888939.1509532365" alt="">
+        <h4>IDR Rp1.200.000 / pcs</h4>
+        <h5>Kesslers Diamonds</h5>
+        <h6>10 pcs (Supply Ability)</h6>
+        <h6>Daily (Period Ability)</h6>
+        <hr>
+        <div class="text-center">
+          <h6>Art Silver</h6>
+          <a href="#" class="btn btn-default">Contact Seller</a>
+        </div>
+      </div>
+      <div>
+        <img class="img-responsive" src="https://img10.jd.id/Indonesia/s800x800_/nHBfsgAABwAAAAYAJwAZ9QAAy9I.jpg?_ga=2.31647994.598327110.1516764553-1000888939.1509532365" alt="">
+        <h4>IDR Rp1.200.000 / pcs</h4>
+        <h5>Kesslers Diamonds</h5>
+        <h6>10 pcs (Supply Ability)</h6>
+        <h6>Daily (Period Ability)</h6>
+        <hr>
+        <div class="text-center">
+          <h6>Art Silver</h6>
+          <a href="#" class="btn btn-default">Contact Seller</a>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
 
-</div>
-</div>
-
-
-<?php
-
-$this->load->view('template/front/Foot_front');
-
-?>
+  <script>
+  $('.image-toggler').click(function () {
+    $('.image-toggle').hide();
+    $($(this).attr('data-image-id')).show();
+  });
+  </script>
+<?php $this->load->view('template/front/foot_front'); ?>
