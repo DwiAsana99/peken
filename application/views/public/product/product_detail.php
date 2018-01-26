@@ -26,7 +26,7 @@
         <p>Sub Category : <?php echo $product[0]->ProductSubCategory; ?></p>
         <p>Supply Ability : <?php echo $product[0]->SupplyAbility; ?></p>
         <p>Period Supply Ability : <?php echo $product[0]->PeriodSupplyAbility; ?></p>
-        <a class="btn btn-primary contact" href="#">Contact Supllier
+        <a class="btn btn-primary contact" href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$product[0]->IdProduct."&"."id_supplier=".$p->IdSupplier ?>">Contact Supllier
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
         </a>
         <ul class="nav nav-tabs">
@@ -41,13 +41,11 @@
           <div class="tab-pane active" id="1a">
             <p><?php echo $product[0]->ProductDescription; ?></p>
           </div>
-          <div class="tab-pane" id="2a">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus sapiente reprehenderit ut velit
-              quas dignissimos voluptatem at, eius debitis facere. Amet nam eum iusto officia nesciunt repudiandae
-              ullam nostrum odit. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus sapiente
-              reprehenderit ut velit quas dignissimos voluptatem at, eius debitis facere. Amet nam eum iusto
-              officia nesciunt repudiandae ullam nostrum odit.
-            </p>
+          <div class="tab-pane" id="2a"><br>
+            <a href="<?php echo site_url('supplier/public_supplier_detail_view?')."id_supplier=".$p->IdSupplier ?>">
+            <p><img src="<?php echo base_url('assets/supplier_upload/').$p->ProfilImage;  ?>" width="100" height="100" alt=""></p>
+            <p><?php echo $p->CompanyName; ?></p>
+            </a>
           </div>
         </div>
       </div>

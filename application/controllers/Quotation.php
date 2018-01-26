@@ -19,7 +19,7 @@ class Quotation extends CI_Controller{
     $data['product'] = $get_product->result();
     $data['supplier'] = $get_supplier->result();
     // print_r($data['supplier']);exit();
-    $this->load->view('rfq',$data);
+    $this->load->view('private/quotation/rfq',$data);
   }
   function supplier_quotation_list()
   {
@@ -47,7 +47,7 @@ class Quotation extends CI_Controller{
     $id_buyer = $this->session->userdata('id_buyer');
     $get_quotation = $this->M_quotation->get_quotation($id_buyer);
     $data['quotation'] = $get_quotation->result();
-    $this->load->view('private/quotation/buyer_quotation',$data);
+    $this->load->view('private/quotation/buyer_quotation_list',$data);
   }
   function add_quotation_detail()
   {

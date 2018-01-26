@@ -72,7 +72,7 @@
     <?php } ?>
 
       <div class="text-right">
-        <a href="#" class="btn btn-warning">See More Product Today</a>
+        <a href="<?php echo site_url('Product/public_product_list_view') ?>" class="btn btn-warning">See More Product Today</a>
       </div>
     </div>
   </div>
