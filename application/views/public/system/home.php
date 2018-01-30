@@ -3,6 +3,7 @@
   <div class="container">
     <div class="jumbotron">
       <h1>Dinilaku</h1>
+      <h1>Nah mo nae</h1>
       <div id="text-slog">"Love is Fragile"</div>
       <a class="btn btn-default btn-lg">Shop Now</a>
     </div>
