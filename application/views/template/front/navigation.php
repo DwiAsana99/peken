@@ -57,7 +57,7 @@
 
   .tes a{
     margin-left: 0px;
-    
+
   }
 
   select{
@@ -106,7 +106,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php echo site_url('Home'); ?>">DINILAKU</a>
+      <a class="navbar-brand" href="<?php echo site_url('Home'); ?>">DINILAKU YU</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
