@@ -1,6 +1,6 @@
 
   <div class="container">
-    <h1>Pembelian Necklace Bahla</h1>
+    <h1>Pembelian Necklace Bahla initalize</h1>
     <ol class="breadcrumb">
       <li>
         <a href="#">Home</a>
