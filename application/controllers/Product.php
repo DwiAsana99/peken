@@ -61,12 +61,20 @@ class Product extends CI_Controller{
 		$data['product'] = $get_product->result();
 		$str_links = $this->pagination->create_links();
 		$data["links"] = explode('&nbsp;',$str_links );
+		$head_data['page_title'] = "Dinilaku";
+		$this->load->view('template/front/head_front',$head_data);
+		$this->load->view('template/front/navigation');
 		$this->load->view('public/product/product_list',$data);
+		$this->load->view('template/front/foot_front');
 	}
 	function public_product_detail_view($id_product){
 		$get_product = $this->M_product->get_product("",$id_product);
 		$data['product'] = $get_product->result();
+		$head_data['page_title'] = "Dinilaku";
+		$this->load->view('template/front/head_front',$head_data);
+		$this->load->view('template/front/navigation');
 		$this->load->view('public/product/product_detail',$data);
+		$this->load->view('template/front/foot_front');
 	}
 	function product_view(){
 		$id_supplier = $this->session->userdata('id_supplier');

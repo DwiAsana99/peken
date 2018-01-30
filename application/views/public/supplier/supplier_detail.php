@@ -1,4 +1,4 @@
-<?php $title['tit']  = "Dinilaku"; $this->load->view('template/front/head_front',$title); ?>
+
   <script>
 $(document).ready(function(){
   // Add smooth scrolling to all links
@@ -25,7 +25,7 @@ $(document).ready(function(){
   });
 });
 </script>
-<?php $this->load->view('template/front/navigation'); ?>
+
   <div class="heading">
     <div class="container-fluid">
       <div class="col-md-4 col-md-offset-4 text-center">
@@ -71,4 +71,3 @@ $(document).ready(function(){
     <?php }?>
     </div>
   </div>
-<?php $this->load->view('template/front/foot_front'); ?>

@@ -1,7 +1,72 @@
-.img-circle {
+.chat
+{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chat li
+{
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px dotted #B3A9A9;
+}
+
+.chat li.left .chat-body
+{
+  margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+  margin-right: 60px;
+}
+
+
+.chat li .chat-body p
+{
+  margin: 0;
+  color: #777777;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+  margin-right: 5px;
+}
+
+.panel-body
+{
+  overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
+/*=========Membuat  scroll mulai dari bawah===============*/
+  height: 300px;
+}
+
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #555;
+}
+
+
+/* _____________________________________________________ */
+/* .img-circle {
     width: 30px;
     height: 30px;
-}
+} */
 
 .detail img {
     width: 8vw;
@@ -11,7 +76,7 @@
     box-shadow: 2px 2px 4px #bbb;
     border-top-right-radius: 4px;
 }
-
+/*
 .block {
     display: inline-block;
     margin-bottom: 5vh;
@@ -21,8 +86,8 @@ pre {
     background-color: white;
     border: none;
     /* font-family: "Source Sans Pro",Calibri,Candara,Arial,sans-serif; */
-}
-
+/* } */
+/*
 .chat {
     border: 1px solid rgb(243, 243, 243);
     padding-bottom: 10px;
@@ -90,21 +155,21 @@ pre {
 
 .message{
     margin-top: 10px;
-}
+} */
 
 /* container properties */
-
+/*
 .scrollbar {
     width: 100%;
     max-width: 100%;
     height: 400px;
     background-color: #ffffff;
     overflow-y: scroll;
-}
+} */
 
 
 /* customize scrollbar css */
-
+/*
 #scrollbar-custom::-webkit-scrollbar {
     width: 12px;
     background-color: #e9e9e9;
@@ -116,10 +181,10 @@ pre {
 
 #scrollbar-custom::-webkit-scrollbar-track {
     border: 1px #ffffff solid;
-    border-radius: 0px;
+    border-radius: 0px; */
     /* -webkit-box-shadow:0 0 6px #c8c8c8 inset; */
-}
-
+/* } */
+/*
 #scrollbar-custom::-webkit-scrollbar-thumb {
     background-color: #ff4d00;
     border: none;
@@ -151,5 +216,5 @@ pre {
         white-space: nowrap;
         overflow-x: scroll;
         overflow-y: hidden;
-    }
+    } */
 }

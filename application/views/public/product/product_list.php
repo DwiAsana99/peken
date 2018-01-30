@@ -1,5 +1,4 @@
-<?php $title['tit']  = "Dinilaku"; $this->load->view('template/front/head_front',$title); ?>
-<?php $this->load->view('template/front/navigation'); ?>
+
   <div class="container">
   <ol class="breadcrumb">
       <li>
@@ -26,4 +25,3 @@
       <?php } ?>
     </div>
   </div>
-<?php $this->load->view('template/front/foot_front'); ?>

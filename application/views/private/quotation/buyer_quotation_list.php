@@ -1,4 +1,4 @@
-<?php $title['tit']  = "Dinilaku"; $this->load->view('template/front/head_front',$title); ?>
+
     <style>
         table a:not(.btn),
         .table a:not(.btn) {
@@ -10,7 +10,7 @@
             /* whatever other hover styles you want */
         }
     </style>
-<?php $this->load->view('template/front/navigation'); ?>
+
     <div class="container">
         <h1>Quotation List</h1>
         <ol class="breadcrumb">
@@ -28,35 +28,14 @@
           <?php foreach($quotation as $q){ ?>
             <tr>
                 <td>
-                    <a href="<?php echo base_url().'index.php/Quotation/supplier_quotation_detail?id_quotation='.$q->IdQuotation; ?>">To: <?php echo $q->CompanyName  ?></a>
+                    <a href="<?php echo base_url().'index.php/Quotation/buyer_quotation_detail?id_quotation='.$q->IdQuotation; ?>">To: <?php echo $q->CompanyName  ?></a>
                 </td>
                 <td>Pembelian <?php echo $q->Name  ?></td>
                 <td><?php echo trim(substr($q->Content,0,50))." <b>...</b>" ?></td>
                 <td><?php echo $q->DateSend  ?></td>
             </tr>
             <?php } ?>
-            <!-- <tr>
-                <td>To: Art Silver</td>
-                </a>
-                <td>Pembelian Necklace</td>
-                </a>
-                <td>Lorem Ipsum dolor sit amet...</td>
-                </a>
-                <td>19 / 01 / 2018</td>
-                </a>
-            </tr>
-            <tr>
-                <td>To: Art Silver</td>
-                <td>Pembelian Necklace</td>
-                <td>Lorem Ipsum dolor sit amet...</td>
-                <td>19 / 01 / 2018</td>
-            </tr>
-            <tr>
-                <td>To: Art Silver</td>
-                <td>Pembelian Necklace</td>
-                <td>Lorem Ipsum dolor sit amet...</td>
-                <td>19 / 01 / 2018</td>
-            </tr> -->
+
         </table>
     </div>
     <script>
@@ -84,4 +63,3 @@
             $(this).toggleClass('hover');
         });
     </script>
-<?php $this->load->view('template/front/foot_front'); ?>

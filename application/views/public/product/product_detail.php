@@ -1,5 +1,3 @@
-<?php $title['tit']  = $product[0]->Name; $this->load->view('template/front/head_front',$title); ?>
-<?php $this->load->view('template/front/navigation'); ?>
 <div class="container">
   <div id="detail">
     <div>
@@ -110,4 +108,3 @@
     $($(this).attr('data-image-id')).show();
   });
   </script>
-<?php $this->load->view('template/front/foot_front'); ?>

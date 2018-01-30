@@ -1,4 +1,3 @@
-<?php $title['tit']  = "Dinilaku"; $this->load->view('template/front/head_front',$title); ?>
 
   <style>
      #info {
@@ -24,7 +23,7 @@
       });
     });
   </script>
-<?php $this->load->view('template/front/navigation'); ?>
+
   <div id="info" class="container">
   <ol class="breadcrumb">
       <li>
@@ -61,4 +60,3 @@
         <button class="btn btn-warning pull-right" type="submit">Send RFQ</button>
       </form>
     </div>
-<?php $this->load->view('template/front/foot_front'); ?>

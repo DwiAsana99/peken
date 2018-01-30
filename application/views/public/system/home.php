@@ -1,5 +1,4 @@
-<?php $title['tit']  = "Dinilaku"; $this->load->view('template/front/head_front',$title); ?>
-<?php $this->load->view('template/front/navigation'); ?>
+
 <heading>
   <div class="container">
     <div class="jumbotron">
@@ -89,4 +88,3 @@
     </div>
   </div>
 </div>
-<?php $this->load->view('template/front/foot_front'); ?>
