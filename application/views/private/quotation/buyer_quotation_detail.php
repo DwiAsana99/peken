@@ -37,7 +37,7 @@ Qty           : 10 <br><br>
                 <?php foreach ($quotation_detail as $qd): ?>
                   <?php if ($this->session->userdata('id_buyer') == $qd->IdMember): ?>
                     <li class="right clearfix"><span class="chat-img pull-right">
-                      <img src="<?php echo base_url('assets/supplier_upload/').$qd->ProfilImage ?>" alt="User Avatar" width="60" class="img-circle" />
+                      <img src="http://placehold.it/50/55C1E7/fff&text=me" alt="User Avatar" width="60" class="img-circle" />
                     </span>
                     <div class="chat-body clearfix">
                       <div class="header">
@@ -75,7 +75,7 @@ Qty           : 10 <br><br>
         <div class="panel-footer">
           <!-- <form class="" id="Simpan" action="<?php //echo base_url().'index.php/Quotation/add_quotation_detail'; ?>" method="post" > -->
           <div class="input-group">
-              <input type="hidden" name="id_member" value="<?php echo $this->session->userdata('id_supplier'); ?>">
+              <input type="hidden" name="id_member" value="<?php echo $this->session->userdata('id_buyer'); ?>">
               <input type="hidden" name="id_quotation" value="<?php echo $quotation[0]->IdQuotation;; ?>">
             <input onkeypress="return runScript(event)" type="text"  name="message" class="form-control input-sm" placeholder="Type your message here..." />
             <span class="input-group-btn">
@@ -89,82 +89,7 @@ Qty           : 10 <br><br>
         </div>
       </div>
     </div>
-      <!-- CHAT DESIGN DETA -->
-      <!-- <div class="col-md-4 col-md-offset-1 chat">
-        <h2>Chat</h2>
-        <div class="chat-room scrollbar" id="scrollbar-custom">
-          <div class="buyer">
-            <div class="left">
-              <span>
-                <img class="img-responsive img-circle" src="./assets/img/minisite.jpg" alt="" srcset=""> <b>Deta</b></span>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam nulla quia nobis! Dicta temporibus atque modi asperiores placeat,
-                veritatis in aut blanditiis soluta repudiandae hipsam voluptates minima adipisci exercitationem autem!
-              </p>
-              <div style="font-size: 0.8em;text-align: center;word-spacing: 9px;">11/12/2018 09:10AM</div>
-            </div>
-          </div>
-          <div class="seller">
-            <div class="right">
-              <span style="float:right">
-              <b>Deta</b> <img class="img-responsive img-circle" src="./assets/img/necklace.jpg">
-              </span>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam nulla quia nobis! Dicta temporibus atque modi
-                asperiores placeat, veritatis in aut blanditiis soluta repudiandae ipsam voluptates minima adipisci exercitationem
-                autem!
-              </p>
-              <div style="font-size: 0.8em;text-align: center;word-spacing: 9px;">11/12/2018 09:10AM</div>
-            </div>
-          </div>
-          <div class="buyer">
-            <div class="left">
-              <span>
-                <img class="img-responsive img-circle" src="./assets/img/minisite.jpg" alt="" srcset=""> <b>Deta</b></span>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              </p>
-              <div style="font-size: 0.8em;text-align: center;word-spacing: 9px;">11/12/2018 09:10AM</div>
-            </div>
-          </div>
-          <div class="seller">
-            <div class="right">
-              <span style="float:right">
-              <b>Deta</b> <img class="img-responsive img-circle" src="./assets/img/necklace.jpg">
-              </span>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                autem!
-              </p>
-              <div style="font-size: 0.8em;text-align: center;word-spacing: 9px;">11/12/2018 09:10AM</div>
-            </div>
-          </div>
-          <div class="buyer">
-            <div class="left">
-              <span>
-                <img class="img-responsive img-circle" src="./assets/img/minisite.jpg" alt="" srcset=""> <b>Deta</b></span>
-              <p>
-                Lorem
-              </p>
-              <div style="font-size: 0.8em;text-align: center;word-spacing: 9px;">11/12/2018 09:10AM</div>
-            </div>
-          </div>
-          <div class="seller">
-            <div class="right">
-              <span style="float:right">
-              <b>Deta</b> <img class="img-responsive img-circle" src="./assets/img/necklace.jpg">
-              </span>
-              <p>Lorem
-              </p>
-              <div style="font-size: 0.8em;text-align: center;word-spacing: 9px;">11/12/2018 09:10AM</div>
-            </div>
-          </div>
-        </div>
-        <div class="input-group message">
-          <input type="text" class="form-control">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Send</button>
-          </span>
-        </div>
-      </div> -->
+
     </div>
   </div>
   <script>
@@ -173,5 +98,64 @@ Qty           : 10 <br><br>
       $(".chat-room").delay(800).animate({
         scrollTop: a
       }, 500);
+    });
+  </script>
+  <script type="text/javascript">
+  function runScript(e) {
+      if (e.keyCode == 13) {
+        // alert("test");
+      e.preventDefault();
+      var data = {
+        'id_quotation'              : $('input[name=id_quotation]').val(),
+          'id_member'              : $('input[name=id_member]').val(),
+          'message'             : $('input[name=message]').val()
+      };
+      // lakukan proses ajax
+      $.ajax({
+          type        : 'POST',
+          dataType:'html',
+          url         : "<?php echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
+          cache: false,
+          data        :  data,
+          success: function(response) {
+
+              $(".badan_chat").append(response);
+
+          }
+
+      });
+  return false;
+  }
+  }
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+       $("#addPesan").click(function(e){
+        //  alert("test");
+        // var url = $('#Simpan').attr('action');
+         // ambil inputannya
+         e.preventDefault();
+         var data = {
+           'id_quotation'              : $('input[name=id_quotation]').val(),
+             'id_member'              : $('input[name=id_member]').val(),
+             'message'             : $('input[name=message]').val()
+         };
+         // lakukan proses ajax
+         $.ajax({
+             type        : 'POST',
+             dataType:'html',
+             url         : "<?php echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
+             cache: false,
+             data        :  data,
+             success: function(response) {
+
+                 $(".badan_chat").append(response);
+
+             }
+
+         });
+
+
+      });
     });
   </script>
