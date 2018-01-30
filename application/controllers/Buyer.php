@@ -13,7 +13,11 @@ class Buyer extends CI_Controller{
     $id_buyer = $this->session->userdata('id_buyer');
     $get_member = $this->M_member->get_member("",0,$id_buyer);
     $data['user'] = $get_member->result();
+    $head_data['page_title'] = "Dinilaku";
+		$this->load->view('template/front/head_front',$head_data);
+		$this->load->view('template/front/navigation');
     $this->load->view('private/buyer_account/buyer_account',$data);
+    $this->load->view('template/front/foot_front');
   }
   public function edit_buyer_account(){
     $id_buyer = $this->session->userdata('id_buyer');
