@@ -17,7 +17,6 @@
           <img src="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" alt="">
           <?php } ?>
         </div>
-<br><br><br><br><br><br><br><br>
 Quotation id  : 1 <br>
 Supplier Name : <?php echo $quotation[0]->CompanyName; ?><br>
 Product Name  : <?php echo $quotation[0]->Name; ?><br>
@@ -44,9 +43,9 @@ Qty           : 10 <br><br>
                         <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
                         <strong class="pull-right primary-font"><?php echo $qd->CompanyName; ?></strong>
                       </div>
-                      <p>
+                      <div>
                         <?php echo $qd->Message; ?>
-                      </p>
+                      </div>
                     </div>
                   </li>
                   <?php else: ?>
@@ -58,9 +57,9 @@ Qty           : 10 <br><br>
                         <strong class="primary-font"><?php echo $qd->CompanyName; ?></strong> <small class="pull-right text-muted">
                           <span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
                         </div>
-                        <p>
+                        <div>
                           <?php echo $qd->Message; ?>
-                        </p>
+                        </d>
                       </div>
                     </li>
                   <?php endif; ?>
