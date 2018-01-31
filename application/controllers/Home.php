@@ -5,7 +5,7 @@ class Home extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
-    $this->load->model(array('M_product','M_member','M_product_category'));
+		$this->load->model(array('M_product','M_member','M_product_category'));
 	}
 
 	function index(){
@@ -15,9 +15,13 @@ class Home extends CI_Controller{
 	function home_view(){
 		$data['product'] = $this->M_product->get_top8_product();
 		$data['supplier'] = $this->M_member->get_top10_supplier();
-		 $get_product_category = $this->M_product_category->get_product_category();
-			$data['product_category'] = $get_product_category->result();
+		$get_product_category = $this->M_product_category->get_product_category();
+		$data['product_category'] = $get_product_category->result();
+		$head_data['page_title'] = "Dinilaku";
+		$this->load->view('template/front/head_front',$head_data);
+		$this->load->view('template/front/navigation');
 		$this->load->view('public/system/home',$data);
+		$this->load->view('template/front/foot_front');
 	}
 
 

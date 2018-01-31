@@ -45,7 +45,11 @@ class Supplier extends CI_Controller{
     $data['supplier'] = $get_supplier->result();
     $str_links = $this->pagination->create_links();
     $data["links"] = explode('&nbsp;',$str_links );
+    $head_data['page_title'] = "Dinilaku";
+		$this->load->view('template/front/head_front',$head_data);
+		$this->load->view('template/front/navigation');
     $this->load->view('public/supplier/supplier_list',$data);
+    $this->load->view('template/front/foot_front');
   }
   function public_supplier_detail_view(){
     $page = $this->input->get('per_page');
@@ -64,7 +68,11 @@ class Supplier extends CI_Controller{
     $this->pagination->initialize($config);
     $str_links = $this->pagination->create_links();
     $data["links"] = explode('&nbsp;',$str_links );
+    $head_data['page_title'] = "Dinilaku";
+		$this->load->view('template/front/head_front',$head_data);
+		$this->load->view('template/front/navigation');
     $this->load->view('public/supplier/supplier_detail',$data);
+    $this->load->view('template/front/foot_front');
   }
 
   function supplier_account_view(){

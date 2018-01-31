@@ -1,6 +1,7 @@
 <?php
 /**
 *
+
 */
 class Quotation extends CI_Controller{
 
@@ -18,11 +19,24 @@ class Quotation extends CI_Controller{
     $get_supplier = $this->M_member->get_member("",1,$id_supplier);
     $data['product'] = $get_product->result();
     $data['supplier'] = $get_supplier->result();
-    // print_r($data['supplier']);exit();
-    $this->load->view('rfq',$data);
+    $head_data['page_title'] = "Dinilaku";
+		$this->load->view('template/front/head_front',$head_data);
+		$this->load->view('template/front/navigation');
+    $this->load->view('private/quotation/rfq',$data);
+    $this->load->view('template/front/foot_front');
   }
-  function supplier_quotation_list()
-  {
+  /*
+   - rfq_view() diatas digunakan untuk menampilkan halaman request for quotation
+   - $this->input->get('id_product'), $this->input->get('id_supplier') digunakan
+     untuk mengambil id_product dan id_supplier yang berada pada tombol/hyperlink
+     di halaman product detail
+   - $this->M_product->get_product("",$id_product) digunakan untuk mencari data
+     product berdasarkan id_product.
+   - $data['product'] berisi multiple row (beberapa baris) data berdasarkan jumlah gambar
+     dari 1 product tunggal.
+
+  */
+  function supplier_quotation_list(){
     $id_supplier = $this->session->userdata('id_supplier');
     $get_quotation = $this->M_quotation->get_quotation("",$id_supplier);
     $data['quotation'] = $get_quotation->result();
@@ -47,16 +61,38 @@ class Quotation extends CI_Controller{
     $id_buyer = $this->session->userdata('id_buyer');
     $get_quotation = $this->M_quotation->get_quotation($id_buyer);
     $data['quotation'] = $get_quotation->result();
-    $this->load->view('private/quotation/buyer_quotation',$data);
+    $head_data['page_title'] = "Quotation Detail";
+    $this->load->view('template/front/head_front',$head_data);
+    $this->load->view('template/front/navigation');
+    $this->load->view('private/quotation/buyer_quotation_list',$data);
+    $this->load->view('template/front/foot_front');
   }
-  function add_quotation_detail()
-  {
+  /*
+  - buyer_quotation_list() diatas digunakan menampilkan halaman buyer_quotation_list
+    yang berisi daftar quotation yang pernah dilakukan oleh buyer
+  */
+
+  function buyer_quotation_detail(){
+    $id_buyer = $this->session->userdata('id_buyer');
+    $id_quotation = $this->input->get('id_quotation');
+    $get_quotation = $this->M_quotation->get_quotation($id_buyer,"",$id_quotation);
+    $get_quotation_detail = $this->M_quotation_detail->get_quotation_detail($id_quotation);
+    $quotation_row = $get_quotation->row();
+    $get_product = $this->M_product->get_product("",$quotation_row->IdProduct);
+    $data['quotation'] = $get_quotation->result();
+    $data['product'] = $get_product->result();
+    $data['quotation_detail'] = $get_quotation_detail->result();
+    $head_data['page_title'] = "Quotation Detail";
+    $this->load->view('template/front/head_front',$head_data);
+    $this->load->view('template/front/navigation');
+    $this->load->view('private/quotation/buyer_quotation_detail',$data);
+    $this->load->view('template/front/foot_front');
+  }
+  function add_quotation_detail(){
     $id_quotation = $this->input->post('id_quotation');
     $id_member = $this->input->post('id_member');
     $message = $this->input->post('message');
     $date = $this->M_date->get_date_sql_format();
-
-
     $data = array(
       'IdQuotation' => $id_quotation,
       'IdMember' => $id_member,

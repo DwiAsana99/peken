@@ -85,7 +85,7 @@
 
         <div class="row">
           <p id="hasil"></p>
-          <div class="col-md-8">
+          <div class="col-md-4">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <span class="glyphicon glyphicon-comment"></span> Chat
@@ -100,7 +100,7 @@
                         <div class="chat-body clearfix">
                           <div class="header">
                             <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
-                            <strong class="pull-right primary-font"><?php echo $qd->CompanyName; ?></strong>
+                            <strong class="pull-right primary-font"></strong>
                           </div>
                           <p>
                             <?php echo $qd->Message; ?>
@@ -109,7 +109,7 @@
                       </li>
                       <?php else: ?>
                         <li class="left clearfix"><span class="chat-img pull-left">
-                          <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                          <img src="http://placehold.it/50/55C1E7/fff&text=buyer" alt="User Avatar" class="img-circle" />
                         </span>
                         <div class="chat-body clearfix">
                           <div class="header">
