@@ -116,20 +116,24 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
+              <?php  foreach($product_category as $pc){?>
+
               <li class="dropdown-submenu">
-                <a class="test" tabindex="-1" href="#">Ring
+                <a class="test" tabindex="-1" href="#"><?php echo $pc->ProductCategory ; ?>
                   <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu tes">
+                  <?php  foreach($product_sub_category as $psc){?>
+                    <?php if ($pc->Code == $psc->ProductCategoryCode): ?>
                   <li>
-                    <a tabindex="-1" href="#">Ring blue</a>
+                    <a tabindex="-1" href="#"><?php echo $psc->ProductSubCategory ; ?></a>
                   </li>
-                  <li>
-                    <a tabindex="-1" href="#">Ring Red</a>
-                  </li>
+                  <?php endif; ?>
+                  <?php }?>
                 </ul>
               </li>
-              <li class="dropdown-submenu">
+              <?php }?>
+              <!-- <li class="dropdown-submenu">
                 <a class="test" tabindex="-1" href="#">Necklace
                   <span class="caret"></span>
                 </a>
@@ -173,7 +177,7 @@
                     <a tabindex="-1" href="#">Earing Yellow</a>
                   </li>
                 </ul>
-              </li>
+              </li> -->
             </ul>
           </div>
         </li>
