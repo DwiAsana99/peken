@@ -16,7 +16,7 @@ class Supplier extends CI_Controller{
   function public_supplier_list_view(){
     //mengambil nilai page dari url
     $page = $this->input->get('per_page');
-    $this->M_pagination->set_config("",1,"","","","","");
+    $this->M_pagination->set_config("",10,"","","","","");
     /* mengecek apakah nilai dari form pencarian ada atau tidak, jika ada maka
 		supplier list akan menampilkan supplier berdasarkan CompanyName*/
     if (!empty($this->input->get('search_value'))) {

@@ -3,6 +3,7 @@
 *
 */
 class M_product_sub_category extends CI_Model{
+
   function get_product_sub_category($product_category_code="", $option_tag="",$selected=""){
     if (!empty($product_category_code) AND (!empty($option_tag) AND is_numeric($option_tag)) AND empty($selected) ) {
       $product_sub_category = "";
@@ -31,11 +32,18 @@ class M_product_sub_category extends CI_Model{
       }
       return $product_sub_category;
     }
-
-
-
   }
 
+  function get_product_sub_category_all(){
+    $query = "SELECT * FROM tbproductsubcategory
+
+    ORDER BY ProductSubCategory ASC";
+    $query = $this->db->query($query);
+    return $query;
+  }
+  // function diatas digunakan untuk mencari product_sub_category.
+  // hanya digunakan untuk sementara harus nya bisa dirapikan dengan function
+  // get_product_sub_category
   function add_product_category($data) {
     $this->db->insert('tbproductsubcategory',$data);
   }

@@ -1,6 +1,6 @@
 
   <div class="container">
-    <h1>Pembelian Necklace Bahla initalize</h1>
+    <h1>Pembelian Necklace Bahla</h1>
     <ol class="breadcrumb">
       <li>
         <a href="#">Home</a>
@@ -43,9 +43,9 @@ Qty           : 10 <br><br>
                         <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
                         <strong class="pull-right primary-font"><?php echo $qd->CompanyName; ?></strong>
                       </div>
-                      <div>
+                      <p>
                         <?php echo $qd->Message; ?>
-                      </div>
+                      </p>
                     </div>
                   </li>
                   <?php else: ?>
@@ -57,9 +57,9 @@ Qty           : 10 <br><br>
                         <strong class="primary-font"><?php echo $qd->CompanyName; ?></strong> <small class="pull-right text-muted">
                           <span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
                         </div>
-                        <div>
+                        <p>
                           <?php echo $qd->Message; ?>
-                        </d>
+                        </p>
                       </div>
                     </li>
                   <?php endif; ?>
