@@ -1,4 +1,3 @@
-
 <heading>
   <div class="container">
     <div class="jumbotron">
@@ -47,45 +46,38 @@
       <a href="#" class="btn btn-warning">See More Product Promo</a>
     </div>
   </div>
-  <div class="row"></div>
-  <div class="row"></div>
-  <div class="row product-today">
-    <div class="">
-      <h2>Product Today</h2>
-      <?php foreach($product as $u){
-        //if ($i % 4 == 1) { ?>
-      <div class="col-md-3">
-        <a href="<?php echo site_url('Product/public_product_detail_view/').$u->IdProduct ?>">
-        <img src="<?php echo base_url('assets/supplier_upload/').$u->FileName; ?>" class="img-responsive" alt="">
-        <div class="row">
-          <h4 class="text-center"><b><?php echo $u->Name ?> </b></h3>
-          <h4 class="text-center">Rp<?php echo number_format($u->Price, 0, '.', '.'); ?></h4>
-          <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolor...</p> -->
-          <div class="row text-right">
-            <div class="checkout">
-              <a href="#" class="btn btn-default">Checkout</a>
-            </div>
-          </div>
+  <h2>Product Today</h2>
+  <div class="my-container">
+    <?php $i = 1; foreach($product as $p){ ?>
+    <div class="tes-hover">
+      <img class="img-responsive" src="<?php echo base_url('assets/supplier_upload/').$p->FileName?>" alt="">
+      <h4>IDR Rp1.200.000 / pcs</h4>
+      <h5>Kesslers Diamonds</h5>
+      <div class="detail-display">
+        <h6>10 pcs (Supply Ability)</h6>
+        <h6>Daily (Period Ability)</h6>
+      </div>
+      <hr>
+      <div class="text-center">
+        <h6>Art Silver</h6>
+        <a href="" class="btn btn-default">Contact Seller</a>
+      </div>
+    </div>
+    <?php } ?>
+    </div>
+    <div class="text-right">
+      <a href="<?php echo site_url('Product/public_product_list_view') ?>" class="btn btn-warning more">See More Product Today</a>
+    </div>h
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row text-center seller">
+      <div class="container">
+        <h2>Seller</h2>
+        <?php foreach($supplier as $s){ ?>
+        <div class="col-xs-2">
+          <img src="<?php echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>" class="img-responsive" alt="">
         </div>
-        </a>
-      </div>
-    <?php } ?>
-
-      <div class="text-right">
-        <a href="<?php echo site_url('Product/public_product_list_view') ?>" class="btn btn-warning">See More Product Today</a>
+        <?php } ?>
       </div>
     </div>
   </div>
-  <div class="row"></div>
-  <div class="row"></div>
-  <div class="row text-center seller">
-    <div class="container">
-      <h2>Seller</h2>
-      <?php foreach($supplier as $s){ ?>
-      <div class="col-xs-2">
-        <img src="<?php echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>" class="img-responsive" alt="">
-      </div>
-    <?php } ?>
-    </div>
-  </div>
-</div>

@@ -1,3 +1,7 @@
+.more{
+    margin-top: 20vh;
+}
+
 #text-slog{
     font-size: x-large;
     margin: 3vh 0 6vh 0;
@@ -18,13 +22,11 @@
     font-weight: bold;
 }
 
-.product-promo,
-.product-today {
+.product-promo {
     margin: 5% 0;
 }
 
-.product-promo,
-.product-today {
+.product-promo {
     -webkit-box-shadow: 18px 37px 43px -18px rgba(0, 0, 0, 0.43);
     -moz-box-shadow: 18px 37px 43px -18px rgba(0, 0, 0, 0.43);
     box-shadow: 18px 37px 43px -18px rgba(0, 0, 0, 0.43);
