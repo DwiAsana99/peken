@@ -182,15 +182,43 @@
           </div>
         </li>
       </ul>
-      <form class="navbar-form navbar-left" method="get" action="<?php echo base_url().'index.php/Product/public_product_list_view'; ?>">
+      <form  id="search_form" class="navbar-form navbar-left" method="get" action="<?php echo base_url().'index.php/Product/public_product_list_view'; ?>">
         <div class="form-group">
-          <input style="margin-bottom: 3px;" type="text" name="search_value" value="<?php echo $search_value = (isset($search_value)) ? $search_value : "
-            " ; ?>" class="form-control" placeholder="Search">
+          <input style="margin-bottom: 3px;" type="text" name="search_value" value="<?php echo $search_value = (isset($search_value)) ? $search_value : "" ; ?>" class="form-control" placeholder="Search">
         </div>
-        <select>
-            <option value="volvo">Seller</option>
-            <option value="saab">Product</option>
+        <select id="search_option">
+            <option id="nav_product" value="product">Product</option>
+            <option  id="nav_supplier" value="seller">Seller</option>
+
         </select>
+
+        <script type="text/javascript">
+        var search_option = document.getElementById('search_option');
+          // function supplierClick() {
+          //   var searchForm = document.getElementById('search_form');
+          //   searchForm.setAttribute("action","<?php //echo base_url().'index.php/Supplier/public_supplier_list_view'; ?>");
+          // }
+          // function productClick() {
+          //   var searchForm = document.getElementById('search_form');
+          //   searchForm.setAttribute("action","<?php //echo base_url().'index.php/Product/public_product_list_view'; ?>");
+          // }
+          function change_action() {
+            //var search_option = document.getElementById('search_option');
+            if (search_option.value == "product") {
+              var searchForm = document.getElementById('search_form');
+              searchForm.setAttribute("action","<?php echo base_url().'index.php/Product/public_product_list_view'; ?>");
+            } else {
+              var searchForm = document.getElementById('search_form');
+              searchForm.setAttribute("action","<?php echo base_url().'index.php/Supplier/public_supplier_list_view'; ?>");
+            }
+          }
+          // var supplier = document.getElementById('nav_supplier');
+          // var product = document.getElementById('nav_product');
+          // supplier.addEventListener("change",supplierClick);
+          // product.addEventListener("change",productClick);
+
+          search_option.addEventListener("change",change_action);
+          </script>
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li>
