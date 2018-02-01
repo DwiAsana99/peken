@@ -43,7 +43,7 @@ Qty           : 10 <br><br>
                         <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
                         <strong class="pull-right primary-font"><?php echo $qd->CompanyName; ?></strong>
                       </div>
-                      <p>
+                      <p class="word-wrap">
                         <?php echo $qd->Message; ?>
                       </p>
                     </div>
@@ -57,14 +57,14 @@ Qty           : 10 <br><br>
                         <strong class="primary-font"><?php echo $qd->CompanyName; ?></strong> <small class="pull-right text-muted">
                           <span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
                         </div>
-                        <p>
+                        <p class="word-wrap">
                           <?php echo $qd->Message; ?>
                         </p>
                       </div>
                     </li>
                   <?php endif; ?>
                 <?php endforeach; ?>
-                <div class="badan_chat">
+                <div class="badan_chat word-wrap">
 
                 </div>
 
