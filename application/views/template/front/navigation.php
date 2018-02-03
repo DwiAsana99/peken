@@ -102,9 +102,14 @@
   $(document).ready(function () {
     $('.dropdown-submenu a.test').on("click", function (e) {
       $(this).next('ul').toggle();
+      $('.dropdown-submenu a.test').not(this).each(function(){
+        $(this).next('ul').css('display', 'none')
+     });
       e.stopPropagation();
       e.preventDefault();
     });
+
+
   });
 </script>
 <nav class="navbar navbar-default navbar-fixed-top">
