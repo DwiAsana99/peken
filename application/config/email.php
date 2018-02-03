@@ -1,12 +1,15 @@
 <?php
 $config = array(
   'protocol' => 'smtp',
-  'smtp_host' => 'ssl://smtp.googlemail.com',
-  'smtp_port' => 25,
-  'smtp_user' => "stikihs@gmail.com",
-  'smtp_pass' => "stikihs2015",
+  'smtp_host' => 'smtp.live.com',
+  'smtp_port' => 587,
+  'smtp_user' => "premawaisnawa@outlook.com",
+  'smtp_pass' => "34GVvbl97Gpq",
   'mailtype' => "html",
-  'charset' => 'iso-8859-1',
+  'charset' => 'utf-8',
+  'smtp_timeout' => 60,
   'wordwrap' => TRUE
 );
+//smtp.live.com
+//smtp-mail.outlook.com
 ?>
