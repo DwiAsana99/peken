@@ -1,5 +1,9 @@
 <!-- CSS dropdown login -->
 <style media="screen">
+  .logo{
+      width: 100px;
+      margin-top: -5px;
+  }
   #login-dp {
     min-width: 250px;
     padding: 14px 14px 0;
@@ -87,6 +91,11 @@
       margin-left: 30px;
       font-style: italic;
     }
+
+    .logo{
+      width: 100px;
+      margin-top: -8px;
+    }
   }
 </style>
 <script>
@@ -106,7 +115,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php echo site_url('Home'); ?>">DINILAKU </a>
+      <a class="navbar-brand" href="<?php echo site_url('Home'); ?>">
+      <img class="img-responsive logo" src="<?php echo base_url('assets/front_end_assets/img/2Dinilaku_Logo.png') ?>" alt="">
+      </a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
