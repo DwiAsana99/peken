@@ -108,8 +108,9 @@
       e.stopPropagation();
       e.preventDefault();
     });
-
-
+    $('#signOut').click(function() {
+      $("#myNavbar").animate({ scrollTop: $('#myNavbar').prop("scrollHeight")}, 1000);
+    });
   });
 </script>
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -274,7 +275,7 @@
             </li>
           </ul>
           <?php else: ?>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <a href="#" id="signOut" class="dropdown-toggle" data-toggle="dropdown">
             <span class=""></span>
             <?php echo $this->session->userdata('first_name'); ?>
           </a>
