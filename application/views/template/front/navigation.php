@@ -93,6 +93,10 @@
     z-index: 1;
   }
 
+  input[name="search_value"]{
+    width: 30vw !important;
+  }
+
 
   @media(max-width:768px) {
     #login-dp {
@@ -111,6 +115,26 @@
     .logo{
       width: 100px;
       margin-top: -8px;
+    }
+
+    #search_form{
+      position: initial;
+      width: inital;
+      text-align: left;
+      margin: inital;
+    }
+
+    .cont-top{
+      position:relative;
+    }
+
+    .z-index1{
+      position: relative;
+      z-index: 1;
+    }
+
+    input[name="search_value"]{
+      width: 100% !important;
     }
   }
 </style>
@@ -217,7 +241,7 @@
       </ul>
       <form  id="search_form" role="search" class="navbar-form navbar-left" method="get" action="<?php echo base_url().'index.php/Product/public_product_list_view'; ?>">
         <div class="form-group">
-          <input style="margin-bottom:3px;width:30vw;" type="text" name="search_value" value="<?php echo $search_value = (isset($search_value)) ? $search_value : "" ; ?>" class="form-control" placeholder="Search">
+          <input style="margin-bottom:3px;" type="text" name="search_value" value="<?php echo $search_value = (isset($search_value)) ? $search_value : "" ; ?>" class="form-control" placeholder="Search">
         </div>
         <select id="search_option">
             <option id="nav_product" value="product">Product</option>
