@@ -55,7 +55,7 @@ $(document).ready(function () {
   </div>
 
   <div class="container">
-    <textarea name="message" rows="10" cols="10"></textarea>
+    <textarea name="message" rows="10" cols="160"></textarea>
     <input type="hidden" name="supplier_email" value="<?php echo $supplier[0]->Email; ?>">
     <input type="hidden" name="id_supplier" value="<?php echo $supplier[0]->IdSupplier; ?>">
     <input type="hidden" name="id_product" value="<?php echo $product[0]->IdProduct; ?>">

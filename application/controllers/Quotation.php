@@ -154,7 +154,7 @@ class Quotation extends CI_Controller{
     );
 
     $this->M_quotation->add_quotation($data);
-    $this->email->from('premawaisnawa@outlook.com', 'marketplacesilver');
+    $this->email->from('marketplacesilver@gmail.com', 'marketplacesilver');
     $this->email->to('premawaisnawa@gmail.com');
     $this->email->subject($subject);
     $this->email->message($content);
