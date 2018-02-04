@@ -77,6 +77,22 @@
     color: #000;
   }
 
+  #search_form{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+  }
+
+  .cont-top{
+    position:relative;
+  }
+
+  .z-index1{
+    position: relative;
+    z-index: 1;
+  }
+
 
   @media(max-width:768px) {
     #login-dp {
@@ -114,7 +130,7 @@
   });
 </script>
 <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
+  <div class="container cont-top">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
@@ -122,11 +138,11 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="<?php echo site_url('Home'); ?>">
-      <img class="img-responsive logo" src="<?php echo base_url('assets/front_end_assets/img/2Dinilaku_Logo.png') ?>" alt="">
+      <img class="img-responsive logo z-index1" src="<?php echo base_url('assets/front_end_assets/img/2Dinilaku_Logo.png') ?>" alt="">
       </a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav z-index1">
         <li class="active">
           <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="margin-top: 5px;">Categories
@@ -199,9 +215,9 @@
           </div>
         </li>
       </ul>
-      <form  id="search_form" class="navbar-form navbar-left" method="get" action="<?php echo base_url().'index.php/Product/public_product_list_view'; ?>">
+      <form  id="search_form" role="search" class="navbar-form navbar-left" method="get" action="<?php echo base_url().'index.php/Product/public_product_list_view'; ?>">
         <div class="form-group">
-          <input style="margin-bottom: 3px;" type="text" name="search_value" value="<?php echo $search_value = (isset($search_value)) ? $search_value : "" ; ?>" class="form-control" placeholder="Search">
+          <input style="margin-bottom:3px;width:30vw;" type="text" name="search_value" value="<?php echo $search_value = (isset($search_value)) ? $search_value : "" ; ?>" class="form-control" placeholder="Search">
         </div>
         <select id="search_option">
             <option id="nav_product" value="product">Product</option>
