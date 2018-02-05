@@ -15,24 +15,48 @@
       </div>
       <!-- /.box-header -->
       <div class="box-body">
-         <table class="table table-inbox table-hover">
-            <h2>Quotation List</h2>
+        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Send</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
             <tbody>
-               <?php foreach($quotation as $q){ ?>
-
-                  <tr class="">
-                     <td class="view-message dont-show"><?php echo $q->CompanyName ?> <span class="label label-success ">New</span></td>
-                     <td class="view-message view-message"><b><?php echo trim(substr($q->Subject,0,20))." <b>...</b>" ?></b></td>
-                     <td class="view-message view-message"><?php echo trim(substr($q->Content,0,50))." <b>...</b>" ?></td>
-                     <td class="view-message text-right"><?php echo $q->DateSend ?></td>
-                     <td ><a href="<?php echo base_url().'index.php/Quotation/supplier_quotation_detail?id_quotation='.$q->IdQuotation; ?>" class="btn btn-info">quotation detail</a></td>
-
-                  </tr>
-
-               <?php } ?>
+                <?php foreach($quotation as $q){ ?>
+                <tr class="click">
+                    <td>
+                        <a href="<?php echo base_url().'index.php/Quotation/supplier_quotation_detail?id_quotation='.$q->IdQuotation; ?>">To:
+                            <?php echo $q->CompanyName  ?>
+                        </a>
+                    </td>
+                    <td>Pembelian
+                        <?php echo $q->Name  ?>
+                    </td>
+                    <td>
+                        <?php echo trim(substr($q->Content,0,50))." <b>...</b>" ?>
+                    </td>
+                    <td>
+                        <?php echo $q->DateSend  ?>
+                    </td>
+                </tr>
+                <?php } ?>
             </tbody>
-         </table>
+        </table>
+
       </div>
    </div><!-- /.box-body -->
 </div><!-- /.box -->
 </section>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+        $('.click').click(function () {
+            window.location = $(this).find('a').attr('href');
+        }).hover(function () {
+            $(this).toggleClass('hover');
+        });
+    });
+</script>
