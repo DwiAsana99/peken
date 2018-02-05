@@ -1,6 +1,6 @@
 <div class="container">
   <div id="detail">
-    <div>
+    <div class="contain_obj">
       <?php $i = 1; foreach($product as $p){
         if ($i == 1 ) { ?>
           <img src="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" id="image<?php echo $i ?>" class="image-toggle">
@@ -12,7 +12,7 @@
       ?>
       <hr>
       <?php $i = 1; foreach($product as $p){ ?>
-        <div class="col-xs-3">
+        <div class="col-xs-2 padding_0">
           <img class="img-responsive image-toggler" data-image-id="#image<?php echo $i ?>" src="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" />
         </div>
         <?php $i++;  } ?>
@@ -27,7 +27,9 @@
         <a class="btn btn-primary contact" href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$product[0]->IdProduct."&"."id_supplier=".$p->IdSupplier ?>">Contact Supllier
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
         </a>
-        <ul class="nav nav-tabs">
+      </div>
+    </div>
+    <ul class="nav nav-tabs">
           <li class="active">
             <a href="#1a" data-toggle="tab">Description</a>
           </li>
@@ -37,17 +39,19 @@
         </ul>
         <div class="tab-content clearfix">
           <div class="tab-pane active" id="1a">
-            <p><?php echo $product[0]->ProductDescription; ?></p>
+            <div style="margin-top:20px"><?php echo $product[0]->ProductDescription; ?></div>
           </div>
-          <div class="tab-pane" id="2a"><br>
+          <div class="tab-pane seller_detail" id="2a"><br>
             <a href="<?php echo site_url('supplier/public_supplier_detail_view?')."id_supplier=".$p->IdSupplier ?>">
-            <p><img src="<?php echo base_url('assets/supplier_upload/').$p->ProfilImage;  ?>" width="100" height="100" alt=""></p>
+            <p><img class=" img-responsive seller_img" src="<?php echo base_url('assets/supplier_upload/').$p->ProfilImage;  ?>" width="100" height="100" alt=""></p>
             <p><?php echo $p->CompanyName; ?></p>
             </a>
+            <div>kfc@gmail.com</div>
+            <div>Ngurah rai street no 23</div>
+            <div>081234567890</div>
+            <div>This is static description</div>
           </div>
         </div>
-      </div>
-    </div>
     <h2>Related products</h2>
     <div class="my-container">
       <div>
