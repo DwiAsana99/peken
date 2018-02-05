@@ -6,7 +6,7 @@ class Supplier extends CI_Controller{
     parent::__construct();
     $this->load->library(array('form_validation','pagination'));
     $this->load->helper(array('form', 'url'));
-    $this->load->model(array('M_member','M_product','M_pagination'));
+    $this->load->model(array('M_member','M_product','M_pagination', 'M_product_category', 'M_product_sub_category'));
   }
   function dashboard_supplier_view(){
     $this->load->view('private/dashboard_supplier');
@@ -45,9 +45,13 @@ class Supplier extends CI_Controller{
     $data['supplier'] = $get_supplier->result();
     $str_links = $this->pagination->create_links();
     $data["links"] = explode('&nbsp;',$str_links );
+    $get_product_category = $this->M_product_category->get_product_category();
+		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+		$data_nav['product_category'] = $get_product_category->result();
+		$data_nav['product_sub_category'] = $get_product_sub_category->result();
     $head_data['page_title'] = "Dinilaku";
 		$this->load->view('template/front/head_front',$head_data);
-		$this->load->view('template/front/navigation');
+		$this->load->view('template/front/navigation',$data_nav);
     $this->load->view('public/supplier/supplier_list',$data);
     $this->load->view('template/front/foot_front');
   }
@@ -68,9 +72,13 @@ class Supplier extends CI_Controller{
     $this->pagination->initialize($config);
     $str_links = $this->pagination->create_links();
     $data["links"] = explode('&nbsp;',$str_links );
+    $get_product_category = $this->M_product_category->get_product_category();
+		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+		$data_nav['product_category'] = $get_product_category->result();
+		$data_nav['product_sub_category'] = $get_product_sub_category->result();
     $head_data['page_title'] = "Dinilaku";
 		$this->load->view('template/front/head_front',$head_data);
-		$this->load->view('template/front/navigation');
+		$this->load->view('template/front/navigation',$data_nav);
     $this->load->view('public/supplier/supplier_detail',$data);
     $this->load->view('template/front/foot_front');
   }

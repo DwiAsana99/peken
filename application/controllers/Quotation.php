@@ -19,9 +19,13 @@ class Quotation extends CI_Controller{
     $get_supplier = $this->M_member->get_member("",1,$id_supplier);
     $data['product'] = $get_product->result();
     $data['supplier'] = $get_supplier->result();
+    $get_product_category = $this->M_product_category->get_product_category();
+		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+		$data_nav['product_category'] = $get_product_category->result();
+		$data_nav['product_sub_category'] = $get_product_sub_category->result();
     $head_data['page_title'] = "Dinilaku";
 		$this->load->view('template/front/head_front',$head_data);
-		$this->load->view('template/front/navigation');
+		$this->load->view('template/front/navigation',$data_nav);
     $this->load->view('private/quotation/rfq',$data);
     $this->load->view('template/front/foot_front');
   }
@@ -61,9 +65,13 @@ class Quotation extends CI_Controller{
     $id_buyer = $this->session->userdata('id_buyer');
     $get_quotation = $this->M_quotation->get_quotation($id_buyer);
     $data['quotation'] = $get_quotation->result();
+    $get_product_category = $this->M_product_category->get_product_category();
+		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+		$data_nav['product_category'] = $get_product_category->result();
+		$data_nav['product_sub_category'] = $get_product_sub_category->result();
     $head_data['page_title'] = "Quotation Detail";
     $this->load->view('template/front/head_front',$head_data);
-    $this->load->view('template/front/navigation');
+    $this->load->view('template/front/navigation',$data_nav);
     $this->load->view('private/quotation/buyer_quotation_list',$data);
     $this->load->view('template/front/foot_front');
   }
@@ -82,9 +90,13 @@ class Quotation extends CI_Controller{
     $data['quotation'] = $get_quotation->result();
     $data['product'] = $get_product->result();
     $data['quotation_detail'] = $get_quotation_detail->result();
+    $get_product_category = $this->M_product_category->get_product_category();
+		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+		$data_nav['product_category'] = $get_product_category->result();
+		$data_nav['product_sub_category'] = $get_product_sub_category->result();
     $head_data['page_title'] = "Quotation Detail";
     $this->load->view('template/front/head_front',$head_data);
-    $this->load->view('template/front/navigation');
+    $this->load->view('template/front/navigation',$data_nav);
     $this->load->view('private/quotation/buyer_quotation_detail',$data);
     $this->load->view('template/front/foot_front');
   }

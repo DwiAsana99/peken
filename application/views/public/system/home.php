@@ -50,7 +50,9 @@
   <div class="my-container">
     <?php $i = 1; foreach($product as $p){ ?>
     <div class="tes-hover">
-      <img class="img-responsive" src="<?php echo base_url('assets/supplier_upload/').$p->FileName?>" alt="">
+      <a href="<?php echo site_url('Product/public_product_detail_view/').$p->IdProduct ?>">
+        <img class="img-responsive" src="<?php echo base_url('assets/supplier_upload/').$p->FileName?>" alt="">
+      </a>
       <h4>IDR Rp1.200.000 / pcs</h4>
       <h5>Kesslers Diamonds</h5>
       <div class="detail-display">
