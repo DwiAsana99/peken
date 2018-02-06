@@ -318,8 +318,7 @@ $(document).ready(function () {
     <?php else: ?>
       <li class="dropdown">
         <a href="#" id="signOut" class="dropdown-toggle" data-toggle="dropdown">
-          <span class=""></span>
-          <?php echo $this->session->userdata('first_name'); ?>
+          <span class="glyphicon glyphicon-user"></span> <?php echo $this->session->userdata('first_name'); ?><span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
           <li>
