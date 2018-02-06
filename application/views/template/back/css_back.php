@@ -31,7 +31,7 @@
       <!-- Daterange picker -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/AdminLTE-2.0.5/plugins/daterangepicker/daterangepicker.css') ?>" />
 
-
+<link href="<?php echo base_url('assets/front_end_assets/css/quotation_detail.css') ?>" rel="stylesheet" type="text/css" />
 <style type="text/css">
   .table thead,
 .table th {text-align: center;}

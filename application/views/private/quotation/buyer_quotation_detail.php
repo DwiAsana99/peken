@@ -17,6 +17,7 @@
           <img src="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" alt="">
           <?php } ?>
         </div>
+        <br>
 Quotation id  : 1 <br>
 Supplier Name : <?php echo $quotation[0]->CompanyName; ?><br>
 Product Name  : <?php echo $quotation[0]->Name; ?><br>

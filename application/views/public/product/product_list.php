@@ -11,7 +11,9 @@
     <div class="my-container">
       <?php $i = 1; foreach($product as $p){ ?>
       <div class="tes-hover">
-        <img class="img-responsive" src="<?php echo base_url('assets/supplier_upload/').$p->FileName?>" alt="">
+        <a href="<?php echo site_url('Product/public_product_detail_view/').$p->IdProduct ?>">
+          <img class="img-responsive" src="<?php echo base_url('assets/supplier_upload/').$p->FileName?>" alt="">
+        </a>
         <h4>Rp.<?php echo number_format($p->Price, 0, '.', '.'); ?></h4>
         <h5><?php echo $p->Name; ?></h5>
         <div class="detail-display">
