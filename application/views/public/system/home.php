@@ -47,6 +47,7 @@
     </div>
   </div>
   <h2>Product Today</h2>
+  <div class="product-today">
   <div class="my-container">
     <?php $i = 1; foreach($product as $p){ ?>
     <div class="tes-hover">
@@ -69,7 +70,8 @@
     </div>
     <div class="text-right">
       <a href="<?php echo site_url('Product/public_product_list_view') ?>" class="btn btn-warning more">See More Product Today</a>
-    </div>h
+    </div>
+    </div>
     <div class="row"></div>
     <div class="row"></div>
     <div class="row text-center seller">

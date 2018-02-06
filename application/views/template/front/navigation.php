@@ -82,6 +82,7 @@ select option{
   width: 100%;
   text-align: center;
   margin: auto;
+  margin-top: 3px;
 }
 
 .cont-top{

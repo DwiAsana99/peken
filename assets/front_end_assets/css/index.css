@@ -26,7 +26,7 @@
     margin: 5% 0;
 }
 
-.product-promo {
+.product-promo, .product-today {
     -webkit-box-shadow: 18px 37px 43px -18px rgba(0, 0, 0, 0.43);
     -moz-box-shadow: 18px 37px 43px -18px rgba(0, 0, 0, 0.43);
     box-shadow: 18px 37px 43px -18px rgba(0, 0, 0, 0.43);
