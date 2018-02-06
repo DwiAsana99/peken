@@ -47,8 +47,8 @@
     </div>
   </div>
   <h2>Product Today</h2>
-  <div class="product-today">
-  <div class="my-container">
+  <div class="product-today">z
+  <div class="my-container">z
     <?php $i = 1; foreach($product as $p){ ?>
     <div class="tes-hover">
       <a href="<?php echo site_url('Product/public_product_detail_view/').$p->IdProduct ?>">
