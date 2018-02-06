@@ -88,14 +88,15 @@ class Product extends CI_Controller{
 		$id_supplier = $this->session->userdata('id_supplier');
 		$get_product = $this->M_product->get_product($id_supplier,"","","","","tbproductpic.IdProduct");
 		$data['product'] = $get_product->result();
-
-  $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
-  $data_notification['quotation'] = $get_quotation->result();
-		$this->load->view('template/back/head_back',$data);
+		$get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
+		$data_notification['quotation'] = $get_quotation->result();
+		$this->load->view('template/back/head_back',$data_notification);
+		$this->load->view('template/back/sidebar_back');
 		$this->load->view('private/product/product',$data);
 		$this->load->view('template/back/foot_back');
 	}
 	function product_edit_view($id_product){
+		$id_supplier = $this->session->userdata('id_supplier');
 		$get_product = $this->M_product->get_product("",$id_product);
 		$get_product_category = $this->M_product_category->get_product_category();
 		$data['product_category'] = $get_product_category->result();
@@ -104,7 +105,12 @@ class Product extends CI_Controller{
 		$selected['product_sub_category_code'] = $row->ProductSubCategoryCode;
 		$selected['product_sub_category'] = $row->ProductSubCategory;
 		$data['product_sub_category_tag'] = $this->M_product_sub_category->get_product_sub_category($row->ProductCategoryCode,1,$selected);
+		$get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
+		$data_notification['quotation'] = $get_quotation->result();
+		$this->load->view('template/back/head_back',$data_notification);
+		$this->load->view('template/back/sidebar_back');
 		$this->load->view('private/product/edit_product',$data);
+		$this->load->view('template/back/foot_back');
 	}
 
 	function edit_product(){
@@ -170,7 +176,7 @@ class Product extends CI_Controller{
 	function add_product_picture(){
 		$config['upload_path']   = './assets/supplier_upload';
 		$config['allowed_types'] = 'gif|jpg|png|ico|pdf|docx';
-		 $config['max_size']             = 6000;
+		$config['max_size']             = 6000;
 		//mengganti nama asli file menjadi cstom
 		$new_name = time().$_FILES["userfiles"]['name'];
 		$config['file_name'] = $new_name;
