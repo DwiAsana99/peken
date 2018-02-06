@@ -7,12 +7,13 @@ class M_quotation extends CI_Model{
    $this->db->insert('tbquotation',$data);
  }
  function get_quotation(
-   $id_buyer = "",$id_supplier = "",$id_quotation = ""
+   $id_buyer = "",$id_supplier = "",$id_quotation = "", $is_read = ""
  ){
   //  $filter_value = " AND tbmember.IsSupplier = 1 ";
    $filter_value = !empty($id_buyer) ? " AND IdBuyer = $id_buyer " : "" ;
    $filter_value = !empty($id_supplier) ? " AND tbquotation.IdSupplier = $id_supplier " : "" ;
    $filter_value = !empty($id_quotation) ? " AND tbquotation.IdQuotation = $id_quotation " : "" ;
+   $filter_value = !empty($is_read) ? " AND tbquotation.IsRead = $is_read " : "" ;
    if (!empty($id_buyer)) {
       $tbmember_join_tbquotation = "AND tbmember.IdMember = tbquotation.IdSupplier";
    } elseif(!empty($id_supplier)){

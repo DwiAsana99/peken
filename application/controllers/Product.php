@@ -89,8 +89,8 @@ class Product extends CI_Controller{
 		$get_product = $this->M_product->get_product($id_supplier,"","","","","tbproductpic.IdProduct");
 		$data['product'] = $get_product->result();
 
-  $get_quotation = $this->M_quotation->get_quotation("",$id_supplier);
-  $data['quotation'] = $get_quotation->result();
+  $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
+  $data_notification['quotation'] = $get_quotation->result();
 		$this->load->view('template/back/head_back',$data);
 		$this->load->view('private/product/product',$data);
 		$this->load->view('template/back/foot_back');
