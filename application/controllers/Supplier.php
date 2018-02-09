@@ -6,7 +6,7 @@ class Supplier extends CI_Controller{
     parent::__construct();
     $this->load->library(array('form_validation','pagination'));
     $this->load->helper(array('form', 'url'));
-    $this->load->model(array('M_member','M_product','M_pagination', 'M_product_category', 'M_product_sub_category'));
+    $this->load->model(array('M_member','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation'));
   }
   function dashboard_supplier_view(){
     $this->load->view('private/dashboard_supplier');
@@ -87,7 +87,12 @@ class Supplier extends CI_Controller{
     $id_supplier = $this->session->userdata('id_supplier');
     $get_member = $this->M_member->get_member("",1,$id_supplier);
     $data['user'] = $get_member->result();
+    $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
+		$data_notification['quotation'] = $get_quotation->result();
+		$this->load->view('template/back/head_back',$data_notification);
+		$this->load->view('template/back/sidebar_back');
     $this->load->view('private/supplier_account/supplier_account',$data);
+    $this->load->view('template/back/foot_back');
   }
   public function edit_supplier_account(){
     $id_supplier = $this->session->userdata('id_supplier');

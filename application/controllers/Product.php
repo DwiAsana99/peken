@@ -134,9 +134,15 @@ class Product extends CI_Controller{
 		redirect('Product/product_view');
 	}
 	function product_add_view(){
+		$id_supplier = $this->session->userdata('id_supplier');
 		$get_product_category = $this->M_product_category->get_product_category();
 		$data['product_category'] = $get_product_category->result();
+		$get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
+		$data_notification['quotation'] = $get_quotation->result();
+		$this->load->view('template/back/head_back',$data_notification);
+		$this->load->view('template/back/sidebar_back');
 		$this->load->view('private/product/add_product',$data);
+		$this->load->view('template/back/foot_back');
 	}
 	function generate_product_sub_category(){
 		$product_category_code=$this->input->post('product_category_code');
