@@ -22,7 +22,7 @@
               <span class="logo-lg"><b>Dini</b>Laku</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-fixed-top ">
+            <nav class="navbar  ">
               <!-- Sidebar toggle button-->
               <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Toggle navigation</span>

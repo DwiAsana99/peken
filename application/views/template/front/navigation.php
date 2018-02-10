@@ -175,16 +175,15 @@ $(document).ready(function () {
             </button>
             <ul class="dropdown-menu">
               <?php  foreach($product_category as $pc){?>
-
                 <li class="dropdown-submenu">
-                  <a class="test" tabindex="-1" href="#"><?php echo $pc->ProductCategory ; ?>
+                  <a class="test" tabindex="-1" href=""><?php echo $pc->ProductCategory ; ?>
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu tes">
                     <?php  foreach($product_sub_category as $psc){?>
                       <?php if ($pc->Code == $psc->ProductCategoryCode): ?>
                         <li>
-                          <a tabindex="-1" href="#"><?php echo $psc->ProductSubCategory ; ?></a>
+                          <a tabindex="-1" href="<?php echo site_url('Product/public_product_list_view?')."product_sub_category_code=".$psc->Code; ?>"><?php echo $psc->ProductSubCategory ; ?></a>
                         </li>
                       <?php endif; ?>
                     <?php }?>

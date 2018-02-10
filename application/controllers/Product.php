@@ -21,7 +21,7 @@ class Product extends CI_Controller{
 		/* mengecek apakah nilai dari form pencarian ada atau tidak jika ada maka
 		Product list akan menampilkan product berdasarkan nama product atau kategori
 		produk*/
-		if (!empty($this->input->get('search_value')) OR !empty($this->input->get('product_category_code'))) {
+		if ( (!empty($this->input->get('search_value')) OR !empty($this->input->get('product_category_code'))) OR !empty($this->input->get('product_sub_category_code')) ) {
 			if (!empty($this->input->get('search_value'))) {
 				$search_value = $this->input->get('search_value');
 				$data['search_value'] = $search_value;
@@ -34,7 +34,7 @@ class Product extends CI_Controller{
 				$offset = $this->M_pagination->get_offset($page);
 				$get_product = $this->M_product->get_product("","",$search_value,$offset,$config["per_page"],"tbproductpic.IdProduct");
 			}
-			else {
+			elseif ( !empty($this->input->get('product_category_code'))) {
 				$product_category_code = $this->input->get('product_category_code');
 				$get_product = $this->M_product->get_product("","","","","","tbproductpic.IdProduct",$product_category_code);
 				$this->M_pagination->set_config(
@@ -44,6 +44,17 @@ class Product extends CI_Controller{
 				$config = $this->M_pagination->get_config();
 				$offset = $this->M_pagination->get_offset($page);
 				$get_product = $this->M_product->get_product("","","",$offset,$config["per_page"],"tbproductpic.IdProduct",$product_category_code);
+			}
+			else {
+				$product_sub_category_code = $this->input->get('product_sub_category_code');
+				$get_product = $this->M_product->get_product("","","","","","tbproductpic.IdProduct","",$product_sub_category_code);
+				$this->M_pagination->set_config(
+					"","","","","","","","index.php/Product/public_product_list_view?product_sub_category_code=".$product_sub_category_code,
+					$get_product->num_rows()
+				);
+				$config = $this->M_pagination->get_config();
+				$offset = $this->M_pagination->get_offset($page);
+				$get_product = $this->M_product->get_product("","","",$offset,$config["per_page"],"tbproductpic.IdProduct","",$product_sub_category_code);
 			}
 		}
 		/*menampilkan semua product secara acak*/

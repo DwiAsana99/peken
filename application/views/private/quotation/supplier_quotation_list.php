@@ -4,14 +4,14 @@
 <section class="content-header">
  <div class="btn-group btn-breadcrumb">
   <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
-  <a  class="btn btn-default  btn-xs active">Product</a>
+  <a  class="btn btn-default  btn-xs active">Quotation List</a>
  </div>
 </section>
 <section class="content">
 <div class="col-xs-12">
    <div class="box">
       <div class="box-header">
-         <h3 class="box-title">Product</h3>
+         <h3 class="box-title">Quotation List</h3>
       </div>
       <!-- /.box-header -->
       <div class="box-body">

@@ -6,12 +6,13 @@ class M_product extends CI_Model{
 
   function get_product(
     $id_supplier = "",$id_product = "",$search_value = "",$offset= "",$limit= "",
-    $group_by = "", $product_category_code = ""
+    $group_by = "", $product_category_code = "",$product_sub_category_code = ""
   ){
     $filter_value = " AND tbmember.IsSupplier = 1 ";
     $filter_value .= !empty($id_supplier) ? " AND tbproduct.IdSupplier = $id_supplier " : "" ;
     $filter_value .= !empty($id_product) ? " AND tbproductpic.IdProduct = $id_product " : "" ;
     $filter_value .= !empty($product_category_code) ? " AND tbproductsubcategory.ProductCategoryCode = $product_category_code " : "" ;
+    $filter_value .= !empty($product_sub_category_code) ? " AND tbproduct.ProductSubCategoryCode = $product_sub_category_code " : "" ;
     $filter_value .= !empty($search_value) ? " AND tbproduct.Name LIKE '%$search_value%' " : "" ;
     $filter_value .= !empty($search_value) ? " OR tbproductcategory.ProductCategory LIKE '%$search_value%' " : "";
 

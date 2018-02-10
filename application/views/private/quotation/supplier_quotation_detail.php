@@ -63,11 +63,11 @@
 }
 
 </style>
-
 <section class="content-header">
   <div class="btn-group btn-breadcrumb">
     <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
-    <a  class="btn btn-default  btn-xs active">Product</a>
+    <a href="<?php echo base_url('index.php/Quotation/supplier_quotation_list');?>" class="btn btn-default  btn-xs">Quotation List</a>
+    <a  class="btn btn-default  btn-xs active">Quotation Detail</a>
   </div>
 </section>
 <section class="content">
