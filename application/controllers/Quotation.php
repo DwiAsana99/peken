@@ -44,7 +44,9 @@ class Quotation extends CI_Controller{
     $id_supplier = $this->session->userdata('id_supplier');
     $get_quotation = $this->M_quotation->get_quotation("",$id_supplier);
     $data['quotation'] = $get_quotation->result();
-    $this->load->view('template/back/head_back',$data);
+    $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
+		$data_notification['quotation'] = $get_quotation->result();
+		$this->load->view('template/back/head_back',$data_notification);
     $this->load->view('template/back/sidebar_back');
     $this->load->view('private/quotation/supplier_quotation_list',$data);
     $this->load->view('template/back/foot_back');

@@ -1,7 +1,4 @@
-<?php
-$this->load->view('template/back/head_back');
-$this->load->view('template/back/sidebar_back');
-?>
+
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dropzone/css/dropzone.min.css') ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dropzone/css/basic.min.css') ?>" />
 
@@ -144,7 +141,7 @@ $this->load->view('template/back/sidebar_back');
 </section>
 
 
-<?php $this->load->view('template/back/foot_back'); ?>
+
 <script src= "<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>" ></script>
 <script src= "<?php echo base_url('assets/dropzone/js/dropzone-amd-module.min.js') ?>" ></script>
 <script type="text/javascript">
