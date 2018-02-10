@@ -26,13 +26,14 @@
 .my-container {
     width: 100%;
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-gap: 5vh;
+    grid-template-columns: 24% 24% 24% 24%;
+    grid-gap: 1%;
 }
 
 .my-container > div{
     border: 1px solid lightgray;
     padding: 10px;
+    margin-bottom: 20px;
 }
 
 
