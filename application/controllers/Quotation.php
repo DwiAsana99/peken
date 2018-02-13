@@ -155,20 +155,20 @@ class Quotation extends CI_Controller{
 
     $this->M_quotation->add_quotation($data);
     $this->email->from('marketplacesilver@gmail.com', 'marketplacesilver');
-    $this->email->to('premawaisnawa@gmail.com');
+    $this->email->to($supplier_email);
     $this->email->subject($subject);
     $this->email->message($content);
     $this->email->set_newline("\r\n");
     $this->email->send();
-    if($this->email->send()){
-   //Success email Sent
-   echo $this->email->print_debugger();
-}else{
-   //Email Failed To Send
-   echo $this->email->print_debugger();
-}
-    //redirect('Home');
- exit();
+//     if($this->email->send()){
+//    //Success email Sent
+//    echo $this->email->print_debugger();
+// }else{
+//    //Email Failed To Send
+//    echo $this->email->print_debugger();
+// }
+    redirect('Home');
+ // exit();
   }
 }
 
