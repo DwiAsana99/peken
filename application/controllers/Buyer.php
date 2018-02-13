@@ -6,16 +6,20 @@ class Buyer extends CI_Controller{
     parent::__construct();
     $this->load->library(array('form_validation','pagination'));
     $this->load->helper(array('form', 'url'));
-    $this->load->model(array('M_member','M_product','M_pagination'));
+    $this->load->model(array('M_member','M_product','M_pagination', 'M_product_category', 'M_product_sub_category'));
   }
 
   function buyer_account_view(){
     $id_buyer = $this->session->userdata('id_buyer');
     $get_member = $this->M_member->get_member("",0,$id_buyer);
     $data['user'] = $get_member->result();
+    $get_product_category = $this->M_product_category->get_product_category();
+		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+		$data_nav['product_category'] = $get_product_category->result();
+		$data_nav['product_sub_category'] = $get_product_sub_category->result();
     $head_data['page_title'] = "Dinilaku";
 		$this->load->view('template/front/head_front',$head_data);
-		$this->load->view('template/front/navigation');
+		$this->load->view('template/front/navigation', $data_nav);
     $this->load->view('private/buyer_account/buyer_account',$data);
     $this->load->view('template/front/foot_front');
   }

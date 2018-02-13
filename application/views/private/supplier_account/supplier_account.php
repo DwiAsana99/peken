@@ -1,9 +1,3 @@
-<?php
-$this->load->view('template/back/head_back');
-$this->load->view('template/back/sidebar_back');
-?>
-
-
 <section class="content">
     <div class="row">
         <div class="col-md-12">
@@ -169,7 +163,6 @@ $this->load->view('template/back/sidebar_back');
 
         </section>
 
-        <?php $this->load->view('template/back/foot_back'); ?>
         <script type="text/javascript">
         function readURL(input) {
             if (input.files && input.files[0]) {

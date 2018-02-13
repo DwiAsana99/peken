@@ -1,7 +1,4 @@
-<?php
-$this->load->view('template/back/head_back');
-$this->load->view('template/back/sidebar_back');
-?>
+
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dropzone/css/dropzone.min.css') ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dropzone/css/basic.min.css') ?>" />
 
@@ -11,7 +8,7 @@ $this->load->view('template/back/sidebar_back');
   <div class="btn-group btn-breadcrumb">
     <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
     <a href="<?php echo base_url('index.php/Product/product_view');?>" class="btn btn-default  btn-xs">Product</a>
-    <a  class="btn btn-default  btn-xs active">Add Product</a>
+    <a  class="btn btn-default  btn-xs active">Update Product</a>
   </div>
 </section>
 
@@ -21,7 +18,7 @@ $this->load->view('template/back/sidebar_back');
     <div class="col-md-12">
       <div class="box box-info">
         <div class="box-header">
-          <h3 class="box-title">Add New Product</h3>
+          <h3 class="box-title">Update Product</h3>
         </div>
         <div class="box-body">
           <form method="post"  enctype="multipart/form-data" id="Simpan"  action="<?php echo base_url().'index.php/Product/edit_product'; ?>">
@@ -144,7 +141,7 @@ $this->load->view('template/back/sidebar_back');
 </section>
 
 
-<?php $this->load->view('template/back/foot_back'); ?>
+
 <script src= "<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>" ></script>
 <script src= "<?php echo base_url('assets/dropzone/js/dropzone-amd-module.min.js') ?>" ></script>
 <script type="text/javascript">

@@ -19,8 +19,22 @@
     object-fit: cover;
 }
 
+.seller_img{
+    margin-right: 30px;
+    float: left;
+}
+
 .nav-tabs{
-    margin-top: 20px;
+    margin-top: 10vh;
+}
+
+.padding_0{
+    padding: 0;
+    margin-right: 3.3%;
+}
+
+.contain_obj img{
+    object-fit: contain !important;
 }
 
 @media screen and (max-width: 480px) {
@@ -31,5 +45,14 @@
 
     .contact{
         width: 100%;
+    }
+
+    .seller_img{
+        margin: 0 auto;
+        float:none;
+    }
+
+    .seller_detail{
+        text-align: center;
     }
 }

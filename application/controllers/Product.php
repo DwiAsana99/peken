@@ -20,8 +20,8 @@ class Product extends CI_Controller{
 		$this->M_pagination->set_config("",15,"","","","","");
 		/* mengecek apakah nilai dari form pencarian ada atau tidak jika ada maka
 		Product list akan menampilkan product berdasarkan nama product atau kategori
-		produk*/
-		if (!empty($this->input->get('search_value')) OR !empty($this->input->get('product_category_code'))) {
+		produk */
+		if ( (!empty($this->input->get('search_value')) OR !empty($this->input->get('product_category_code'))) OR !empty($this->input->get('product_sub_category_code')) ) {
 			if (!empty($this->input->get('search_value'))) {
 				$search_value = $this->input->get('search_value');
 				$data['search_value'] = $search_value;
@@ -33,8 +33,10 @@ class Product extends CI_Controller{
 				$config = $this->M_pagination->get_config();
 				$offset = $this->M_pagination->get_offset($page);
 				$get_product = $this->M_product->get_product("","",$search_value,$offset,$config["per_page"],"tbproductpic.IdProduct");
+				$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+				$data['breadcrumb'] .= "<li class='active'>"."Search for '".$search_value."''</li>";
 			}
-			else {
+			elseif ( !empty($this->input->get('product_category_code'))) {
 				$product_category_code = $this->input->get('product_category_code');
 				$get_product = $this->M_product->get_product("","","","","","tbproductpic.IdProduct",$product_category_code);
 				$this->M_pagination->set_config(
@@ -44,6 +46,30 @@ class Product extends CI_Controller{
 				$config = $this->M_pagination->get_config();
 				$offset = $this->M_pagination->get_offset($page);
 				$get_product = $this->M_product->get_product("","","",$offset,$config["per_page"],"tbproductpic.IdProduct",$product_category_code);
+				$get_product_category = $this->M_product_category->get_product_category($product_category_code);
+				$baris = $get_product_category->row();
+				$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+				$data['breadcrumb'] .= "<li class='active'>".$baris->ProductCategory."</li>";
+
+			}
+			else {
+				$product_sub_category_code = $this->input->get('product_sub_category_code');
+				$get_product = $this->M_product->get_product("","","","","","tbproductpic.IdProduct","",$product_sub_category_code);
+				$this->M_pagination->set_config(
+					"","","","","","","","index.php/Product/public_product_list_view?product_sub_category_code=".$product_sub_category_code,
+					$get_product->num_rows()
+				);
+				$config = $this->M_pagination->get_config();
+				$offset = $this->M_pagination->get_offset($page);
+				$get_product = $this->M_product->get_product("","","",$offset,$config["per_page"],"tbproductpic.IdProduct","",$product_sub_category_code);
+				$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_query($product_sub_category_code);
+					$baris = $get_product_sub_category->row();
+					$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+					$data['breadcrumb'] .= "<li>"."<a href='".site_url('Product/public_product_list_view?')."product_category_code=".$baris->ProductCategoryCode."'>".$baris->ProductCategory."</a>"."</li>";
+					$data['breadcrumb'] .= "<li class='active'>".$baris->ProductSubCategory."</li>";
+					// $data['breadcrumb'] .= "<li class='active'>"."<a  href='".site_url('Product/public_product_list_view?')."product_sub_category_code=".$product_sub_category_code."'>".$baris->ProductSubCategory."</a>"."</li>";
+
+
 			}
 		}
 		/*menampilkan semua product secara acak*/
@@ -56,23 +82,38 @@ class Product extends CI_Controller{
 			$config = $this->M_pagination->get_config();
 			$offset = $this->M_pagination->get_offset($page);
 			$get_product = $this->M_product->get_product("","","",$offset, $config["per_page"],"tbproductpic.IdProduct");
+			$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+			$data['breadcrumb'] .= "<li class='active'>All Product</li>";
 		}
 		$this->pagination->initialize($config);
 		$data['product'] = $get_product->result();
 		$str_links = $this->pagination->create_links();
 		$data["links"] = explode('&nbsp;',$str_links );
+		$get_product_category = $this->M_product_category->get_product_category();
+		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+		$data_nav['product_category'] = $get_product_category->result();
+		$data_nav['product_sub_category'] = $get_product_sub_category->result();
 		$head_data['page_title'] = "Dinilaku";
 		$this->load->view('template/front/head_front',$head_data);
-		$this->load->view('template/front/navigation');
+		$this->load->view('template/front/navigation',$data_nav);
 		$this->load->view('public/product/product_list',$data);
 		$this->load->view('template/front/foot_front');
 	}
 	function public_product_detail_view($id_product){
 		$get_product = $this->M_product->get_product("",$id_product);
 		$data['product'] = $get_product->result();
+		$get_product_category = $this->M_product_category->get_product_category();
+		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+		$data_nav['product_category'] = $get_product_category->result();
+		$data_nav['product_sub_category'] = $get_product_sub_category->result();
 		$head_data['page_title'] = "Dinilaku";
+		$baris = $get_product->row();
+		$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+		$data['breadcrumb'] .= "<li>"."<a href='".site_url('Product/public_product_list_view?')."product_category_code=".$baris->ProductCategoryCode."'>".$baris->ProductCategory."</a>"."</li>";
+		$data['breadcrumb'] .= "<li >"."<a  href='".site_url('Product/public_product_list_view?')."product_sub_category_code=".$baris->ProductSubCategoryCode."'>".$baris->ProductSubCategory."</a>"."</li>";
+		$data['breadcrumb'] .= "<li class='active'>".$baris->Name."</li>";
 		$this->load->view('template/front/head_front',$head_data);
-		$this->load->view('template/front/navigation');
+		$this->load->view('template/front/navigation',$data_nav);
 		$this->load->view('public/product/product_detail',$data);
 		$this->load->view('template/front/foot_front');
 	}
@@ -80,14 +121,15 @@ class Product extends CI_Controller{
 		$id_supplier = $this->session->userdata('id_supplier');
 		$get_product = $this->M_product->get_product($id_supplier,"","","","","tbproductpic.IdProduct");
 		$data['product'] = $get_product->result();
-
-  $get_quotation = $this->M_quotation->get_quotation("",$id_supplier);
-  $data['quotation'] = $get_quotation->result();
-		$this->load->view('template/back/head_back',$data);
+		$get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
+		$data_notification['quotation'] = $get_quotation->result();
+		$this->load->view('template/back/head_back',$data_notification);
+		$this->load->view('template/back/sidebar_back');
 		$this->load->view('private/product/product',$data);
 		$this->load->view('template/back/foot_back');
 	}
 	function product_edit_view($id_product){
+		$id_supplier = $this->session->userdata('id_supplier');
 		$get_product = $this->M_product->get_product("",$id_product);
 		$get_product_category = $this->M_product_category->get_product_category();
 		$data['product_category'] = $get_product_category->result();
@@ -96,7 +138,12 @@ class Product extends CI_Controller{
 		$selected['product_sub_category_code'] = $row->ProductSubCategoryCode;
 		$selected['product_sub_category'] = $row->ProductSubCategory;
 		$data['product_sub_category_tag'] = $this->M_product_sub_category->get_product_sub_category($row->ProductCategoryCode,1,$selected);
+		$get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
+		$data_notification['quotation'] = $get_quotation->result();
+		$this->load->view('template/back/head_back',$data_notification);
+		$this->load->view('template/back/sidebar_back');
 		$this->load->view('private/product/edit_product',$data);
+		$this->load->view('template/back/foot_back');
 	}
 
 	function edit_product(){
@@ -120,9 +167,15 @@ class Product extends CI_Controller{
 		redirect('Product/product_view');
 	}
 	function product_add_view(){
+		$id_supplier = $this->session->userdata('id_supplier');
 		$get_product_category = $this->M_product_category->get_product_category();
 		$data['product_category'] = $get_product_category->result();
+		$get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
+		$data_notification['quotation'] = $get_quotation->result();
+		$this->load->view('template/back/head_back',$data_notification);
+		$this->load->view('template/back/sidebar_back');
 		$this->load->view('private/product/add_product',$data);
+		$this->load->view('template/back/foot_back');
 	}
 	function generate_product_sub_category(){
 		$product_category_code=$this->input->post('product_category_code');
@@ -162,7 +215,7 @@ class Product extends CI_Controller{
 	function add_product_picture(){
 		$config['upload_path']   = './assets/supplier_upload';
 		$config['allowed_types'] = 'gif|jpg|png|ico|pdf|docx';
-		 $config['max_size']             = 6000;
+		$config['max_size']             = 6000;
 		//mengganti nama asli file menjadi cstom
 		$new_name = time().$_FILES["userfiles"]['name'];
 		$config['file_name'] = $new_name;

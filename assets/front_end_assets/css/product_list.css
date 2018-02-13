@@ -1,13 +1,39 @@
+.tes-hover:hover > [class= "detail-display"]{
+    opacity: 1;
+    height: 10%;
+}
+
+.tes-hover:hover{
+    transform: scale(1);
+    transform-origin: 40% 10px;
+    margin-bottom: -20%;
+    -webkit-box-shadow: 0px 0px 25px 0px rgba(105, 181, 243, 0.75);
+    -moz-box-shadow: 0px 0px 25px 0px rgba(105, 181, 243, 0.75);
+    box-shadow: 0px 0px 25px 0px rgba(105, 181, 243, 0.75);
+}
+
+.tes-hover{
+    background-color: white;
+}
+
+.detail-display{
+    height: 0;
+    opacity: 0;
+    -moz-transition: opacity .7s linear;
+    -webkit-transition: opacity .7s linear;
+}
+
 .my-container {
     width: 100%;
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-gap: 5vh;
+    grid-template-columns: 24% 24% 24% 24%;
+    grid-gap: 1%;
 }
 
 .my-container > div{
     border: 1px solid lightgray;
     padding: 10px;
+    margin-bottom: 20px;
 }
 
 
@@ -18,5 +44,8 @@
         display: grid;
         grid-template-columns: auto auto;
         grid-gap: 70px 10px;
+    }
+    .tes-hover:hover{
+        margin-bottom: -25%;
     }
 }

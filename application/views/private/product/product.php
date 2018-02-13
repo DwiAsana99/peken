@@ -1,8 +1,3 @@
-<?php
-
-$this->load->view('template/back/sidebar_back');
-?>
-
 <section class="content-header">
  <div class="btn-group btn-breadcrumb">
   <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>

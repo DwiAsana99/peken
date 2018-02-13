@@ -40,7 +40,7 @@
   overflow: auto;
   display: flex;
   flex-direction: column-reverse;
-/*=========Membuat  scroll mulai dari bawah===============*/
+  /*=========Membuat  scroll mulai dari bawah===============*/
   height: 300px;
 }
 
@@ -63,29 +63,32 @@
 }
 
 </style>
-
 <section class="content-header">
- <div class="btn-group btn-breadcrumb">
-  <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
-  <a  class="btn btn-default  btn-xs active">Product</a>
- </div>
+  <div class="btn-group btn-breadcrumb">
+    <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
+    <a href="<?php echo base_url('index.php/Quotation/supplier_quotation_list');?>" class="btn btn-default  btn-xs">Quotation List</a>
+    <a  class="btn btn-default  btn-xs active">Quotation Detail</a>
+  </div>
 </section>
 <section class="content">
-<div class="col-xs-12">
-  <div class="box">
-    <div class="box-header">
-      <h3 class="box-title">Quotatio Detail</h3>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-      <p><?php echo $quotation[0]->CompanyName; ?></p>
-      <p><?php echo $quotation[0]->DateSend; ?></p>
-      <p><?php echo $quotation[0]->Subject; ?></p>
-      <p><?php echo $quotation[0]->Content; ?></p>
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Quotatio Detail</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="col-md-6">
+          <p><?php echo $quotation[0]->CompanyName; ?></p>
+          <p><?php echo $quotation[0]->DateSend; ?></p>
+          <p><?php echo $quotation[0]->Subject; ?></p>
+          <p><?php echo $quotation[0]->Content; ?></p>
+        </div>
 
-        <div class="row">
-          <p id="hasil"></p>
-          <div class="col-md-4">
+
+        <!-- <div class="">
+          <p id="hasil"></p> -->
+          <div class="col-md-6">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <span class="glyphicon glyphicon-comment"></span> Chat
@@ -102,143 +105,143 @@
                             <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
                             <strong class="pull-right primary-font"></strong>
                           </div>
-                          <p>
-                            <?php echo $qd->Message; ?>
-                          </p>
+                          <p class="word-wrap">
+                        <?php echo $qd->Message; ?>
+                      </p>
                         </div>
                       </li>
-                      <?php else: ?>
-                        <li class="left clearfix"><span class="chat-img pull-left">
-                          <img src="http://placehold.it/50/55C1E7/fff&text=buyer" alt="User Avatar" class="img-circle" />
-                        </span>
-                        <div class="chat-body clearfix">
-                          <div class="header">
-                            <strong class="primary-font"><?php echo $qd->CompanyName; ?></strong> <small class="pull-right text-muted">
-                              <span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
-                            </div>
-                            <p>
-                              <?php echo $qd->Message; ?>
-                            </p>
+                    <?php else: ?>
+                      <li class="left clearfix"><span class="chat-img pull-left">
+                        <img src="http://placehold.it/50/55C1E7/fff&text=buyer" alt="User Avatar" class="img-circle" />
+                      </span>
+                      <div class="chat-body clearfix">
+                        <div class="header">
+                          <strong class="primary-font"><?php echo $qd->CompanyName; ?></strong> <small class="pull-right text-muted">
+                            <span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
                           </div>
-                        </li>
-                      <?php endif; ?>
-                    <?php endforeach; ?>
-                    <div class="badan_chat">
+                          <p class="word-wrap">
+                        <?php echo $qd->Message; ?>
+                      </p>
+                        </div>
+                      </li>
+                    <?php endif; ?>
+                  <?php endforeach; ?>
+                  <div class="badan_chat word-wrap">
 
-                    </div>
+                  </div>
 
 
-              </ul>
-            </div>
-            <div class="panel-footer">
-              <!-- <form class="" id="Simpan" action="<?php //echo base_url().'index.php/Quotation/add_quotation_detail'; ?>" method="post" > -->
-              <div class="input-group">
+                </ul>
+              </div>
+              <div class="panel-footer">
+                <!-- <form class="" id="Simpan" action="<?php //echo base_url().'index.php/Quotation/add_quotation_detail'; ?>" method="post" > -->
+                <div class="input-group">
                   <input type="hidden" name="id_member" value="<?php echo $this->session->userdata('id_supplier'); ?>">
                   <input type="hidden" name="id_quotation" value="<?php echo $quotation[0]->IdQuotation;; ?>">
-                <input onkeypress="return runScript(event)" type="text"  name="message" class="form-control input-sm" placeholder="Type your message here..." />
-                <span class="input-group-btn">
-                  <a type="submit" id="addPesan" class="btn btn-warning btn-sm" id="btn-chat" >
-                    Send</a>
-                  </span>
+                  <input onkeypress="return runScript(event)" type="text"  name="message" class="form-control input-sm" placeholder="Type your message here..." />
+                  <span class="input-group-btn">
+                    <a type="submit" id="addPesan" class="btn btn-warning btn-sm" id="btn-chat" >
+                      Send</a>
+                    </span>
 
+                  </div>
+                  <!-- </form> -->
                 </div>
-                <!-- </form> -->
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        <!-- </div> -->
 
-    </div>
-  </div><!-- /.box-body -->
-</div><!-- /.box -->
+      </div>
+    </div><!-- /.box-body -->
+  </div><!-- /.box -->
 </section>
 <script type="text/javascript">
 function runScript(e) {
-    if (e.keyCode == 13) {
-      // alert("test");
+  if (e.keyCode == 13) {
+    // alert("test");
     e.preventDefault();
     var data = {
       'id_quotation'              : $('input[name=id_quotation]').val(),
-        'id_member'              : $('input[name=id_member]').val(),
-        'message'             : $('input[name=message]').val()
+      'id_member'              : $('input[name=id_member]').val(),
+      'message'             : $('input[name=message]').val()
     };
     // lakukan proses ajax
     $.ajax({
-        type        : 'POST',
-        dataType:'html',
-        url         : "<?php echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
-        cache: false,
-        data        :  data,
-        success: function(response) {
-
-            $(".badan_chat").append(response);
-
-        }
-
-    });
-return false;
-}
-}
-</script>
-<script type="text/javascript">
-  $(document).ready(function(){
-     $("#addPesan").click(function(e){
-      //  alert("test");
-      // var url = $('#Simpan').attr('action');
-       // ambil inputannya
-       e.preventDefault();
-       var data = {
-         'id_quotation'              : $('input[name=id_quotation]').val(),
-           'id_member'              : $('input[name=id_member]').val(),
-           'message'             : $('input[name=message]').val()
-       };
-       // lakukan proses ajax
-       $.ajax({
-           type        : 'POST',
-           dataType:'html',
-           url         : "<?php echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
-           cache: false,
-           data        :  data,
-           success: function(response) {
-
-               $(".badan_chat").append(response);
-
-           }
-
-       });
-
-
-    });
-  });
-</script>
-<!-- <script type="text/javascript">
-function add(e){
-  e.preventDefault();
-  // ambil url pada atribute form action
-  var url = $('#Simpan').attr('action');
-  // ambil inputannya
-  var data = {
-    'id_quotation'              : $('input[name=id_quotation]').val(),
-      'id_member'              : $('input[name=id_member]').val(),
-      'message'             : $('input[name=message]').val()
-  };
-  // lakukan proses ajax
-  $.ajax({
       type        : 'POST',
       dataType:'html',
-      url         : ,
+      url         : "<?php echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
       cache: false,
       data        :  data,
       success: function(response) {
-        $("#message").val()= "";
-        alert("ok");
-          $("#badan_chat").html(response);
+
+        $(".badan_chat").append(response);
 
       }
 
-  });
+    });
+    return false;
+  }
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#addPesan").click(function(e){
+    //  alert("test");
+    // var url = $('#Simpan').attr('action');
+    // ambil inputannya
+    e.preventDefault();
+    var data = {
+      'id_quotation'              : $('input[name=id_quotation]').val(),
+      'id_member'              : $('input[name=id_member]').val(),
+      'message'             : $('input[name=message]').val()
+    };
+    // lakukan proses ajax
+    $.ajax({
+      type        : 'POST',
+      dataType:'html',
+      url         : "<?php echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
+      cache: false,
+      data        :  data,
+      success: function(response) {
 
-  return false;
+        $(".badan_chat").append(response);
+
+      }
+
+    });
+
+
+  });
+});
+</script>
+<!-- <script type="text/javascript">
+function add(e){
+e.preventDefault();
+// ambil url pada atribute form action
+var url = $('#Simpan').attr('action');
+// ambil inputannya
+var data = {
+'id_quotation'              : $('input[name=id_quotation]').val(),
+'id_member'              : $('input[name=id_member]').val(),
+'message'             : $('input[name=message]').val()
+};
+// lakukan proses ajax
+$.ajax({
+type        : 'POST',
+dataType:'html',
+url         : ,
+cache: false,
+data        :  data,
+success: function(response) {
+$("#message").val()= "";
+alert("ok");
+$("#badan_chat").html(response);
+
+}
+
+});
+
+return false;
 }
 </script> -->
