@@ -9,11 +9,11 @@ https://github.com/marcaube/bootstrap-magnify
     margin: 0 auto;
     float: none;
 }
-    
+
 .mag img {
     max-width: 100%;
 }
-        
+
 
 .magnify {
     position: relative;
@@ -29,7 +29,7 @@ https://github.com/marcaube/bootstrap-magnify
     -webkit-box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
        -moz-box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
             box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
-    
+
     -webkit-border-radius: 100%;
        -moz-border-radius: 100%;
              border-radius: 100%
@@ -166,6 +166,11 @@ $(window).on('load', function () {
 </script>
 
 <div class="container">
+  <ol class="breadcrumb">
+    <?php if (isset($breadcrumb)): ?>
+      <?php echo $breadcrumb ?>
+    <?php endif; ?>
+  </ol>
   <div id="detail">
     <div class="contain_obj">
       <div class="mag">

@@ -20,7 +20,7 @@ class Product extends CI_Controller{
 		$this->M_pagination->set_config("",15,"","","","","");
 		/* mengecek apakah nilai dari form pencarian ada atau tidak jika ada maka
 		Product list akan menampilkan product berdasarkan nama product atau kategori
-		produk*/
+		produk */
 		if ( (!empty($this->input->get('search_value')) OR !empty($this->input->get('product_category_code'))) OR !empty($this->input->get('product_sub_category_code')) ) {
 			if (!empty($this->input->get('search_value'))) {
 				$search_value = $this->input->get('search_value');
@@ -33,6 +33,8 @@ class Product extends CI_Controller{
 				$config = $this->M_pagination->get_config();
 				$offset = $this->M_pagination->get_offset($page);
 				$get_product = $this->M_product->get_product("","",$search_value,$offset,$config["per_page"],"tbproductpic.IdProduct");
+				$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+				$data['breadcrumb'] .= "<li class='active'>"."Search for '".$search_value."''</li>";
 			}
 			elseif ( !empty($this->input->get('product_category_code'))) {
 				$product_category_code = $this->input->get('product_category_code');
@@ -44,6 +46,11 @@ class Product extends CI_Controller{
 				$config = $this->M_pagination->get_config();
 				$offset = $this->M_pagination->get_offset($page);
 				$get_product = $this->M_product->get_product("","","",$offset,$config["per_page"],"tbproductpic.IdProduct",$product_category_code);
+				$get_product_category = $this->M_product_category->get_product_category($product_category_code);
+				$baris = $get_product_category->row();
+				$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+				$data['breadcrumb'] .= "<li class='active'>".$baris->ProductCategory."</li>";
+
 			}
 			else {
 				$product_sub_category_code = $this->input->get('product_sub_category_code');
@@ -55,6 +62,14 @@ class Product extends CI_Controller{
 				$config = $this->M_pagination->get_config();
 				$offset = $this->M_pagination->get_offset($page);
 				$get_product = $this->M_product->get_product("","","",$offset,$config["per_page"],"tbproductpic.IdProduct","",$product_sub_category_code);
+				$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_query($product_sub_category_code);
+					$baris = $get_product_sub_category->row();
+					$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+					$data['breadcrumb'] .= "<li>"."<a href='".site_url('Product/public_product_list_view?')."product_category_code=".$baris->ProductCategoryCode."'>".$baris->ProductCategory."</a>"."</li>";
+					$data['breadcrumb'] .= "<li class='active'>".$baris->ProductSubCategory."</li>";
+					// $data['breadcrumb'] .= "<li class='active'>"."<a  href='".site_url('Product/public_product_list_view?')."product_sub_category_code=".$product_sub_category_code."'>".$baris->ProductSubCategory."</a>"."</li>";
+
+
 			}
 		}
 		/*menampilkan semua product secara acak*/
@@ -67,6 +82,8 @@ class Product extends CI_Controller{
 			$config = $this->M_pagination->get_config();
 			$offset = $this->M_pagination->get_offset($page);
 			$get_product = $this->M_product->get_product("","","",$offset, $config["per_page"],"tbproductpic.IdProduct");
+			$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+			$data['breadcrumb'] .= "<li class='active'>All Product</li>";
 		}
 		$this->pagination->initialize($config);
 		$data['product'] = $get_product->result();
@@ -90,6 +107,11 @@ class Product extends CI_Controller{
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
 		$head_data['page_title'] = "Dinilaku";
+		$baris = $get_product->row();
+		$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+		$data['breadcrumb'] .= "<li>"."<a href='".site_url('Product/public_product_list_view?')."product_category_code=".$baris->ProductCategoryCode."'>".$baris->ProductCategory."</a>"."</li>";
+		$data['breadcrumb'] .= "<li >"."<a  href='".site_url('Product/public_product_list_view?')."product_sub_category_code=".$baris->ProductSubCategoryCode."'>".$baris->ProductSubCategory."</a>"."</li>";
+		$data['breadcrumb'] .= "<li class='active'>".$baris->Name."</li>";
 		$this->load->view('template/front/head_front',$head_data);
 		$this->load->view('template/front/navigation',$data_nav);
 		$this->load->view('public/product/product_detail',$data);

@@ -41,6 +41,21 @@ class M_product_sub_category extends CI_Model{
     $query = $this->db->query($query);
     return $query;
   }
+
+  function get_product_sub_category_query($product_sub_category_code='',$product_category_code='')
+  {
+    $filter_value = !empty($product_category_code) ? " AND tbproductsubcategory.ProductCategoryCode = $product_category_code " : "" ;
+    $filter_value .= !empty($product_sub_category_code) ? " AND tbproductsubcategory.Code = $product_sub_category_code " : "" ;
+    $query = "SELECT tbproductsubcategory.Code AS ProductSubCategoryCode,
+    tbproductsubcategory.ProductCategoryCode,
+    tbproductsubcategory.ProductSubCategory,
+    tbproductcategory.ProductCategory
+     FROM tbproductsubcategory INNER JOIN tbproductcategory
+     ON tbproductcategory.Code = tbproductsubcategory.ProductCategoryCode
+     WHERE 1=1 ".$filter_value;
+    $query = $this->db->query($query);
+    return $query;
+  }
   // function diatas digunakan untuk mencari product_sub_category.
   // hanya digunakan untuk sementara harus nya bisa dirapikan dengan function
   // get_product_sub_category

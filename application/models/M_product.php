@@ -15,6 +15,7 @@ class M_product extends CI_Model{
     $filter_value .= !empty($product_sub_category_code) ? " AND tbproduct.ProductSubCategoryCode = $product_sub_category_code " : "" ;
     $filter_value .= !empty($search_value) ? " AND tbproduct.Name LIKE '%$search_value%' " : "" ;
     $filter_value .= !empty($search_value) ? " OR tbproductcategory.ProductCategory LIKE '%$search_value%' " : "";
+    $filter_value .= !empty($search_value) ? " OR tbproductsubcategory.ProductSubCategory LIKE '%$search_value%' " : "";
 
     $limit = !empty($limit) ? " LIMIT $limit " : "" ;
     $offset = is_numeric($offset)? " OFFSET $offset " : "" ;

@@ -23,10 +23,10 @@
     <h1>Quotation List</h1>
     <ol class="breadcrumb">
         <li>
-            <a href="#">Home</a>
+            <a href="<?php echo site_url('Home/home_view/') ?>">Home</a>
         </li>
-        <li>
-            <a>Quotation List</a>
+        <li class='active'>
+            Quotation List
         </li>
     </ol>
 

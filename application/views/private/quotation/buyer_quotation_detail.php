@@ -3,11 +3,12 @@
     <h1>Pembelian Necklace Bahla</h1>
     <ol class="breadcrumb">
       <li>
-        <a href="#">Home</a>
+        <a href="<?php echo site_url('Home/home_view/') ?>">Home</a>
       </li>
       <li>
-        <a>Quotation Detail</a>
+        <a href="<?php echo site_url('Quotation/buyer_quotation_list/') ?>">Quotation List</a>
       </li>
+      <li class="active">Quotation Detail</li>
     </ol>
     <div class="row">
       <div class="col-md-7 detail">

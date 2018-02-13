@@ -1,14 +1,14 @@
 
   <div class="container">
   <ol class="breadcrumb">
-      <li>
-        <a href="#">Home</a>
-      </li>
-      <li>
-        <a>Product List</a>
-      </li>
+    <?php if (isset($breadcrumb)): ?>
+      <?php echo $breadcrumb ?>
+    <?php endif; ?>
+
+
     </ol>
     <div class="my-container">
+
       <?php $i = 1; foreach($product as $p){ ?>
       <div class="tes-hover">
         <a href="<?php echo site_url('Product/public_product_detail_view/').$p->IdProduct ?>">
