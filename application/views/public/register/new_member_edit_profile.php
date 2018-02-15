@@ -1,73 +1,85 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <?php
-    $this->load->view('template/front/Css_front');
-    $this->load->view('template/front/Js_front');
-    ?>
-  </head>
-  <body>
-    <div class="uk-container uk-container-center uk-container-small">
-      <div class="uk-width-medium-1-2 uk-container-center">
-        <h1 class="uk-text-center">Marketplace Name</h1>
-        <h2 class="uk-text-center">Information</h2>
-        <?php echo form_open('Register/edit_new_member_profile','class="uk-panel uk-panel-box uk-form"'); ?>
-
-          <div class="uk-form-row ">
-                <label for="">Username </label>
-                <input readonly value="<?php echo $user[0]->Email; ?>" class="uk-input uk-form" type="text" placeholder="">
-          </div>
-          <div class="uk-form-row ">
-                <label for="">Password</label>
-                <input name="password" value="" class="uk-input uk-form" type="password" placeholder="">
-          </div>
-          <div class="uk-form-row ">
-                <label for="">Confirm Password</label>
-                <input name="c_password" value="" class="uk-input uk-form" type="password" placeholder="">
-
-          </div>
-          <div class="uk-form-row ">
-                <label for="">Location</label>
-                <select class="uk-input" name="location">
-                  <option value="indonesia">Indonesia</option>
-                </select>
-          </div>
-          <div class="uk-form-row ">
-            <label for=""> I am a</label><br>
-            <input type="radio" name="is_supplier" value="1">Suplier
-            <input type="radio" name="is_supplier" value="0">Buyer
-          </div>
-          <div class="uk-form-row ">
-                <label for="">Full Name</label>
-                <div class="uk-grid">
-                  <div class="uk-width-1-2">
-                  <input name="first_name" value="<?php echo $user[0]->FirstName; ?>" class="uk-input uk-form" type="text" placeholder="First Name">
-                </div>
-                  <div class="uk-width-1-2">
-                <input name="last_name" value="<?php echo $user[0]->LastName; ?>" class="uk-input uk-form" type="text" placeholder="Last Name">
-              </div>
-            </div>
-          </div>
-          <div class="uk-form-row ">
-                <label for="">Company Name </label>
-                <input name="company_name" value="<?php echo $user[0]->CompanyName; ?>" class="uk-input uk-form" type="text" placeholder="">
-          </div>
-          <div class="uk-form-row ">
-                <label for="">Telp</label><div class="uk-grid">
-                  <div class="uk-width-2-10">
-                  <input disabled  value="+62" class="uk-input uk-form" type="text" placeholder="First Name">
-                </div>
-                  <div class="uk-width-8-10">
-                <input name="phone" value="" class="uk-input uk-form" type="text" placeholder="Telp">
-              </div>
-            </div>
-          </div>
-          <input type="hidden" name="id_member" value="<?php echo $user[0]->IdMember; ?>">
-          <button type="submit" name="button"> submit</button>
-        <?php echo form_close(); ?>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <div class="text-center" style="margin-bottom:7%;">
+        <h4><img class="text-center" src="<?php echo base_url('assets/front_end_assets/img/2Dinilaku_Logo.png') ?>" alt=""></h4>
+        <h4> <b> Registration</b> </h4>
       </div>
+      <?php echo form_open('Register/edit_new_member_profile'); ?>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" readonly value="<?php echo $user[0]->Email; ?>" class="form-control" id="email" required>
+          </div>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-xs-12 ">
+            <div class="form-group">
+              <label for="first_name">First Name</label>
+              <input type="text" class="form-control" name="first_name" value="<?php echo $user[0]->FirstName; ?>" id="first_name" required>
+            </div>
+          </div>
+          <div class="col-xs-12 ">
+            <div class="form-group">
+              <label for="last_name">Last Name</label>
+              <input type="text" class="form-control" value="<?php echo $user[0]->LastName; ?>" name="last_name" id="last_name" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="company_name">Company Name</label>
+              <input type="text" class="form-control" value="<?php echo $user[0]->CompanyName; ?>" name="company_name" id="company_name" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="company_name">Phone</label>
+              <input type="text" class="form-control" value="" name="phone" id="phone" placeholder="081999777333" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" value="" name="password" id="password" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="c_password">Confirm Password</label>
+              <input type="password" class="form-control" value="" name="c_password" id="c_password" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <label for=""> I am a</label>
+            <div class="radio">
+              <label class="radio-inline">
+                <input  value="1" type="radio" name="is_supplier" id="seller" checked required>Seller
+              </label>
+              <label class="radio-inline">
+                <input  value="0" type="radio" name="is_supplier" id="buyer" required>Buyer
+              </label>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" name="id_member" value="<?php echo $user[0]->IdMember; ?>">
+        <div class="row">
+          <div class="col-xs-12 text-right">
+            <button type="submit" class="btn btn-default btn-lg">Submit</button>
+          </div>
+        </div>
+      <?php echo form_close(); ?>
     </div>
-  </body>
-</html>
+  </div>
+</div>

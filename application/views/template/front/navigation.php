@@ -280,7 +280,7 @@ $(document).ready(function () {
 <ul class="nav navbar-nav navbar-right">
   <?php if (empty($this->session->userdata('id_buyer'))): ?>
     <li>
-      <a href="#">
+      <a href="<?php echo base_url(); ?>index.php/Register">
         <span class="glyphicon glyphicon-user"></span> Sign Up</a>
       </li>
 
