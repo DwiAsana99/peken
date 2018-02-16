@@ -18,7 +18,7 @@
 </html>
 <script src="http://malsup.github.io/jquery.blockUI.js" type="text/javascript"></script>
 
-<?php $this->load->view('template/back/Js_back'); ?>
+<?php $this->load->view('template/back/js_back'); ?>
 <script type="text/javascript">
     $(document).ready(function(){
         $(".change").click(function(){

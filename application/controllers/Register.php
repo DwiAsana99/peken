@@ -96,11 +96,11 @@ public function edit_new_member_profile(){
       $this->session->set_userdata('id_buyer',$id_member);
       $this->session->set_userdata('company_name',$row->CompanyName);
       $this->session->set_userdata('first_name',$row->FirstName);
-      redirect('Home/home_view')
+      redirect('Home/home_view');
     }
 
   } else {
-    redirect('Home/home_view')
+    redirect('Home/home_view');
   }
 }
 

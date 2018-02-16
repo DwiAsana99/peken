@@ -174,15 +174,15 @@ class Quotation extends CI_Controller{
     $this->email->message($content);
     $this->email->set_newline("\r\n");
     $this->email->send();
-//     if($this->email->send()){
-//    //Success email Sent
-//    echo $this->email->print_debugger();
-// }else{
-//    //Email Failed To Send
-//    echo $this->email->print_debugger();
-// }
+    if($this->email->send()){
+   //Success email Sent
+   echo $this->email->print_debugger();
+}else{
+   //Email Failed To Send
+   echo $this->email->print_debugger();
+}
     redirect('Home');
- // exit();
+ exit();
   }
 }
 

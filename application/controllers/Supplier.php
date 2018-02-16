@@ -9,7 +9,7 @@ class Supplier extends CI_Controller{
     $this->load->model(array('M_member','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation'));
   }
   function dashboard_supplier_view(){
-    $this->load->view('private/dashboard_supplier');
+    $this->load->view('private/product');
   }
   /* function public_supplier_list_view() digunakan untuk menampilkan supplier list
 	kepada public (non member, member)*/
