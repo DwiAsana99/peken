@@ -27,5 +27,11 @@
         </div>
       </div>
       <?php } ?>
+
     </div>
+    <ul class="pagination pagination-large hidden-xs">
+    <?php foreach ($links as $link) {
+      echo "<li class=''>". $link."</li>";
+    } ?>
+  </ul>
   </div>
