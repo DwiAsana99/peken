@@ -9,7 +9,13 @@ class Supplier extends CI_Controller{
     $this->load->model(array('M_member','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation'));
   }
   function dashboard_supplier_view(){
-    $this->load->view('private/product');
+      $id_supplier = $this->session->userdata('id_supplier');
+       $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
+		$data_notification['quotation'] = $get_quotation->result();
+		$this->load->view('template/back/head_back',$data_notification);
+		$this->load->view('template/back/sidebar_back');
+    $this->load->view('private/dashboard_supplier');
+     $this->load->view('template/back/foot_back');
   }
   /* function public_supplier_list_view() digunakan untuk menampilkan supplier list
 	kepada public (non member, member)*/
@@ -30,6 +36,8 @@ class Supplier extends CI_Controller{
       $config = $this->M_pagination->get_config();
       $offset = $this->M_pagination->get_offset($page);
       $get_supplier = $this->M_member->get_member(0,1,"",$search_value,$offset,$config["per_page"]);
+      $data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+	  $data['breadcrumb'] .= "<li class='active'>"."Search for '".$search_value."''</li>";
     }
     else {
       $get_supplier = $this->M_member->get_member(0,1);
@@ -108,6 +116,7 @@ class Supplier extends CI_Controller{
     $profil_image_file = $this->upload->data();
     if (!empty($profil_image_file['file_name'])){
       $profil_image = $profil_image_file['file_name'];
+      $this->session->set_userdata('profil_image',$profil_image);
     }else{
       $profil_image = $profil_image_lama;
     }
@@ -140,6 +149,8 @@ class Supplier extends CI_Controller{
       'Siup' => $siup,
       'Tdp' => $tdp
     );
+    $this->session->set_userdata('first_name',$this->input->post('first_name'));
+    $this->session->set_userdata('company_name',$this->input->post('company_name'));
     // print_r($data);exit();
     $this->M_member->edit_member($data,$id_supplier);
     redirect('Supplier/supplier_account_view');

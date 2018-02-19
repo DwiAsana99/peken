@@ -1,7 +1,4 @@
-<?php
-$this->load->view('template/back/Head_back');
-$this->load->view('template/back/Sidebar_back');
-?>
+
 <!-- Content Wrapper. Contains page content -->
 
   <!-- Content Header (Page header) -->
@@ -224,4 +221,4 @@ $this->load->view('template/back/Sidebar_back');
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
-<?php $this->load->view('template/back/Foot_back'); ?>
+

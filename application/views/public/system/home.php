@@ -109,8 +109,8 @@
         </div>
         <hr>
         <div class="text-center">
-          <h6>Art Silver</h6>
-          <a href="" class="btn btn-default">Contact Seller</a>
+          <h6><?php echo $p->CompanyName; ?></h6>
+          <a href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$p->IdProduct."&"."id_supplier=".$p->IdSupplier ?>" class="btn btn-default">Contact Supplier</a>
         </div>
       </div>
       <?php } ?>
@@ -126,7 +126,7 @@
       <h2>Seller</h2>
       <?php foreach($supplier as $s){ ?>
       <div class="col-xs-2">
-        <img src="<?php echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>" class="img-responsive" alt="">
+        <a href="<?php echo site_url('supplier/public_supplier_detail_view?id_supplier=').$s->IdSupplier ?>"><img src="<?php echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>" class="img-responsive" alt=""></a>
       </div>
       <?php } ?>
     </div>

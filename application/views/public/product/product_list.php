@@ -22,8 +22,8 @@
         </div>
         <hr>
         <div class="text-center">
-          <h6>Art Silver</h6>
-          <a href="" class="btn btn-default">Contact Seller</a>
+          <h6><?php echo $p->CompanyName; ?></h6>
+          <a href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$p->IdProduct."&"."id_supplier=".$p->IdSupplier ?>" class="btn btn-default">Contact Supplier</a>
         </div>
       </div>
       <?php } ?>

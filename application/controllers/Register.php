@@ -46,7 +46,7 @@ class Register extends CI_Controller{
       $row = $get_member->row();
       $this->email->message("<a href='".base_url().
       "index.php/Register/new_member_edit_profile_view/".$row->IdMember.
-      "'>Verifikasi Akun Anda tes 1</a>"
+      "'>Verifikasi Akun Anda </a>"
     );
     $this->email->set_newline("\r\n");
     $this->email->send();
@@ -55,9 +55,10 @@ class Register extends CI_Controller{
     $data_nav['product_category'] = $get_product_category->result();
     $data_nav['product_sub_category'] = $get_product_sub_category->result();
     $head_data['page_title'] = "Quotation Detail";
+    $data['email'] = $email;
     $this->load->view('template/front/head_front',$head_data);
     $this->load->view('template/front/navigation',$data_nav);
-    $this->load->view('public/register/reg_confirm',$email);
+    $this->load->view('public/register/reg_confirm',$data);
     $this->load->view('template/front/foot_front');
   }
 }
@@ -90,11 +91,13 @@ public function edit_new_member_profile(){
     if ($this->input->post('is_supplier')==1) {
       $this->session->set_userdata('id_supplier',$id_member);
       $this->session->set_userdata('company_name',$row->CompanyName);
+      $this->session->set_userdata('profil_image',$row->ProfilImage);
       $this->session->set_userdata('first_name',$row->FirstName);
       redirect('Supplier/dashboard_supplier_view');
     } else {
       $this->session->set_userdata('id_buyer',$id_member);
       $this->session->set_userdata('company_name',$row->CompanyName);
+      $this->session->set_userdata('profil_image',$row->ProfilImage);
       $this->session->set_userdata('first_name',$row->FirstName);
       redirect('Home/home_view');
     }

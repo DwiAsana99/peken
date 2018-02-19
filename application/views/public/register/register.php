@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
       <div class="text-center" style="margin-bottom:7%;">
-        <a style="font-size:3em;text-decoration:none;color:black;" href="/" >DINILAKU</a>
+        <h2><img class=" text-center" src="<?php echo base_url('assets/front_end_assets/img/2Dinilaku_Logo.png') ?>" alt=""></h2>
         <h4>Register</h4>
       </div>
       <?php echo validation_errors();?>

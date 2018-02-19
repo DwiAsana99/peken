@@ -212,8 +212,7 @@ $(window).on('load', function () {
         <p>Period Supply Ability :
           <?php echo $product[0]->PeriodSupplyAbility; ?>
         </p>
-        <a class="btn btn-primary contact" href="<?php echo site_url('Quotation/rfq_view?')." id_product=".$product[0]->IdProduct."
-          & "."id_supplier=".$p->IdSupplier ?>">Contact Supllier
+        <a class="btn btn-primary contact" href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$product[0]->IdProduct."&"."id_supplier=".$p->IdSupplier ?>">Contact Supplier
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
         </a>
       </div>

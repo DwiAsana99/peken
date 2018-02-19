@@ -26,12 +26,9 @@ $(document).ready(function () {
 <form action="<?php echo base_url().'index.php/Quotation/add_quotation'; ?>" method="post">
   <div id="info" class="container">
     <ol class="breadcrumb">
-      <li>
-        <a href="#">Home</a>
-      </li>
-      <li>
-        <a>Request Quotation</a>
-      </li>
+      <?php if (isset($breadcrumb)): ?>
+      <?php echo $breadcrumb ?>
+    <?php endif; ?>
     </ol>
     <div class="col-md-4">
       <img class="img-responsive" src="<?php echo base_url('assets/supplier_upload/').$product[0]->FileName;?>" alt="" srcset="">

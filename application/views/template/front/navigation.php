@@ -278,7 +278,7 @@ $(document).ready(function () {
   </script>
 </form>
 <ul class="nav navbar-nav navbar-right">
-  <?php if (empty($this->session->userdata('id_buyer'))): ?>
+  <?php if (empty($this->session->userdata('id_buyer')) AND empty($this->session->userdata('id_supplier'))): ?>
     <li>
       <a href="<?php echo base_url(); ?>index.php/Register">
         <span class="glyphicon glyphicon-user"></span> Sign Up</a>
@@ -314,7 +314,7 @@ $(document).ready(function () {
           </li>
         </ul>
       </li>
-    <?php else: ?>
+    <?php elseif (!empty($this->session->userdata('id_buyer'))): ?>
       <li><a href="#" >
         <span class="glyphicon glyphicon-bell"><span class="badge badge-info">1000</span></span>
       </a>
@@ -329,6 +329,23 @@ $(document).ready(function () {
           </li>
           <li>
             <a href="<?php echo base_url().'index.php/Quotation/buyer_quotation_list';?>">Request for Quotation List</a>
+          </li>
+          <li>
+            <a href="<?php echo base_url().'index.php/Login/logout';?>">Sign Out</a>
+          </li>
+        </ul>
+
+      </li>
+      <?php elseif (!empty($this->session->userdata('id_supplier'))): ?>
+      <!--<li><a href="#" >Back to admin supplier page</a>-->
+      <!--</li>-->
+      <li class="dropdown">
+        <a href="#" id="signOut" class="dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-user"></span> <?php echo $this->session->userdata('company_name'); ?><span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a href="<?php echo base_url().'index.php/Supplier/dashboard_supplier_view';?>">Back to admin supplier page</a>
           </li>
           <li>
             <a href="<?php echo base_url().'index.php/Login/logout';?>">Sign Out</a>

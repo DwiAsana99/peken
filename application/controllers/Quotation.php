@@ -20,12 +20,14 @@ class Quotation extends CI_Controller{
     $data['product'] = $get_product->result();
     $data['supplier'] = $get_supplier->result();
     $get_product_category = $this->M_product_category->get_product_category();
-		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
-		$data_nav['product_category'] = $get_product_category->result();
-		$data_nav['product_sub_category'] = $get_product_sub_category->result();
+	$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+	$data_nav['product_category'] = $get_product_category->result();
+	$data_nav['product_sub_category'] = $get_product_sub_category->result();
     $head_data['page_title'] = "Dinilaku";
-		$this->load->view('template/front/head_front',$head_data);
-		$this->load->view('template/front/navigation',$data_nav);
+    $data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+	$data['breadcrumb'] .= "<li class='active'>Request for Quotation</li>";
+	$this->load->view('template/front/head_front',$head_data);
+	$this->load->view('template/front/navigation',$data_nav);
     $this->load->view('private/quotation/rfq',$data);
     $this->load->view('template/front/foot_front');
   }
@@ -174,15 +176,15 @@ class Quotation extends CI_Controller{
     $this->email->message($content);
     $this->email->set_newline("\r\n");
     $this->email->send();
-    if($this->email->send()){
-   //Success email Sent
-   echo $this->email->print_debugger();
-}else{
-   //Email Failed To Send
-   echo $this->email->print_debugger();
-}
+//     if($this->email->send()){
+//    //Success email Sent
+//    echo $this->email->print_debugger();
+// }else{
+//    //Email Failed To Send
+//    echo $this->email->print_debugger();
+// }
     redirect('Home');
- exit();
+ // exit();
   }
 }
 
