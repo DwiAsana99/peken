@@ -14,10 +14,13 @@ https://github.com/marcaube/bootstrap-magnify
     max-width: 100%;
 }
 
-
 .magnify {
     position: relative;
     cursor: none
+}
+
+.col-xs-2{
+  z-index: -1;
 }
 
 .magnify-large {

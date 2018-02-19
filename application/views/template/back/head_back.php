@@ -45,15 +45,13 @@
                           <li><!-- start message -->
                             <a href="#">
                               <div class="pull-left">
-                                  
-                                  
-                                
+                                <img src="https://dummyimage.com/vga" />
                               </div>
                               <h4>
                                 <?php echo $q->CompanyName; ?><br>
                                 <small><i class="fa fa-clock-o"></i> <?php echo $q->DateSend; ?></small>
                               </h4>
-                              <p><?php echo $q->Subject; ?></p>
+                              <span class="badge" style="background-color:orange;">4</span> <span class="label label-danger"> unread comment</span>
                             </a>
                           </li>
                           <?php } ?>
