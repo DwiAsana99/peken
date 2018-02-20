@@ -98,7 +98,133 @@ input[name="search_value"]{
   width: 30vw !important;
 }
 
+/* notification */
 
+.navbar-default .dropdown-menu.notify-drop a {
+ text-decoration: none;
+ display: block;
+ width: 100%;
+ height: 100%;
+}
+
+.navbar-default .dropdown-menu.notify-drop {
+  min-width: 330px;
+  background-color: #fff;
+  min-height: 360px;
+  max-height: 360px;
+}
+.navbar-default .dropdown-menu.notify-drop .notify-drop-title {
+  border-bottom: 1px solid #e2e2e2;
+  padding: 5px 15px 10px 15px;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content {
+  min-height: 280px;
+  max-height: 280px;
+  overflow-y: scroll;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content::-webkit-scrollbar-track
+{
+  background-color: #F5F5F5;
+}
+
+.navbar-default .dropdown-menu.notify-drop .drop-content::-webkit-scrollbar
+{
+  width: 8px;
+  background-color: #F5F5F5;
+}
+
+.navbar-default .dropdown-menu.notify-drop .drop-content::-webkit-scrollbar-thumb
+{
+  background-color: #ccc;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li {
+  border-bottom: 1px solid #e2e2e2;
+  padding: 10px 0px 5px 0px;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li:nth-child(2n+0) {
+  background-color: #fafafa;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li:hover {
+  background-color: #fcfcfc;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li:last-child {
+  border-bottom: none;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li .notify-img {
+  float: left;
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  margin: 0px 0px 8px 0px;
+}
+.navbar-default .dropdown-menu.notify-drop .allRead {
+  margin-right: 7px;
+}
+.navbar-default .dropdown-menu.notify-drop .rIcon {
+  float: right;
+  color: #999;
+}
+.navbar-default .dropdown-menu.notify-drop .rIcon:hover {
+  color: #333;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li a {
+  font-size: 12px;
+  font-weight: normal;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li {
+  font-weight: bold;
+  font-size: 11px;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li hr {
+  margin: 5px 0;
+  width: 70%;
+  border-color: #e2e2e2;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content .pd-l0 {
+  padding-left: 0;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li p {
+  font-size: 11px;
+  color: #666;
+  font-weight: normal;
+  margin: 3px 0;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li p.time {
+  font-size: 10px;
+  font-weight: 600;
+  top: -6px;
+  margin: 8px 0px 0px 0px;
+  padding: 0px 3px;
+  border: 1px solid #e2e2e2;
+  position: relative;
+  background-image: linear-gradient(#fff,#f2f2f2);
+  display: inline-block;
+  border-radius: 2px;
+  color: #B97745;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li p.time:hover {
+  background-image: linear-gradient(#fff,#fff);
+}
+.navbar-default .dropdown-menu.notify-drop .notify-drop-footer {
+  border-top: 1px solid #e2e2e2;
+  bottom: 0;
+  position: relative;
+  padding: 8px 15px;
+}
+.navbar-default .dropdown-menu.notify-drop .notify-drop-footer a {
+  color: #777;
+  text-decoration: none;
+}
+.navbar-default .dropdown-menu.notify-drop .notify-drop-footer a:hover {
+  color: #333;
+}
+ /* ini komen bagian akhir notfikasi :) */
+ 
 @media(max-width:768px) {
   #login-dp {
     background-color: inherit;
@@ -278,9 +404,9 @@ $(document).ready(function () {
   </script>
 </form>
 <ul class="nav navbar-nav navbar-right">
-  <?php if (empty($this->session->userdata('id_buyer'))): ?>
+  <?php if (empty($this->session->userdata('id_buyer')) AND empty($this->session->userdata('id_supplier'))): ?>
     <li>
-      <a href="#">
+      <a href="<?php echo base_url(); ?>index.php/Register">
         <span class="glyphicon glyphicon-user"></span> Sign Up</a>
       </li>
 
@@ -314,11 +440,80 @@ $(document).ready(function () {
           </li>
         </ul>
       </li>
-    <?php else: ?>
-      <li><a href="#" >
-        <span class="glyphicon glyphicon-bell"><span class="badge badge-info">1000</span></span>
-      </a>
-      </li>
+    <?php elseif (!empty($this->session->userdata('id_buyer'))): ?>
+    <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notification (<b>2</b>)</a>
+          <ul class="dropdown-menu notify-drop">
+            <div class="notify-drop-title">
+            	<div class="row">
+            		<div class="col-md-6 col-sm-6 col-xs-6">Belum dibaca (<b>2</b>)</div>
+            		<div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title="tümü okundu."><i class="fa fa-dot-circle-o"></i></a></div>
+            	</div>
+            </div>
+            <!-- end notify title -->
+            <!-- notify content -->
+            <div class="drop-content">
+              <li>
+                  <a href="http://www.google.com">
+                  <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
+                  <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
+                    Ahmet yorumladı. 
+                    Çicek bahçeleri...
+                    <hr>
+                    <p class="time"><span class="label label-primary">Primary Label</span></p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                  <a href="http://www.google.com">
+                  <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
+                  <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
+                    Ahmet yorumladı. 
+                    Çicek bahçeleri...
+                    <hr>
+                    <p class="time"><span class="label label-primary">Primary Label</span></p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                  <a href="http://www.google.com">
+                  <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
+                  <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
+                    Ahmet yorumladı. 
+                    Çicek bahçeleri...
+                    <hr>
+                    <p class="time"><span class="label label-primary">Primary Label</span></p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                  <a href="http://www.google.com">
+                  <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
+                  <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
+                    Ahmet yorumladı. 
+                    Çicek bahçeleri...
+                    <hr>
+                    <p class="time"><span class="label label-primary">Primary Label</span></p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                  <a href="http://www.google.com">
+                  <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
+                  <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
+                    Ahmet yorumladı. 
+                    Çicek bahçeleri...
+                    <hr>
+                    <p class="time"><span class="label label-primary">Primary Label</span></p>
+                  </div>
+                </a>
+              </li>
+            </div>
+            <div class="notify-drop-footer text-center">
+            	<a href=""><i class="fa fa-eye"></i> Tümünü Göster</a>
+            </div>
+          </ul>
+        </li>
       <li class="dropdown">
         <a href="#" id="signOut" class="dropdown-toggle" data-toggle="dropdown">
           <span class="glyphicon glyphicon-user"></span> <?php echo $this->session->userdata('first_name'); ?><span class="caret"></span>
@@ -336,19 +531,31 @@ $(document).ready(function () {
         </ul>
 
       </li>
+      <?php elseif (!empty($this->session->userdata('id_supplier'))): ?>
+      <!--<li><a href="#" >Back to admin supplier page</a>-->
+      <!--</li>-->
+      <li class="dropdown">
+        <a href="#" id="signOut" class="dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-user"></span> <?php echo $this->session->userdata('company_name'); ?><span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a href="<?php echo base_url().'index.php/Supplier/dashboard_supplier_view';?>">Back to admin supplier page</a>
+          </li>
+          <li>
+            <a href="<?php echo base_url().'index.php/Login/logout';?>">Sign Out</a>
+          </li>
+        </ul>
+
+      </li>
     <?php endif; ?>
   </ul>
-
-
-
-
-
-
-
-
-
   <!--  -->
-
+  <script>
+    $(function () {
+  $('[data-tooltip="tooltip"]').tooltip()
+	});
+  </script>
 </div>
 </div>
 </nav>

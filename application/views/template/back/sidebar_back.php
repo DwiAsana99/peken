@@ -3,14 +3,22 @@
 
 <section class="sidebar" >
 
-      <div class="user-panel text-center">
-        <div class="image">
+      <div class="user-panel">
+        <div class="pull-left image">
 
-          <img src="<?php echo base_url('assets/supplier_upload/').$this->session->userdata('profil_image') ?>" width="160"  class="img-circle" alt="User Image">
-          <h4 style="color:white;"><b><?php echo $this->session->userdata('company_name'); ?></b></h4>
+          <img src="<?php if (empty($this->session->userdata('profil_image')) OR $this->session->userdata('profil_image') == "") {
+                                    echo base_url().'assets/icon/upload-icon.png';
+                                }else{
+                                    echo base_url().'assets/supplier_upload/'.$this->session->userdata('profil_image');
+
+                                }?>" width="75" class="img-circle" alt="User Image">
+
+
 
         </div>
-
+        <div class="pull-left info ">
+          <h5 class=""><b ><?php echo $this->session->userdata('company_name'); ?></b></h5>
+        </div>
       </div>
 
       <!-- /.search form -->
@@ -41,7 +49,7 @@
           </ul>
         </li> -->
         <li><a href="<?php echo base_url().'index.php/Product/product_view' ?>"><i class="fa fa-circle-o"></i><span>My Product</span></a></li>
-        <li><a href="<?php echo base_url().'index.php/Quotation/supplier_quotation_list' ?>"><i class="fa fa-envelope-o"></i><span >Quotation List <i class="label label-success badge">4</i></span></a></li>
+        <li><a href="<?php echo base_url().'index.php/Quotation/supplier_quotation_list' ?>"><i class="fa fa-envelope-o"></i><span >Quotation List</span></a></li>
         <li><a href="<?php echo base_url().'index.php/Supplier/supplier_account_view' ?>"><i class="fa fa-user"></i> <span>Profil</span></a></li>
       </ul>
     </section>

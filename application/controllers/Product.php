@@ -17,7 +17,7 @@ class Product extends CI_Controller{
 	function public_product_list_view(){
 		//mengambil nilai page dari url
 		$page = $this->input->get('per_page');
-		$this->M_pagination->set_config("",15,"","","","","");
+		$this->M_pagination->set_config("",10,"","","","","");
 		/* mengecek apakah nilai dari form pencarian ada atau tidak jika ada maka
 		Product list akan menampilkan product berdasarkan nama product atau kategori
 		produk */
@@ -94,6 +94,7 @@ class Product extends CI_Controller{
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
 		$head_data['page_title'] = "Dinilaku";
+		//print_r($str_links);exit();
 		$this->load->view('template/front/head_front',$head_data);
 		$this->load->view('template/front/navigation',$data_nav);
 		$this->load->view('public/product/product_list',$data);

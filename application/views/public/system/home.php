@@ -1,3 +1,16 @@
+<style>
+  @media screen and (max-width: 480px) {
+    .detail-display{
+      height: auto;
+      opacity: 1;
+    }
+
+    .my-container {
+      grid-gap: 0;
+    }
+}
+</style>
+
 <div class="container">
   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -51,7 +64,7 @@
 </div>
 
 <div class="container">
-  <div class="row product-promo">
+  <!-- <div class="row product-promo">
     <h2>Product Promo</h2>
     <div class="col-md-6">
       <img src="./assets/img/jumbroton.jpg" class="img-responsive" alt="">
@@ -86,9 +99,9 @@
     <div class="text-right">
       <a href="#" class="btn btn-warning">See More Product Promo</a>
     </div>
-  </div>
-  <h2>Product Today</h2>
-  <div class="product-today">
+  </div> -->
+  <div class="flex_shadow seller_list">
+      <h2>Product Today</h2>
     <div class="my-container">
       <?php $i = 1; foreach($product as $p){ ?>
       <div class="tes-hover">
@@ -109,8 +122,8 @@
         </div>
         <hr>
         <div class="text-center">
-          <h6>Art Silver</h6>
-          <a href="" class="btn btn-default">Contact Seller</a>
+          <h6><?php echo $p->CompanyName; ?></h6>
+          <a href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$p->IdProduct."&"."id_supplier=".$p->IdSupplier ?>" class="btn btn-default">Contact Supplier</a>
         </div>
       </div>
       <?php } ?>
@@ -119,16 +132,44 @@
       <a href="<?php echo site_url('Product/public_product_list_view') ?>" class="btn btn-warning more">See More Product Today</a>
     </div>
   </div>
-  <div class="row"></div>
-  <div class="row"></div>
-  <div class="row text-center seller">
+  <!-- <div class="row"> -->
+  <div class="divider" style="margin: 10% 0"></div>
+    <div class="flex_shadow seller">
+      <h2>Seller</h2>
+      <div class="my-container seller_column">
+        <?php foreach($supplier as $s){ ?>
+        <div class="tes-hover text-center">
+          <a 
+          href="<?php echo site_url('supplier/public_supplier_detail_view?id_supplier=').$s->IdSupplier ?>">
+            <img 
+              src="<?php echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>"
+              class="sellerImg"
+              alt="">
+          </a>
+          <div class="detail-display">
+            <p>THis is static description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis at odio incidunt pla </p>
+          </div>
+        </div>
+        <?php } ?>
+      </div>
+      <div class="text-right">
+        <a href="#" class="btn btn-warning more">See More Seller</a>
+      </div>
+    </div>
+  <!-- </div> row comment -->
+  <!-- <div class="row text-center seller">
     <div class="container">
       <h2>Seller</h2>
-      <?php foreach($supplier as $s){ ?>
+      <?php //foreach($supplier as $s){ ?>
       <div class="col-xs-2">
-        <img src="<?php echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>" class="img-responsive" alt="">
+        <a 
+        href="<?php //echo site_url('supplier/public_supplier_detail_view?id_supplier=').$s->IdSupplier ?>">
+          <img 
+            src="<?php //echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>" class="img-responsive"
+            alt="">
+        </a>
       </div>
-      <?php } ?>
+      <?php //} ?>
     </div>
-  </div>
+  </div> -->
 </div>

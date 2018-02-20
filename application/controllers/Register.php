@@ -9,7 +9,7 @@ class Register extends CI_Controller{
     /* Load the libraries and helpers */
     $this->load->library(array('form_validation','email'));
     $this->load->helper(array('form', 'captcha'));
-    $this->load->model(array('M_captcha','M_member'));
+    $this->load->model(array('M_captcha','M_member','M_product_category','M_product_sub_category'));
   }
   public function index(){
 
@@ -25,7 +25,15 @@ class Register extends CI_Controller{
     ){
       $cap = $this->M_captcha->generate_captcha();
       $this->session->set_userdata('captcha_word', $cap['word']);
+      $get_product_category = $this->M_product_category->get_product_category();
+      $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+      $data_nav['product_category'] = $get_product_category->result();
+      $data_nav['product_sub_category'] = $get_product_sub_category->result();
+      $head_data['page_title'] = "Quotation Detail";
+      $this->load->view('template/front/head_front',$head_data);
+      $this->load->view('template/front/navigation',$data_nav);
       $this->load->view('public/register/register',$cap);
+      $this->load->view('template/front/foot_front');
     }
     elseif($this->form_validation->run() == TRUE && $captcha == $word){
       $this->session->unset_userdata('captcha_word');
@@ -38,24 +46,40 @@ class Register extends CI_Controller{
       $row = $get_member->row();
       $this->email->message("<a href='".base_url().
       "index.php/Register/new_member_edit_profile_view/".$row->IdMember.
-      "'>Verifikasi Akun Anda tes 1</a>"
+      "'>Verifikasi Akun Anda </a>"
     );
     $this->email->set_newline("\r\n");
     $this->email->send();
-    $this->load->view('public/register/reg_confirm',$email);
-    }
+    $get_product_category = $this->M_product_category->get_product_category();
+    $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+    $data_nav['product_category'] = $get_product_category->result();
+    $data_nav['product_sub_category'] = $get_product_sub_category->result();
+    $head_data['page_title'] = "Quotation Detail";
+    $data['email'] = $email;
+    $this->load->view('template/front/head_front',$head_data);
+    $this->load->view('template/front/navigation',$data_nav);
+    $this->load->view('public/register/reg_confirm',$data);
+    $this->load->view('template/front/foot_front');
   }
+}
 
-  public function new_member_edit_profile_view($id_member){
-    $get_member = $this->M_member->get_member(0,"",$id_member);
-     $data['user'] = $get_member->result();
-    $this->load->view('public/register/new_member_edit_profile',$data);
-  }
+public function new_member_edit_profile_view($id_member){
+  $get_member = $this->M_member->get_member(0,"",$id_member);
+  $data['user'] = $get_member->result();
+  $get_product_category = $this->M_product_category->get_product_category();
+  $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+  $data_nav['product_category'] = $get_product_category->result();
+  $data_nav['product_sub_category'] = $get_product_sub_category->result();
+  $head_data['page_title'] = "Quotation Detail";
+  $this->load->view('template/front/head_front',$head_data);
+  $this->load->view('template/front/navigation',$data_nav);
+  $this->load->view('public/register/new_member_edit_profile',$data);
+  $this->load->view('template/front/foot_front');
+}
 
 public function edit_new_member_profile(){
   if ($this->input->post('password')===$this->input->post('c_password')) {
     $data = array('Pwd' => sha1($this->input->post('password')),
-    'Location' => $this->input->post('location'),
     'IsSupplier' => $this->input->post('is_supplier'),
     'FirstName' => $this->input->post('first_name'),
     'LastName' => $this->input->post('last_name'),
@@ -64,19 +88,22 @@ public function edit_new_member_profile(){
   );
   $id_member = $this->input->post('id_member');
   $this->M_member->edit_member($data,$id_member);
-  if ($this->input->post('is_supplier')==1) {
-    $this->session->set_userdata('id_supplier',$id_member);
-    $this->session->set_userdata('company_name',$row->CompanyName);
-    $this->session->set_userdata('profil_image',$row->ProfilImage);
-  } else {
-    $this->session->set_userdata('id_member',$id_member);
-    $this->session->set_userdata('company_name',$row->CompanyName);
-    $this->session->set_userdata('profil_image',$row->ProfilImage);
-  }
+    if ($this->input->post('is_supplier')==1) {
+      $this->session->set_userdata('id_supplier',$id_member);
+      $this->session->set_userdata('company_name',$row->CompanyName);
+      $this->session->set_userdata('profil_image',$row->ProfilImage);
+      $this->session->set_userdata('first_name',$row->FirstName);
+      redirect('Supplier/dashboard_supplier_view');
+    } else {
+      $this->session->set_userdata('id_buyer',$id_member);
+      $this->session->set_userdata('company_name',$row->CompanyName);
+      $this->session->set_userdata('profil_image',$row->ProfilImage);
+      $this->session->set_userdata('first_name',$row->FirstName);
+      redirect('Home/home_view');
+    }
 
-
-  redirect('Supplier/dashboard_supplier_view');
   } else {
+    redirect('Home/home_view');
   }
 }
 

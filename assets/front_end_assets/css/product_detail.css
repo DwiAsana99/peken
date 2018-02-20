@@ -1,7 +1,7 @@
 #detail {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 70vh;
+    grid-template-rows: 5%;
     grid-gap: 40px;
 }
 
@@ -22,6 +22,7 @@
 .seller_img{
     margin-right: 30px;
     float: left;
+    z-index: -1;
 }
 
 .nav-tabs{

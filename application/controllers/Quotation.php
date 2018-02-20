@@ -20,12 +20,14 @@ class Quotation extends CI_Controller{
     $data['product'] = $get_product->result();
     $data['supplier'] = $get_supplier->result();
     $get_product_category = $this->M_product_category->get_product_category();
-		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
-		$data_nav['product_category'] = $get_product_category->result();
-		$data_nav['product_sub_category'] = $get_product_sub_category->result();
+	$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+	$data_nav['product_category'] = $get_product_category->result();
+	$data_nav['product_sub_category'] = $get_product_sub_category->result();
     $head_data['page_title'] = "Dinilaku";
-		$this->load->view('template/front/head_front',$head_data);
-		$this->load->view('template/front/navigation',$data_nav);
+    $data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+	$data['breadcrumb'] .= "<li class='active'>Request for Quotation</li>";
+	$this->load->view('template/front/head_front',$head_data);
+	$this->load->view('template/front/navigation',$data_nav);
     $this->load->view('private/quotation/rfq',$data);
     $this->load->view('template/front/foot_front');
   }
@@ -142,6 +144,9 @@ class Quotation extends CI_Controller{
     // </li>';
   }
   function add_quotation(){
+    // print_r($this->input->post());
+    // exit();
+
     $id_buyer = $this->session->userdata('id_buyer');
     $supplier_email = $this->input->post('supplier_email');
     $id_supplier = $this->input->post('id_supplier');
@@ -153,9 +158,9 @@ class Quotation extends CI_Controller{
     $get_buyer = $this->M_member->get_member(0,0,$id_buyer);
     $buyer = $get_buyer->row();
     $content = "Pemesanan oleh : ".$buyer->FirstName.$buyer->LastName."(".$buyer->Email.") to buy ".$product_name.", qty : ".$qty.$message;
-    $subject = "Request for quotation from ".$buyer_name." to buy ".$product_name;
+    $subject = "Request for quotation from "." to buy ".$product_name;
     $data = array(
-      'Date' => $date,
+      'DateSend' => $date,
       'IdBuyer' => $id_buyer,
       'IdSupplier' => $id_supplier,
       'Subject' => $subject,
@@ -163,6 +168,7 @@ class Quotation extends CI_Controller{
       'IdProduct' => $id_product,
       'Qty' => $qty
     );
+
     $this->M_quotation->add_quotation($data);
     $this->email->from('marketplacesilver@gmail.com', 'marketplacesilver');
     $this->email->to($supplier_email);
@@ -170,7 +176,15 @@ class Quotation extends CI_Controller{
     $this->email->message($content);
     $this->email->set_newline("\r\n");
     $this->email->send();
+//     if($this->email->send()){
+//    //Success email Sent
+//    echo $this->email->print_debugger();
+// }else{
+//    //Email Failed To Send
+//    echo $this->email->print_debugger();
+// }
     redirect('Home');
+ // exit();
   }
 }
 
