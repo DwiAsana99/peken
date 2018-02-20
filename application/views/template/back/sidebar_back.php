@@ -3,20 +3,22 @@
 
 <section class="sidebar" >
 
-      <div class="user-panel text-center">
-        <div class="image">
+      <div class="user-panel">
+        <div class="pull-left image">
 
           <img src="<?php if (empty($this->session->userdata('profil_image')) OR $this->session->userdata('profil_image') == "") {
                                     echo base_url().'assets/icon/upload-icon.png';
                                 }else{
                                     echo base_url().'assets/supplier_upload/'.$this->session->userdata('profil_image');
-                                    
+
                                 }?>" width="75" class="img-circle" alt="User Image">
-          
-          <h4 style="color:white;"><b><?php echo $this->session->userdata('company_name'); ?></b></h4>
+
+
 
         </div>
-
+        <div class="pull-left info ">
+          <h5 class=""><b ><?php echo $this->session->userdata('company_name'); ?></b></h5>
+        </div>
       </div>
 
       <!-- /.search form -->
