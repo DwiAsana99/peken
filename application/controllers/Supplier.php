@@ -9,22 +9,22 @@ class Supplier extends CI_Controller{
     $this->load->model(array('M_member','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation', 'M_quotation_detail'));
   }
   function dashboard_supplier_view(){
-      $id_supplier = $this->session->userdata('id_supplier');
-       $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
-		$data_notification['quotation'] = $get_quotation->result();
-		$this->load->view('template/back/head_back',$data_notification);
-		$this->load->view('template/back/sidebar_back');
+    $id_supplier = $this->session->userdata('id_supplier');
+    $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
+    $data_notification['quotation'] = $get_quotation->result();
+    $this->load->view('template/back/head_back',$data_notification);
+    $this->load->view('template/back/sidebar_back');
     $this->load->view('private/dashboard_supplier');
-     $this->load->view('template/back/foot_back');
+    $this->load->view('template/back/foot_back');
   }
   /* function public_supplier_list_view() digunakan untuk menampilkan supplier list
-	kepada public (non member, member)*/
+  kepada public (non member, member)*/
   function public_supplier_list_view(){
     //mengambil nilai page dari url
     $page = $this->input->get('per_page');
     $this->M_pagination->set_config("",10,"","","","","");
     /* mengecek apakah nilai dari form pencarian ada atau tidak, jika ada maka
-		supplier list akan menampilkan supplier berdasarkan CompanyName*/
+    supplier list akan menampilkan supplier berdasarkan CompanyName*/
     if (!empty($this->input->get('search_value'))) {
       $search_value = $this->input->get('search_value');
       $data['search_value'] = $search_value;
@@ -37,7 +37,7 @@ class Supplier extends CI_Controller{
       $offset = $this->M_pagination->get_offset($page);
       $get_supplier = $this->M_member->get_member(0,1,"",$search_value,$offset,$config["per_page"]);
       $data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
-	  $data['breadcrumb'] .= "<li class='active'>"."Search for '".$search_value."''</li>";
+      $data['breadcrumb'] .= "<li class='active'>"."Search for '".$search_value."''</li>";
     }
     else {
       $get_supplier = $this->M_member->get_member(0,1);
@@ -54,18 +54,18 @@ class Supplier extends CI_Controller{
     $str_links = $this->pagination->create_links();
     $data["links"] = explode('&nbsp;',$str_links );
     $get_product_category = $this->M_product_category->get_product_category();
-		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
-		$data_nav['product_category'] = $get_product_category->result();
-		$data_nav['product_sub_category'] = $get_product_sub_category->result();
+    $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+    $data_nav['product_category'] = $get_product_category->result();
+    $data_nav['product_sub_category'] = $get_product_sub_category->result();
     if ($this->session->userdata('id_buyer')) {
-			$id_buyer = $this->session->userdata('id_buyer');
-			$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$id_buyer);
-			$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-			$data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
-		}
+      $id_buyer = $this->session->userdata('id_buyer');
+      $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$id_buyer);
+      $data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+      $data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
+    }
     $head_data['page_title'] = "Dinilaku";
-		$this->load->view('template/front/head_front',$head_data);
-		$this->load->view('template/front/navigation',$data_nav);
+    $this->load->view('template/front/head_front',$head_data);
+    $this->load->view('template/front/navigation',$data_nav);
     $this->load->view('public/supplier/supplier_list',$data);
     $this->load->view('template/front/foot_front');
   }
@@ -87,18 +87,18 @@ class Supplier extends CI_Controller{
     $str_links = $this->pagination->create_links();
     $data["links"] = explode('&nbsp;',$str_links );
     $get_product_category = $this->M_product_category->get_product_category();
-		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
-		$data_nav['product_category'] = $get_product_category->result();
-		$data_nav['product_sub_category'] = $get_product_sub_category->result();
+    $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+    $data_nav['product_category'] = $get_product_category->result();
+    $data_nav['product_sub_category'] = $get_product_sub_category->result();
     if ($this->session->userdata('id_buyer')) {
-			$id_buyer = $this->session->userdata('id_buyer');
-			$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$id_buyer);
-			$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-			$data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
-		}
+      $id_buyer = $this->session->userdata('id_buyer');
+      $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$id_buyer);
+      $data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+      $data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
+    }
     $head_data['page_title'] = "Dinilaku";
-		$this->load->view('template/front/head_front',$head_data);
-		$this->load->view('template/front/navigation',$data_nav);
+    $this->load->view('template/front/head_front',$head_data);
+    $this->load->view('template/front/navigation',$data_nav);
     $this->load->view('public/supplier/supplier_detail',$data);
     $this->load->view('template/front/foot_front');
   }
@@ -108,13 +108,13 @@ class Supplier extends CI_Controller{
     $get_member = $this->M_member->get_member("",1,$id_supplier);
     $data['user'] = $get_member->result();
     $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
-		$data_notification['unread_quotation'] = $get_quotation->result();
-		$data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
-		$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($id_supplier);
-		$data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-		$data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
-		$this->load->view('template/back/head_back',$data_notification);
-		$this->load->view('template/back/sidebar_back');
+    $data_notification['unread_quotation'] = $get_quotation->result();
+    $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
+    $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($id_supplier);
+    $data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+    $data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
+    $this->load->view('template/back/head_back',$data_notification);
+    $this->load->view('template/back/sidebar_back');
     $this->load->view('private/supplier_account/supplier_account',$data);
     $this->load->view('template/back/foot_back');
   }

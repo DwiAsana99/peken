@@ -124,10 +124,7 @@
                     <?php endif; ?>
                   <?php endforeach; ?>
                   <div class="badan_chat word-wrap">
-
                   </div>
-
-
                 </ul>
               </div>
               <div class="panel-footer">
@@ -140,7 +137,6 @@
                     <a type="submit" id="addPesan" class="btn btn-warning btn-sm" id="btn-chat" >
                       Send</a>
                     </span>
-
                   </div>
                   <!-- </form> -->
                 </div>
@@ -171,11 +167,8 @@ function runScript(e) {
       cache: false,
       data        :  data,
       success: function(response) {
-
         $(".badan_chat").append(response);
-
       }
-
     });
     return false;
   }
