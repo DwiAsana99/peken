@@ -442,29 +442,29 @@ $(document).ready(function () {
       </li>
     <?php elseif (!empty($this->session->userdata('id_buyer'))): ?>
     <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-comment"></i><span style="" class="badge">42</span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-comment"></i><span style="" class="badge"><?php echo $unread_quotation_detail_num_rows; ?></span></a>
           <ul class="dropdown-menu notify-drop">
             <div class="notify-drop-title">
             	<div class="row">
-            		<div class="col-md-12 col-sm-6 col-xs-6">You have unread comment in 0 quotation</div>
+            		<div class="col-md-12 col-sm-6 col-xs-6">You have unread comment in <?php echo $unread_quotation_detail_num_rows; ?> quotation</div>
             		<!-- <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title="tümü okundu."><i class="fa fa-dot-circle-o"></i></a></div> -->
             	</div>
             </div>
             <!-- end notify title -->
             <!-- notify content -->
             <div class="drop-content">
+              <?php foreach($unread_quotation_detail as $uqd){ ?>
               <li>
-                  <a href="http://www.google.com">
-                  <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
+                  <a href="<?php echo base_url().'index.php/Quotation/buyer_quotation_detail?id_quotation='.$uqd->IdQuotation; ?>">
+                  <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="<?php echo base_url().'assets/supplier_upload/'.$uqd->ProfilImage ?>" height="50" width="50" class="img-circle" alt=""></div></div>
                   <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
-                    Ahmet yorumladı.
-                    Çicek bahçeleri...
+                    <h5><b><?php echo $uqd->CompanyName; ?></b></h5>
                     <hr>
-                    <p class=""><span class="label label-primary">Primary Label</span></p>
+                    <span class="badge" style="background-color:orange;"><?php echo $uqd->UnreadCount; ?></span> <span class="label label-info"> unread comment</span>
                   </div>
                 </a>
               </li>
-
+              <?php } ?>
             </div>
             <div class="notify-drop-footer text-center">
             	<a href=""><i class="fa fa-eye"></i> See All Notifications</a>

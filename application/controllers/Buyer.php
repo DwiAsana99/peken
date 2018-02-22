@@ -6,7 +6,7 @@ class Buyer extends CI_Controller{
     parent::__construct();
     $this->load->library(array('form_validation','pagination'));
     $this->load->helper(array('form', 'url'));
-    $this->load->model(array('M_member','M_product','M_pagination', 'M_product_category', 'M_product_sub_category'));
+    $this->load->model(array('M_member','M_product','M_pagination', 'M_product_category', 'M_product_sub_category','M_quotation_detail'));
   }
 
   function buyer_account_view(){
@@ -17,6 +17,12 @@ class Buyer extends CI_Controller{
 		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
+    if ($this->session->userdata('id_buyer')) {
+			$id_buyer = $this->session->userdata('id_buyer');
+			$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$id_buyer);
+			$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+			$data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
+		}
     $head_data['page_title'] = "Dinilaku";
 		$this->load->view('template/front/head_front',$head_data);
 		$this->load->view('template/front/navigation', $data_nav);
