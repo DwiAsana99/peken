@@ -6,7 +6,7 @@ class Product extends CI_Controller{
 		parent::__construct();
 		$this->load->library(array('form_validation','pagination'));
 		$this->load->helper(array('form', 'url'));
-		$this->load->model(array('M_product','M_product_category','M_product_sub_category','M_pagination','M_quotation'));
+		$this->load->model(array('M_product','M_product_category','M_product_sub_category','M_pagination','M_quotation','M_quotation_detail'));
 	}
 
 	function index(){
@@ -123,7 +123,11 @@ class Product extends CI_Controller{
 		$get_product = $this->M_product->get_product($id_supplier,"","","","","tbproductpic.IdProduct");
 		$data['product'] = $get_product->result();
 		$get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
-		$data_notification['quotation'] = $get_quotation->result();
+		$data_notification['unread_quotation'] = $get_quotation->result();
+		$data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
+		$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($id_supplier);
+		$data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+		$data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
 		$this->load->view('template/back/head_back',$data_notification);
 		$this->load->view('template/back/sidebar_back');
 		$this->load->view('private/product/product',$data);
@@ -140,7 +144,11 @@ class Product extends CI_Controller{
 		$selected['product_sub_category'] = $row->ProductSubCategory;
 		$data['product_sub_category_tag'] = $this->M_product_sub_category->get_product_sub_category($row->ProductCategoryCode,1,$selected);
 		$get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
-		$data_notification['quotation'] = $get_quotation->result();
+		$data_notification['unread_quotation'] = $get_quotation->result();
+		$data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
+		$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($id_supplier);
+		$data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+		$data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
 		$this->load->view('template/back/head_back',$data_notification);
 		$this->load->view('template/back/sidebar_back');
 		$this->load->view('private/product/edit_product',$data);
@@ -172,7 +180,11 @@ class Product extends CI_Controller{
 		$get_product_category = $this->M_product_category->get_product_category();
 		$data['product_category'] = $get_product_category->result();
 		$get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
-		$data_notification['quotation'] = $get_quotation->result();
+		$data_notification['unread_quotation'] = $get_quotation->result();
+		$data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
+		$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($id_supplier);
+		$data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+		$data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
 		$this->load->view('template/back/head_back',$data_notification);
 		$this->load->view('template/back/sidebar_back');
 		$this->load->view('private/product/add_product',$data);

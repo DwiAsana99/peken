@@ -33,25 +33,55 @@
                   <!-- Messages: style can be found in dropdown.less-->
                   <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-bell-o"></i>
-                      <span class="label label-warning">4</span>
+                      <i class="glyphicon glyphicon-envelope"></i>
+                      <span class="label label-warning"><?php echo $unread_quotation_num_rows; ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                      <li class="header">You have 4 notifications</li>
+                      <li class="header">You have <?php echo $unread_quotation_num_rows; ?> unread quotation</li>
                       <li>
                         <!-- inner menu: contains the actual data -->
                         <ul class="menu">
-                            <?php foreach($quotation as $q){ ?>
+                            <?php foreach($unread_quotation as $uq){ ?>
                           <li><!-- start message -->
-                            <a href="#">
+                            <a href="<?php echo base_url().'index.php/Quotation/supplier_quotation_detail?id_quotation='.$uq->IdQuotation; ?>">
+                              <div class="pull-left">
+                                <img src="" />
+                              </div>
+                              <h4>
+                                <?php echo $uq->CompanyName; ?><br>
+                                <small><i class="fa fa-clock-o"></i> <?php echo $uq->DateSend; ?></small>
+                              </h4>
+                              <span class="badge" style="background-color:red;">new</span> <span class="label label-info"> quotation</span>
+                            </a>
+                          </li>
+                          <?php } ?>
+                        </ul>
+                      </li>
+                      <li class="footer"><a href="#">See All Notifications</a></li>
+                    </ul>
+                  </li>
+                  <!-- Messages: style can be found in dropdown.less-->
+                  <li class="dropdown messages-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="glyphicon glyphicon-comment"></i>
+                      <span class="label label-warning"><?php echo $unread_quotation_detail_num_rows; ?></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li class="header">You have unread comment in <?php echo $unread_quotation_detail_num_rows; ?> quotation</li>
+                      <li>
+                        <!-- inner menu: contains the actual data -->
+                        <ul class="menu">
+                            <?php foreach($unread_quotation_detail as $uqd){ ?>
+                          <li><!-- start message -->
+                            <a href="<?php echo base_url().'index.php/Quotation/supplier_quotation_detail?id_quotation='.$uqd->IdQuotation; ?>">
                               <div class="pull-left">
                                 <img src="https://dummyimage.com/vga" />
                               </div>
                               <h4>
-                                <?php echo $q->CompanyName; ?><br>
-                                <small><i class="fa fa-clock-o"></i> <?php echo $q->DateSend; ?></small>
+                                <?php echo $uqd->CompanyName; ?><br>
+                                <small><i class="fa fa-clock-o"></i> <?php //echo $qd->DateSend; ?></small>
                               </h4>
-                              <span class="badge" style="background-color:orange;">4</span> <span class="label label-danger"> unread comment</span>
+                              <span class="badge" style="background-color:red;"><?php echo $uqd->UnreadCount; ?></span> <span class="label label-info"> unread comment</span>
                             </a>
                           </li>
                           <?php } ?>
@@ -70,7 +100,7 @@
                                     echo base_url().'assets/icon/upload-icon.png';
                                 }else{
                                     echo base_url().'assets/supplier_upload/'.$this->session->userdata('profil_image');
-                                    
+
                                 }?>" height="22" class="img-circle" alt="User Image">
                       <span class="hidden-xs"><?php echo $this->session->userdata('company_name'); ?></span>
                     </a>
@@ -81,7 +111,7 @@
                                     echo base_url().'assets/icon/upload-icon.png';
                                 }else{
                                     echo base_url().'assets/supplier_upload/'.$this->session->userdata('profil_image');
-                                    
+
                                 }?>" height="160" class="img-circle" alt="User Image">
 
                         <p>

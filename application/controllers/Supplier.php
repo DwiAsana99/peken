@@ -6,7 +6,7 @@ class Supplier extends CI_Controller{
     parent::__construct();
     $this->load->library(array('form_validation','pagination'));
     $this->load->helper(array('form', 'url'));
-    $this->load->model(array('M_member','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation'));
+    $this->load->model(array('M_member','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation', 'M_quotation_detail'));
   }
   function dashboard_supplier_view(){
       $id_supplier = $this->session->userdata('id_supplier');
@@ -96,7 +96,11 @@ class Supplier extends CI_Controller{
     $get_member = $this->M_member->get_member("",1,$id_supplier);
     $data['user'] = $get_member->result();
     $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
-		$data_notification['quotation'] = $get_quotation->result();
+		$data_notification['unread_quotation'] = $get_quotation->result();
+		$data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
+		$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($id_supplier);
+		$data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+		$data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
 		$this->load->view('template/back/head_back',$data_notification);
 		$this->load->view('template/back/sidebar_back');
     $this->load->view('private/supplier_account/supplier_account',$data);

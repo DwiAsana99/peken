@@ -224,7 +224,7 @@ input[name="search_value"]{
   color: #333;
 }
  /* ini komen bagian akhir notfikasi :) */
- 
+
 @media(max-width:768px) {
   #login-dp {
     background-color: inherit;
@@ -442,12 +442,12 @@ $(document).ready(function () {
       </li>
     <?php elseif (!empty($this->session->userdata('id_buyer'))): ?>
     <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notification (<b>2</b>)</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-comment"></i><span style="" class="badge">42</span></a>
           <ul class="dropdown-menu notify-drop">
             <div class="notify-drop-title">
             	<div class="row">
-            		<div class="col-md-6 col-sm-6 col-xs-6">Belum dibaca (<b>2</b>)</div>
-            		<div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title="tümü okundu."><i class="fa fa-dot-circle-o"></i></a></div>
+            		<div class="col-md-12 col-sm-6 col-xs-6">You have unread comment in 0 quotation</div>
+            		<!-- <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title="tümü okundu."><i class="fa fa-dot-circle-o"></i></a></div> -->
             	</div>
             </div>
             <!-- end notify title -->
@@ -457,60 +457,17 @@ $(document).ready(function () {
                   <a href="http://www.google.com">
                   <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
                   <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
-                    Ahmet yorumladı. 
+                    Ahmet yorumladı.
                     Çicek bahçeleri...
                     <hr>
-                    <p class="time"><span class="label label-primary">Primary Label</span></p>
+                    <p class=""><span class="label label-primary">Primary Label</span></p>
                   </div>
                 </a>
               </li>
-              <li>
-                  <a href="http://www.google.com">
-                  <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
-                  <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
-                    Ahmet yorumladı. 
-                    Çicek bahçeleri...
-                    <hr>
-                    <p class="time"><span class="label label-primary">Primary Label</span></p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                  <a href="http://www.google.com">
-                  <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
-                  <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
-                    Ahmet yorumladı. 
-                    Çicek bahçeleri...
-                    <hr>
-                    <p class="time"><span class="label label-primary">Primary Label</span></p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                  <a href="http://www.google.com">
-                  <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
-                  <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
-                    Ahmet yorumladı. 
-                    Çicek bahçeleri...
-                    <hr>
-                    <p class="time"><span class="label label-primary">Primary Label</span></p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                  <a href="http://www.google.com">
-                  <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
-                  <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
-                    Ahmet yorumladı. 
-                    Çicek bahçeleri...
-                    <hr>
-                    <p class="time"><span class="label label-primary">Primary Label</span></p>
-                  </div>
-                </a>
-              </li>
+
             </div>
             <div class="notify-drop-footer text-center">
-            	<a href=""><i class="fa fa-eye"></i> Tümünü Göster</a>
+            	<a href=""><i class="fa fa-eye"></i> See All Notifications</a>
             </div>
           </ul>
         </li>

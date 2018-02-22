@@ -47,7 +47,11 @@ class Quotation extends CI_Controller{
     $get_quotation = $this->M_quotation->get_quotation("",$id_supplier);
     $data['quotation'] = $get_quotation->result();
     $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
-		$data_notification['quotation'] = $get_quotation->result();
+		$data_notification['unread_quotation'] = $get_quotation->result();
+    $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
+		$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($id_supplier);
+		$data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+		$data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
 		$this->load->view('template/back/head_back',$data_notification);
     $this->load->view('template/back/sidebar_back');
     $this->load->view('private/quotation/supplier_quotation_list',$data);
@@ -56,11 +60,23 @@ class Quotation extends CI_Controller{
   function supplier_quotation_detail(){
     $id_supplier = $this->session->userdata('id_supplier');
     $id_quotation = $this->input->get('id_quotation');
+    $set_quotation_detail_data = array('IsRead' => 1);
+    $this->M_quotation_detail->update_quotation_detail($set_quotation_detail_data,$id_quotation);
+    $set_quotation_data = array('IsRead' => 1);
+    $this->M_quotation->update_quotation($set_quotation_data,$id_quotation);
     $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,$id_quotation);
     $get_quotation_detail = $this->M_quotation_detail->get_quotation_detail($id_quotation);
     $data['quotation'] = $get_quotation->result();
     $data['quotation_detail'] = $get_quotation_detail->result();
-    $this->load->view('template/back/head_back',$data);
+    $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
+		$data_notification['unread_quotation'] = $get_quotation->result();
+    $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
+		$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($id_supplier);
+		$data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+		$data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
+    $set_quotation_detail_data = array('IsRead' => 1);
+    $this->M_quotation_detail->update_quotation_detail($set_quotation_detail_data,$id_quotation);
+    $this->load->view('template/back/head_back',$data_notification);
     $this->load->view('template/back/sidebar_back');
     $this->load->view('private/quotation/supplier_quotation_detail',$data);
     $this->load->view('template/back/foot_back');

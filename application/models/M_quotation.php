@@ -23,11 +23,15 @@ class M_quotation extends CI_Model{
    FROM tbquotation INNER JOIN tbproduct INNER JOIN tbmember
    ON tbproduct.IdProduct = tbquotation.IdProduct ".$tbmember_join_tbquotation." WHERE 1=1 ".$filter_value.
    " ORDER BY DateSend DESC";
-      // echo $query;exit();
+      //echo $query;exit();
    $query = $this->db->query($query);
 
    return $query;
 
+ }
+ function update_quotation($data="", $id_quotation=""){
+   $this->db->where('IdQuotation',$id_quotation );
+   $this->db->update('tbquotation',$data);
  }
 }
 
