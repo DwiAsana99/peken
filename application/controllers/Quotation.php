@@ -138,6 +138,44 @@ class Quotation extends CI_Controller{
     $this->load->view('private/quotation/buyer_quotation_detail',$data);
     $this->load->view('template/front/foot_front');
   }
+  function get_quotation_detail_chat(){
+    $id_buyer = $this->session->userdata('id_buyer');
+    $id_supplier = $this->session->userdata('id_supplier');
+    $id_member = !empty($id_buyer) ? $id_buyer : $id_supplier ;
+    $id_quotation = $this->input->post('id_quotation');
+    $get_quotation_detail = $this->M_quotation_detail->get_quotation_detail($id_quotation,"",0);
+    $quotation_detail_all = $get_quotation_detail->result();
+    //echo "~".$id_member."~";
+    $row = $get_quotation_detail->row();
+    // echo "Id Member".$row->IdMember."Id Member";
+    // echo $get_quotation_detail->num_rows();exit();
+    if ($get_quotation_detail->num_rows() > 0 AND $row->IdMember != $id_member) {
+      foreach ($quotation_detail_all as $quotation_detail) {
+        if ($quotation_detail->IsRead == 0) {
+          $profile_image = $quotation_detail->ProfilImage;
+          $profile_image = !empty($profile_image) ? $profile_image : "user_without_profile_image.png" ;
+          echo '<li class="left clearfix"><span class="chat-img pull-left">
+            <img src='.base_url('assets/supplier_upload/').$profile_image.' alt="User Avatar" width="55" class="img-circle" />
+          </span>
+          <div class="chat-body clearfix">
+            <div class="header">
+            <strong class=" primary-font">'.$quotation_detail->CompanyName.'</strong>
+              <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>'.$quotation_detail->DateSend.'</small>
+            </div>
+            <p>
+              '.$quotation_detail->Message.'
+            </p>
+          </div>
+        </li>';
+          if ($id_member != $quotation_detail->IdMember) {
+            $set_quotation_detail_data = array('IsRead' => 1);
+            $this->M_quotation_detail->update_quotation_detail($set_quotation_detail_data,"",$quotation_detail->IdQuotationDetail);
+          }
+        }
+      }
+    }
+
+  }
   function add_quotation_detail(){
     $id_quotation = $this->input->post('id_quotation');
     $id_member = $this->input->post('id_member');
@@ -152,13 +190,15 @@ class Quotation extends CI_Controller{
     $id_quotation_detail = $this->M_quotation_detail->add_quotation_detail($data);
     $get_quotation_detail = $this->M_quotation_detail->get_quotation_detail($id_quotation,$id_quotation_detail);
     $quotation_detail = $get_quotation_detail->row();
+    $profile_image = $quotation_detail->ProfilImage;
+    $profile_image = !empty($profile_image) ? $profile_image : "user_without_profile_image.png" ;
     echo '<li class="right clearfix"><span class="chat-img pull-right">
-      <img src='.base_url('assets/supplier_upload/').$quotation_detail->ProfilImage.' alt="User Avatar" width="60" class="img-circle" />
+      <img src='.base_url('assets/supplier_upload/').$profile_image.' alt="User Avatar" width="60" class="img-circle" />
     </span>
     <div class="chat-body clearfix">
       <div class="header">
         <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>'.$date.'</small>
-        <strong class="pull-right primary-font">'.$quotation_detail->CompanyName.'</strong>
+        <strong class="pull-right primary-font">'."Me".'</strong>
       </div>
       <p>
         '.$quotation_detail->Message.'
@@ -192,7 +232,7 @@ class Quotation extends CI_Controller{
     $get_buyer = $this->M_member->get_member(0,0,$id_buyer);
     $buyer = $get_buyer->row();
     $content = "Pemesanan oleh : ".$buyer->FirstName.$buyer->LastName."(".$buyer->Email.") to buy ".$product_name.", qty : ".$qty.$message;
-    $subject = "Request for quotation from "." to buy ".$product_name;
+    $subject = " Request for quotation from "." to buy ".$product_name;
     $data = array(
       'DateSend' => $date,
       'IdBuyer' => $id_buyer,

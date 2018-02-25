@@ -10,6 +10,7 @@ class M_quotation extends CI_Model{
    $id_buyer = "",$id_supplier = "",$id_quotation = "", $is_read = ""
  ){
   //  $filter_value = " AND tbmember.IsSupplier = 1 ";
+  $tbmember_join_tbquotation = "";
    $filter_value = !empty($id_buyer) ? " AND IdBuyer = $id_buyer " : "" ;
    $filter_value .= !empty($id_supplier) ? " AND tbquotation.IdSupplier = $id_supplier " : "" ;
    $filter_value .= !empty($id_quotation) ? " AND tbquotation.IdQuotation = $id_quotation " : "" ;

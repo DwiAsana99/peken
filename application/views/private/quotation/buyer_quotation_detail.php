@@ -36,14 +36,19 @@ Qty           : 10 <br><br>
             <div class="panel-body" >
               <ul class="chat" >
                 <?php foreach ($quotation_detail as $qd): ?>
+                  <?php if (!empty($qd->ProfilImage)): ?>
+                    <?php $profil_image = $qd->ProfilImage; ?>
+                  <?php else: ?>
+                    <?php $profil_image = "user_without_profile_image.png"; ?>
+                  <?php endif; ?>
                   <?php if ($this->session->userdata('id_buyer') == $qd->IdMember): ?>
                     <li class="right clearfix"><span class="chat-img pull-right">
-                      <img src="http://placehold.it/50/55C1E7/fff&text=me" alt="User Avatar" width="60" class="img-circle" />
+                      <img src="<?php echo base_url('assets/supplier_upload/').$profil_image; ?>" alt="User Avatar" width="45" class="img-circle" />
                     </span>
                     <div class="chat-body clearfix">
                       <div class="header">
                         <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
-                        <strong class="pull-right primary-font"><?php echo $qd->CompanyName; ?></strong>
+                        <strong class="pull-right primary-font">Me</strong>
                       </div>
                       <p class="word-wrap">
                         <?php echo $qd->Message; ?>
@@ -52,12 +57,12 @@ Qty           : 10 <br><br>
                   </li>
                   <?php else: ?>
                     <li class="left clearfix"><span class="chat-img pull-left">
-                      <img src="<?php echo base_url('assets/supplier_upload/').$qd->ProfilImage ?>" width="55" class="img-circle" />
+                      <img src="<?php echo base_url('assets/supplier_upload/').$profil_image; ?>" width="45" class="img-circle" />
                     </span>
                     <div class="chat-body clearfix">
                       <div class="header">
-                        <strong class="primary-font"><?php echo $qd->CompanyName; ?></strong> <small class="pull-right text-muted">
-                          <span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
+                        <strong class="primary-font"><?php echo $qd->CompanyName; ?></strong>
+                        <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
                         </div>
                         <p class="word-wrap">
                           <?php echo $qd->Message; ?>
@@ -78,7 +83,7 @@ Qty           : 10 <br><br>
           <div class="input-group">
               <input type="hidden" name="id_member" value="<?php echo $this->session->userdata('id_buyer'); ?>">
               <input type="hidden" name="id_quotation" value="<?php echo $quotation[0]->IdQuotation;; ?>">
-            <input onkeypress="return runScript(event)" type="text"  name="message" class="form-control input-sm" placeholder="Type your message here..." />
+            <input id="txt_message" onkeypress="return runScript(event)" type="text"  name="message" class="form-control input-sm " placeholder="Type your message here..." />
             <span class="input-group-btn">
               <a type="submit" id="addPesan" class="btn btn-warning btn-sm" id="btn-chat" >
                 Send</a>
@@ -94,12 +99,12 @@ Qty           : 10 <br><br>
     </div>
   </div>
   <script>
-    $(document).ready(function () {
-      var a = $(".chat-room")[0].scrollHeight;
-      $(".chat-room").delay(800).animate({
-        scrollTop: a
-      }, 500);
-    });
+    // $(document).ready(function () {
+    //   var a = $(".chat-room")[0].scrollHeight;
+    //   $(".chat-room").delay(800).animate({
+    //     scrollTop: a
+    //   }, 500);
+    // });
   </script>
   <script type="text/javascript">
   function runScript(e) {
@@ -121,16 +126,40 @@ Qty           : 10 <br><br>
           success: function(response) {
 
               $(".badan_chat").append(response);
+              $("#txt_message").val("");
 
           }
 
       });
+
   return false;
   }
   }
   </script>
   <script type="text/javascript">
+    function reload_chat() {
+      var data = {
+        'id_quotation'              : $('input[name=id_quotation]').val()
+      };
+      $.ajax({
+          type        : 'POST',
+          dataType:'html',
+          url         : "<?php echo base_url().'index.php/Quotation/get_quotation_detail_chat'; ?>",
+          cache: false,
+          data        :  data,
+          success: function(response) {
+              $(".badan_chat").append(response);
+          }
+      });
+    }
+  </script>
+  <script type="text/javascript">
     $(document).ready(function(){
+      // alert('tes');
+        setInterval(
+          reload_chat
+          , 1000
+        );
        $("#addPesan").click(function(e){
         //  alert("test");
         // var url = $('#Simpan').attr('action');
@@ -151,12 +180,11 @@ Qty           : 10 <br><br>
              success: function(response) {
 
                  $(".badan_chat").append(response);
+                 $("#txt_message").val("");
 
              }
 
          });
-
-
       });
     });
   </script>

@@ -97,26 +97,32 @@
                 <div class="panel-body" >
                   <ul class="chat" >
                     <?php foreach ($quotation_detail as $qd): ?>
+                      <?php if (!empty($qd->ProfilImage)): ?>
+                        <?php $profil_image = $qd->ProfilImage; ?>
+                      <?php else: ?>
+                        <?php $profil_image = "user_without_profile_image.png"; ?>
+                      <?php endif; ?>
                       <?php if ($this->session->userdata('id_supplier') == $qd->IdMember): ?>
                         <li class="right clearfix"><span class="chat-img pull-right">
-                          <img src="<?php echo base_url('assets/supplier_upload/').$qd->ProfilImage ?>" alt="User Avatar" width="60" class="img-circle" />
+                          <img src="<?php echo base_url('assets/supplier_upload/').$profil_image; ?>" alt="User Avatar" width="45" class="img-circle" />
                         </span>
                         <div class="chat-body clearfix">
                           <div class="header">
+                            <!-- <strong class="pull-right primary-font">ME</strong> -->
                             <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
-                            <strong class="pull-right primary-font"></strong>
+                            <strong class="pull-right primary-font">Me</strong>
                           </div>
                           <p class="word-wrap"><?php echo $qd->Message; ?></p>
                         </div>
                       </li>
                     <?php else: ?>
                       <li class="left clearfix"><span class="chat-img pull-left">
-                        <img src="http://placehold.it/50/55C1E7/fff&text=buyer" alt="User Avatar" class="img-circle" />
+                        <img src="<?php echo base_url('assets/supplier_upload/').$profil_image; ?>" alt="User Avatar" width="45" class="img-circle" />
                       </span>
                       <div class="chat-body clearfix">
                         <div class="header">
-                          <strong class="primary-font"><?php echo $qd->CompanyName; ?></strong> <small class="pull-right text-muted">
-                            <span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
+                          <strong class="primary-font"><?php echo $qd->CompanyName; ?></strong>
+                          <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
                           </div>
                           <p class="word-wrap"><?php echo $qd->Message; ?></p>
                         </div>
@@ -132,7 +138,7 @@
                 <div class="input-group">
                   <input type="hidden" name="id_member" value="<?php echo $this->session->userdata('id_supplier'); ?>">
                   <input type="hidden" name="id_quotation" value="<?php echo $quotation[0]->IdQuotation;; ?>">
-                  <input onkeypress="return runScript(event)" type="text"  name="message" class="form-control input-sm" placeholder="Type your message here..." />
+                  <input onkeypress="return runScript(event)" type="text" id="txt_message" name="message" class="form-control input-sm" placeholder="Type your message here..." />
                   <span class="input-group-btn">
                     <a type="submit" id="addPesan" class="btn btn-warning btn-sm" id="btn-chat" >
                       Send</a>
@@ -151,6 +157,86 @@
 </section>
 <script type="text/javascript">
 function runScript(e) {
+    if (e.keyCode == 13) {
+      // alert("test");
+    e.preventDefault();
+    var data = {
+      'id_quotation'              : $('input[name=id_quotation]').val(),
+        'id_member'              : $('input[name=id_member]').val(),
+        'message'             : $('input[name=message]').val()
+    };
+    // lakukan proses ajax
+    $.ajax({
+        type        : 'POST',
+        dataType:'html',
+        url         : "<?php echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
+        cache: false,
+        data        :  data,
+        success: function(response) {
+
+            $(".badan_chat").append(response);
+            $("#txt_message").val("");
+        }
+
+    });
+return false;
+}
+}
+</script>
+<script type="text/javascript">
+  function reload_chat() {
+    var data = {
+      'id_quotation'              : $('input[name=id_quotation]').val()
+    };
+    $.ajax({
+        type        : 'POST',
+        dataType:'html',
+        url         : "<?php echo base_url().'index.php/Quotation/get_quotation_detail_chat'; ?>",
+        cache: false,
+        data        :  data,
+        success: function(response) {
+            $(".badan_chat").append(response);
+        }
+    });
+  }
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    // alert('tes');
+      setInterval(
+        reload_chat
+        , 1000
+      );
+     $("#addPesan").click(function(e){
+      //  alert("test");
+      // var url = $('#Simpan').attr('action');
+       // ambil inputannya
+       e.preventDefault();
+       var data = {
+         'id_quotation'              : $('input[name=id_quotation]').val(),
+           'id_member'              : $('input[name=id_member]').val(),
+           'message'             : $('input[name=message]').val()
+       };
+       // lakukan proses ajax
+       $.ajax({
+           type        : 'POST',
+           dataType:'html',
+           url         : "<?php echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
+           cache: false,
+           data        :  data,
+           success: function(response) {
+
+               $(".badan_chat").append(response);
+               $("#txt_message").val("");
+           }
+
+       });
+    });
+  });
+</script>
+<!-- <script type="text/javascript">
+function runScript(e) {
+
   if (e.keyCode == 13) {
     // alert("test");
     e.preventDefault();
@@ -163,7 +249,7 @@ function runScript(e) {
     $.ajax({
       type        : 'POST',
       dataType:'html',
-      url         : "<?php echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
+      url         : "<?php //echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
       cache: false,
       data        :  data,
       success: function(response) {
@@ -176,6 +262,21 @@ function runScript(e) {
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
+  setTimeout(
+    // $.ajax({
+    //   type        : 'POST',
+    //   dataType:'html',
+    //   url         : "<?php// echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
+    //   cache: false,
+    //   data        :  data,
+    //   success: function(response) {
+    //     $(".badan_chat").append(response);
+    //   }
+    // });
+    alert('tes');
+    , 6000
+  );
+
   $("#addPesan").click(function(e){
     //  alert("test");
     // var url = $('#Simpan').attr('action');
@@ -190,7 +291,7 @@ $(document).ready(function(){
     $.ajax({
       type        : 'POST',
       dataType:'html',
-      url         : "<?php echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
+      url         : "<?php //echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
       cache: false,
       data        :  data,
       success: function(response) {
@@ -204,7 +305,8 @@ $(document).ready(function(){
 
   });
 });
-</script>
+</script> -->
+<!-- _________________________________________________________ -->
 <!-- <script type="text/javascript">
 function add(e){
 e.preventDefault();
