@@ -11,7 +11,11 @@ class Supplier extends CI_Controller{
   function dashboard_supplier_view(){
     $id_supplier = $this->session->userdata('id_supplier');
     $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
-    $data_notification['quotation'] = $get_quotation->result();
+    $data_notification['unread_quotation'] = $get_quotation->result();
+    $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
+    $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($id_supplier);
+    $data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+    $data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
     $this->load->view('template/back/head_back',$data_notification);
     $this->load->view('template/back/sidebar_back');
     $this->load->view('private/dashboard_supplier');
