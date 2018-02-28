@@ -442,16 +442,17 @@ $(document).ready(function () {
       </li>
     <?php elseif (!empty($this->session->userdata('id_buyer'))): ?>
     <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-comment"></i><span style="" class="badge"><?php echo $unread_quotation_detail_num_rows; ?></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="glyphicon glyphicon-comment"></i><span style="" class="badge"><?php echo $unread_quotation_detail_num_rows; ?></span>
+          </a>
           <ul class="dropdown-menu notify-drop">
             <div class="notify-drop-title">
             	<div class="row">
             		<div class="col-md-12 col-sm-6 col-xs-6">You have unread comment in <?php echo $unread_quotation_detail_num_rows; ?> quotation</div>
-            		<!-- <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title="tümü okundu."><i class="fa fa-dot-circle-o"></i></a></div> -->
+            		
             	</div>
             </div>
-            <!-- end notify title -->
-            <!-- notify content -->
+
             <div class="drop-content">
               <?php foreach($unread_quotation_detail as $uqd){ ?>
               <li>
