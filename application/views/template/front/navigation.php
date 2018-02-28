@@ -441,6 +441,7 @@ $(document).ready(function () {
         </ul>
       </li>
     <?php elseif (!empty($this->session->userdata('id_buyer'))): ?>
+      <!-- _____________||_____________ -->
     <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <i class="glyphicon glyphicon-comment"></i><span style="" class="badge"><?php echo $unread_quotation_detail_num_rows; ?></span>
@@ -449,7 +450,7 @@ $(document).ready(function () {
             <div class="notify-drop-title">
             	<div class="row">
             		<div class="col-md-12 col-sm-6 col-xs-6">You have unread comment in <?php echo $unread_quotation_detail_num_rows; ?> quotation</div>
-            		
+
             	</div>
             </div>
 
@@ -472,6 +473,7 @@ $(document).ready(function () {
             </div>
           </ul>
         </li>
+        <!-- __________________________ -->
       <li class="dropdown">
         <a href="#" id="signOut" class="dropdown-toggle" data-toggle="dropdown">
           <span class="glyphicon glyphicon-user"></span> <?php echo $this->session->userdata('first_name'); ?><span class="caret"></span>
