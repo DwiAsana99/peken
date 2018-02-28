@@ -115,7 +115,7 @@
       <div id="about" class="tab-pane fade">
         <h3>Menu 1</h3>
         <div class="container">
-          <h2>Carousel Example</h2>  
+          <h2>Carousel Example</h2>
           <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -133,7 +133,7 @@
               <div class="item">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/PS1_Dual_Analog_with_Box.jpg" alt="Chicago" style="width:100%;">
               </div>
-            
+
               <div class="item">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/PS1_Dual_Analog_with_Box.jpg" alt="New york" style="width:100%;">
               </div>
@@ -154,5 +154,13 @@
       </div>
     </div>
   </div>
-
+  <div class="text-center ">
+  <ul class="pagination pagination-large">
+  <?php
+  // print_r($links);exit();
+  foreach ($links as $link) {
+    echo $link;
+  } ?>
+</ul>
+</div>
 </div>

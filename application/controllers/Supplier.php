@@ -1,5 +1,5 @@
 <?php
-
+defined('BASEPATH') OR exit('No direct script access allowed');
 class Supplier extends CI_Controller{
 
   function __construct(){
@@ -10,6 +10,9 @@ class Supplier extends CI_Controller{
   }
   function dashboard_supplier_view(){
     $id_supplier = $this->session->userdata('id_supplier');
+    if (empty($id_supplier)) {
+      redirect('Home/home_view');
+    }
     $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
     $data_notification['unread_quotation'] = $get_quotation->result();
     $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
@@ -26,7 +29,7 @@ class Supplier extends CI_Controller{
   function public_supplier_list_view(){
     //mengambil nilai page dari url
     $page = $this->input->get('per_page');
-    $this->M_pagination->set_config("",10,"","","","","");
+    $this->M_pagination->set_config("",12,"","","","","");
     /* mengecek apakah nilai dari form pencarian ada atau tidak, jika ada maka
     supplier list akan menampilkan supplier berdasarkan CompanyName*/
     if (!empty($this->input->get('search_value'))) {
@@ -52,6 +55,8 @@ class Supplier extends CI_Controller{
       $config = $this->M_pagination->get_config();
       $offset = $this->M_pagination->get_offset($page);
       $get_supplier = $this->M_member->get_member(0,1,"","",$offset, $config["per_page"]);
+      $data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
+			$data['breadcrumb'] .= "<li class='active'>All Supplier</li>";
     }
     $this->pagination->initialize($config);
     $data['supplier'] = $get_supplier->result();
@@ -78,7 +83,7 @@ class Supplier extends CI_Controller{
     $id_supplier = $this->input->get('id_supplier');
     $get_product = $this->M_product->get_product($id_supplier,"","","", "","tbproductpic.IdProduct");
     $this->M_pagination->set_config(
-      "",15,"","","","","","index.php/Supplier/public_supplier_detail_view?id_supplier=".$id_supplier,
+      "",12,"","","","","","index.php/Supplier/public_supplier_detail_view?id_supplier=".$id_supplier,
       $get_product->num_rows()
     );
     $config = $this->M_pagination->get_config();
@@ -109,6 +114,9 @@ class Supplier extends CI_Controller{
 
   function supplier_account_view(){
     $id_supplier = $this->session->userdata('id_supplier');
+    if (empty($id_supplier)) {
+      redirect('Home/home_view');
+    }
     $get_member = $this->M_member->get_member("",1,$id_supplier);
     $data['user'] = $get_member->result();
     $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);

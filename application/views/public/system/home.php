@@ -139,21 +139,24 @@
       <div class="my-container seller_column">
         <?php foreach($supplier as $s){ ?>
         <div class="tes-hover text-center">
-          <a 
+          <a
           href="<?php echo site_url('supplier/public_supplier_detail_view?id_supplier=').$s->IdSupplier ?>">
-            <img 
+            <img
               src="<?php echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>"
               class="sellerImg"
               alt="">
           </a>
           <div class="detail-display">
-            <p>THis is static description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis at odio incidunt pla </p>
+            <h3><b><?php echo $s->CompanyName; ?></b> </h3>
+            <h4><?php echo $s->Location; ?></h4>
+            <h4><?php echo $s->Email; ?></h4>
+            <h4><?php echo $s->Phone; ?></h4>
           </div>
         </div>
         <?php } ?>
       </div>
       <div class="text-right">
-        <a href="#" class="btn btn-warning more">See More Seller</a>
+        <a href="<?php echo site_url('Supplier/public_supplier_list_view') ?>" class="btn btn-warning more">See More Supplier</a>
       </div>
     </div>
   <!-- </div> row comment -->
@@ -162,9 +165,9 @@
       <h2>Seller</h2>
       <?php //foreach($supplier as $s){ ?>
       <div class="col-xs-2">
-        <a 
+        <a
         href="<?php //echo site_url('supplier/public_supplier_detail_view?id_supplier=').$s->IdSupplier ?>">
-          <img 
+          <img
             src="<?php //echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>" class="img-responsive"
             alt="">
         </a>

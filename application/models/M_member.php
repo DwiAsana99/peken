@@ -9,7 +9,7 @@ class M_member extends CI_Model{
   //  }
   // mencari 10 supplier teratas
   function get_top10_supplier(){
-    $query = $this->db->query("SELECT IdMember AS IdSupplier, ProfilImage,CompanyName FROM tbmember WHERE IsSupplier = 1 LIMIT 12");
+    $query = $this->db->query("SELECT IdMember AS IdSupplier, ProfilImage,CompanyName,Location,Email,Phone FROM tbmember WHERE IsSupplier = 1 LIMIT 8");
     return $query->result();
   }
   //mencari data supplier berdasarkan $id_supplier atau $search_value dari form pencarian

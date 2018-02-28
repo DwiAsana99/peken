@@ -9,8 +9,8 @@
       grid-gap: 0;
     }
 }
-</style>  
-    
+</style>
+
     <div class="container">
     <h2>Seller List</h2>
     <ol class="breadcrumb">
@@ -31,18 +31,30 @@
       <div class="my-container seller_column">
         <?php foreach($supplier as $s){ ?>
         <div class="tes-hover text-center">
-          <a 
+          <a
           href="<?php echo site_url('supplier/public_supplier_detail_view?id_supplier=').$s->IdSupplier ?>">
-            <img 
+            <img
               src="<?php echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>"
               class="sellerImg"
               alt="">
           </a>
           <div class="detail-display">
-            <p>THis is static description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis at odio incidunt pla </p>
+            <h3><b><?php echo $s->CompanyName; ?></b> </h3>
+            <h4><?php echo $s->Location; ?></h4>
+            <h4><?php echo $s->Email; ?></h4>
+            <h4><?php echo $s->Phone; ?></h4>
           </div>
         </div>
         <?php } ?>
       </div>
     </div>
+    <div class="text-center ">
+    <ul class="pagination pagination-large">
+    <?php
+    // print_r($links);exit();
+    foreach ($links as $link) {
+      echo $link;
+    } ?>
+  </ul>
+  </div>
     </div>

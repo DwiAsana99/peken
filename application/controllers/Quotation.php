@@ -13,6 +13,10 @@ class Quotation extends CI_Controller{
   }
 
   function rfq_view(){
+    $id_buyer = $this->session->userdata('id_buyer');
+    if (empty($id_buyer)) {
+      redirect('Home/home_view');
+    }
     $id_product = $this->input->get('id_product');
     $id_supplier = $this->input->get('id_supplier');
     $get_product = $this->M_product->get_product("",$id_product);
@@ -20,9 +24,9 @@ class Quotation extends CI_Controller{
     $data['product'] = $get_product->result();
     $data['supplier'] = $get_supplier->result();
     $get_product_category = $this->M_product_category->get_product_category();
-	$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
-	$data_nav['product_category'] = $get_product_category->result();
-	$data_nav['product_sub_category'] = $get_product_sub_category->result();
+  	$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
+  	$data_nav['product_category'] = $get_product_category->result();
+  	$data_nav['product_sub_category'] = $get_product_sub_category->result();
   if ($this->session->userdata('id_buyer')) {
     $id_buyer = $this->session->userdata('id_buyer');
     $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$id_buyer);
@@ -50,6 +54,9 @@ class Quotation extends CI_Controller{
   */
   function supplier_quotation_list(){
     $id_supplier = $this->session->userdata('id_supplier');
+    if (empty($id_supplier)) {
+      redirect('Home/home_view');
+    }
     $get_quotation = $this->M_quotation->get_quotation("",$id_supplier);
     $data['quotation'] = $get_quotation->result();
     $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
@@ -65,6 +72,9 @@ class Quotation extends CI_Controller{
   }
   function supplier_quotation_detail(){
     $id_supplier = $this->session->userdata('id_supplier');
+    if (empty($id_supplier)) {
+      redirect('Home/home_view');
+    }
     $id_quotation = $this->input->get('id_quotation');
     $set_quotation_detail_data = array('IsRead' => 1);
     $this->M_quotation_detail->update_quotation_detail($set_quotation_detail_data,$id_quotation);
@@ -87,6 +97,9 @@ class Quotation extends CI_Controller{
   }
   function buyer_quotation_list(){
     $id_buyer = $this->session->userdata('id_buyer');
+    if (empty($id_buyer)) {
+      redirect('Home/home_view');
+    }
     $get_quotation = $this->M_quotation->get_quotation($id_buyer);
     $data['quotation'] = $get_quotation->result();
     $get_product_category = $this->M_product_category->get_product_category();
@@ -112,6 +125,9 @@ class Quotation extends CI_Controller{
 
   function buyer_quotation_detail(){
     $id_buyer = $this->session->userdata('id_buyer');
+    if (empty($id_buyer)) {
+      redirect('Home/home_view');
+    }
     $id_quotation = $this->input->get('id_quotation');
     $set_quotation_detail_data = array('IsRead' => 1);
     $this->M_quotation_detail->update_quotation_detail($set_quotation_detail_data,$id_quotation);

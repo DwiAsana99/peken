@@ -132,6 +132,9 @@ class Product extends CI_Controller{
 	}
 	function product_view(){
 		$id_supplier = $this->session->userdata('id_supplier');
+		if (empty($id_supplier)) {
+      redirect('Home/home_view');
+    }
 		$get_product = $this->M_product->get_product($id_supplier,"","","","","tbproductpic.IdProduct");
 		$data['product'] = $get_product->result();
 		$get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
@@ -147,6 +150,9 @@ class Product extends CI_Controller{
 	}
 	function product_edit_view($id_product){
 		$id_supplier = $this->session->userdata('id_supplier');
+		if (empty($id_supplier)) {
+      redirect('Home/home_view');
+    }
 		$get_product = $this->M_product->get_product("",$id_product);
 		$get_product_category = $this->M_product_category->get_product_category();
 		$data['product_category'] = $get_product_category->result();
@@ -189,6 +195,9 @@ class Product extends CI_Controller{
 	}
 	function product_add_view(){
 		$id_supplier = $this->session->userdata('id_supplier');
+		if (empty($id_supplier)) {
+      redirect('Home/home_view');
+    }
 		$get_product_category = $this->M_product_category->get_product_category();
 		$data['product_category'] = $get_product_category->result();
 		$get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);

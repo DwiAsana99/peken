@@ -11,6 +11,9 @@ class Buyer extends CI_Controller{
 
   function buyer_account_view(){
     $id_buyer = $this->session->userdata('id_buyer');
+    if (empty($id_buyer)) {
+      redirect('Home/home_view');
+    }
     $get_member = $this->M_member->get_member("",0,$id_buyer);
     $data['user'] = $get_member->result();
     $get_product_category = $this->M_product_category->get_product_category();
