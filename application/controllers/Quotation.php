@@ -192,6 +192,51 @@ class Quotation extends CI_Controller{
     }
 
   }
+  function get_chat_notification_bell(){
+    $id_buyer = $this->session->userdata('id_buyer');
+    $id_supplier = $this->session->userdata('id_supplier');
+    if (!empty($id_supplier)) {
+			$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($id_supplier);
+		}
+    if (!empty($id_buyer)) {
+			$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$id_buyer);
+		}
+    //$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+    $unread_count = $get_unread_qutation_detail->num_rows();
+    $unread_chat_notification_bell = $get_unread_qutation_detail->result();
+    if ($unread_count > 0) {
+      $msg = "You have unread comment in ".$unread_count." quotation";
+    } else {
+      $msg = "You have not unread comment ";
+    }
+
+    echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><i class='glyphicon glyphicon-comment'></i><span style='' class='badge'>".$unread_count."</span></a>
+      <ul class='dropdown-menu notify-drop'>
+        <div class='notify-drop-title'>
+          <div class='row'>
+            <div class='col-md-12 col-sm-6 col-xs-6'>".$msg."</div>
+          </div>
+        </div>
+        <div class='drop-content'>";
+      foreach ($unread_chat_notification_bell as $ucnb) {
+        echo "<li>
+                  <a href=".base_url()."index.php/Quotation/buyer_quotation_detail?id_quotation=".$ucnb->IdQuotation.">
+                  <div class='col-md-3 col-sm-3 col-xs-3'><div class='notify-img'><img src=".base_url()."assets/supplier_upload/".$ucnb->ProfilImage." height='50' width='50' class='img-circle' alt=''></div></div>
+                  <div class='col-md-9 col-sm-9 col-xs-9 pd-l0'>
+                    <h5><b>".$ucnb->CompanyName."</b></h5>
+                    <hr>
+                    <span class='badge' style='background-color:orange;'>".$ucnb->UnreadCount."</span> <span class='label label-info'> unread comment</span>
+                  </div>
+                </a>
+              </li>";
+      }
+      echo "</div>
+      <div class='notify-drop-footer text-center'>
+        <a href=''><i class='fa fa-eye'></i> See All Notifications</a>
+      </div>
+    </ul>";
+    //exit();
+  }
   function add_quotation_detail(){
     $id_quotation = $this->input->post('id_quotation');
     $id_member = $this->input->post('id_member');
