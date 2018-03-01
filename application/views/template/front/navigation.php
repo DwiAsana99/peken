@@ -476,7 +476,12 @@ $(document).ready(function () {
                 cache: false,
                 data        :  data,
                 success: function(response) {
-                      $("#chat_num").html("1");
+                       $("#chat_num").append(response['unread_count']);
+                      // console.log(data[0].msg);
+       //                var json = $.parseJSON(data); // create an object with the key of the array
+       // alert(json.html);
+
+                      //$("#unread_chat_notification_bell").html(response);
                 }
             });
           }
