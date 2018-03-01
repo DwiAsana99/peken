@@ -209,17 +209,10 @@ class Quotation extends CI_Controller{
     } else {
       $msg = "You have not unread comment ";
     }
-
-    echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><i class='glyphicon glyphicon-comment'></i><span style='' class='badge'>".$unread_count."</span></a>
-      <ul class='dropdown-menu notify-drop'>
-        <div class='notify-drop-title'>
-          <div class='row'>
-            <div class='col-md-12 col-sm-6 col-xs-6'>".$msg."</div>
-          </div>
-        </div>
-        <div class='drop-content'>";
+    $unread_count = $unread_count;
+    $list = "";
       foreach ($unread_chat_notification_bell as $ucnb) {
-        echo "<li>
+        $list .=  "<li>
                   <a href=".base_url()."index.php/Quotation/buyer_quotation_detail?id_quotation=".$ucnb->IdQuotation.">
                   <div class='col-md-3 col-sm-3 col-xs-3'><div class='notify-img'><img src=".base_url()."assets/supplier_upload/".$ucnb->ProfilImage." height='50' width='50' class='img-circle' alt=''></div></div>
                   <div class='col-md-9 col-sm-9 col-xs-9 pd-l0'>
@@ -230,12 +223,9 @@ class Quotation extends CI_Controller{
                 </a>
               </li>";
       }
-      echo "</div>
-      <div class='notify-drop-footer text-center'>
-        <a href=''><i class='fa fa-eye'></i> See All Notifications</a>
-      </div>
-    </ul>";
-    //exit();
+      $arr = array('list' => $list, 'msg' => $msg, 'unread_count' => $unread_count);
+       header('Content-Type: application/json');
+      echo json_encode($arr);
   }
   function add_quotation_detail(){
     $id_quotation = $this->input->post('id_quotation');
