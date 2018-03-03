@@ -31,7 +31,7 @@
               <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                   <!-- Messages: style can be found in dropdown.less-->
-                  <li class="dropdown messages-menu">
+                  <li class="dropdown messages-menu" id="supplier_unread_quotation_notification_bell">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="glyphicon glyphicon-envelope"></i>
                       <span class="label label-warning"><?php echo $unread_quotation_num_rows; ?></span>
@@ -60,8 +60,34 @@
                       <li class="footer"><a href="#">See All Notifications</a></li>
                     </ul>
                   </li>
+                  <script type="text/javascript">
+                    function reload_unread_quotation_notification_bell() {
+                      var data = {
+                        'id_quotation'              : 1
+                      };
+                      $.ajax({
+                          type        : 'POST',
+                          dataType:'html',
+                          url         : "<?php echo base_url().'index.php/Quotation/get_unread_quotation_notification_bell'; ?>",
+                          cache: false,
+                          data        :  data,
+                          success: function(response) {
+                              $("#supplier_unread_quotation_notification_bell").html(response);
+                          }
+                      });
+                    }
+                  </script>
+                  <script type="text/javascript">
+                  $(document).ready(function(){
+                    // alert('tes');
+                      setInterval(
+                        reload_unread_quotation_notification_bell
+                        , 10000
+                      );
+                      });
+                  </script>
                   <!-- Messages: style can be found in dropdown.less-->
-                  <li class="dropdown messages-menu">
+                  <li class="dropdown messages-menu" id="supplier_unread_chat_notification_bell">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="glyphicon glyphicon-comment"></i>
                       <span class="label label-warning"><?php echo $unread_quotation_detail_num_rows; ?></span>
@@ -90,6 +116,32 @@
                       <li class="footer"><a href="#">See All Notifications</a></li>
                     </ul>
                   </li>
+                  <script type="text/javascript">
+                    function reload_unread_chat_notification_bell() {
+                      var data = {
+                        'id_quotation'              : 1
+                      };
+                      $.ajax({
+                          type        : 'POST',
+                          dataType:'html',
+                          url         : "<?php echo base_url().'index.php/Quotation/get_chat_notification_bell'; ?>",
+                          cache: false,
+                          data        :  data,
+                          success: function(response) {
+                              $("#supplier_unread_chat_notification_bell").html(response);
+                          }
+                      });
+                    }
+                  </script>
+                  <script type="text/javascript">
+                  $(document).ready(function(){
+                    // alert('tes');
+                      setInterval(
+                        reload_unread_chat_notification_bell
+                        , 10000
+                      );
+                      });
+                  </script>
                   <!-- Notifications: style can be found in dropdown.less -->
 
                   <!-- User Account: style can be found in dropdown.less -->
