@@ -1,8 +1,54 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dropzone/css/dropzone.min.css') ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dropzone/css/basic.min.css') ?>" />
-
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+<script src="<?php echo base_url('assets/js/accounting.js') ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/js/cleave.min.js') ?>" type="text/javascript"></script>
+<script type="text/javascript">
+  function doMathPrice()
+  {
+      var price = document.getElementById('price1').value;
+      price = price.replace(/\./g, "");
+      document.getElementById('price').value =  price;
+      var price = document.getElementById('supply_ability1').value;
+      supply_ability = price.replace(/\./g, "");
+      document.getElementById('supply_ability').value =  supply_ability;
+      // price = parseFloat(price);
+      // var service = price * 0.1;
+      // var tax = (service + price) * 0.1;
+      // var finalprice = price + tax + service;
+      // document.getElementById('tax1').value = tax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      // document.getElementById('tax').value = tax;
+      // document.getElementById('service1').value = service.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      // document.getElementById('service').value = service;
+      // document.getElementById('fp1').value = finalprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      // document.getElementById('fp').value = finalprice;
+  }
+</script>
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    new Cleave('.input-1', {
+       numeral: true,
+       numeralDecimalMark: ',',
+       delimiter: '.'
+  });
+    new Cleave('.input-2', {
+       numeral: true,
+       numeralDecimalMark: ',',
+       delimiter: '.'
+  });
+  //   new Cleave('.input-3', {
+  //      numeral: true,
+  //      numeralDecimalMark: ',',
+  //      delimiter: '.'
+  // });
+  //   new Cleave('.input-4', {
+  //      numeral: true,
+  //      numeralDecimalMark: ',',
+  //      delimiter: '.'
+  // });
+      });
+</script>
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="btn-group btn-breadcrumb">
@@ -24,7 +70,7 @@
           <form method="post"  enctype="multipart/form-data" id="Simpan"  action="<?php echo base_url().'index.php/Product/add_product'; ?>">
             <div class="form-group">
               <label class="control-label">Product Name</label>
-              <input type="text" name="product_name" id="product_name"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..."  class="form-control"  placeholder="">
+              <input type="text" name="product_name" id="product_name"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out product name..."  class="form-control"  placeholder="">
             </div>
             <div class="form-group">
               <label for="">Product Category</label>
@@ -43,15 +89,17 @@
             </div>
             <div class="form-group">
               <label for="">Unit</label>
-              <input type="text" name="unit" class="form-control" value="">
+              <input type="text" name="unit" class="form-control"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out unit name..." value="">
             </div>
             <div class="form-group">
               <label class="control-label">Price</label>
-              <input type="text" name="price" id="price"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..."  class="form-control"  placeholder="">
+              <input type="text" name="price1" id="price1" onkeyup="doMathPrice()" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out product price..."  class="form-control input-1"  placeholder="">
+              <input type="hidden" name="price" id="price" onkeyup="doMathPrice()"class="form-control"  placeholder="">
             </div>
             <div class="form-group">
               <label class="control-label">Supply Ability</label>
-              <input type="text" name="supply_ability" id="supply_ability"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..."  class="form-control"  placeholder="">
+              <input type="text" name="supply_ability1" id="supply_ability1" onkeyup="doMathPrice()" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out supply ability..."  class="form-control input-2"  placeholder="">
+              <input type="hidden" name="supply_ability" id="supply_ability" onkeyup="doMathPrice()"   class="form-control"  placeholder="">
             </div>
             <div class="form-group">
               <label for="">Period Supply Ability</label>
@@ -64,13 +112,11 @@
             </div>
             <div class="form-group">
               <label for="">Product Description</label>
-              <textarea class="form-control" rows="5" name="product_description" >
-              </textarea>
+              <textarea class="form-control" rows="5" name="product_description" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out product description..."></textarea>
             </div>
             <div class="form-group">
               <label for="">Packaging & Delivery</label>
-              <textarea class="form-control" rows="5" name="pkg_delivery" >
-              </textarea>
+              <textarea class="form-control" rows="5" name="pkg_delivery" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out packaging & delivery..."></textarea>
             </div>
             <div class="form-group">
               <label class="control-label">Product Image</label>
@@ -101,6 +147,11 @@
 
 <script src= "<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>" ></script>
 <script src= "<?php echo base_url('assets/dropzone/js/dropzone-amd-module.min.js') ?>" ></script>
+<script>
+  $.validate({
+    lang: 'es'
+  });
+</script>
 <script type="text/javascript">
 $(function(){
 

@@ -40,3 +40,4 @@
 
     });
 </script>
+ <?php $this->load->view('template/back/msg_sukses'); ?>
