@@ -34,6 +34,22 @@ class Buyer extends CI_Controller{
   }
   public function edit_buyer_account(){
     $id_buyer = $this->session->userdata('id_buyer');
+    $config['upload_path']   = './assets/supplier_upload/';
+    $config['allowed_types'] = 'gif|jpg|png|pdf';
+    $config['overwrite'] = TRUE;
+    $config['max_size']      = 1000;
+    //$config['max_width']     = 1024;
+    //$config['max_height']    = 1000;
+    $this->load->library('upload', $config);
+    $this->upload->do_upload('profil_image');
+    $profil_image_lama = $this->input->post('profil_image_lama');
+    $profil_image_file = $this->upload->data();
+    if (!empty($profil_image_file['file_name'])){
+      $profil_image = $profil_image_file['file_name'];
+      $this->session->set_userdata('profil_image',$profil_image);
+    }else{
+      $profil_image = $profil_image_lama;
+    }
     $data = array(
       'FirstName' => $this->input->post('first_name'),
       'LastName' => $this->input->post('last_name'),
@@ -42,6 +58,7 @@ class Buyer extends CI_Controller{
       'City' => $this->input->post('city'),
       'ZipCode' => $this->input->post('zip_code'),
       'Location' => $this->input->post('location'),
+      'ProfilImage' => $profil_image,
       'Phone' => $this->input->post('phone')
     );
     // print_r($data);exit();

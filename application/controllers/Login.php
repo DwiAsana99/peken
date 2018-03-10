@@ -13,7 +13,7 @@ class Login extends CI_Controller{
 	function login(){
 		$email = $this->input->post('email');
 		$password = sha1($this->input->post('password'));
-		$get_member = $this->M_member->get_member("","","","","","",$email,$password);
+		$get_member = $this->M_member->get_member("","","","","","",$email,$password,"");
 		$num_rows = $get_member->num_rows();
 		$row = $get_member->row();
 		if ($num_rows > 0 AND $row->IsSupplier == 1) {

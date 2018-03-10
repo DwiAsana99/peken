@@ -173,14 +173,17 @@ class Supplier extends CI_Controller{
       'ZipCode' => $this->input->post('zip_code'),
       'Location' => $this->input->post('location'),
       'Npwp' => $this->input->post('npwp'),
+      'Phone' => $this->input->post('phone'),
+      'CompanyDescription' => $this->input->post('company_description'),
       'ProfilImage' => $profil_image,
       'Siup' => $siup,
       'Tdp' => $tdp
     );
+    $supplier_gallery_pic = $this->input->post('file');
     $this->session->set_userdata('first_name',$this->input->post('first_name'));
     $this->session->set_userdata('company_name',$this->input->post('company_name'));
     // print_r($data);exit();
-    $this->M_member->edit_member($data,$id_supplier);
+    $this->M_member->edit_member($data,$id_supplier,$supplier_gallery_pic);
     redirect('Supplier/supplier_account_view');
   }
   public function supplier_upload_siup(){
@@ -238,10 +241,6 @@ class Supplier extends CI_Controller{
       $msg = $dataupload['file_name']." berhasil diupload";
     }
     $this->output->set_content_type('application/json')->set_output(json_encode(array('status'=>$status,'msg'=>$msg)));
-
-
-
-
     $tdp_lama = $this->input->post('tdp_lama');
     $tdp =   $this->upload->data('file_name');
 
@@ -254,7 +253,33 @@ class Supplier extends CI_Controller{
     $this->M_register->edit_member_db($data,$id);
     //redirect('Suplier/suplier_edit');
   }
-
+  function add_supplier_gallery_pic(){
+		$config['upload_path']   = './assets/supplier_upload';
+		$config['allowed_types'] = 'gif|jpg|png|ico|pdf|docx';
+		$config['max_size']             = 6000;
+		//mengganti nama asli file menjadi cstom
+		$new_name = time().$_FILES["userfiles"]['name'];
+		$config['file_name'] = $new_name;
+		$this->load->library('upload',$config);
+		if($this->upload->do_upload('userfiles')){
+			$token=$this->input->post('token_foto');
+			$nama=$this->upload->data('file_name');
+		}
+		$data = $nama.",".$token;
+		echo json_encode($data);
+	}
+  function remove_supplier_gallery_pic_button(){
+    $id_gallery_pic=$this->input->post('id_gallery_pic');
+    $this->db->where('IdGalleryPic', $id_gallery_pic);
+    $this->db->delete('tbgallerypic');
+  }
+  function remove_supplier_gallery_pic(){
+    $nama=$this->input->post('nama');
+    if(file_exists($file='./assets/supplier_upload/'.str_replace(' ', '_', $nama))){
+      unlink($file);
+    }
+    echo "{}";
+    }
 
 }
 
