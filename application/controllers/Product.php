@@ -277,19 +277,38 @@ class Product extends CI_Controller{
 		// print_r($row);exit();
 		foreach ($product as $key ) {
 			// echo $row->Name;
-			echo "<img src=".base_url()."assets/supplier_upload/".$key->FileName." alt='' width='172'>";
+			echo "<img src=".base_url()."assets/supplier_upload/".$key->FileName." alt='' width='125'>";
 
 		}
-		echo "<br>Product Name : ".$row->Name;
-		echo "<br>Product Unit : ".$row->Unit;
-		echo "<br>Product Price : ".$row->Price;
-		echo "<br>Product Description : ".$row->ProductDescription;
-		echo "<br>Package Delivery : ".$row->PkgDelivery;
-		echo "<br>Supply Ability : ".$row->SupplyAbility;
-		echo "<br>Period Supply Ability : ".$row->PeriodSupplyAbility;
-		echo "<br>Product Category : ".$row->ProductCategory;
-		echo "<br>Product Sub Category : ".$row->ProductSubCategory;
 
+		echo "
+		<br>
+		<div class='col-md-3 col-xs-12'><b>Product Name</b></div>
+		<div class='col-md-9 col-xs-12'> : ".$row->Name."</div>".
+		"<br>
+		<div class='col-md-3 col-xs-12'><b>Product Unit</b></div>
+		<div class='col-md-9 col-xs-12'> : ".$row->Unit."</div>".
+		"<br>
+		<div class='col-md-3 col-xs-12'><b>Product Category</b></div>
+		<div class='col-md-9 col-xs-12'> : ".$row->ProductCategory."</div>".
+		"<br>
+		<div class='col-md-3 col-xs-12'><b>Product Sub Category</b></div>
+		<div class='col-md-9 col-xs-12'> : ".$row->ProductSubCategory."</div>".
+		"<br>
+		<div class='col-md-3 col-xs-12'><b>Product Price</b></div>
+		<div class='col-md-9 col-xs-12'> : ".$row->Price."</div>".
+		"<br>
+		<div class='col-md-3 col-xs-12'><b>Product Description</b></div>
+		<div class='col-md-9 col-xs-12'> : ".$row->ProductDescription."</div>".
+		"<br>
+		<div class='col-md-3 col-xs-12'><b>Package Delivery</b></div>
+		<div class='col-md-9 col-xs-10'> : ".$row->PkgDelivery."</div>".
+		"<br>
+		<div class='col-md-3 col-xs-12'><b>Supply Ability</b></div>
+		<div class='col-md-9 col-xs-12'> : ".$row->SupplyAbility."</div>".
+		"<br>
+		<div class='col-md-3 col-xs-12'><b>Period Supply Ability</b></div>
+		<div class='col-md-9 col-xs-12'> : ".$row->PeriodSupplyAbility."</div>";
 	}
 	function remove_product_picture(){
 		$nama=$this->input->post('nama');
