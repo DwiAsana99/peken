@@ -450,7 +450,7 @@ $(document).ready(function () {
             <ul class="dropdown-menu notify-drop">
               <div class="notify-drop-title">
                 <div class="row">
-                  <div class="col-md-12 col-sm-6 col-xs-6">MSG</div>
+                  <div class="col-md-12 col-sm-6 col-xs-6" id="msg">MSG</div>
 
                 </div>
               </div>
@@ -476,12 +476,12 @@ $(document).ready(function () {
                 cache: false,
                 data        :  data,
                 success: function(response) {
-                       $("#chat_num").append(response['unread_count']);
+                       $("#chat_num").html(response['unread_count']);
                       // console.log(data[0].msg);
        //                var json = $.parseJSON(data); // create an object with the key of the array
        // alert(json.html);
 
-                      //$("#unread_chat_notification_bell").html(response);
+                      $("#msg").html(response['msg']);
                 }
             });
           }
