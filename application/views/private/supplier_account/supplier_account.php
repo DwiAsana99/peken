@@ -174,6 +174,7 @@
                               <label class="control-label">Company Gallery</label>
                               </div>
                               <?php foreach ($user as $us): ?>
+                                
                                 <div id="<?php echo "div".$us->IdGalleryPic; ?>" class="form-group col-lg-2 text-center">
                                   <!-- <img src="<?php //echo base_url().'assets/icon/upload-icon.png'?>" alt="" style="width: 100px"> -->
                                   <div class="form-group text-center">

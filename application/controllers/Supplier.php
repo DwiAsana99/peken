@@ -89,7 +89,7 @@ class Supplier extends CI_Controller{
     $config = $this->M_pagination->get_config();
     $offset = $this->M_pagination->get_offset($page);
     $get_product = $this->M_product->get_product($id_supplier,"","",$offset, $config["per_page"],"tbproductpic.IdProduct");
-    $get_supplier = $this->M_member->get_member(0,1,$id_supplier);
+    $get_supplier = $this->M_member->get_member(0,1,$id_supplier,"","","","","","include");
     $data['product'] = $get_product->result();
     $data['supplier'] = $get_supplier->result();
     $this->pagination->initialize($config);
@@ -117,8 +117,9 @@ class Supplier extends CI_Controller{
     if (empty($id_supplier)) {
       redirect('Home/home_view');
     }
-    $get_member = $this->M_member->get_member("",1,$id_supplier);
+    $get_member = $this->M_member->get_member("",1,$id_supplier,"","","","","","include");
     $data['user'] = $get_member->result();
+    // print_r($data['user']);exit();
     $get_quotation = $this->M_quotation->get_quotation("",$id_supplier,"",0);
     $data_notification['unread_quotation'] = $get_quotation->result();
     $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
