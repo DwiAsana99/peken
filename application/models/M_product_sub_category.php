@@ -35,8 +35,8 @@ class M_product_sub_category extends CI_Model{
   }
 
   function get_product_sub_category_all(){
-    $query = "SELECT * FROM tbproductsubcategory
 
+    $query = "SELECT * FROM tbproductsubcategory
     ORDER BY ProductSubCategory ASC";
     $query = $this->db->query($query);
     return $query;

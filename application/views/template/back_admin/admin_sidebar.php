@@ -49,10 +49,10 @@
           </ul>
         </li> -->
         <li><a href="<?php echo base_url().'index.php/Supplier/dashboard_supplier_view' ?>"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
-        <li><a href="<?php echo base_url().'index.php/Product/product_view' ?>"><i class="glyphicon glyphicon-th-list"></i><span>Product Category</span></a></li>
-        <li><a href="<?php echo base_url().'index.php/Quotation/supplier_quotation_list' ?>"><i class="fa fa-envelope-o"></i><span >Product Sub Category</span></a></li>
-        <li><a href="<?php echo base_url().'index.php/Supplier/supplier_account_view' ?>"><i class="fa fa-user"></i> <span>Supplier</span></a></li>
-        <li><a href="<?php echo base_url().'index.php/Supplier/supplier_account_view' ?>"><i class="fa fa-user"></i> <span>Buyer</span></a></li>
+        <li><a href="<?php echo base_url().'index.php/Product_category' ?>"><i class="glyphicon glyphicon-th-list"></i><span>Product Category</span></a></li>
+        <li><a href="<?php echo base_url().'index.php/Product_sub_category' ?>"><i class="glyphicon glyphicon-th-list"></i><span >Product Sub Category</span></a></li>
+        <li><a href="<?php echo base_url().'index.php/Supplier/supplier_view' ?>"><i class="glyphicon glyphicon-th-list"></i> <span>Supplier</span></a></li>
+        <li><a href="<?php echo base_url().'index.php/Buyer/buyer_view' ?>"><i class="glyphicon glyphicon-th-list"></i> <span>Buyer</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

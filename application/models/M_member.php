@@ -24,7 +24,7 @@ class M_member extends CI_Model{
     $password = "",
     $with_member_gallery= ""
   ){
-    if (empty($is_supplier)) {
+    if (!is_numeric($is_supplier)) {
       $filter_value = "";
       $id_member_alias = "";
     }  elseif ($is_supplier == 1) {

@@ -65,6 +65,40 @@ class Buyer extends CI_Controller{
     $this->M_member->edit_member($data,$id_buyer);
     redirect('Buyer/buyer_account_view');
   }
+  function buyer_view(){
+    //$data['product_category'] = $this->M_product_category->get_product_category();
+    $this->load->view('template/back_admin/admin_head');
+    $this->load->view('template/back_admin/admin_navigation');
+    $this->load->view('template/back_admin/admin_sidebar');
+    $this->load->view('private/buyer/buyer');
+    $this->load->view('template/back_admin/admin_foot');
+  }
+  function get_buyer_json(){
+
+    $get_member = $this->M_member->get_member(0,0);
+    // print_r($get_product_category->row());exit();
+    $baris = $get_member->result();
+    $data = array();
+    foreach ($baris as $bar) {
+      $row = array(
+      "CompanyName" => $bar->CompanyName,
+      "Email" => $bar->Email,
+      "Phone" => $bar->Phone,
+      "Location" => $bar->Location,
+      "City" => $bar->City,
+      "DetailButton" => '<a   id="id_detail" class="btn btn-info id_detail" ><span class="fa fa-fw fa-search" >
+      </span></a>'
+      );
+      $data[] = $row;
+    }
+    $output = array(
+      "draw" => 0,
+      "recordsTotal" => $get_member->num_rows(),
+      "recordsFiltered" => $get_member->num_rows(),
+      "data" => $data
+    );
+    echo json_encode($output);
+  }
 
 
 }
