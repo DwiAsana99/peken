@@ -12,7 +12,7 @@
       <div class="box">
         <div class="box-header">
           <h3 class="box-title">Product Sub Category</h3>
-          <a style="float:right"  href="<?php ?>" class="btn btn-primary">
+          <a style="float:right"  href="<?php echo base_url('index.php/Product_sub_category/product_sub_category_add_view'); ?>" class="btn btn-primary">
             <i class="glyphicon glyphicon-saved"></i>
             Add Product Sub  Category
           </a>
@@ -27,6 +27,7 @@
                   <th>Product Category Code</th>
                   <th>Product Category</th>
                   <th>Product Sub Category</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody class="text-center">
@@ -80,7 +81,8 @@ $(document).ready(function() {
       {"data": "ProductSubCategoryCode"},
       {"data": "ProductCategoryCode"},
       {"data": "ProductCategory"},
-      {"data": "ProductSubCategory"}
+      {"data": "ProductSubCategory"},
+      {"data": "EditButton"}
     ],
 
   });

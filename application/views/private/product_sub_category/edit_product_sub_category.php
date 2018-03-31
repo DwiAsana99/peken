@@ -1,14 +1,9 @@
-<?php
-$this->load->view('template/back/head_back');
-$this->load->view('template/back/sidebar_back');
-?>
-
 <!-- Content Header (Page header) -->
 <section class="content-header">
    <div class="btn-group btn-breadcrumb">
             <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
-             <a href="<?php echo base_url('index.php/Product_category/public_product_view');?>" class="btn btn-default  btn-xs">Product Category</a>
-            <a  class="btn btn-default  btn-xs active">Edit Product Category</a>
+             <a href="<?php echo base_url('index.php/Product_sub_sub_category/product_sub_sub_category_view');?>" class="btn btn-default  btn-xs">Product Sub Category</a>
+            <a  class="btn btn-default  btn-xs active">Edit Product Sub Category</a>
         </div>
 </section>
 
@@ -19,15 +14,21 @@ $this->load->view('template/back/sidebar_back');
         <div class="col-md-12">
              <div class="box box-info">
                 <div class="box-header">
-                  <h3 class="box-title">Edit Product Category</h3>
+                  <h3 class="box-title">Edit Product Sub Category</h3>
                 </div>
                 <div class="box-body">
-                    <form method="post" id="Simpan" action="<?php echo base_url().'index.php/Product_category/edit_product_category'; ?>">
-                    <div class="form-group">
-                            <label class="control-label">Product Category</label>
-                            <input type="text" name="product_category"  value="<?php echo $data[0]->ProductCategory; ?>"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..."  class="form-control"  placeholder="">
-                            <input type="hidden" name="id_product_category"  value="<?php echo $data[0]->IdProductCategory; ?>" class="form-control"  placeholder="">
+                    <form method="post" id="Simpan" action="<?php echo base_url().'index.php/Product_sub_category/edit_product_sub_category'; ?>">
+                      <div class="form-group">
+                        <label for="">Product Category</label>
+                        <select  disabled class="form-control" name="" id="product_category_code">
+                          <option selected value=''><?php echo $data[0]->ProductCategory; ?></pilih>
 
+                          </select>
+                        </div>
+                    <div class="form-group">
+                            <label class="control-label">Product Sub Category</label>
+                            <input type="text" name="product_sub_category"  value="<?php echo $data[0]->ProductSubCategory; ?>"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..."  class="form-control"  placeholder="">
+                            <input type="hidden" name="product_sub_category_code"  value="<?php echo $data[0]->ProductSubCategoryCode; ?>" class="form-control"  placeholder="">
                     </div>
 
                    <div class="form-group">
@@ -69,10 +70,6 @@ $("#Simpan").submit(function() {
 
 });
 </script>
-
-<?php $this->load->view('template/back/foot_back'); ?>
-
-
 <script>
 
   $.validate({
