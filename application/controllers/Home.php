@@ -13,7 +13,7 @@ class Home extends CI_Controller{
 	}
 
 	function home_view(){
-		$data['product'] = $this->M_product->get_top8_product();
+		$data['product'] = $this->M_product->get_top8_product(1);
 		$data['supplier'] = $this->M_member->get_top10_supplier();
 		$get_product_category = $this->M_product_category->get_product_category();
 		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();

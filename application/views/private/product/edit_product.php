@@ -76,11 +76,23 @@
               </div>
               <div class="form-group">
                 <label for="">Product Description</label>
-                <textarea class="form-control" rows="5" name="product_description" ><?php echo $product[0]->Name ?></textarea>
+                <textarea class="form-control" rows="5" name="product_description" ><?php echo $product[0]->ProductDescription ?></textarea>
               </div>
               <div class="form-group">
                 <label for="">Packaging & Delivery</label>
                 <textarea class="form-control" rows="5" name="pkg_delivery" ><?php echo $product[0]->PkgDelivery ?></textarea>
+              </div>
+              <div class="form-group">
+                <label for="">Product Status</label>
+                <select class="form-control" name="status">
+                  <?php if ($product[0]->IsActive == 1): ?>
+                    <option selected value="1">Published</option>
+                    <option value="0">Do not publish</option>
+                  <?php else: ?>
+                    <option value="1">Published</option>
+                    <option selected value="0">Do not publish</option>
+                  <?php endif; ?>
+                </select>
               </div>
               <div class="co-md-12 "><label class="control-label ">Product Pictures</label></div>
               <?php foreach ($product as $p): ?>
@@ -109,11 +121,6 @@
                     </div>
                   </div>
                 </div>
-
-
-
-
-
                 <!-- <div class="form-group",>
                 <label class="control-label">Product Image</label>
                 <div class="dropzone">

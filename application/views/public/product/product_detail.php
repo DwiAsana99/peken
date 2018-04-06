@@ -215,9 +215,13 @@ $(window).on('load', function () {
         <p>Period Supply Ability :
           <?php echo $product[0]->PeriodSupplyAbility; ?>
         </p>
-        <a class="btn btn-primary contact" href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$product[0]->IdProduct."&"."id_supplier=".$p->IdSupplier ?>">Contact Supplier
-          <i class="fa fa-arrow-right" aria-hidden="true"></i>
-        </a>
+        <?php if ($product[0]->IsActive == 1): ?>
+          <a class="btn btn-primary contact" href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$product[0]->IdProduct."&"."id_supplier=".$p->IdSupplier ?>">Contact Supplier
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        <?php else: ?>
+          <p><b>This product no longer available</b></p>
+        <?php endif; ?>
       </div>
     </div>
     <ul class="nav nav-tabs">

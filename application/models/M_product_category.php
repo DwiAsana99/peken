@@ -3,15 +3,15 @@
  *
  */
 class M_product_category extends CI_Model{
-  function get_product_category($product_category_code = ""){
+  function get_product_category($product_category_code = "",$order_by=""){
     $filter_value = !empty($product_category_code) ? " AND Code = $product_category_code " : "" ;
     $query = $this->db->query('SELECT * FROM tbproductcategory
-    WHERE 1=1 '.$filter_value);
+    WHERE 1=1 '.$filter_value.$order_by);
     //$query = $this->db->query($query);
     return $query;
   }
   // function datas mungkin bisa menimbulkan bug pada user hak akses supplier
-  function add_product_category_db($table,$data) {
+  function add_product_category($table,$data) {
 			 $this->db->insert($table,$data);
 	}
 
@@ -24,8 +24,8 @@ class M_product_category extends CI_Model{
 	}
 
 
-	function edit_product_category_db($data,$code) {
- 			 $this->db->where('ProductCategoryCode',$code );
+	function edit_product_category($data,$code) {
+ 			 $this->db->where('Code',$code );
  			 $this->db->update("tbproductcategory",$data);
   }
 }

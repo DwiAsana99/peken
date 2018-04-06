@@ -24,7 +24,7 @@ class M_member extends CI_Model{
     $password = "",
     $with_member_gallery= ""
   ){
-    if (empty($is_supplier)) {
+    if (!is_numeric($is_supplier)) {
       $filter_value = "";
       $id_member_alias = "";
     }  elseif ($is_supplier == 1) {
@@ -34,7 +34,7 @@ class M_member extends CI_Model{
       $filter_value = " AND tbmember.IsSupplier = 0 ";
       $id_member_alias = " AS IdBuyer ";
     }
-    $filter_value .= ($is_user == 1) ? " AND tbmember.IsUser = 1 " : " AND tbmember.IsUser = 0 " ;
+    $filter_value .= ($is_user == 1) ? " AND tbmember.IsUser = 1 " : "" ;
     $filter_value .= !empty($id_member) ? " AND tbmember.IdMember = $id_member " : "" ;
     $filter_value .= !empty($search_value) ? " AND  CompanyName LIKE '%$search_value%' " : "" ;
     $filter_value .= !empty($email) ? " AND  Email = '$email' " : "" ;

@@ -1,7 +1,3 @@
-<?php
-$this->load->view('template/back/head_back');
-$this->load->view('template/back/sidebar_back');
-?>
 
 <section class="content-header">
     <div class="btn-group btn-breadcrumb">
@@ -17,7 +13,7 @@ $this->load->view('template/back/sidebar_back');
       <div class="box">
         <div class="box-header">
           <h3 class="box-title">Product Category</h3>
-          <a style="float:right"  href="<?php echo base_url('index.php/Product_category/product_category_add_view');?>" class="btn btn-primary">
+          <a style="float:right"  href="<?php echo base_url("index.php/Product_category/product_category_add_view");?>" class="btn btn-primary">
             <i class="glyphicon glyphicon-saved"></i>
             Add Product Category
           </a>
@@ -26,26 +22,15 @@ $this->load->view('template/back/sidebar_back');
         <div class="box-body">
           <div class="table-responsive">
             <table id="example1" class="table table-bordered table-striped">
-              <thead>
-                  <tr >
-                      <th>No</th>
+              <thead class="text-center">
+                  <tr>
                       <th>ID</th>
-                      <th>Category</th>
+                      <th>Product Category</th>
                       <th>Action</th>
                   </tr>
               </thead>
-              <tbody>
-                <?php $i = 1; foreach($product_category as $u){?>
-                        <tr  class='odd gradeX context'>
-                          <td><?php  echo $i++; ?></td>
-                          <td><?php echo $u->IdProductCategory ?></td>
-                          <td><?php echo $u->ProductCategory?></td>
-                          <td>
-                            <a class="btn btn-primary"   href="<?php echo base_url('index.php/Product_category/product_category_edit_view/'.$u->IdProductCategory);?>">  <span class="fa fa-fw fa-edit" ></span> </a>
-                            <!-- <input type="hidden" id="btnhapus" value="<?php //echo $u->category ?>" > -->
-                          </td>
-                        </tr>
-                <?php } ?>
+              <tbody class="text-center">
+
               </tbody>
             </table>
           </div>
@@ -55,17 +40,49 @@ $this->load->view('template/back/sidebar_back');
   </div><!-- /.row -->
 </section><!-- /.content -->
 
-<?php $this->load->view('template/back/foot_back'); ?>
 <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
+  // $(function () {
+  //   $("#example1").DataTable();
+  //   $('#example2').DataTable({
+  //     "paging": true,
+  //     "lengthChange": false,
+  //     "searching": false,
+  //     "ordering": true,
+  //     "info": true,
+  //     "autoWidth": false
+  //   });
+  // });
 </script>
+<script type="text/javascript">
+
+            var save_method; //for save method string
+            var table;
+
+            $(document).ready(function() {
+                //datatables
+                table = $('#example1').DataTable({
+                    "processing": true, //Feature control the processing indicator.
+                    "serverSide": false, //Feature control DataTables' server-side processing mode.
+                    "paging": true,
+                        "lengthChange": true,
+                        "searching": true,
+                        "ordering": true,
+                        "info": true,
+                        "autoWidth": false,
+                    "order": [], //Initial no order.
+                    // Load data for the table's content from an Ajax source
+                    "ajax": {
+                        "url": '<?php echo site_url('Product_category/get_product_category_json'); ?>',
+                        "type": "POST"
+                    },
+                    //Set column definition initialisation properties.
+                    "columns": [
+                        {"data": "Code"},
+                        {"data": "ProductCategory"},
+                        {"data": "EditButton"}
+                    ],
+
+                });
+
+            });
+        </script>
