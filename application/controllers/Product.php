@@ -241,8 +241,6 @@ class Product extends CI_Controller{
 		);
 		$product_pictures = $this->input->post('file');
 		$id_product = $this->M_product->add_product($data,$product_pictures);
-
-		// print_r($product_picture);exit();
 		$this->session->set_flashdata('msg', 'Add Product successfully ...');
 		redirect('Product/product_view');
 	}
