@@ -38,15 +38,8 @@ $(document).ready(function () {
       <h5><?php echo $supplier[0]->CompanyName; ?></h5>
       <br>
       <div class="form-group">
-        <label for="qty">Quantity</label>
+        <label for="qty">Quantity(<?php echo $product[0]->Unit; ?>)</label>
         <input name="qty" type="number" class="form-control" id="qty">
-      </div>
-      <div class="form-group">
-        <label for="unit">Unit:</label>
-        <select class="form-control" id="unit">
-          <option>Pcs</option>
-          <option>Dozen</option>
-        </select>
       </div>
     </div>
   </div>

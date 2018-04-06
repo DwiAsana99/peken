@@ -2,7 +2,7 @@
 <section class="content-header">
    <div class="btn-group btn-breadcrumb">
             <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
-             <a href="<?php echo base_url('index.php/Product_sub_sub_category/product_sub_sub_category_view');?>" class="btn btn-default  btn-xs">Product Sub Category</a>
+             <a href="<?php echo base_url('index.php/Product_sub_category/product_sub_category_view');?>" class="btn btn-default  btn-xs">Product Sub Category</a>
             <a  class="btn btn-default  btn-xs active">Edit Product Sub Category</a>
         </div>
 </section>

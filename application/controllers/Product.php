@@ -25,27 +25,27 @@ class Product extends CI_Controller{
 			if (!empty($this->input->get('search_value'))) {
 				$search_value = $this->input->get('search_value');
 				$data['search_value'] = $search_value;
-				$get_product = $this->M_product->get_product("","",$search_value,"","","tbproductpic.IdProduct");
+				$get_product = $this->M_product->get_product("","",$search_value,"","","tbproductpic.IdProduct","","",1);
 				$this->M_pagination->set_config(
 					"","","","","","","","index.php/Product/public_product_list_view?search_value=".$search_value,
 					$get_product->num_rows()
 				);
 				$config = $this->M_pagination->get_config();
 				$offset = $this->M_pagination->get_offset($page);
-				$get_product = $this->M_product->get_product("","",$search_value,$offset,$config["per_page"],"tbproductpic.IdProduct");
+				$get_product = $this->M_product->get_product("","",$search_value,$offset,$config["per_page"],"tbproductpic.IdProduct","","",1);
 				$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
 				$data['breadcrumb'] .= "<li class='active'>"."Search for '".$search_value."''</li>";
 			}
 			elseif ( !empty($this->input->get('product_category_code'))) {
 				$product_category_code = $this->input->get('product_category_code');
-				$get_product = $this->M_product->get_product("","","","","","tbproductpic.IdProduct",$product_category_code);
+				$get_product = $this->M_product->get_product("","","","","","tbproductpic.IdProduct",$product_category_code,"",1);
 				$this->M_pagination->set_config(
 					"","","","","","","","index.php/Product/public_product_list_view?product_category_code=".$product_category_code,
 					$get_product->num_rows()
 				);
 				$config = $this->M_pagination->get_config();
 				$offset = $this->M_pagination->get_offset($page);
-				$get_product = $this->M_product->get_product("","","",$offset,$config["per_page"],"tbproductpic.IdProduct",$product_category_code);
+				$get_product = $this->M_product->get_product("","","",$offset,$config["per_page"],"tbproductpic.IdProduct",$product_category_code,"",1);
 				$get_product_category = $this->M_product_category->get_product_category($product_category_code);
 				$baris = $get_product_category->row();
 				$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
@@ -54,14 +54,14 @@ class Product extends CI_Controller{
 			}
 			else {
 				$product_sub_category_code = $this->input->get('product_sub_category_code');
-				$get_product = $this->M_product->get_product("","","","","","tbproductpic.IdProduct","",$product_sub_category_code);
+				$get_product = $this->M_product->get_product("","","","","","tbproductpic.IdProduct","",$product_sub_category_code,1);
 				$this->M_pagination->set_config(
 					"","","","","","","","index.php/Product/public_product_list_view?product_sub_category_code=".$product_sub_category_code,
 					$get_product->num_rows()
 				);
 				$config = $this->M_pagination->get_config();
 				$offset = $this->M_pagination->get_offset($page);
-				$get_product = $this->M_product->get_product("","","",$offset,$config["per_page"],"tbproductpic.IdProduct","",$product_sub_category_code);
+				$get_product = $this->M_product->get_product("","","",$offset,$config["per_page"],"tbproductpic.IdProduct","",$product_sub_category_code,1);
 				$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_query($product_sub_category_code);
 					$baris = $get_product_sub_category->row();
 					$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
@@ -74,14 +74,14 @@ class Product extends CI_Controller{
 		}
 		/*menampilkan semua product secara acak*/
 		else {
-			$get_product = $this->M_product->get_product("","","","","","tbproductpic.IdProduct");
+			$get_product = $this->M_product->get_product("","","","","","tbproductpic.IdProduct","","",1);
 			$this->M_pagination->set_config(
 				"","","","","","","","index.php/product/public_product_list_view",
 				$get_product->num_rows()
 			);
 			$config = $this->M_pagination->get_config();
 			$offset = $this->M_pagination->get_offset($page);
-			$get_product = $this->M_product->get_product("","","",$offset, $config["per_page"],"tbproductpic.IdProduct");
+			$get_product = $this->M_product->get_product("","","",$offset, $config["per_page"],"tbproductpic.IdProduct","","",1);
 			$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
 			$data['breadcrumb'] .= "<li class='active'>All Product</li>";
 		}
@@ -184,7 +184,8 @@ class Product extends CI_Controller{
 			'PeriodSupplyAbility' => $this->input->post('period_supply_ability'),
 			'ProductSubCategoryCode' => $this->input->post('product_sub_category_code'),
 			'ProductDescription' => $this->input->post('product_description'),
-			'PkgDelivery' => $this->input->post('pkg_delivery')
+			'PkgDelivery' => $this->input->post('pkg_delivery'),
+			'IsActive' => $this->input->post('status')
 		);
 		$product_pictures = $this->input->post('file');
 		$id_product = $this->M_product->edit_product($id_product,$data,$product_pictures);
@@ -273,42 +274,46 @@ class Product extends CI_Controller{
 		$get_product = $this->M_product->get_product($id_supplier,$id_product,"","","");
 		$product = $get_product->result();
 		$row = $get_product->row();
-
+		echo "<div class'text-right'><a href='".site_url('Product/public_product_detail_view/').$row->IdProduct."' class=' btn btn-info'><span class='glyphicon glyphicon-eye-open'></span> Preview Product Detail in Published</a><div><br>";
 		// print_r($row);exit();
 		foreach ($product as $key ) {
 			// echo $row->Name;
-			echo "<img src=".base_url()."assets/supplier_upload/".$key->FileName." alt='' width='125'>";
+			echo "<img src=".base_url()."assets/supplier_upload/".$key->FileName." alt='' width='110'>";
 
 		}
-
+		//
+		$status = ($row->IsActive==1) ? "published" : "no published" ;
 		echo "
 		<br>
-		<div class='col-md-3 col-xs-12'><b>Product Name</b></div>
-		<div class='col-md-9 col-xs-12'> : ".$row->Name."</div>".
-		"<br>
-		<div class='col-md-3 col-xs-12'><b>Product Unit</b></div>
-		<div class='col-md-9 col-xs-12'> : ".$row->Unit."</div>".
-		"<br>
-		<div class='col-md-3 col-xs-12'><b>Product Category</b></div>
-		<div class='col-md-9 col-xs-12'> : ".$row->ProductCategory."</div>".
-		"<br>
-		<div class='col-md-3 col-xs-12'><b>Product Sub Category</b></div>
-		<div class='col-md-9 col-xs-12'> : ".$row->ProductSubCategory."</div>".
-		"<br>
-		<div class='col-md-3 col-xs-12'><b>Product Price</b></div>
-		<div class='col-md-9 col-xs-12'> : ".$row->Price."</div>".
-		"<br>
-		<div class='col-md-3 col-xs-12'><b>Product Description</b></div>
-		<div class='col-md-9 col-xs-12'> : ".$row->ProductDescription."</div>".
-		"<br>
-		<div class='col-md-3 col-xs-12'><b>Package Delivery</b></div>
-		<div class='col-md-9 col-xs-10'> : ".$row->PkgDelivery."</div>".
-		"<br>
-		<div class='col-md-3 col-xs-12'><b>Supply Ability</b></div>
-		<div class='col-md-9 col-xs-12'> : ".$row->SupplyAbility."</div>".
-		"<br>
-		<div class='col-md-3 col-xs-12'><b>Period Supply Ability</b></div>
-		<div class='col-md-9 col-xs-12'> : ".$row->PeriodSupplyAbility."</div>";
+		<h4 class=''><b>Product Name</b></h4>
+		<p class=''>".$row->Name."</p>".
+		"
+		<h4 class=''><b>Product Unit</b></h4>
+		<p class=''>".$row->Unit."</p>".
+		"
+		<h4 class=''><b>Product Category</b></h4>
+		<p class=''>".$row->ProductCategory."</p>".
+		"
+		<h4 class=''><b>Product Sub Category</b></h4>
+		<p class=''>".$row->ProductSubCategory."</p>".
+		"
+		<h4 class=''><b>Product Price</b></h4>
+		<p class=''>".$row->Price."</p>".
+		"
+		<h4 class=''><b>Supply Ability</b></h4>
+		<p class=''>".$row->SupplyAbility."</p>".
+		"
+		<h4 class=''><b>Period Supply Ability</b></h4>
+		<p class=''>".$row->PeriodSupplyAbility."</p>".
+		"
+		<h4 class=''><b>Product Description</b></h4>
+		<p class=''>".$row->ProductDescription."</p>".
+		"
+		<h4 class=''><b>Package Delivery</b></h4>
+		<p class=''>".$row->PkgDelivery."</p>".
+		"
+		<h4 class=''><b>Product Status</b></h4>
+		<p class=''>".$status."</p>";
 	}
 	function remove_product_picture(){
 		$nama=$this->input->post('nama');
