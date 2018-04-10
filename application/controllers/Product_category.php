@@ -23,8 +23,7 @@ class Product_category extends CI_Controller{
     $this->load->view('private/product_category/product_category');
     $this->load->view('template/back_admin/admin_foot');
   }
-  function get_product_category_json()
-  {
+  function get_product_category_json(){
     $get_product_category = $this->M_product_category->get_product_category();
     // print_r($get_product_category->row());exit();
     $baris = $get_product_category->result();

@@ -506,13 +506,16 @@ $(document).ready(function () {
         </a>
         <ul class="dropdown-menu">
           <li>
-            <a href="<?php echo base_url().'index.php/Buyer/buyer_account_view';?>">Profile</a>
+            <a href="<?php echo base_url().'index.php/Buyer/buyer_account_view';?>"><span class="glyphicon glyphicon-user"></span> Profile</a>
           </li>
           <li>
-            <a href="<?php echo base_url().'index.php/Quotation/buyer_quotation_list';?>">Request for Quotation List</a>
+            <a href="<?php echo base_url().'index.php/Quotation/buyer_quotation_list';?>"><span class="glyphicon glyphicon-th-list"></span> Request for Quotation List</a>
           </li>
           <li>
-            <a href="<?php echo base_url().'index.php/Login/logout';?>">Sign Out</a>
+            <a href="<?php echo base_url().'index.php/Support/buyer_request_support';?>"><span class="glyphicon glyphicon-phone-alt"></span> Support</a>
+          </li>
+          <li>
+            <a href="<?php echo base_url().'index.php/Login/logout';?>"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a>
           </li>
         </ul>
 
