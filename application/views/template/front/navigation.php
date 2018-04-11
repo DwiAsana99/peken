@@ -512,7 +512,7 @@ $(document).ready(function () {
             <a href="<?php echo base_url().'index.php/Quotation/buyer_quotation_list';?>"><span class="glyphicon glyphicon-th-list"></span> Request for Quotation List</a>
           </li>
           <li>
-            <a href="<?php echo base_url().'index.php/Support/buyer_request_support';?>"><span class="glyphicon glyphicon-phone-alt"></span> Support</a>
+            <a href="<?php echo base_url().'index.php/Support/buyer_support_list_view';?>"><span class="glyphicon glyphicon-phone-alt"></span> Support</a>
           </li>
           <li>
             <a href="<?php echo base_url().'index.php/Login/logout';?>"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a>
