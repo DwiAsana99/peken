@@ -101,7 +101,7 @@
     </div>
   </div> -->
   <div class="flex_shadow seller_list">
-      <h2>Product Today</h2>
+      <h2>Product Today Hari Ini</h2>
     <div class="my-container">
       <?php $i = 1; foreach($product as $p){ ?>
       <div class="tes-hover">
