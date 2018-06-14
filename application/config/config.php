@@ -24,7 +24,7 @@ date_default_timezone_set('Asia/Makassar');
 |
 */
 //$config['base_url'] = 'http://localhost/marketplace/';
- $config['base_url'] = 'http://localhost/peken/';
+ $config['base_url'] = 'http://localhost:8080/peken/';
 /*
 |--------------------------------------------------------------------------
 | Index File

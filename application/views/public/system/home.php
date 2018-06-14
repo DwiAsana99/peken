@@ -28,27 +28,27 @@
           <img src="http://glimageurl.golocall.com/golocal-post/image/72114_fusionplus_1493037430.jpeg" alt="...">
         </a>
         <div class="carousel-caption">
-          <h2>Heading</h2>
+          <h2>Heading1</h2>
         </div>
       </div>
       <div class="item">
         <img src="https://ae01.alicdn.com/kf/HTB1ZhomHVXXXXXwXFXXq6xXFXXXb/Girl-jewelry-Golden-Plated-Blue-belive-it-back-R-N-fashion-Jewellry-sets-coupon-african-jewelry.jpg_640x640.jpg"
           alt="...">
         <div class="carousel-caption">
-          <h2>Heading</h2>
+          <h2>Heading2</h2>
         </div>
       </div>
       <div class="item">
         <img src="https://s-media-cache-ak0.pinimg.com/originals/e1/ee/ba/e1eeba10640b058ba881c55fcc1d45fb.jpg" alt="...">
         <div class="carousel-caption">
-          <h2>Heading</h2>
+          <h2>Heading3</h2>
         </div>
       </div>
       <div class="item">
         <img src="http://www.uniquejewells.co.uk/ekmps/shops/5da030/images/18k-gold-plated-stellux-crystal-phoenix-pendant-necklace-earrings-bridal-jewellry-73-p.jpg"
           alt="...">
         <div class="carousel-caption">
-          <h2>Heading</h2>
+          <h2>Heading4</h2>
         </div>
       </div>
     </div>
