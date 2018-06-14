@@ -135,7 +135,7 @@
   <!-- <div class="row"> -->
   <div class="divider" style="margin: 10% 0"></div>
     <div class="flex_shadow seller">
-      <h2>Seller</h2>
+      <h2>Seller TEst Git</h2>
       <div class="my-container seller_column">
         <?php foreach($supplier as $s){ ?>
         <div class="tes-hover text-center">
