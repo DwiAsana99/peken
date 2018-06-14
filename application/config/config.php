@@ -23,7 +23,8 @@ date_default_timezone_set('Asia/Makassar');
 | a PHP script and you can easily do that on your own.
 |
 */
-//$config['base_url'] = 'http://localhost/marketplace/';
+//$config['base_url'] = 'http://localhost/marketplace/'
+//$config['base_url'] = 'http://dinilaku.com';;
  $config['base_url'] = 'http://localhost/peken/';
 /*
 |--------------------------------------------------------------------------

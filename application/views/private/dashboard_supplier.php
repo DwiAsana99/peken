@@ -14,12 +14,7 @@
   </section>
 <!-- Main content -->
     <section class="content">
-      <!-- Small boxes (Stat box) -->
-
-      <!-- /.row -->
-      <!-- Main row -->
-
-      <!-- /.row (main row) -->
+<!-- tarub box info -->
 
     </section>
     <!-- /.content -->
@@ -221,4 +216,3 @@
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
-

@@ -171,7 +171,7 @@ class Quotation extends CI_Controller{
           $profile_image = $quotation_detail->ProfilImage;
           $profile_image = !empty($profile_image) ? $profile_image : "user_without_profile_image.png" ;
           echo '<li class="left clearfix"><span class="chat-img pull-left">
-            <img src='.base_url('assets/supplier_upload/').$profile_image.' alt="User Avatar" width="55" class="img-circle" />
+            <img src='.base_url('assets/supplier_upload/').$profile_image.' alt="User Avatar" width="45" class="img-circle" />
           </span>
           <div class="chat-body clearfix">
             <div class="header">

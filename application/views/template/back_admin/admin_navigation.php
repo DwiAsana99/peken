@@ -16,45 +16,7 @@
 
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-              <!-- Messages: style can be found in dropdown.less-->
-              <li class="dropdown messages-menu" id="supplier_unread_quotation_notification_bell">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="glyphicon glyphicon-envelope"></i>
-                  <span class="label label-warning"></span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li class="header">You have  unread quotation</li>
-                  <li>
-                    <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
-
-                        <!-- start message -->
-
-                    </ul>
-                  </li>
-                  <li class="footer"><a href="#">See All Notifications</a></li>
-                </ul>
-              </li>
-
-              <!-- Messages: style can be found in dropdown.less-->
-              <li class="dropdown messages-menu" id="supplier_unread_chat_notification_bell">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="glyphicon glyphicon-comment"></i>
-                  <span class="label label-warning"></span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li class="header">You have unread comment in  quotation</li>
-                  <li>
-                    <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
-
-                        <!-- start message -->
-
-                    </ul>
-                  </li>
-                  <li class="footer"><a href="#">See All Notifications</a></li>
-                </ul>
-              </li>
+            
 
               <!-- Notifications: style can be found in dropdown.less -->
 
