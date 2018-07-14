@@ -48,7 +48,7 @@ class Login extends CI_Controller{
 			redirect('Admin/admin_dashboard_view');
 		}
 		 else {
-			 echo "sinf ada";exit();
+			// echo "sinf ada";exit();
 			redirect('Home/index');
 		}
 

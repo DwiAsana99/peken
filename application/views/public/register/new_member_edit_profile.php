@@ -40,7 +40,7 @@
           <div class="col-xs-12">
             <div class="form-group">
               <label for="company_name">Phone</label>
-              <input type="text" class="form-control" value="" name="phone" id="phone" placeholder="081999777333" required>
+              <input type="text" class="form-control" value="" name="phone" id="phone" placeholder="" required>
             </div>
           </div>
         </div>

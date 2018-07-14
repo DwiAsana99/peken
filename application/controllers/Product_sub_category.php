@@ -16,6 +16,10 @@ class Product_sub_category extends CI_Controller
     }
 
     function product_sub_category_view(){
+      $id_admin = $this->session->userdata('id_admin');
+      if (empty($id_admin)) {
+        redirect('Home/home_view');
+      }
       //$data['product_category'] = $this->M_product_category->get_product_category();
       $this->load->view('template/back_admin/admin_head');
       $this->load->view('template/back_admin/admin_navigation');
@@ -85,6 +89,10 @@ class Product_sub_category extends CI_Controller
       // redirect('Product_category/product_category_view');
     }
     function product_sub_category_add_view(){
+      $id_admin = $this->session->userdata('id_admin');
+      if (empty($id_admin)) {
+        redirect('Home/home_view');
+      }
       $get_product_category = $this->M_product_category->get_product_category();
   		$data['product_category'] = $get_product_category->result();
       $this->load->view('template/back_admin/admin_head');
@@ -95,6 +103,10 @@ class Product_sub_category extends CI_Controller
     }
 
     function product_sub_category_edit_view($id){
+      $id_admin = $this->session->userdata('id_admin');
+      if (empty($id_admin)) {
+        redirect('Home/home_view');
+      }
       $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_query($id) ;
       $data['data'] = $get_product_sub_category->result();
       $this->load->view('template/back_admin/admin_head');
