@@ -66,6 +66,10 @@ class Buyer extends CI_Controller{
     redirect('Buyer/buyer_account_view');
   }
   function buyer_view(){
+    $id_admin = $this->session->userdata('id_admin');
+    if (empty($id_admin)) {
+      redirect('Home/home_view');
+    }
     //$data['product_category'] = $this->M_product_category->get_product_category();
     $this->load->view('template/back_admin/admin_head');
     $this->load->view('template/back_admin/admin_navigation');

@@ -39,10 +39,16 @@
               alt="">
           </a>
           <div class="detail-display">
-            <h3><b><?php echo $s->CompanyName; ?></b> </h3>
-            <h4><?php echo $s->Location; ?></h4>
-            <h4><?php echo $s->Email; ?></h4>
-            <h4><?php echo $s->Phone; ?></h4>
+            <h6><b>
+              <?php $lengt = strlen($s->CompanyName);
+              if ($lengt>14) {
+              echo trim(substr($s->CompanyName,0,12))." <b>...</b>";
+              } else {
+                echo $s->CompanyName;
+              }
+               ?>
+            </b> </h6>
+
           </div>
         </div>
         <?php } ?>

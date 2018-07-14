@@ -46,7 +46,7 @@ class Register extends CI_Controller{
       $row = $get_member->row();
       $this->email->message("<a href='".base_url().
       "index.php/Register/new_member_edit_profile_view/".$row->IdMember.
-      "'>Verifikasi Akun Anda </a>"
+      "'><i class='glyphicon glyphicon-time'></i>VERIFY YOUR ACCOUNTS</a>"
     );
     $this->email->set_newline("\r\n");
     $this->email->send();

@@ -283,6 +283,10 @@ class Supplier extends CI_Controller{
     }
     function supplier_view(){
       //$data['product_category'] = $this->M_product_category->get_product_category();
+      $id_admin = $this->session->userdata('id_admin');
+      if (empty($id_admin)) {
+        redirect('Home/home_view');
+      }
       $this->load->view('template/back_admin/admin_head');
       $this->load->view('template/back_admin/admin_navigation');
       $this->load->view('template/back_admin/admin_sidebar');

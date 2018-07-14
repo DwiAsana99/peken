@@ -17,6 +17,10 @@ class Product_category extends CI_Controller{
 
   function product_category_view(){
     //$data['product_category'] = $this->M_product_category->get_product_category();
+    $id_admin = $this->session->userdata('id_admin');
+    if (empty($id_admin)) {
+      redirect('Home/home_view');
+    }
     $this->load->view('template/back_admin/admin_head');
     $this->load->view('template/back_admin/admin_navigation');
     $this->load->view('template/back_admin/admin_sidebar');
@@ -52,6 +56,10 @@ class Product_category extends CI_Controller{
 
 
   function product_category_add_view(){
+    $id_admin = $this->session->userdata('id_admin');
+    if (empty($id_admin)) {
+      redirect('Home/home_view');
+    }
     $this->load->view('template/back_admin/admin_head');
     $this->load->view('template/back_admin/admin_navigation');
     $this->load->view('template/back_admin/admin_sidebar');
@@ -77,6 +85,10 @@ class Product_category extends CI_Controller{
   }
 
   function product_category_edit_view($id){
+    $id_admin = $this->session->userdata('id_admin');
+    if (empty($id_admin)) {
+      redirect('Home/home_view');
+    }
     $get_product_category = $this->M_product_category->get_product_category($id) ;
     $data['data'] = $get_product_category->result();
     $this->load->view('template/back_admin/admin_head');
