@@ -10,7 +10,7 @@
     }
 }
 </style>
-
+<?php //echo $_SERVER['SCRIPT_NAME']  ;?>
 <div class="container">
   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
