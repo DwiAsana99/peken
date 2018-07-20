@@ -4,6 +4,11 @@
 */
 class M_product extends CI_Model{
 
+  /*
+    function get_product(
+    $filter_value="", $order_by=""
+  )
+  */
   function get_product(
     $id_supplier = "",$id_product = "",$search_value = "",$offset= "",$limit= "",
     $group_by = "", $product_category_code = "",$product_sub_category_code = "", $is_active=""
