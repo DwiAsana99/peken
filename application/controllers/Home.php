@@ -13,6 +13,12 @@ class Home extends CI_Controller{
 	}
 
 	function home_view(){
+		$rules['limit'] = 8;
+		$rules['join']['other_table_columns'] = ",user_tb.*, productpic_tb.* ";
+		$rules['join']['join_table'] = "INNER JOIN user_tb INNER JOIN productpic_tb
+		ON product_tb.Id = productpic_tb.ProductId 
+		AND user_tb.Id = product_tb.SupplierId ";
+		$this->M_product->set_search_product($rules);
 		$data['product'] = $this->M_product->get_top8_product(1);
 		$data['supplier'] = $this->M_member->get_top10_supplier();
 		$get_product_category = $this->M_product_category->get_product_category();

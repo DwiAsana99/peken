@@ -4,12 +4,25 @@
 */
 class M_product extends CI_Model{
 
-  /*
-    function get_product(
-    $filter_value="", $order_by=""
-  )
-  */
-  function get_product(
+  
+  function set_search_product($rules) {
+    $rules['join']['other_table_columns']
+    $rules['join']['join_table']
+    $rules['filter_value']
+    $rules['group_by']
+    $rules['order_by']
+    $rules['limit']
+    $rules['offset']
+  }
+  
+  function get_product() {
+    $query = "SELECT product_tb.* ".$other_table_columns."
+    FROM product_tb ".$join_table."
+    WHERE 1=1 ".$filter_value.$group_by.$order_by.$limit.$offset;
+  }
+
+  
+  function get_product_lama(
     $id_supplier = "",$id_product = "",$search_value = "",$offset= "",$limit= "",
     $group_by = "", $product_category_code = "",$product_sub_category_code = "", $is_active=""
   ){
