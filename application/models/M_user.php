@@ -2,15 +2,35 @@
 /**
 *
 */
-class M_member extends CI_Model{
+class M_user extends CI_Model{
+  protected $other_table_columns;
+  protected $join_table;
+  protected $filter_value;
+  protected $group_by;
+  protected $order_by;
+  protected $limit;
+  protected $offset;
   // function get_member("0",$email, $password) {
   //   $query = $this->db->query("SELECT * FROM tbmember WHERE Email = '$email' AND Pwd = '$password'");
   //   return $query;
   //  }
   // mencari 10 supplier teratas
-  function get_top10_supplier(){
-    $query = $this->db->query("SELECT IdMember AS IdSupplier, ProfilImage,CompanyName,Location,Email,Phone FROM tbmember WHERE IsSupplier = 1 LIMIT 8");
-    return $query->result();
+  function set_search_user($rules){
+    $this->other_table_columns = !empty($rules['join']['other_table_columns']) ? $rules['join']['other_table_columns'] : "" ;
+    $this->join_table = !empty($rules['join']['join_table']) ? $rules['join']['join_table'] : "" ;
+    $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ; 
+    $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ; 
+    $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
+    $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
+    $this->filter_value = isset($rules['filter_value']['is_published']) ? " AND product_tb.IsPublished = ".$rules['filter_value']['is_published'] : "" ; 
+  }
+  function get_user() {
+    $query = "SELECT user_tb.* ".$this->other_table_columns."
+    FROM user_tb ".$this->join_table."
+    WHERE 1=1 ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
+    //echo $query;exit();
+    $query = $this->db->query($query);
+    return $query;
   }
   //mencari data supplier berdasarkan $id_supplier atau $search_value dari form pencarian
   function get_member(

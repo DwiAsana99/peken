@@ -105,11 +105,11 @@
     <div class="my-container">
       <?php $i = 1; foreach($product as $p){ ?>
       <div class="tes-hover">
-        <a href="<?php echo site_url('Product/public_product_detail_view/').$p->IdProduct ?>">
+        <a href="<?php echo site_url('Product/public_product_detail_view/').$p->ProductId ?>">
           <img class="img-responsive" src="<?php echo base_url('assets/supplier_upload/').$p->FileName?>" alt="">
         </a>
         <h4>Rp.
-          <?php echo number_format($p->Price, 0, '.', '.'); ?>
+          <?php echo number_format($p->MinPrice, 0, '.', '.'); ?>
         </h4>
         <h5>
           <?php echo $p->Name; ?>
@@ -123,7 +123,7 @@
         <hr>
         <div class="text-center">
           <h6><?php echo $p->CompanyName; ?></h6>
-          <a href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$p->IdProduct."&"."id_supplier=".$p->IdSupplier ?>" class="btn btn-default">Contact Supplier</a>
+          <a href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$p->ProductId."&"."id_supplier=".$p->SupplierId ?>" class="btn btn-default">Contact Supplier</a>
         </div>
       </div>
       <?php } ?>
