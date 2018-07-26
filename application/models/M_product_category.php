@@ -3,13 +3,33 @@
  *
  */
 class M_product_category extends CI_Model{
-  function get_product_category($product_category_code = "",$order_by=""){
-    $filter_value = !empty($product_category_code) ? " AND Code = $product_category_code " : "" ;
-    $query = $this->db->query('SELECT * FROM tbproductcategory
-    WHERE 1=1 '.$filter_value.$order_by);
-    //$query = $this->db->query($query);
+  protected $other_table_columns;
+  protected $join_table;
+  protected $filter_value;
+  protected $group_by;
+  protected $order_by;
+  protected $limit;
+  protected $offset;
+
+  function set_search_product_category($rules = "") {
+    $this->other_table_columns = !empty($rules['join']['other_table_columns']) ? $rules['join']['other_table_columns'] : "" ;
+    $this->join_table = !empty($rules['join']['join_table']) ? $rules['join']['join_table'] : "" ;
+    $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ; 
+    $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ; 
+    $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
+    $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
+    //$this->filter_value = isset($rules['filter_value']['is_published']) ? " AND product_tb.IsPublished = ".$rules['filter_value']['is_published'] : "" ; 
+  }
+
+  function get_product_category(){
+    $query = "SELECT productcategory_tb.* ".$this->other_table_columns."
+    FROM productcategory_tb ".$this->join_table."
+    WHERE 1=1 ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
+    //echo $query;exit();
+    $query = $this->db->query($query);
     return $query;
   }
+
   // function datas mungkin bisa menimbulkan bug pada user hak akses supplier
   function add_product_category($table,$data) {
 			 $this->db->insert($table,$data);

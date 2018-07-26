@@ -30,8 +30,8 @@ class Home extends CI_Controller{
 		//$rules['filter_value'] =  array('is_published' => 1);
 		//$rules['group_by'] = ' productpic_tb.ProductId ';
 		$this->M_user->set_search_user($user_rules);
-		$data['supplier'] = $this->M_user->get_user();
-
+		$get_user = $this->M_user->get_user();
+		$data['supplier'] = $get_user->result();
 		// $get_product_category = $this->M_product_category->get_product_category();
 		// $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
 		// $data['product_category'] = $get_product_category->result();
@@ -46,8 +46,8 @@ class Home extends CI_Controller{
 
 		$head_data['page_title'] = "Dinilaku";
 		$this->load->view('template/front/head_front',$head_data);
-		$this->load->view('template/front/navigation',$data);
-		$this->load->view('public/system/home',$data);
+		$this->load->view('template/front/navigation');
+		$this->load->view('public/system/landing_page',$data);
 		$this->load->view('template/front/foot_front');
 	}
 

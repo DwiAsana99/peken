@@ -15,6 +15,21 @@ class Product_category extends CI_Controller{
     redirect('Product_category/product_category_view');
   }
 
+  function get_product_category()  {
+    $this->M_product_category->set_search_product_category();
+		$get_product_category = $this->M_product_category->get_product_category();
+    $product_category = $get_product_category->result();
+    $data = array();
+    foreach ($product_category as $pc) {
+      $row = array(
+        'Code' => $pc->Code, 
+        'ProductCategory' => $pc->ProductCategory, 
+      );
+      $data[] = $row;
+    }
+    echo json_encode($data);
+  }
+
   function product_category_view(){
     //$data['product_category'] = $this->M_product_category->get_product_category();
     $id_admin = $this->session->userdata('id_admin');

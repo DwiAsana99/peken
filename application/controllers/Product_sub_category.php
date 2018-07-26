@@ -115,7 +115,22 @@ class Product_sub_category extends CI_Controller
       $this->load->view('private/product_sub_category/edit_product_sub_category',$data);
       $this->load->view('template/back_admin/admin_foot');
     }
-
+    function get_product_sub_category()  {
+    //$rules['filter_value'] =  array('product_category_code' => $product_category_code);
+    $this->M_product_sub_category->set_search_product_sub_category();
+		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
+    $product_sub_category = $get_product_sub_category->result();
+    $data = array();
+    foreach ($product_sub_category as $psc) {
+      $row = array(
+        'Code' => $psc->Code, 
+        'ProductCategoryCode' => $psc->ProductCategoryCode,
+        'ProductSubCategory' => $psc->ProductSubCategory
+      );
+      $data[] = $row;
+    }
+    echo json_encode($data);
+  }
     function edit_product_sub_category(){
       $product_sub_category_code = $this->input->post('product_sub_category_code');
       $data = array('ProductSubCategory' => $this->input->post('product_sub_category'));
