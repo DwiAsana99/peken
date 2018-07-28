@@ -6,66 +6,18 @@ class Login extends CI_Controller{
 		//$this->CI =& get_instance();
 		parent::__construct();
 		//$this->load->library( 'create_menu');
-		$this->load->model(array('M_member'));
+		$this->load->model(array('M_user'));
 	}
 
 
-	function login(){
-		$email = $this->input->post('email');
-		$password = sha1($this->input->post('password'));
-		$get_member = $this->M_member->get_member("","","","","","",$email,$password,"");
-		$num_rows = $get_member->num_rows();
-		$row = $get_member->row();
-
-		if ($num_rows > 0 AND $row->IsSupplier == 1  AND $row->IsUser == 0) {
-			//echo "supplier";exit();
-			$get_supplier = $this->M_member->get_member(0,1,$row->IdMember);
-	  	$data['supplier'] = $get_supplier->result();
-			$this->session->set_userdata('id_supplier',$row->IdMember);
-			$this->session->set_userdata('company_name',$row->CompanyName);
-			$this->session->set_userdata('profil_image',$row->ProfilImage);
-			$this->session->set_userdata('first_name',$row->FirstName);
-			redirect('Supplier/dashboard_supplier_view');
-		}
-		elseif ($num_rows > 0 AND $row->IsSupplier == 0 AND $row->IsUser == 0) {
-		//	echo "buyer";exit();
-			$get_buyer = $this->M_member->get_member(0,0,$row->IdMember);
-	  $data['buyer'] = $get_buyer->result();
-			$this->session->set_userdata('id_buyer',$row->IdMember);
-			// $this->session->set_userdata('company_name',$row->CompanyName);
-			// $this->session->set_userdata('profil_image',$row->ProfilImage);
-			$this->session->set_userdata('first_name',$row->FirstName);
-			redirect('Home/index');
-		}
-		elseif ($num_rows > 0 AND $row->IsUser == 1) {
-			$get_supplier = $this->M_member->get_member(1,0,$row->IdMember);
-	  	$data['supplier'] = $get_supplier->result();
-			//echo "admin";exit();
-			$this->session->set_userdata('id_admin',$row->IdMember);
-			$this->session->set_userdata('company_name',$row->CompanyName);
-			$this->session->set_userdata('profil_image',$row->ProfilImage);
-			$this->session->set_userdata('first_name',$row->FirstName);
-			redirect('Admin/admin_dashboard_view');
-		}
-		 else {
-			// echo "sinf ada";exit();
-			redirect('Home/index');
-		}
-
-
-	}
-
-	function logout(){
-		$this->session->sess_destroy();
-		redirect('Home/index');
-	}
+	
 
 	// function dashboard(){
 	//
 	//
 	// 	$username = $this->session->userdata('Username');
 	// 	$password = $this->session->userdata('Password');
-	// 	$result = $this->M_member->getdataOP($username, $password)->result();
+	// 	$result = $this->M_user->getdataOP($username, $password)->result();
 	// 	if (!empty($result)) {
 	//
 	// 		$role_user =  $this->M_rbac->get_role_user($result[0]->id_user);

@@ -331,10 +331,9 @@
           </div>
         </li>
       </ul>
-      <form id="search_form" role="search" class="navbar-form navbar-left" method="get" action="<?php echo base_url().'index.php/Product/public_product_list_view'; ?>">
+      <form id="search_form" role="search" class="navbar-form navbar-left" method="get" action="<?php echo base_url().'Product/public_product_list_view'; ?>">
         <div class="form-group">
-          <input style="margin-bottom:3px;" type="text" name="search_value" value="<?php echo $search_value = (isset($search_value)) ? $search_value : "
-            " ; ?>" class="form-control" placeholder="Search">
+          <input style="margin-bottom:3px;" type="text" name="search_value" value="<?php echo $search_value = (isset($search_value)) ? $search_value : "" ; ?>" class="form-control" placeholder="Search">
         </div>
         <select id="search_option">
           <option id="nav_product" value="product">Product</option>
@@ -357,11 +356,11 @@
             if (search_option.value == "product") {
               var searchForm = document.getElementById('search_form');
               searchForm.setAttribute("action",
-                "<?php echo base_url().'index.php/Product/public_product_list_view'; ?>");
+                "<?php echo base_url().'Product/public_product_list_view'; ?>");
             } else {
               var searchForm = document.getElementById('search_form');
               searchForm.setAttribute("action",
-                "<?php echo base_url().'index.php/Supplier/public_supplier_list_view'; ?>");
+                "<?php echo base_url().'User/public_supplier_list_view'; ?>");
             }
           }
           // var supplier = document.getElementById('nav_supplier');
@@ -387,7 +386,7 @@
             <li>
               <div class="row">
                 <div class="col-md-12">
-                  <form class="form" role="form" method="post" action="<?php echo base_url().'index.php/Login/login';?>" accept-charset="UTF-8"
+                  <form class="form" role="form" method="post" action="<?php echo base_url().'User/login';?>" accept-charset="UTF-8"
                     id="login-nav">
                     <div class="form-group">
                       <label class="sr-only" for="exampleInputEmail2">Email address</label>

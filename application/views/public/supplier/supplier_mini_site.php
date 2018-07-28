@@ -1,72 +1,72 @@
 <style>
-body{
-  margin-top:0;
-}
-p {
-  font-size: 16px;
-}
-.carousel{
-  -webkit-box-shadow: 0;
-  -moz-box-shadow: 0;
-  box-shadow: 0;
-  border-radius: 15px;
-}
-#myCarousel{
-  margin-bottom: 50px;
-}
-.margin {
-  margin-bottom: 45px;
-}
-
-.bg-1 {
-  background-color: #333333;
-  /* Green */
-  color: #ffffff;
-}
-
-h4 a{
-  text-decoration: none;
-  color: #fff;
-}
-h4 a:hover{
-  color: #ff9d00;
-}
-.container-fluid {
-  padding-top: 70px;
-  padding-bottom: 70px;
-}
-.nav-center {
-  text-align: center;
-}
-.nav-center ul.nav {
-  display: inline-block;
-}
-.nav-center ul.nav li {
-  display: inline a;
-  display-float: left;
-}
-
-.nav-tabs li {
-  font-size: 2em;
-  font-weight: lighter;
-}
-
-.tab-pane p {
-  font-weight: lighter;
-}
-
-@media screen and (max-width: 480px) {
-  .nav-tabs li {
-    font-size: 1em;
+  body{
+    margin-top:0;
   }
-}
+  p {
+    font-size: 16px;
+  }
+  .carousel{
+    -webkit-box-shadow: 0;
+    -moz-box-shadow: 0;
+    box-shadow: 0;
+    border-radius: 15px;
+  }
+  #myCarousel{
+    margin-bottom: 50px;
+  }
+  .margin {
+    margin-bottom: 45px;
+  }
+
+  .bg-1 {
+    background-color: #333333;
+    /* Green */
+    color: #ffffff;
+  }
+
+  h4 a{
+    text-decoration: none;
+    color: #fff;
+  }
+  h4 a:hover{
+    color: #ff9d00;
+  }
+  .container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+  .nav-center {
+    text-align: center;
+  }
+  .nav-center ul.nav {
+    display: inline-block;
+  }
+  .nav-center ul.nav li {
+    display: inline a;
+    display-float: left;
+  }
+
+  .nav-tabs li {
+    font-size: 2em;
+    font-weight: lighter;
+  }
+
+  .tab-pane p {
+    font-weight: lighter;
+  }
+
+  @media screen and (max-width: 480px) {
+    .nav-tabs li {
+      font-size: 1em;
+    }
+  }
 </style>
 
 <div class="container-fluid bg-1 text-center">
-  <img src="<?php echo base_url('assets/supplier_upload/').$supplier[0]->ProfilImage; ?>" class="img-responsive " style="display:inline" width="250" height="250">
+  <img src="<?php echo base_url('assets/supplier_upload/').$supplier[0]->ProfileImage; ?>" class="img-responsive " style="display:inline" width="250" height="250">
   <!-- Semboyan <h3><em>"Jewelry is something that has todo wtih emotion"</em></h3>-->
   <h2 class="margin"><b><?php echo $supplier[0]->CompanyName?></b</h2>
-    <h4><?php echo ucwords($supplier[0]->Location)?></h4>
+    <h4><?php echo ucwords($supplier[0]->State)?></h4>
     <h4><a href="mailto:<?php echo $supplier[0]->Email?>?Subject="><?php echo $supplier[0]->Email?></a></h4>
     <h4><a href="tel:<?php echo $supplier[0]->Phone?>"><?php echo $supplier[0]->Phone?></a></h4>
     <h4><a href="#">Twitter</a> | <a href="#">Facebook</a> | <a href="#">Instagram</a></h4>
@@ -88,11 +88,11 @@ h4 a:hover{
         <div class="my-container">
           <?php $i = 1; foreach($product as $p){ ?>
             <div class="tes-hover">
-              <a href="<?php echo site_url('Product/public_product_detail_view/').$p->IdProduct ?>">
+              <a href="<?php echo site_url('Product/public_product_detail_view/').$p->ProductId ?>">
                 <img class="img-responsive" src="<?php echo base_url('assets/supplier_upload/').$p->FileName?>" alt="">
               </a>
               <h4>Rp.
-                <?php echo number_format($p->Price, 0, '.', '.'); ?>
+                <?php echo number_format($p->MinPrice, 0, '.', '.'); ?>
               </h4>
               <h5>
                 <?php echo $p->Name; ?>
@@ -106,7 +106,7 @@ h4 a:hover{
                   <hr>
                   <div class="text-center">
                     <h6><?php echo $p->CompanyName; ?></h6>
-                    <a href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$p->IdProduct."&"."id_supplier=".$p->IdSupplier ?>" class="btn btn-default">Contact Supplier</a>
+                    <a href="<?php echo site_url('Quotation/rfq_view?')."product_id=".$p->ProductId."&"."supplier_id=".$p->SupplierId ?>" class="btn btn-default">Contact Supplier</a>
                   </div>
                 </div>
               <?php } ?>
@@ -128,7 +128,7 @@ h4 a:hover{
               <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
-                  <?php $x =0; foreach ($supplier as $s): ?>
+                  <?php $x =0; foreach ($supplier_gallery_pic as $s): ?>
                     <?php if ($x == 0): ?>
                       <li data-target="#myCarousel" data-slide-to="<?php echo $x ?>" class="active"></li>
                     <?php else: ?>
@@ -140,14 +140,14 @@ h4 a:hover{
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
-                  <?php $o =1; foreach ($supplier as $s): ?>
+                  <?php $o =1; foreach ($supplier_gallery_pic as $s): ?>
                     <?php if ($o == 1): ?>
                       <div class="item active">
-                        <img src="<?php echo base_url('assets/supplier_upload/').$s->GalleryPicFileName?>" alt="Los Angeles" style="width:100%;">
+                        <img src="<?php echo base_url('assets/supplier_upload/').$s->FileName?>" alt="Los Angeles" style="width:100%;">
                       </div>
                     <?php else: ?>
                     <div class="item">
-                      <img src="<?php echo base_url('assets/supplier_upload/').$s->GalleryPicFileName?>" alt="Los Angeles" style="width:100%;">
+                      <img src="<?php echo base_url('assets/supplier_upload/').$s->FileName?>" alt="Los Angeles" style="width:100%;">
                     </div>
                     <?php endif; ?>
                     <?php $o++; ?>

@@ -32,9 +32,9 @@
         <?php foreach($supplier as $s){ ?>
         <div class="tes-hover text-center">
           <a
-          href="<?php echo site_url('supplier/public_supplier_detail_view?id_supplier=').$s->IdSupplier ?>">
+          href="<?php echo site_url('user/supplier_mini_site_view?supplier_id=').$s->Id ?>">
             <img
-              src="<?php echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>"
+              src="<?php echo base_url('assets/supplier_upload/').$s->ProfileImage; ?>"
               class="sellerImg"
               alt="">
           </a>

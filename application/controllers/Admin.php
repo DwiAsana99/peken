@@ -6,7 +6,7 @@ class Admin extends CI_Controller{
     parent::__construct();
     $this->load->library(array('form_validation','pagination'));
     $this->load->helper(array('form', 'url'));
-    $this->load->model(array('M_member','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation', 'M_quotation_detail'));
+    $this->load->model(array('M_user','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation', 'M_quotation_detail'));
   }
   function admin_dashboard_view(){
     $id_admin = $this->session->userdata('id_admin');

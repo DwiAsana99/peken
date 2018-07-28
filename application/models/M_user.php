@@ -18,11 +18,13 @@ class M_user extends CI_Model{
   function set_search_user($rules){
     $this->other_table_columns = !empty($rules['join']['other_table_columns']) ? $rules['join']['other_table_columns'] : "" ;
     $this->join_table = !empty($rules['join']['join_table']) ? $rules['join']['join_table'] : "" ;
-    $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ; 
-    $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ; 
+    $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ;
+    $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ;
     $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
     $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
-    $this->filter_value = isset($rules['filter_value']['is_published']) ? " AND product_tb.IsPublished = ".$rules['filter_value']['is_published'] : "" ; 
+    $this->filter_value = isset($rules['filter_value']['user_level']) ? " AND user_tb.UserLevel = ".$rules['filter_value']['user_level'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['supplier_id']) ? " AND user_tb.Id = ".$rules['filter_value']['supplier_id'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['search_value']) ? " AND user_tb.CompanyName LIKE "."'%".$rules['filter_value']['search_value']."%'"  : "" ;
   }
   function get_user() {
     $query = "SELECT user_tb.* ".$this->other_table_columns."

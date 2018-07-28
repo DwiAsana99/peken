@@ -9,7 +9,7 @@ class Quotation extends CI_Controller{
     parent::__construct();
     $this->load->library(array('form_validation','email'));
     $this->load->helper(array('form', 'url'));
-    $this->load->model(array('M_date','M_quotation','M_quotation_detail','M_member','M_product','M_pagination','M_product_category','M_product_sub_category'));
+    $this->load->model(array('M_date','M_quotation','M_quotation_detail','M_user','M_product','M_pagination','M_product_category','M_product_sub_category'));
   }
 
   function rfq_view(){
@@ -20,7 +20,7 @@ class Quotation extends CI_Controller{
     $id_product = $this->input->get('id_product');
     $id_supplier = $this->input->get('id_supplier');
     $get_product = $this->M_product->get_product("",$id_product);
-    $get_supplier = $this->M_member->get_member("",1,$id_supplier);
+    $get_supplier = $this->M_user->get_member("",1,$id_supplier);
     $data['product'] = $get_product->result();
     $data['supplier'] = $get_supplier->result();
     $get_product_category = $this->M_product_category->get_product_category();
@@ -371,7 +371,7 @@ class Quotation extends CI_Controller{
     $qty = $this->input->post('qty');
     $message =$this->input->post('message');
     $date = $this->M_date->get_date_sql_format();
-    $get_buyer = $this->M_member->get_member(0,0,$id_buyer);
+    $get_buyer = $this->M_user->get_member(0,0,$id_buyer);
     $buyer = $get_buyer->row();
     $content = " Pemesanan oleh : ".$buyer->FirstName.$buyer->LastName."(".$buyer->Email.") to buy ".$product_name.", qty : ".$qty.$message."<br><span class='glyphicon glyphicon-time'></span>";
     $subject = " Request for quotation from "." to buy ".$product_name;

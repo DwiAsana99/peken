@@ -6,7 +6,7 @@ class Buyer extends CI_Controller{
     parent::__construct();
     $this->load->library(array('form_validation','pagination'));
     $this->load->helper(array('form', 'url'));
-    $this->load->model(array('M_member','M_product','M_pagination', 'M_product_category', 'M_product_sub_category','M_quotation_detail'));
+    $this->load->model(array('M_user','M_product','M_pagination', 'M_product_category', 'M_product_sub_category','M_quotation_detail'));
   }
 
   function buyer_account_view(){
@@ -14,7 +14,7 @@ class Buyer extends CI_Controller{
     if (empty($id_buyer)) {
       redirect('Home/home_view');
     }
-    $get_member = $this->M_member->get_member("",0,$id_buyer);
+    $get_member = $this->M_user->get_member("",0,$id_buyer);
     $data['user'] = $get_member->result();
     $get_product_category = $this->M_product_category->get_product_category();
 		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
@@ -62,7 +62,7 @@ class Buyer extends CI_Controller{
       'Phone' => $this->input->post('phone')
     );
     // print_r($data);exit();
-    $this->M_member->edit_member($data,$id_buyer);
+    $this->M_user->edit_member($data,$id_buyer);
     redirect('Buyer/buyer_account_view');
   }
   function buyer_view(){
@@ -79,7 +79,7 @@ class Buyer extends CI_Controller{
   }
   function get_buyer_json(){
 
-    $get_member = $this->M_member->get_member(0,0);
+    $get_member = $this->M_user->get_member(0,0);
     // print_r($get_product_category->row());exit();
     $baris = $get_member->result();
     $data = array();

@@ -140,7 +140,7 @@
         <?php foreach($supplier as $s){ ?>
         <div class="tes-hover text-center">
           <a
-          href="<?php echo site_url('supplier/public_supplier_detail_view?id_supplier=').$s->Id ?>">
+          href="<?php echo site_url('user/supplier_mini_site_view?supplier_id=').$s->Id ?>">
             <img
               src="<?php echo base_url('assets/supplier_upload/').$s->ProfileImage; ?>"
               class="sellerImg"
@@ -162,7 +162,7 @@
         <?php } ?>
       </div>
       <div class="text-right">
-        <a href="<?php echo site_url('Supplier/public_supplier_list_view') ?>" class="btn btn-warning more">See More Supplier</a>
+        <a href="<?php echo site_url('user/public_supplier_list_view') ?>" class="btn btn-warning more">See More Supplier</a>
       </div>
     </div>
   <!-- </div> row comment -->
