@@ -386,7 +386,7 @@
             <li>
               <div class="row">
                 <div class="col-md-12">
-                  <form class="form" role="form" method="post" action="<?php echo base_url().'User/login';?>" accept-charset="UTF-8"
+                  <form class="form" role="form" method="post" action="<?php echo base_url().'user/login';?>" accept-charset="UTF-8"
                     id="login-nav">
                     <div class="form-group">
                       <label class="sr-only" for="exampleInputEmail2">Email address</label>

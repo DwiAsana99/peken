@@ -356,55 +356,62 @@
         echo json_encode($output);
     }
 
+    
+        function login(){
+            
+            $email = $this->input->post('email');
+            $password = sha1($this->input->post('password'));
+            
+            $user_rules['filter_value'] =  array('email'=>$email, 'password'=>$password);
+            $this->M_user->set_search_user($user_rules);
+    
+            $get_member = $this->M_user->get_user();
+            $num_rows = $get_member->num_rows();
+            $row = $get_member->row();
+    
+            if ($num_rows > 0 AND $row->UserLevel == 1  ) {
+                $user_rules['filter_value'] =  array('supplier_id'=>$row->Id, 'user_level'=>1);
+                $this->M_user->set_search_user($user_rules);
+                $get_supplier = $this->M_user->get_user();
+                  $data['supplier'] = $get_supplier->result();
+                $this->session->set_userdata('supplier_id',$row->Id);
+                $this->session->set_userdata('company_name',$row->CompanyName);
+                $this->session->set_userdata('profil_image',$row->ProfileImage);
+                $this->session->set_userdata('first_name',$row->FirstName);
+                redirect('Supplier/dashboard_supplier_view');
+            }
+            elseif ($num_rows > 0  AND $row->UserLevel == 0) {
+                $user_rules['filter_value'] =  array('supplier_id'=>$row->Id, 'user_level'=>0);
+                $this->M_user->set_search_user($user_rules);
+                $get_supplier = $this->M_user->get_user();
+                  $data['buyer'] = $get_buyer->result();
+                $this->session->set_userdata('id_buyer',$row->Id);
+                // $this->session->set_userdata('company_name',$row->CompanyName);
+                // $this->session->set_userdata('profil_image',$row->ProfilImage);
+                $this->session->set_userdata('first_name',$row->FirstName);
+                redirect('Home/index');
+            }
+            // elseif ($num_rows > 0 AND $row->IsUser == 1) {
+            // 	$get_supplier = $this->M_user->get_member(1,0,$row->IdMember);
+              // $data['supplier'] = $get_supplier->result();
+            // 	//echo "admin";exit();
+            // 	$this->session->set_userdata('id_admin',$row->IdMember);
+            // 	$this->session->set_userdata('company_name',$row->CompanyName);
+            // 	$this->session->set_userdata('profil_image',$row->ProfilImage);
+            // 	$this->session->set_userdata('first_name',$row->FirstName);
+            // 	redirect('Admin/admin_dashboard_view');
+            // }
+             else {
+                // echo "sinf ada";exit();
+                redirect('Home/index');
+            }
+    
+    
+        }
+    
+        function logout(){
+            $this->session->sess_destroy();
+            redirect('Home/index');
+        }
     }
-
-    function login(){
-		$email = $this->input->post('email');
-		$password = sha1($this->input->post('password'));
-		$get_member = $this->M_user->get_user("","","","","","",$email,$password,"");
-		$num_rows = $get_member->num_rows();
-		$row = $get_member->row();
-
-		if ($num_rows > 0 AND $row->IsSupplier == 1  AND $row->IsUser == 0) {
-			//echo "supplier";exit();
-			$get_supplier = $this->M_user->get_member(0,1,$row->IdMember);
-	  	$data['supplier'] = $get_supplier->result();
-			$this->session->set_userdata('id_supplier',$row->IdMember);
-			$this->session->set_userdata('company_name',$row->CompanyName);
-			$this->session->set_userdata('profil_image',$row->ProfilImage);
-			$this->session->set_userdata('first_name',$row->FirstName);
-			redirect('Supplier/dashboard_supplier_view');
-		}
-		elseif ($num_rows > 0 AND $row->IsSupplier == 0 AND $row->IsUser == 0) {
-		//	echo "buyer";exit();
-			$get_buyer = $this->M_user->get_member(0,0,$row->IdMember);
-	  		$data['buyer'] = $get_buyer->result();
-			$this->session->set_userdata('id_buyer',$row->IdMember);
-			// $this->session->set_userdata('company_name',$row->CompanyName);
-			// $this->session->set_userdata('profil_image',$row->ProfilImage);
-			$this->session->set_userdata('first_name',$row->FirstName);
-			redirect('Home/index');
-		}
-		elseif ($num_rows > 0 AND $row->IsUser == 1) {
-			$get_supplier = $this->M_user->get_member(1,0,$row->IdMember);
-	  	$data['supplier'] = $get_supplier->result();
-			//echo "admin";exit();
-			$this->session->set_userdata('id_admin',$row->IdMember);
-			$this->session->set_userdata('company_name',$row->CompanyName);
-			$this->session->set_userdata('profil_image',$row->ProfilImage);
-			$this->session->set_userdata('first_name',$row->FirstName);
-			redirect('Admin/admin_dashboard_view');
-		}
-		 else {
-			// echo "sinf ada";exit();
-			redirect('Home/index');
-		}
-
-
-	}
-
-	function logout(){
-		$this->session->sess_destroy();
-		redirect('Home/index');
-	}
 ?>
