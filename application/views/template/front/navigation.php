@@ -303,7 +303,7 @@
     });
   });
 </script>
-sdd
+
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container cont-top">
     <div class="navbar-header">
@@ -317,6 +317,7 @@ sdd
           alt="">
       </a>
     </div>
+
 
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav z-index1">
@@ -332,6 +333,72 @@ sdd
           </div>
         </li>
       </ul>
+
+
+
+
+
+
+
+
+      <script type="text/javascript">
+        function get_product_category(){
+          $("#product_category_button").empty();
+          //var xx = "";
+          //var service_category_code_request = $("#service_category_code_request").val();
+          $.getJSON( "<?php echo base_url().'Product_category/get_product_category/'; ?>/", function( data ) {
+            // console.log(data);
+            // return data.responseJSON;
+             for (var key in data) {
+            //   //console.log( data[key].ProductCategory);
+
+            $("#product_category_button").append("<li class='dropdown-submenu' id='dropdown_product_sub_category'><a class='test' tabindex='-1' href='#' onclick='get_product_sub_category("+data[key].Code+")'>"+data[key].ProductCategory+"<span class='caret'></span></a></li>");
+             }           
+          })
+          // .done(function(data) {
+          //   cetak(data);
+          // })
+          // .fail(function() {
+          //   console.log( "error" );
+          // })
+          // .always(function() {
+          //   console.log( "complete" );
+          // });
+        // console.log(xx);
+          // function cetak(params) {
+          //   console.log('dlm fyunction cetak')
+
+          //   console.log(params)
+          // }
+        }
+        function get_product_sub_category(code){
+          
+         // $("#product_category_sub_button").empty();
+          //var xx = "";
+          //var service_category_code_request = $("#service_category_code_request").val();
+          $.getJSON( "<?php echo base_url().'Product_sub_category/get_product_sub_category'; ?>/"+code, function( data ) {
+            // console.log(data);
+            // return data.responseJSON;
+            $("#dropdown_product_sub_category").append("<ul class='dropdown-menu tes' id='list_product_sub_category'>");
+            $("#dropdown_product_sub_category").append("</ul>");
+            for (var key in data) {
+              //console.log( data[key].ProductCategory);
+
+              $("#list_product_sub_category").append("<li><a tabindex='-1' href='<"+"<?php echo site_url('Product/public_product_list_view?')." product_sub_category_code="; ?>"+data[key].Code+"'>"+data[key].ProductSubCategory+"</a></li>");
+            }           
+          })
+
+        }
+      </script>
+
+
+
+
+
+
+
+
+
       <form id="search_form" role="search" class="navbar-form navbar-left" method="get" action="<?php echo base_url().'index.php/Product/public_product_list_view'; ?>">
         <div class="form-group">
           <input style="margin-bottom:3px;" type="text" name="search_value" value="<?php echo $search_value = (isset($search_value)) ? $search_value : "

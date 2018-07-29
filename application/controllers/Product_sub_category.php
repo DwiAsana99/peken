@@ -115,9 +115,9 @@ class Product_sub_category extends CI_Controller
       $this->load->view('private/product_sub_category/edit_product_sub_category',$data);
       $this->load->view('template/back_admin/admin_foot');
     }
-    function get_product_sub_category()  {
-    //$rules['filter_value'] =  array('product_category_code' => $product_category_code);
-    $this->M_product_sub_category->set_search_product_sub_category();
+    function get_product_sub_category($product_category_code)  {
+    $rules['filter_value'] =  array('product_category_code' => $product_category_code);
+    $this->M_product_sub_category->set_search_product_sub_category($rules);
 		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
     $product_sub_category = $get_product_sub_category->result();
     $data = array();
