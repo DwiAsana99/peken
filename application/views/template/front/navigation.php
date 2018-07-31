@@ -352,8 +352,11 @@
              for (var key in data) {
             //   //console.log( data[key].ProductCategory);
 
-            $("#product_category_button").append("<li class='dropdown-submenu' id='dropdown_product_sub_category'><a class='test' tabindex='-1' href='#' onclick='get_product_sub_category("+data[key].Code+")'>"+data[key].ProductCategory+"<span class='caret'></span></a></li>");
-             }           
+            $("#product_category_button").append("<li class='dropdown-submenu' id='dropdown_product_sub_category"+data[key].Code+"'><a class='test' tabindex='-1' href='#' onclick='get_product_sub_category("+data[key].Code+")'>"+data[key].ProductCategory+"<span class='caret'></span></a></li>");
+            
+            $("#dropdown_product_sub_category"+code).append("<ul class='dropdown-menu tes' id='list_product_sub_category"+code+"'>");
+            $("#dropdown_product_sub_category"+code).append("</ul>");
+          }           
           })
           // .done(function(data) {
           //   cetak(data);
@@ -377,14 +380,13 @@
           //var xx = "";
           //var service_category_code_request = $("#service_category_code_request").val();
           $.getJSON( "<?php echo base_url().'Product_sub_category/get_product_sub_category'; ?>/"+code, function( data ) {
-            // console.log(data);
+            console.log(data);
             // return data.responseJSON;
-            $("#dropdown_product_sub_category").append("<ul class='dropdown-menu tes' id='list_product_sub_category'>");
-            $("#dropdown_product_sub_category").append("</ul>");
+            
             for (var key in data) {
-              //console.log( data[key].ProductCategory);
+              //console.log( data[key].ProductSubCategory);
 
-              $("#list_product_sub_category").append("<li><a tabindex='-1' href='<"+"<?php echo site_url('Product/public_product_list_view?')." product_sub_category_code="; ?>"+data[key].Code+"'>"+data[key].ProductSubCategory+"</a></li>");
+              $("#list_product_sub_category"+code).append("<li><a tabindex='-1' href='<"+"<?php echo site_url('Product/public_product_list_view?')." product_sub_category_code='"; ?>"+data[key].Code+"'>"+data[key].ProductSubCategory+"</a></li>");
             }           
           })
 
