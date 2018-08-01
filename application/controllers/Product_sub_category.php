@@ -131,6 +131,7 @@ class Product_sub_category extends CI_Controller
     }
     echo json_encode($data);
   }
+
     function edit_product_sub_category(){
       $product_sub_category_code = $this->input->post('product_sub_category_code');
       $data = array('ProductSubCategory' => $this->input->post('product_sub_category'));
@@ -139,6 +140,6 @@ class Product_sub_category extends CI_Controller
       redirect('Product_sub_category/product_sub_category_view');
     }
 
-}
+  }
 
  ?>

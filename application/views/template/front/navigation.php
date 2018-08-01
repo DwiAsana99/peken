@@ -286,7 +286,7 @@
     }
   }
 </style>
-<script>
+<script >
   $(document).ready(function () {
     $('.dropdown-submenu a.test').on("click", function (e) {
       $(this).next('ul').toggle();
@@ -321,16 +321,40 @@
       <ul class="nav navbar-nav z-index1">
         <li class="active">
           <div class="dropdown">
-            <button  class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="margin-top: 5px;" onclick="get_product_category()">Categories
+            <button  class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="margin-top: 5px;" >Categories
               <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" id="product_category_button">
+            <ul class="dropdown-menu" id="product_sub_category_dropdown">
               
               
             </ul>
           </div>
         </li>
       </ul>
+
+
+      <script type="text/javascript" >
+        
+        //function get_product_sub_category_dropdown() {
+          $(document).ready(function () { 
+        
+          //var value= $(this).closest('tr').children('td.idk').text()
+          //alert(value);
+          $.ajax({
+          type:"POST",
+          url: "<?php echo base_url('Home/get_product_sub_category_dropdown') ?>",
+          //data:{id_product:value},
+          success: function(respond){
+            //  $("#modal_product_detail").empty();
+            //  console.log(value);
+            //$('#myModal').modal('show');
+            $("#product_sub_category_dropdown").html(respond);
+
+          }
+          })
+        
+        });
+        </script>
       <form id="search_form" role="search" class="navbar-form navbar-left" method="get" action="<?php echo base_url().'Product/public_product_list_view'; ?>">
         <div class="form-group">
           <input style="margin-bottom:3px;" type="text" name="search_value" value="<?php echo $search_value = (isset($search_value)) ? $search_value : "" ; ?>" class="form-control" placeholder="Search">
@@ -539,3 +563,9 @@
     </div>
   </div>
 </nav>
+<script>
+document.getElementById("myLink").onclick = function() {
+    // do things, and then
+    return false;
+};
+</script>

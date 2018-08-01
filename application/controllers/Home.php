@@ -11,7 +11,38 @@ class Home extends CI_Controller{
 	function index(){
 		redirect('Home/home_view');
 	}
-
+	function get_product_sub_category_dropdown()  {
+		//$rules['filter_value'] =  array('product_category_code' => $product_category_code);
+		$this->M_product_category->set_search_product_category();
+		$get_product_category = $this->M_product_category->get_product_category();
+		$product_category = $get_product_category->result();
+	
+		$this->M_product_sub_category->set_search_product_sub_category();
+		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
+		$product_sub_category = $get_product_sub_category->result();
+		  foreach($product_category as $pc){
+			echo "<li class='dropdown-submenu'>
+			<a class='test' tabindex='-1' href='' id='myLink'>".$pc->ProductCategory."<span class='caret'></span></a>
+			<ul class='dropdown-menu tes'>";
+			foreach($product_sub_category as $psc){
+			  if ($pc->Code == $psc->ProductCategoryCode){
+			  echo "<li>
+				<a tabindex='-1' href='".site_url('Product/public_product_list_view?')."product_sub_category_code=".$psc->Code."'>".
+				   $psc->ProductSubCategory."
+				</a>
+			  </li>";
+			  }
+			}
+			echo "</ul>
+		  </li>";
+		  }
+		  echo "<script>
+			document.getElementById('myLink').onclick = function() {
+				// do things, and then
+				return false;
+			};
+			</script>";
+	  }
 	function home_view(){
 		$product_rules['limit'] = 8;
 		$product_rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.* ";
