@@ -19,6 +19,7 @@ class M_product_sub_category extends CI_Model{
     $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
     $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
     $this->filter_value = isset($rules['filter_value']['product_sub_category_code']) ? " AND productsubcategory_tb.Code = ".$rules['filter_value']['product_sub_category_code'] : "" ; 
+    $this->filter_value = isset($rules['filter_value']['product_category_code']) ? " AND productsubcategory_tb.ProductCategoryCode = ".$rules['filter_value']['product_category_code'] : "" ; 
   }
 
   function get_product_sub_category(){
@@ -92,7 +93,7 @@ class M_product_sub_category extends CI_Model{
  			 $this->db->update("tbproductsubcategory",$data);
   }
   // function generate_product_sub_category(){
-  //
+  //`
   // }
 
   // function edit_product_category_view($id) {

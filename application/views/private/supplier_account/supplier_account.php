@@ -4,8 +4,8 @@
 
 <section class="content">
   <div class="text-center">
-    <?php $id_supplier = $this->session->userdata('id_supplier'); ?>
-    <a href="<?php echo site_url('supplier/public_supplier_detail_view?id_supplier=').$id_supplier ?>" class="text-center btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Preview Mini Site</a>
+    <?php $supplier_id = $this->session->userdata('supplier_id'); ?>
+    <a href="<?php echo site_url('supplier/public_supplier_detail_view?supplier_id=').$supplier_id ?>" class="text-center btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Preview Mini Site</a>
   </div>
   <br>
   <div class="row">
@@ -191,7 +191,7 @@
                       }?>"  alt="" class="img-thumbnail" alt="Cinque Terre" width="200" >
                     </div>
                     <!--  -->
-                    <!-- <input type="hidden" name="id_product_pic" id="id_product_pic" value="<?php //echo $p->IdProductPic; ?>"> -->
+                    <!-- <input type="hidden" name="product_id_pic" id="product_id_pic" value="<?php //echo $p->IdProductPic; ?>"> -->
 
                     <button type="button" class="btn btn-danger" id="delete_pic" value="<?php echo $us->IdGalleryPic; ?>">Delete</button>
                   </div>

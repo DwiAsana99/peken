@@ -23,7 +23,9 @@ class M_user extends CI_Model{
     $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
     $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
     $this->filter_value = isset($rules['filter_value']['user_level']) ? " AND user_tb.UserLevel = ".$rules['filter_value']['user_level'] : "" ;
-    $this->filter_value .= isset($rules['filter_value']['supplier_id']) ? " AND user_tb.Id = ".$rules['filter_value']['supplier_id'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['user_id']) ? " AND user_tb.Id = ".$rules['filter_value']['user_id'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['email']) ? " AND user_tb.Email = "."'".$rules['filter_value']['email']."'" : "" ;
+    $this->filter_value .= isset($rules['filter_value']['password']) ? " AND user_tb.Password = "."'".$rules['filter_value']['password']."'" : "" ;
     $this->filter_value .= isset($rules['filter_value']['search_value']) ? " AND user_tb.CompanyName LIKE "."'%".$rules['filter_value']['search_value']."%'"  : "" ;
   }
   function get_user() {
@@ -34,7 +36,7 @@ class M_user extends CI_Model{
     $query = $this->db->query($query);
     return $query;
   }
-  //mencari data supplier berdasarkan $id_supplier atau $search_value dari form pencarian
+  //mencari data supplier berdasarkan $supplier_id atau $search_value dari form pencarian
   function get_member(
     $is_user = "",
     $is_supplier = "",
@@ -86,14 +88,17 @@ class M_user extends CI_Model{
       return TRUE;
     }
   }
-  public function edit_member($data,$id,$supplier_gallery_pic){
+  public function update_user($data="",$id="",$supplier_gallery_pic=""){
     $this->db->set($data);
-    $this->db->where("IdMember",$id);
-    $this->db->update("tbmember",$data);
-    foreach ($supplier_gallery_pic as $row => $value) {
-      $supplier_gallery_pic_data = array("IdMember" => $id,"FileName" => $value );
-      $this->db->insert('tbgallerypic', $supplier_gallery_pic_data);
+    $this->db->where("Id",$id);
+    $this->db->update("user_tb",$data);
+    if (!empty($supplier_gallery_pic)) {
+      foreach ($supplier_gallery_pic as $row => $value) {
+        $supplier_gallery_pic_data = array("Id" => $id,"FileName" => $value );
+        $this->db->insert('tbgallerypic', $supplier_gallery_pic_data);
+      }
     }
+    
   }
 }
 

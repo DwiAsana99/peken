@@ -30,7 +30,7 @@ $this->load->view('template/front/head_front');
       <p class="">Period Supply Ability: <?php echo $product[0]->PeriodSupplyAbility; ?></p>
 
       <!-- This is a button toggling the modal -->
-      <a href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$product[0]->IdProduct."&"."id_supplier=".$p->IdSupplier ?>"
+      <a href="<?php echo site_url('Quotation/rfq_view?')."product_id=".$product[0]->IdProduct."&"."supplier_id=".$p->IdSupplier ?>"
         class="uk-button" >
         Contact Supplier
       </a>
@@ -43,7 +43,7 @@ $this->load->view('template/front/head_front');
     <div class="uk-width-1-6" style="background:#fff;padding-top:30px;padding-bottom: 30px;"  data-uk-grid-margin>
       <div class="uk-grid uk-grid-small uk-text-center">
         <div class="uk-width-1-1" style="padding-right: 30px;">
-          <a href="<?php echo site_url('supplier/public_supplier_detail_view?')."id_supplier=".$p->IdSupplier ?>">
+          <a href="<?php echo site_url('supplier/public_supplier_detail_view?')."supplier_id=".$p->IdSupplier ?>">
           <p><img src="<?php echo base_url('assets/supplier_upload/').$p->ProfilImage;  ?>" width="100" height="100" alt=""></p>
           <p><?php echo $p->CompanyName; ?></p>
           </a>

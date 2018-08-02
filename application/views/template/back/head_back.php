@@ -34,27 +34,27 @@
                   <li class="dropdown messages-menu" id="supplier_unread_quotation_notification_bell">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="glyphicon glyphicon-envelope"></i>
-                      <span class="label label-warning"><?php echo $unread_quotation_num_rows; ?></span>
+                      <span class="label label-warning"><?php //echo $unread_quotation_num_rows; ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                      <li class="header">You have <?php echo $unread_quotation_num_rows; ?> unread quotation</li>
+                      <li class="header">You have <?php //echo $unread_quotation_num_rows; ?> unread quotation</li>
                       <li>
                         <!-- inner menu: contains the actual data -->
                         <ul class="menu">
-                            <?php foreach($unread_quotation as $uq){ ?>
+                            <?php// foreach($unread_quotation as $uq){ ?>
                           <li><!-- start message -->
-                            <a href="<?php echo base_url().'index.php/Quotation/supplier_quotation_detail?id_quotation='.$uq->IdQuotation; ?>">
+                            <a href="<?php //echo base_url().'index.php/Quotation/supplier_quotation_detail?id_quotation='.$uq->IdQuotation; ?>">
                               <div class="pull-left">
                                 <img src="" />
                               </div>
                               <h4>
-                                <?php echo $uq->CompanyName; ?><br>
-                                <small><i class="fa fa-clock-o"></i> <?php echo $uq->DateSend; ?></small>
+                                <?php //echo $uq->CompanyName; ?><br>
+                                <small><i class="fa fa-clock-o"></i> <?php //echo $uq->DateSend; ?></small>
                               </h4>
                               <span class="badge" style="background-color:red;">new</span> <span class="label label-info"> quotation</span>
                             </a>
                           </li>
-                          <?php } ?>
+                          <?php //} ?>
                         </ul>
                       </li>
                       <li class="footer"><a href="#">See All Notifications</a></li>
@@ -82,7 +82,7 @@
                     // alert('tes');
                       setInterval(
                         reload_unread_quotation_notification_bell
-                        , 10000
+                        , 1000000000 //10000
                       );
                       });
                   </script>
@@ -90,27 +90,27 @@
                   <li class="dropdown messages-menu" id="supplier_unread_chat_notification_bell">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="glyphicon glyphicon-comment"></i>
-                      <span class="label label-warning"><?php echo $unread_quotation_detail_num_rows; ?></span>
+                      <span class="label label-warning"><?php //echo $unread_quotation_detail_num_rows; ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                      <li class="header">You have unread comment in <?php echo $unread_quotation_detail_num_rows; ?> quotation</li>
+                      <li class="header">You have unread comment in <?php //echo $unread_quotation_detail_num_rows; ?> quotation</li>
                       <li>
                         <!-- inner menu: contains the actual data -->
                         <ul class="menu">
-                            <?php foreach($unread_quotation_detail as $uqd){ ?>
+                            <?php// foreach($unread_quotation_detail as $uqd){ ?>
                           <li><!-- start message -->
-                            <a href="<?php echo base_url().'index.php/Quotation/supplier_quotation_detail?id_quotation='.$uqd->IdQuotation; ?>">
+                            <a href="<?php //echo base_url().'index.php/Quotation/supplier_quotation_detail?id_quotation='.$uqd->IdQuotation; ?>">
                               <div class="pull-left">
                                 <img src="https://dummyimage.com/vga" />
                               </div>
                               <h4>
-                                <?php echo $uqd->CompanyName; ?><br>
+                                <?php //echo $uqd->CompanyName; ?><br>
                                 <small><i class="fa fa-clock-o"></i> <?php //echo $qd->DateSend; ?></small>
                               </h4>
-                              <span class="badge" style="background-color:red;"><?php echo $uqd->UnreadCount; ?></span> <span class="label label-info"> unread comment</span>
+                              <span class="badge" style="background-color:red;"><?php //echo $uqd->UnreadCount; ?></span> <span class="label label-info"> unread comment</span>
                             </a>
                           </li>
-                          <?php } ?>
+                          <?php// } ?>
                         </ul>
                       </li>
                       <li class="footer"><a href="#">See All Notifications</a></li>
@@ -138,7 +138,7 @@
                     // alert('tes');
                       setInterval(
                         reload_unread_chat_notification_bell
-                        , 10000
+                        , 1000000000 //10000
                       );
                       });
                   </script>

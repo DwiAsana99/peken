@@ -286,7 +286,7 @@
     }
   }
 </style>
-<script >
+<script>
   $(document).ready(function () {
     $('.dropdown-submenu a.test').on("click", function (e) {
       $(this).next('ul').toggle();
@@ -325,36 +325,32 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" id="product_sub_category_dropdown">
-              
-              
+            <?php  foreach($product_category as $pc){?>
+              <li class="dropdown-submenu">
+                <a class="test" tabindex="-1" href="">
+                  <?php echo $pc->ProductCategory ; ?>
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu tes">
+                  <?php  foreach($product_sub_category as $psc){?>
+                  <?php if ($pc->Code == $psc->ProductCategoryCode): ?>
+                  <li>
+                    <a tabindex="-1" href="<?php echo site_url('Product/public_product_list_view?')." product_sub_category_code=".$psc->Code; ?>">
+                      <?php echo $psc->ProductSubCategory ; ?>
+                    </a>
+                  </li>
+                  <?php endif; ?>
+                  <?php }?>
+                </ul>
+              </li>
+              <?php }?>
             </ul>
           </div>
         </li>
       </ul>
 
 
-      <script type="text/javascript" >
-        
-        //function get_product_sub_category_dropdown() {
-          $(document).ready(function () { 
-        
-          //var value= $(this).closest('tr').children('td.idk').text()
-          //alert(value);
-          $.ajax({
-          type:"POST",
-          url: "<?php echo base_url('Home/get_product_sub_category_dropdown') ?>",
-          //data:{id_product:value},
-          success: function(respond){
-            //  $("#modal_product_detail").empty();
-            //  console.log(value);
-            //$('#myModal').modal('show');
-            $("#product_sub_category_dropdown").html(respond);
 
-          }
-          })
-        
-        });
-        </script>
       <form id="search_form" role="search" class="navbar-form navbar-left" method="get" action="<?php echo base_url().'Product/public_product_list_view'; ?>">
         <div class="form-group">
           <input style="margin-bottom:3px;" type="text" name="search_value" value="<?php echo $search_value = (isset($search_value)) ? $search_value : "" ; ?>" class="form-control" placeholder="Search">
@@ -396,7 +392,7 @@
         </script>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <?php if (empty($this->session->userdata('id_buyer')) AND empty($this->session->userdata('id_supplier'))): ?>
+        <?php if (empty($this->session->userdata('buyer_id')) AND empty($this->session->userdata('supplier_id'))): ?>
         <li>
           <a href="<?php echo base_url(); ?>index.php/Register">
             <span class="glyphicon glyphicon-user"></span> Sign Up</a>
@@ -432,48 +428,48 @@
             </li>
           </ul>
         </li>
-        <?php elseif (!empty($this->session->userdata('id_buyer'))): ?>
+        <?php elseif (!empty($this->session->userdata('buyer_id'))): ?>
         <!-- _____________||_____________ -->
         <li class="dropdown" id="unread_chat_notification_bell">
           <!-- <li class="dropdown"> -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <i class="glyphicon glyphicon-comment"></i>
             <span style="" class="badge">
-              <?php echo $unread_quotation_detail_num_rows; ?>
+              <?php// echo $unread_quotation_detail_num_rows; ?>
             </span>
           </a>
           <ul class="dropdown-menu notify-drop">
             <div class="notify-drop-title">
               <div class="row">
                 <div class="col-md-12 col-sm-6 col-xs-6">You have unread comment in
-                  <?php echo $unread_quotation_detail_num_rows; ?> quotation</div>
+                  <?php //echo $unread_quotation_detail_num_rows; ?> quotation</div>
               </div>
             </div>
             <div class="drop-content">
-              <?php foreach($unread_quotation_detail as $uqd){ ?>
+              <?php //foreach($unread_quotation_detail as $uqd){ ?>
               <li>
-                <a href="<?php echo base_url().'index.php/Quotation/buyer_quotation_detail?id_quotation='.$uqd->IdQuotation; ?>">
+                <a href="<?php //echo base_url().'index.php/Quotation/buyer_quotation_detail?id_quotation='.$uqd->IdQuotation; ?>">
                   <div class="col-md-3 col-sm-3 col-xs-3">
                     <div class="notify-img">
-                      <img src="<?php echo base_url().'assets/supplier_upload/'.$uqd->ProfilImage ?>" height="50" width="50" class="img-circle"
+                      <img src="<?php //echo base_url().'assets/supplier_upload/'.$uqd->ProfilImage ?>" height="50" width="50" class="img-circle"
                         alt="">
                     </div>
                   </div>
                   <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
                     <h5>
                       <b>
-                        <?php echo $uqd->CompanyName; ?>
+                        <?php //echo $uqd->CompanyName; ?>
                       </b>
                     </h5>
                     <hr>
                     <span class="badge" style="background-color:orange;">
-                      <?php echo $uqd->UnreadCount; ?>
+                      <?php //echo $uqd->UnreadCount; ?>
                     </span>
                     <span class="label label-info"> unread comment</span>
                   </div>
                 </a>
               </li>
-              <?php } ?>
+              <?php// } ?>
             </div>
             <div class="notify-drop-footer text-center">
               <a href="">
@@ -516,7 +512,7 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a href="<?php echo base_url().'index.php/Buyer/buyer_account_view';?>">
+              <a href="<?php echo base_url().'User/buyer_account_view';?>">
                 <span class="glyphicon glyphicon-user"></span> Profile</a>
             </li>
             <li>
@@ -527,13 +523,13 @@
             <a href="<?php //echo base_url().'index.php/Support/buyer_support_list_view';?>"><span class="glyphicon glyphicon-phone-alt"></span> Support</a>
           </li> -->
             <li>
-              <a href="<?php echo base_url().'index.php/Login/logout';?>">
+              <a href="<?php echo base_url().'User/logout';?>">
                 <span class="glyphicon glyphicon-log-out"></span> Sign Out</a>
             </li>
           </ul>
 
         </li>
-        <?php elseif (!empty($this->session->userdata('id_supplier'))): ?>
+        <?php elseif (!empty($this->session->userdata('supplier_id'))): ?>
         <!--<li><a href="#" >Back to admin supplier page</a>-->
         <!--</li>-->
         <li class="dropdown">
@@ -563,9 +559,3 @@
     </div>
   </div>
 </nav>
-<script>
-document.getElementById("myLink").onclick = function() {
-    // do things, and then
-    return false;
-};
-</script>

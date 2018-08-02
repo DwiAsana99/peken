@@ -89,13 +89,13 @@ public function edit_new_member_profile(){
   $id_member = $this->input->post('id_member');
   $this->M_user->edit_member($data,$id_member);
     if ($this->input->post('is_supplier')==1) {
-      $this->session->set_userdata('id_supplier',$id_member);
+      $this->session->set_userdata('supplier_id',$id_member);
       $this->session->set_userdata('company_name',$row->CompanyName);
       $this->session->set_userdata('profil_image',$row->ProfilImage);
       $this->session->set_userdata('first_name',$row->FirstName);
       redirect('Supplier/dashboard_supplier_view');
     } else {
-      $this->session->set_userdata('id_buyer',$id_member);
+      $this->session->set_userdata('buyer_id',$id_member);
       $this->session->set_userdata('company_name',$row->CompanyName);
       $this->session->set_userdata('profil_image',$row->ProfilImage);
       $this->session->set_userdata('first_name',$row->FirstName);

@@ -41,7 +41,7 @@
               <a href="#" data-uk-modal><i class="uk-icon-twitter uk-icon-small"></i></a>
             </li>
             <li class="uk-parent" data-uk-dropdown="{mode:'click'}">
-              <?php if (!empty($this->session->userdata('id_buyer'))): ?>
+              <?php if (!empty($this->session->userdata('buyer_id'))): ?>
 
                   <!-- This is the element toggling the dropdown -->
                   <a href="#" data-uk-modal><span class="uk-icon-user"></span><?php echo $this->session->userdata('first_name'); ?></a>

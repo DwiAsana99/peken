@@ -30,7 +30,7 @@ class M_product extends CI_Model{
     $query = "SELECT product_tb.* ".$this->other_table_columns."
     FROM product_tb ".$this->join_table."
     WHERE 1=1 ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
-    //echo $query;exit();
+    // /echo $query;exit();
     
     $query = $this->db->query($query);
     return $query;
@@ -38,13 +38,13 @@ class M_product extends CI_Model{
 
   
   // function get_product_lama(
-  //   $id_supplier = "",$id_product = "",$search_value = "",$offset= "",$limit= "",
+  //   $supplier_id = "",$product_id = "",$search_value = "",$offset= "",$limit= "",
   //   $group_by = "", $product_category_code = "",$product_sub_category_code = "", $is_active=""
   // ){
   //   $filter_value = " AND tbmember.IsSupplier = 1 ";
-  //   $filter_value .= !empty($id_supplier) ? " AND tbproduct.IdSupplier = $id_supplier " : "" ;
+  //   $filter_value .= !empty($supplier_id) ? " AND tbproduct.IdSupplier = $supplier_id " : "" ;
   //   $filter_value .= !empty($is_active) ? " AND tbproduct.IsActive = $is_active " : "" ;
-  //   $filter_value .= !empty($id_product) ? " AND tbproductpic.IdProduct = $id_product " : "" ;
+  //   $filter_value .= !empty($product_id) ? " AND tbproductpic.IdProduct = $product_id " : "" ;
   //   $filter_value .= !empty($product_category_code) ? " AND tbproductsubcategory.ProductCategoryCode = $product_category_code " : "" ;
   //   $filter_value .= !empty($product_sub_category_code) ? " AND tbproduct.ProductSubCategoryCode = $product_sub_category_code " : "" ;
   //   $filter_value .= !empty($search_value) ? " AND tbproduct.Name LIKE '%$search_value%' " : "" ;
@@ -92,11 +92,11 @@ class M_product extends CI_Model{
   // }
 
   function add_product($data,$product_pictures) {
-    $this->db->insert('tbproduct',$data);
-    $id_product = $this->db->insert_id();
+    $this->db->insert('product_tb',$data);
+    $product_id = $this->db->insert_id();
     foreach ($product_pictures as $row => $value) {
-      $product_pic_data = array("IdProduct" => $id_product,"FileName" => $value );
-      $this->db->insert('tbproductpic', $product_pic_data);
+      $product_pic_data = array("ProductId" => $product_id,"FileName" => $value );
+      $this->db->insert('productpic_tb', $product_pic_data);
     }
   }
 
@@ -128,11 +128,11 @@ class M_product extends CI_Model{
     return $query->result();
   }
 
-  function edit_product($id_product,$data,$product_pictures) {
- 		$this->db->where('IdProduct',$id_product );
+  function edit_product($product_id,$data,$product_pictures) {
+ 		$this->db->where('IdProduct',$product_id );
  		$this->db->update('tbproduct',$data);
    foreach ($product_pictures as $row => $value) {
-     $product_pic_data = array("IdProduct" => $id_product,"FileName" => $value );
+     $product_pic_data = array("IdProduct" => $product_id,"FileName" => $value );
      $this->db->insert('tbproductpic', $product_pic_data);
    }
   }

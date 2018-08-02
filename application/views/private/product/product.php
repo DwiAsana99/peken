@@ -12,7 +12,7 @@
    <div class="box">
     <div class="box-header">
      <h3 class="box-title">Product</h3>
-     <a style="float:right"  href="<?php echo base_url('index.php/Product/product_add_view');?>" class="btn btn-primary">
+     <a style="float:right"  href="<?php echo base_url('Product/product_add_view');?>" class="btn btn-primary">
       <i class="glyphicon glyphicon-saved"></i>
       Add Product
      </a>
@@ -40,19 +40,19 @@
        <tbody class="text-center">
         <?php $i = 1; foreach($product as $u){?>
          <tr  class='odd gradeX context'>
-           <td class="idk" style="display:none;"><?php echo $u->IdProduct?></td>
+           <td class="idk" style="display:none;"><?php echo $u->ProductId?></td>
           <td><?php  echo $i++; ?></td>
 
           <td><?php echo $u->Name?></td>
           <td><?php echo $u->ProductCategory?></td>
           <td><?php echo $u->ProductSubCategory?></td>
           <td><?php echo $u->Unit?></td>
-          <td><?php echo $u->Price?></td>
+          <td><?php echo $u->MinPrice?></td>
           <td><?php echo $u->SupplyAbility?></td>
           <td><?php echo $u->PeriodSupplyAbility?></td>
 
           <td>
-           <a class="btn btn-warning"   href="<?php echo base_url('index.php/Product/product_edit_view/').$u->IdProduct;?>">
+           <a class="btn btn-warning"   href="<?php echo base_url('Product/product_edit_view/').$u->ProductId;?>">
             <span class="fa fa-fw fa-edit" >
             </span>
            </a>
@@ -82,7 +82,7 @@ $(function(){
   $.ajax({
    type:"POST",
    url: "<?php echo base_url('index.php/Product/show_product_detail_modal') ?>",
-   data:{id_product:value},
+   data:{product_id:value},
    success: function(respond){
     //  $("#modal_product_detail").empty();
     //  console.log(value);

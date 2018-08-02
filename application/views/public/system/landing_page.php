@@ -123,7 +123,7 @@
         <hr>
         <div class="text-center">
           <h6><?php echo $p->CompanyName; ?></h6>
-          <a href="<?php echo site_url('Quotation/rfq_view?')."id_product=".$p->ProductId."&"."id_supplier=".$p->SupplierId ?>" class="btn btn-default">Contact Supplier</a>
+          <a href="<?php echo site_url('Quotation/rfq_view?')."product_id=".$p->ProductId."&"."supplier_id=".$p->SupplierId ?>" class="btn btn-default">Contact Supplier</a>
         </div>
       </div>
       <?php } ?>
@@ -172,7 +172,7 @@
       <?php //foreach($supplier as $s){ ?>
       <div class="col-xs-2">
         <a
-        href="<?php //echo site_url('supplier/public_supplier_detail_view?id_supplier=').$s->IdSupplier ?>">
+        href="<?php //echo site_url('supplier/public_supplier_detail_view?supplier_id=').$s->IdSupplier ?>">
           <img
             src="<?php //echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>" class="img-responsive"
             alt="">

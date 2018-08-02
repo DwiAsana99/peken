@@ -49,8 +49,8 @@
               <textarea  class="textarea" name="message" placeholder="Message" style="width: 100%; height: 125px; border: 1px solid #dddddd;"></textarea>
             </div>
             <input type="hidden" name="supplier_email" value="<?php echo $supplier[0]->Email; ?>">
-            <input type="hidden" name="id_supplier" value="<?php echo $supplier[0]->IdSupplier; ?>">
-            <input type="hidden" name="id_product" value="<?php echo $product[0]->IdProduct; ?>">
+            <input type="hidden" name="supplier_id" value="<?php echo $supplier[0]->IdSupplier; ?>">
+            <input type="hidden" name="product_id" value="<?php echo $product[0]->IdProduct; ?>">
 
             <input type="hidden" name="product_name" value="<?php echo $product[0]->Name; ?>">
         </div>

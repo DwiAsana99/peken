@@ -7,11 +7,16 @@
 <script type="text/javascript">
   function doMathPrice()
   {
-      var price = document.getElementById('price1').value;
-      price = price.replace(/\./g, "");
-      document.getElementById('price').value =  price;
-      var price = document.getElementById('supply_ability1').value;
-      supply_ability = price.replace(/\./g, "");
+      var min_price = document.getElementById('min_price1').value;
+      min_price = min_price.replace(/\./g, "");
+      document.getElementById('min_price').value =  min_price;
+
+      var max_price = document.getElementById('max_price1').value;
+      max_price = max_price.replace(/\./g, "");
+      document.getElementById('max_price').value =  max_price;
+
+      var supply_ability = document.getElementById('supply_ability1').value;
+      supply_ability = supply_ability.replace(/\./g, "");
       document.getElementById('supply_ability').value =  supply_ability;
       // price = parseFloat(price);
       // var service = price * 0.1;
@@ -37,11 +42,11 @@
        numeralDecimalMark: ',',
        delimiter: '.'
   });
-  //   new Cleave('.input-3', {
-  //      numeral: true,
-  //      numeralDecimalMark: ',',
-  //      delimiter: '.'
-  // });
+    new Cleave('.input-3', {
+       numeral: true,
+       numeralDecimalMark: ',',
+       delimiter: '.'
+  });
   //   new Cleave('.input-4', {
   //      numeral: true,
   //      numeralDecimalMark: ',',
@@ -58,6 +63,72 @@
   </div>
 </section>
 
+
+      <script type="text/javascript" >
+        
+        //function get_product_sub_category_dropdown() {
+          $(document).ready(function () { 
+            get_product_category();
+        });
+        $(function(){
+        $("#product_category_code").change(function(){
+
+        var code=$(this).val();
+        get_product_sub_category(code)
+        
+
+        });
+      })
+        </script>
+
+<script type="text/javascript">
+        function get_product_category(){
+          //$("#product_category_code").empty();
+          //var xx = "";
+          //var service_category_code_request = $("#service_category_code_request").val();
+          $.getJSON( "<?php echo base_url().'Product_category/get_product_category/'; ?>/", function( data ) {
+             console.log(data);
+            // return data.responseJSON;
+             for (var key in data) {
+              $("#product_category_code").append("<option value='"+data[key].Code+"'>"+data[key].ProductCategory+"</option>");
+              console.log(data[key].Code);
+            }
+
+          })
+          // .done(function(data) {
+          //   cetak(data);
+          // })
+          // .fail(function() {
+          //   console.log( "error" );
+          // })
+          // .always(function() {
+          //   console.log( "complete" );
+          // });
+        // console.log(xx);
+          // function cetak(params) {
+          //   console.log('dlm fyunction cetak')
+          //   console.log(params)
+          // }
+        }
+        function get_product_sub_category(code){
+          $("#product_sub_category_code").empty();
+          $.getJSON( "<?php echo base_url().'Product_sub_category/get_product_sub_category'; ?>/"+code, function( data ) {
+            console.log(data);
+ 
+            
+            $("#product_sub_category_code").append("<option value='0'>--Choose Product Sub Category--</option>");
+            for (var key in data) {
+              console.log( data[key].ProductCategoryCode);
+              $("#product_sub_category_code").append("<option value='"+data[key].Code+"'>"+data[key].ProductSubCategory+"</option>");
+            }           
+          })
+        }
+      </script>
+
+
+
+
+
 <!-- Main content -->
 <section class="content">
   <div class="row">
@@ -67,24 +138,21 @@
           <h3 class="box-title">Add New Product</h3>
         </div>
         <div class="box-body">
-          <form method="post"  enctype="multipart/form-data" id="Simpan"  action="<?php echo base_url().'index.php/Product/add_product'; ?>">
+          <form method="post"  enctype="multipart/form-data" id="Simpan"  action="<?php echo base_url().'Product/add_product'; ?>">
             <div class="form-group">
               <label class="control-label">Product Name</label>
               <input type="text" name="product_name" id="product_name"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out product name..."  class="form-control"  placeholder="">
             </div>
             <div class="form-group">
               <label for="">Product Category</label>
-              <select class="form-control" name="product_category_code" id="product_category_code">
-                <option value='0'>--Choose Product Category--</pilih>
-                <?php $i = 1; foreach($product_category as $pc){?>
-                <option value="<?php echo $pc->Code?>"><?php echo $pc->ProductCategory?></option>
-                <?php } ?>
+              <select class="form-control" name="product_category_code" id="product_category_code" >
+                <option value='0'>--Choose Product Category--</option>               
               </select>
             </div>
             <div class="form-group">
               <label for="">Product Sub Category</label>
-              <select class="form-control" name="product_sub_category_code" id="product_sub_category_code">
-                <option value='0'>--Choose Product Sub Category--</pilih>
+              <select class="form-control" name="product_sub_category_code" id="product_sub_category_code" >
+              <option value='0'>--Choose Product Sub Category--</option>
               </select>
             </div>
             <div class="form-group">
@@ -92,13 +160,18 @@
               <input type="text" name="unit" class="form-control"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out unit name..." value="">
             </div>
             <div class="form-group">
-              <label class="control-label">Price</label>
-              <input type="text" name="price1" id="price1" onkeyup="doMathPrice()" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out product price..."  class="form-control input-1"  placeholder="">
-              <input type="hidden" name="price" id="price" onkeyup="doMathPrice()"class="form-control"  placeholder="">
+              <label class="control-label">Min Price</label>
+              <input type="text" name="min_price1" id="min_price1" onkeyup="doMathPrice()" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out product price..."  class="form-control input-1"  placeholder="">
+              <input type="hidden" name="min_price" id="min_price" onkeyup="doMathPrice()"class="form-control"  placeholder="">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Max Price</label>
+              <input type="text" name="max_price1" id="max_price1" onkeyup="doMathPrice()" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out product price..."  class="form-control input-3"  placeholder="">
+              <input type="hidden" name="max_price" id="max_price" onkeyup="doMathPrice()"class="form-control"  placeholder="">
             </div>
             <div class="form-group">
               <label class="control-label">Supply Ability</label>
-              <input type="text" name="supply_ability1" id="supply_ability1" onkeyup="doMathPrice()" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out supply ability..."  class="form-control input-2"  placeholder="">
+              <input type="text" name="supply_ability1" id="supply_ability1" onkeyup="doMathPrice()" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out supply ability..."  class="form-control input-2"  placeholder="">
               <input type="hidden" name="supply_ability" id="supply_ability" onkeyup="doMathPrice()"   class="form-control"  placeholder="">
             </div>
             <div class="form-group">
@@ -153,28 +226,28 @@
   });
 </script>
 <script type="text/javascript">
-$(function(){
+// $(function(){
 
-$.ajaxSetup({
-type:"POST",
-url: "<?php echo base_url('index.php/Product/generate_product_sub_category') ?>",
-cache: false,
-});
+// $.ajaxSetup({
+// type:"POST",
+// url: "<?php// echo base_url('index.php/Product/generate_product_sub_category') ?>",
+// cache: false,
+// });
 
-$("#product_category_code").change(function(){
+// $("#product_category_code").change(function(){
 
-var value=$(this).val();
+// var value=$(this).val();
 
-$.ajax({
-data:{product_category_code:value},
-success: function(respond){
-$("#product_sub_category_code").html(respond);
-}
-})
+// $.ajax({
+// data:{product_category_code:value},
+// success: function(respond){
+// $("#product_sub_category_code").html(respond);
+// }
+// })
 
 
-});
-})
+// });
+// })
 
 </script>
 <script type="text/javascript">
@@ -211,7 +284,7 @@ $(document).ready(function(){
   autoProcessQueue: false;
   var accept = ".pdf,.png,.jpg,.JPEG";
   var foto_upload= new Dropzone(".dropzone",{
-    url: "<?php echo base_url('index.php/Product/add_product_picture') ?>",
+    url: "<?php echo base_url('Product/add_product_picture') ?>",
     maxFilesize: 2000,
     method:"post",
     acceptedFiles:accept,
@@ -264,7 +337,7 @@ $(document).ready(function(){
     $.ajax({
       type:"post",
       data:{nama:namafile},
-      url:"<?php echo base_url('index.php/Product/remove_product_picture') ?>",
+      url:"<?php echo base_url('Product/remove_product_picture') ?>",
       cache:false,
       dataType: 'json',
       success: function(){

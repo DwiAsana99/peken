@@ -107,7 +107,7 @@
                     }?>"  alt="" class="img-thumbnail" alt="Cinque Terre" width="200" >
                   </div>
                   <!--  -->
-                  <!-- <input type="hidden" name="id_product_pic" id="id_product_pic" value="<?php //echo $p->IdProductPic; ?>"> -->
+                  <!-- <input type="hidden" name="product_id_pic" id="product_id_pic" value="<?php //echo $p->IdProductPic; ?>"> -->
 
                   <button type="button" class="btn btn-danger" id="delete_pic" value="<?php echo $p->IdProductPic; ?>">Delete</button>
                 </div>
@@ -135,7 +135,7 @@
           <input type="text" name="description" id="description"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
         </div> -->
         <div class="form-group text-right col-md-12">
-          <input type="hidden" name="id_product" value="<?php echo $product[0]->IdProduct ?>">
+          <input type="hidden" name="product_id" value="<?php echo $product[0]->IdProduct ?>">
           <button type="submit" value="Validate" class="btn btn-default "><i class='glyphicon glyphicon-ok'></i> Save</button>
         </div>
       </form>
@@ -174,7 +174,7 @@ $(function(){
   $.ajax({
    type:"POST",
    url: "<?php echo base_url('index.php/Product/remove_product_picture_edit') ?>",
-   data:{id_product_pic:value},
+   data:{product_id_pic:value},
    success: function(respond){
     var divPic = "#div"+value;
     $(divPic).remove();

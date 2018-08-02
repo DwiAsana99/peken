@@ -224,8 +224,8 @@
         <?php echo $product[0]->PeriodSupplyAbility; ?>
       </p>
       <?php if ($product[0]->IsPublished == 1): ?>
-      <a class="btn btn-primary contact" href="<?php echo site_url('Quotation/rfq_view?')." id_product=".$product[0]->ProductId."
-        & "."id_supplier=".$p->SupplierId ?>">Contact Supplier
+      <a class="btn btn-primary contact" href="<?php echo site_url('Quotation/rfq_view?')." product_id=".$product[0]->ProductId."
+        & "."supplier_id=".$p->SupplierId ?>">Contact Supplier
         <i class="fa fa-arrow-right" aria-hidden="true"></i>
       </a>
       <?php else: ?>

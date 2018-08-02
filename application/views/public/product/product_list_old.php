@@ -49,7 +49,7 @@ $this->load->view('template/front/head_front');
                         <div class="uk-grid-small">
 
                             <div class="uk-width-1-1 uk-text-center" >
-                              <a href="<?php echo site_url('supplier/public_supplier_detail_view')."?id_supplier=".$p->IdSupplier ?>">
+                              <a href="<?php echo site_url('supplier/public_supplier_detail_view')."?supplier_id=".$p->IdSupplier ?>">
                                 <p><img src="<?php echo base_url('assets/supplier_upload/').$p->ProfilImage;  ?>" width="100" height="100" alt=""></p>
                                 <p><?php echo $p->CompanyName; ?></p>
                               </a>

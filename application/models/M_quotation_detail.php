@@ -7,17 +7,17 @@ class M_quotation_detail extends CI_Model{
    $this->db->insert('tbquotationdetail',$data);
    return $this->db->insert_id();
  }
- function get_unread_qutation_detail($id_supplier='',$id_buyer='')
+ function get_unread_qutation_detail($supplier_id='',$buyer_id='')
  {
    $tbmember_join_tbquotation = "";
    $filter_value = " AND tbquotationdetail.IsRead = 0 ";
-   $filter_value .= !empty($id_supplier) ? " AND tbquotation.IdSupplier = $id_supplier" : "" ;
-   $filter_value .= !empty($id_supplier) ? " AND tbquotationdetail.IdMember <> $id_supplier" : "" ;
-   $filter_value .= !empty($id_buyer) ? " AND tbquotation.IdBuyer = $id_buyer" : "" ;
-   $filter_value .= !empty($id_buyer) ? " AND tbquotationdetail.IdMember <> $id_buyer" : "" ;
-   if (!empty($id_buyer)) {
+   $filter_value .= !empty($supplier_id) ? " AND tbquotation.IdSupplier = $supplier_id" : "" ;
+   $filter_value .= !empty($supplier_id) ? " AND tbquotationdetail.IdMember <> $supplier_id" : "" ;
+   $filter_value .= !empty($buyer_id) ? " AND tbquotation.IdBuyer = $buyer_id" : "" ;
+   $filter_value .= !empty($buyer_id) ? " AND tbquotationdetail.IdMember <> $buyer_id" : "" ;
+   if (!empty($buyer_id)) {
       $tbmember_join_tbquotation = " AND tbmember.IdMember = tbquotation.IdSupplier ";
-   } elseif(!empty($id_supplier)){
+   } elseif(!empty($supplier_id)){
       $tbmember_join_tbquotation = " AND tbmember.IdMember = tbquotation.IdBuyer ";
    }
    $query = "SELECT
@@ -37,14 +37,14 @@ class M_quotation_detail extends CI_Model{
  ){
 
   //  $filter_value = " AND tbmember.IsSupplier = 1 ";
-  //  $filter_value = !empty($id_buyer) ? " AND IdBuyer = $id_buyer " : "" ;
-  //  $filter_value = !empty($id_supplier) ? " AND tbquotation.IdSupplier = $id_supplier " : "" ;
+  //  $filter_value = !empty($buyer_id) ? " AND IdBuyer = $buyer_id " : "" ;
+  //  $filter_value = !empty($supplier_id) ? " AND tbquotation.IdSupplier = $supplier_id " : "" ;
    $filter_value = !empty($id_quotation) ? " AND tbquotationdetail.IdQuotation = $id_quotation " : "" ;
    $filter_value .= !empty($id_quotation_detail) ? " AND tbquotationdetail.IdQuotationDetail = $id_quotation_detail " : "" ;
    $filter_value .= is_numeric($is_read) ? " AND tbquotationdetail.IsRead = $is_read " : "" ;
-  //  if (!empty($id_buyer)) {
+  //  if (!empty($buyer_id)) {
   //     $tbmember_join_tbquotation = "AND tbmember.IdMember = tbquotation.IdSupplier";
-  //  } elseif(!empty($id_supplier)){
+  //  } elseif(!empty($supplier_id)){
   //     $tbmember_join_tbquotation = "AND tbmember.IdMember = tbquotation.IdBuyer";
   //  }
    $query = "SELECT

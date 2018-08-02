@@ -134,21 +134,21 @@
                 if ($i % 5 == 1) { ?>
                   <div class="uk-flex">
                     <div class="uk-width-1-4 uk-panel uk-panel-box uk-margin-left uk-margin-bottom uk-text-center" style="height: 250px;width:190px;  ">
-                      <a href="<?php echo site_url('supplier/public_supplier_detail_view?id_supplier=').$s->IdSupplier ?>">
+                      <a href="<?php echo site_url('supplier/public_supplier_detail_view?supplier_id=').$s->IdSupplier ?>">
                         <img style="height: 150px; width: 150px;" src="<?php echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>" alt="">
                         <p><?php echo $s->CompanyName ; ?></p>
                       </a>
                     </div>
                   <?php } elseif(($i % 5 !== 1 AND $i % 5 !== 0) AND ($i !== $array_length)) {?>
                     <div class="uk-width-1-4 uk-panel uk-panel-box uk-margin-left uk-margin-bottom uk-text-center" style="height: 250px;width:190px;  ">
-                      <a href="<?php echo site_url('supplier/public_supplier_detail_view?id_supplier=').$s->IdSupplier ?>">
+                      <a href="<?php echo site_url('supplier/public_supplier_detail_view?supplier_id=').$s->IdSupplier ?>">
                         <img style="height: 150px; width: 150px;" src="<?php echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>" alt="">
                         <p><?php echo $s->CompanyName ; ?></p>
                       </a>
                     </div>
                   <?php } elseif (($i % 5 == 0) OR ($i == $array_length)) { ?>
                     <div class="uk-width-1-4 uk-panel uk-panel-box uk-margin-left uk-margin-bottom uk-text-center" style="height: 250px;width:190px;  ">
-                      <a href="<?php echo site_url('supplier/public_supplier_detail_view?id_supplier=').$s->IdSupplier ?>">
+                      <a href="<?php echo site_url('supplier/public_supplier_detail_view?supplier_id=').$s->IdSupplier ?>">
                         <img style="height: 150px; width: 150px;" src="<?php echo base_url('assets/supplier_upload/').$s->ProfilImage; ?>" alt="">
                         <p><?php echo $s->CompanyName ; ?></p>
                       </a>
