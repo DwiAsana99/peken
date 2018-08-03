@@ -18,12 +18,12 @@ class Product extends CI_Controller{
 		$data_nav = "";
 		$product_rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.*, productcategory_tb.*, productsubcategory_tb.* ";
 		$product_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN productpic_tb INNER JOIN productcategory_tb INNER JOIN productsubcategory_tb
-		ON product_tb.Id = productpic_tb.ProductId 
-		AND user_tb.Id = product_tb.SupplierId 
-		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code 
+		ON product_tb.Id = productpic_tb.ProductId
+		AND user_tb.Id = product_tb.SupplierId
+		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code
 		AND productcategory_tb.Code = productsubcategory_tb.ProductCategoryCode";
 		$product_rules['group_by'] = ' productpic_tb.ProductId ';
-		
+
 		//mengambil nilai page dari url
 		$page = $this->input->get('per_page');
 		$this->M_pagination->set_config("",12,"","","","","");
@@ -72,7 +72,7 @@ class Product extends CI_Controller{
 
 			}
 			else {
-				
+
 				$product_sub_category_code = $this->input->get('product_sub_category_code');
 				$product_rules['filter_value'] =  array('is_published' => 1, 'product_sub_category_code'=>$product_sub_category_code);
 				$this->M_product->set_search_product($product_rules);
@@ -107,7 +107,7 @@ class Product extends CI_Controller{
 		/*menampilkan semua product secara acak*/
 		else {
 			$product_rules['filter_value'] =  array('is_published' => 1);
-			
+
 			$this->M_product->set_search_product($product_rules);
 
 			$get_product = $this->M_product->get_product();
@@ -130,10 +130,10 @@ class Product extends CI_Controller{
 		$data["links"] = explode('&nbsp;',$str_links );
 		$this->M_product_category->set_search_product_category();
 		$get_product_category = $this->M_product_category->get_product_category();
-	
+
 		$this->M_product_sub_category->set_search_product_sub_category();
 		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
-		
+
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
 		// if ($this->session->userdata('buyer_id')) {
@@ -153,9 +153,9 @@ class Product extends CI_Controller{
 		//$product_rules['limit'] = 8;
 		$product_rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.*, productcategory_tb.*, productsubcategory_tb.* ";
 		$product_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN productpic_tb INNER JOIN productcategory_tb INNER JOIN productsubcategory_tb
-		ON product_tb.Id = productpic_tb.ProductId 
-		AND user_tb.Id = product_tb.SupplierId 
-		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code 
+		ON product_tb.Id = productpic_tb.ProductId
+		AND user_tb.Id = product_tb.SupplierId
+		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code
 		AND productcategory_tb.Code = productsubcategory_tb.ProductCategoryCode";
 		$product_rules['filter_value'] =  array('product_id' => $product_id);
 		$product_rules['group_by'] = ' productpic_tb.ProductId ';
@@ -167,10 +167,10 @@ class Product extends CI_Controller{
 		$data['product'] = $get_product->result();
 		$this->M_product_category->set_search_product_category();
 		$get_product_category = $this->M_product_category->get_product_category();
-	
+
 		$this->M_product_sub_category->set_search_product_sub_category();
 		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
-		
+
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
 		// if ($this->session->userdata('buyer_id')) {
@@ -194,9 +194,9 @@ class Product extends CI_Controller{
 		$supplier_id = $this->session->userdata('supplier_id');
 		$product_rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.*, productcategory_tb.*, productsubcategory_tb.* ";
 		$product_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN productpic_tb INNER JOIN productcategory_tb INNER JOIN productsubcategory_tb
-		ON product_tb.Id = productpic_tb.ProductId 
-		AND user_tb.Id = product_tb.SupplierId 
-		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code 
+		ON product_tb.Id = productpic_tb.ProductId
+		AND user_tb.Id = product_tb.SupplierId
+		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code
 		AND productcategory_tb.Code = productsubcategory_tb.ProductCategoryCode";
 		$product_rules['group_by'] = ' productpic_tb.ProductId ';
 		$product_rules['filter_value'] =  array('supplier_id'=>$supplier_id);
@@ -222,42 +222,90 @@ class Product extends CI_Controller{
 		if (empty($supplier_id)) {
 			redirect('Home/home_view');
 		}
-		$get_product = $this->M_product->get_product("",$product_id);
+		$product_rules['join']['other_table_columns'] = " ,product_tb.Id AS ProductId ,user_tb.*, productcategory_tb.*, productsubcategory_tb.* ";
+		$product_rules['join']['join_table'] = " INNER JOIN user_tb  INNER JOIN productcategory_tb INNER JOIN productsubcategory_tb
+		ON user_tb.Id = product_tb.SupplierId
+		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code
+		AND productcategory_tb.Code = productsubcategory_tb.ProductCategoryCode";
+		$product_rules['filter_value'] =  array('product_id'=>$product_id);
+		$this->M_product->set_search_product($product_rules);
+		$get_product = $this->M_product->get_product();
+
+		$product_pic_rules['filter_value'] =  array('product_id'=>$product_id);
+		$this->M_product->set_search_product_pic($product_pic_rules);
+		$get_product_pic = $this->M_product->get_product_pic();
+
+		$this->M_product_category->set_search_product_category();
 		$get_product_category = $this->M_product_category->get_product_category();
-		$data['product_category'] = $get_product_category->result();
-		$data['product'] = $get_product->result();
+
 		$row = $get_product->row();
-		$selected['product_sub_category_code'] = $row->ProductSubCategoryCode;
-		$selected['product_sub_category'] = $row->ProductSubCategory;
-		$data['product_sub_category_tag'] = $this->M_product_sub_category->get_product_sub_category($row->ProductCategoryCode,1,$selected);
-		$get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
-		$data_notification['unread_quotation'] = $get_quotation->result();
-		$data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
-		$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
-		$data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-		$data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
-		$this->load->view('template/back/head_back',$data_notification);
+		// echo $row->ProductCategoryCode;exit();
+		$product_sub_category_rules['filter_value'] =  array('product_category_code'=>$row->ProductCategoryCode);
+		$this->M_product_sub_category->set_search_product_sub_category($product_sub_category_rules);
+		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
+
+
+		// echo "<pre>";
+		// print_r($get_product->result());
+		// echo "</pre>";
+		// echo "</br>";
+		// echo "<pre>";
+		// print_r($get_product_pic->result());
+		// echo "</pre>";
+		// echo "</br>";
+		// echo "<pre>";
+		// print_r($get_product_category->result());
+		// echo "</pre>";
+		// echo "</br>";
+		// echo "<pre>";
+		// print_r($get_product_sub_category->result());exit();
+		// echo "</pre>";
+		$data['product'] = $get_product->result();
+		$data['product_pic'] = $get_product_pic->result();
+		$data['product_category'] = $get_product_category->result();
+		$data['product_sub_category'] = $get_product_sub_category->result();
+		// $get_product_category = $this->M_product_category->get_product_category();
+		// $data['product_category'] = $get_product_category->result();
+		// $data['product'] = $get_product->result();
+		// $row = $get_product->row();
+		// $selected['product_sub_category_code'] = $row->ProductSubCategoryCode;
+		// $selected['product_sub_category'] = $row->ProductSubCategory;
+		// $data['product_sub_category_tag'] = $this->M_product_sub_category->get_product_sub_category($row->ProductCategoryCode,1,$selected);
+
+
+
+
+		// $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
+		// $data_notification['unread_quotation'] = $get_quotation->result();
+		// $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
+		// $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
+		// $data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+		// $data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
+		$this->load->view('template/back/head_back');
 		$this->load->view('template/back/sidebar_back');
 		$this->load->view('private/product/edit_product',$data);
 		$this->load->view('template/back/foot_back');
 	}
 
-	function edit_product(){
+	function update_product(){
 		$supplier_id = $this->session->userdata('supplier_id');
 		$product_id = $this->input->post('product_id');
 		$data = array(
 			'Name' => $this->input->post('product_name'),
 			'Unit' => $this->input->post('unit'),
-			'Price' => $this->input->post('price'),
+			'MinPrice' => $this->input->post('min_price'),
+			'MaxPrice' => $this->input->post('max_price'),
 			'SupplyAbility' => $this->input->post('supply_ability'),
 			'PeriodSupplyAbility' => $this->input->post('period_supply_ability'),
 			'ProductSubCategoryCode' => $this->input->post('product_sub_category_code'),
 			'ProductDescription' => $this->input->post('product_description'),
 			'PkgDelivery' => $this->input->post('pkg_delivery'),
-			'IsActive' => $this->input->post('status')
+			'IsPublished' => $this->input->post('status')
 		);
+		//echo $product_id;exit();
+
 		$product_pictures = $this->input->post('file');
-		$product_id = $this->M_product->edit_product($product_id,$data,$product_pictures);
+		$this->M_product->update_product($product_id,$data,$product_pictures);
 
 		// print_r($product_picture);exit();
 		$this->session->set_flashdata('msg', 'Update product successfully ...');

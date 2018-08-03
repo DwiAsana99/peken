@@ -10,33 +10,55 @@ class M_product extends CI_Model{
   protected $order_by;
   protected $limit;
   protected $offset;
-  
+
   function set_search_product($rules) {
     $this->other_table_columns = !empty($rules['join']['other_table_columns']) ? $rules['join']['other_table_columns'] : "" ;
     $this->join_table = !empty($rules['join']['join_table']) ? $rules['join']['join_table'] : "" ;
-    $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ; 
-    $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ; 
+    $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ;
+    $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ;
     $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
     $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
-    $this->filter_value = isset($rules['filter_value']['is_published']) ? " AND product_tb.IsPublished = ".$rules['filter_value']['is_published'] : "" ; 
-    $this->filter_value .= isset($rules['filter_value']['product_id']) ? " AND product_tb.Id = ".$rules['filter_value']['product_id'] : "" ; 
-    $this->filter_value .= isset($rules['filter_value']['supplier_id']) ? " AND product_tb.SupplierId = ".$rules['filter_value']['supplier_id'] : "" ; 
-    $this->filter_value .= isset($rules['filter_value']['product_category_code']) ? " AND productsubcategory_tb.ProductCategoryCode = ".$rules['filter_value']['product_category_code'] : "" ; 
-    $this->filter_value .= isset($rules['filter_value']['product_sub_category_code']) ? " AND product_tb.ProductSubCategoryCode = ".$rules['filter_value']['product_sub_category_code'] : "" ; 
+    $this->filter_value = isset($rules['filter_value']['is_published']) ? " AND product_tb.IsPublished = ".$rules['filter_value']['is_published'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['product_id']) ? " AND product_tb.Id = ".$rules['filter_value']['product_id'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['supplier_id']) ? " AND product_tb.SupplierId = ".$rules['filter_value']['supplier_id'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['product_category_code']) ? " AND productsubcategory_tb.ProductCategoryCode = ".$rules['filter_value']['product_category_code'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['product_sub_category_code']) ? " AND product_tb.ProductSubCategoryCode = ".$rules['filter_value']['product_sub_category_code'] : "" ;
     $this->filter_value .= isset($rules['filter_value']['search_value']) ? " AND product_tb.Name LIKE "."'%".$rules['filter_value']['search_value']."%'"  : "" ;
   }
-  
+
+  function set_search_product_pic($rules) {
+    $this->other_table_columns = !empty($rules['join']['other_table_columns']) ? $rules['join']['other_table_columns'] : "" ;
+    $this->join_table = !empty($rules['join']['join_table']) ? $rules['join']['join_table'] : "" ;
+    $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ;
+    $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ;
+    $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
+    $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
+    // $this->filter_value = isset($rules['filter_value']['is_published']) ? " AND product_tb.IsPublished = ".$rules['filter_value']['is_published'] : "" ;
+    $this->filter_value = isset($rules['filter_value']['product_id']) ? " AND productpic_tb.ProductId = ".$rules['filter_value']['product_id'] : "" ;
+
+  }
+
   function get_product() {
     $query = "SELECT product_tb.* ".$this->other_table_columns."
     FROM product_tb ".$this->join_table."
     WHERE 1=1 ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
-    // /echo $query;exit();
-    
+    //echo $query;exit();
+
     $query = $this->db->query($query);
     return $query;
   }
 
-  
+  function get_product_pic() {
+    $query = "SELECT productpic_tb.* ".$this->other_table_columns."
+    FROM productpic_tb ".$this->join_table."
+    WHERE 1=1 ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
+    //echo $query;exit();
+
+    $query = $this->db->query($query);
+    return $query;
+  }
+
+
   // function get_product_lama(
   //   $supplier_id = "",$product_id = "",$search_value = "",$offset= "",$limit= "",
   //   $group_by = "", $product_category_code = "",$product_sub_category_code = "", $is_active=""
@@ -128,12 +150,12 @@ class M_product extends CI_Model{
     return $query->result();
   }
 
-  function edit_product($product_id,$data,$product_pictures) {
- 		$this->db->where('IdProduct',$product_id );
- 		$this->db->update('tbproduct',$data);
+  function update_product($product_id,$data,$product_pictures) {
+ 		$this->db->where('Id',$product_id );
+ 		$this->db->update('product_tb',$data);
    foreach ($product_pictures as $row => $value) {
-     $product_pic_data = array("IdProduct" => $product_id,"FileName" => $value );
-     $this->db->insert('tbproductpic', $product_pic_data);
+     $product_pic_data = array("ProductId" => $product_id,"FileName" => $value );
+     $this->db->insert('productpic_tb', $product_pic_data);
    }
   }
 

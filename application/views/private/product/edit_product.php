@@ -1,7 +1,9 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dropzone/css/dropzone.min.css') ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dropzone/css/basic.min.css') ?>" />
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+<script src="<?php echo base_url('assets/js/accounting.js') ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/js/cleave.min.js') ?>" type="text/javascript"></script>
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -11,7 +13,60 @@
     <a  class="btn btn-default  btn-xs active">Update Product</a>
   </div>
 </section>
+<script type="text/javascript">
+  function doMathPrice()
+  {
+      var min_price = document.getElementById('min_price1').value;
+      min_price = min_price.replace(/\,/g, "");
+      document.getElementById('min_price').value =  min_price;
 
+      var max_price = document.getElementById('max_price1').value;
+      max_price = max_price.replace(/\,/g, "");
+      document.getElementById('max_price').value =  max_price;
+
+      var supply_ability = document.getElementById('supply_ability1').value;
+      supply_ability = supply_ability.replace(/\,/g, "");
+      document.getElementById('supply_ability').value =  supply_ability;
+
+      // price = parseFloat(price);
+      // var service = price * 0.1;
+      // var tax = (service + price) * 0.1;
+      // var finalprice = price + tax + service;
+      // document.getElementById('tax1').value = tax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      // document.getElementById('tax').value = tax;
+      // document.getElementById('service1').value = service.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      // document.getElementById('service').value = service;
+      // document.getElementById('fp1').value = finalprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      // document.getElementById('fp').value = finalprice;
+  }
+  $(document).ready(function () { 
+    doMathPrice();
+  });
+</script>
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    new Cleave('.input-1', {
+       numeral: true,
+       numeralDecimalMark: '.',
+       delimiter: ','
+  });
+    new Cleave('.input-2', {
+       numeral: true,
+       numeralDecimalMark: '.',
+       delimiter: ','
+  });
+    new Cleave('.input-3', {
+       numeral: true,
+       numeralDecimalMark: '.',
+       delimiter: ','
+  });
+  //   new Cleave('.input-4', {
+  //      numeral: true,
+  //      numeralDecimalMark: ',',
+  //      delimiter: '.'
+  // });
+      });
+</script>
 <!-- Main content -->
 <section class="content">
   <div class="row">
@@ -21,7 +76,7 @@
           <h3 class="box-title">Update Product</h3>
         </div>
         <div class="box-body">
-          <form method="post"  enctype="multipart/form-data" id="Simpan"  action="<?php echo base_url().'index.php/Product/edit_product'; ?>">
+          <form method="post"  enctype="multipart/form-data" id="Simpan"  action="<?php echo base_url().'Product/update_product'; ?>">
             <div class="form-group">
               <label class="control-label">Product Name</label>
               <input type="text" value="<?php echo $product[0]->Name ?>" name="product_name" id="product_name"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..."  class="form-control"  placeholder="">
@@ -47,10 +102,19 @@
               <div class="form-group">
                 <label for="">Product Sub Category</label>
                 <select class="form-control" name="product_sub_category_code" id="product_sub_category_code">
-
-                  <?php if (!empty($product_sub_category_tag)){
-                    echo $product_sub_category_tag;
-                  }?>
+                  <option value='0'>--Choose Product Sub Category--</pilih>
+                  <?php $i = 1; foreach($product_sub_category as $psc){
+                    if ($product[0]->ProductSubCategoryCode == $psc->Code) {
+                      ?>
+                      <option selected value="<?php echo $psc->Code?>"><?php echo $psc->ProductSubCategory?></option>
+                      <?php
+                    }else{
+                      ?>
+                      <option value="<?php echo $psc->Code?>"><?php echo $psc->ProductSubCategory?></option>
+                      <?php
+                    }
+                    ?>
+                  <?php } ?>
                 </select>
               </div>
               <div class="form-group">
@@ -58,12 +122,19 @@
                 <input type="text" value="<?php echo $product[0]->Unit ?>" name="unit" class="form-control" value="">
               </div>
               <div class="form-group">
-                <label class="control-label">Price</label>
-                <input type="text" name="price" value="<?php echo $product[0]->Price ?>" id="price"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..."  class="form-control"  placeholder="">
+                <label class="control-label">Min Price</label>
+                <input type="text" value="<?php echo $product[0]->MinPrice ?>" name="min_price1" id="min_price1" onkeyup="doMathPrice()" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out product price..."  class="form-control input-1"  placeholder="">
+                <input type="hidden"  value="<?php echo $product[0]->MinPrice ?>" name="min_price" id="min_price" onkeyup="doMathPrice()" class="form-control"  placeholder="">
+              </div>
+              <div class="form-group">
+                <label class="control-label">Max Price</label>
+                <input type="text" value="<?php echo $product[0]->MaxPrice ?>" name="max_price1" id="max_price1" onkeyup="doMathPrice()" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out product price..."  class="form-control input-2"  placeholder="">
+                <input type="hidden" value="<?php echo $product[0]->MaxPrice ?>" name="max_price" id="max_price" onkeyup="doMathPrice()" class="form-control"  placeholder="">
               </div>
               <div class="form-group">
                 <label class="control-label">Supply Ability</label>
-                <input type="text" name="supply_ability" value="<?php echo $product[0]->SupplyAbility ?>" id="supply_ability"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..."  class="form-control"  placeholder="">
+                <input type="text" value="<?php echo $product[0]->SupplyAbility ?>" name="supply_ability1" id="supply_ability1" onkeyup="doMathPrice()" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out supply ability..."  class="form-control input-3"  placeholder="">
+                <input type="hidden" value="<?php echo $product[0]->SupplyAbility ?>" name="supply_ability" id="supply_ability" onkeyup="doMathPrice()"   class="form-control"  placeholder="">
               </div>
               <div class="form-group">
                 <label for="">Period Supply Ability</label>
@@ -85,7 +156,7 @@
               <div class="form-group">
                 <label for="">Product Status</label>
                 <select class="form-control" name="status">
-                  <?php if ($product[0]->IsActive == 1): ?>
+                  <?php if ($product[0]->IsPublished == 1): ?>
                     <option selected value="1">Published</option>
                     <option value="0">Do not publish</option>
                   <?php else: ?>
@@ -95,21 +166,21 @@
                 </select>
               </div>
               <div class="co-md-12 "><label class="control-label ">Product Pictures</label></div>
-              <?php foreach ($product as $p): ?>
-              <div id="<?php echo "div".$p->IdProductPic; ?>" class="form-group col-lg-2 text-center">
+              <?php foreach ($product_pic as $pp): ?>
+              <div id="<?php echo "div".$pp->Id; ?>" class="form-group col-lg-2 text-center">
                 <!-- <img src="<?php //echo base_url().'assets/icon/upload-icon.png'?>" alt="" style="width: 100px"> -->
                 <div class="form-group text-center">
 
-                    <img src="<?php if (empty($p->FileName)) {
+                    <img src="<?php if (empty($pp->FileName)) {
                       echo base_url().'assets/icon/upload-icon.png';
                     }else{
-                      echo base_url().'assets/supplier_upload/'.$p->FileName;
+                      echo base_url().'assets/supplier_upload/'.$pp->FileName;
                     }?>"  alt="" class="img-thumbnail" alt="Cinque Terre" width="200" >
                   </div>
                   <!--  -->
-                  <!-- <input type="hidden" name="product_id_pic" id="product_id_pic" value="<?php //echo $p->IdProductPic; ?>"> -->
+                  <!-- <input type="hidden" name="product_id_pic" id="product_id_pic" value="<?php //echo $pp->IdProductPic; ?>"> -->
 
-                  <button type="button" class="btn btn-danger" id="delete_pic" value="<?php echo $p->IdProductPic; ?>">Delete</button>
+                  <button type="button" class="btn btn-danger" id="delete_pic" value="<?php echo $pp->Id; ?>">Delete</button>
                 </div>
 
                 <?php endforeach; ?>
@@ -135,7 +206,7 @@
           <input type="text" name="description" id="description"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
         </div> -->
         <div class="form-group text-right col-md-12">
-          <input type="hidden" name="product_id" value="<?php echo $product[0]->IdProduct ?>">
+          <input type="hidden" name="product_id" value="<?php echo $product[0]->ProductId ?>">
           <button type="submit" value="Validate" class="btn btn-default "><i class='glyphicon glyphicon-ok'></i> Save</button>
         </div>
       </form>
@@ -173,7 +244,7 @@ $(function(){
   console.log(value);
   $.ajax({
    type:"POST",
-   url: "<?php echo base_url('index.php/Product/remove_product_picture_edit') ?>",
+   url: "<?php echo base_url('Product/remove_product_picture_edit') ?>",
    data:{product_id_pic:value},
    success: function(respond){
     var divPic = "#div"+value;
@@ -184,28 +255,28 @@ $(function(){
 })
 </script>
 <script type="text/javascript">
-$(function(){
+// $(function(){
 
-$.ajaxSetup({
-type:"POST",
-url: "<?php echo base_url('index.php/Product/generate_product_sub_category') ?>",
-cache: false,
-});
+// $.ajaxSetup({
+// type:"POST",
+// url: "<?php //echo base_url('index.php/Product/generate_product_sub_category') ?>",
+// cache: false,
+// });
 
-$("#product_category_code").change(function(){
+// $("#product_category_code").change(function(){
 
-var value=$(this).val();
+// var value=$(this).val();
 
-$.ajax({
-data:{product_category_code:value},
-success: function(respond){
-$("#product_sub_category_code").html(respond);
-}
-})
+// $.ajax({
+// data:{product_category_code:value},
+// success: function(respond){
+// $("#product_sub_category_code").html(respond);
+// }
+// })
 
 
-});
-})
+// });
+// })
 // var productCategoryNode = document.getElementById("product_category_code");
 // var productSubCategoryNode = document.getElementById("product_sub_category_code");
 // console.log(productCategoryNode);
@@ -213,7 +284,7 @@ $("#product_sub_category_code").html(respond);
 //   function getProductSubCategory() {
 //     var request = new XMLHttpRequest();
 //
-//     request.open("GET", "<?php echo base_url()."index.php/Product/get_product_sub_category"; ?>", false);
+//     request.open("GET", "<?php //echo base_url()."index.php/Product/get_product_sub_category"; ?>", false);
 //     request.send();request.responseText;
 //     console.log(request.responseText);
 //     // productSubCategoryNode.innerHTML = request.responseText;

@@ -14,12 +14,12 @@ class M_product_sub_category extends CI_Model{
   function set_search_product_sub_category($rules="") {
     $this->other_table_columns = !empty($rules['join']['other_table_columns']) ? $rules['join']['other_table_columns'] : "" ;
     $this->join_table = !empty($rules['join']['join_table']) ? $rules['join']['join_table'] : "" ;
-    $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ; 
-    $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ; 
+    $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ;
+    $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ;
     $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
     $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
-    $this->filter_value = isset($rules['filter_value']['product_sub_category_code']) ? " AND productsubcategory_tb.Code = ".$rules['filter_value']['product_sub_category_code'] : "" ; 
-    $this->filter_value = isset($rules['filter_value']['product_category_code']) ? " AND productsubcategory_tb.ProductCategoryCode = ".$rules['filter_value']['product_category_code'] : "" ; 
+    $this->filter_value = isset($rules['filter_value']['product_sub_category_code']) ? " AND productsubcategory_tb.Code = ".$rules['filter_value']['product_sub_category_code'] : "" ;
+    $this->filter_value = isset($rules['filter_value']['product_category_code']) ? " AND productsubcategory_tb.ProductCategoryCode = ".$rules['filter_value']['product_category_code'] : "" ;
   }
 
   function get_product_sub_category(){
@@ -49,13 +49,13 @@ class M_product_sub_category extends CI_Model{
   //     ORDER BY ProductSubCategory ASC";
   //     $query = $this->db->query($query);
   //     foreach ($query->result_array() as $data ){
-
+  //
   //       if ($data['Code'] == $selected['product_sub_category_code']) {
   //         $product_sub_category .= "<option selected value='$selected[product_sub_category_code]'>$selected[product_sub_category]</option>";
   //       } else {
   //         $product_sub_category .= "<option value='$data[Code]'>$data[ProductSubCategory]</option>";
   //       }
-
+  //
   //     }
   //     return $product_sub_category;
   //   }

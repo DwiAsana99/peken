@@ -34,18 +34,18 @@
   jQuery(document).ready(function($) {
     new Cleave('.input-1', {
        numeral: true,
-       numeralDecimalMark: ',',
-       delimiter: '.'
+       numeralDecimalMark: '.',
+       delimiter: ','
   });
     new Cleave('.input-2', {
        numeral: true,
-       numeralDecimalMark: ',',
-       delimiter: '.'
+       numeralDecimalMark: '.',
+       delimiter: ','
   });
     new Cleave('.input-3', {
        numeral: true,
-       numeralDecimalMark: ',',
-       delimiter: '.'
+       numeralDecimalMark: '.',
+       delimiter: ','
   });
   //   new Cleave('.input-4', {
   //      numeral: true,
