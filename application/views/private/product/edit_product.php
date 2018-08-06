@@ -13,6 +13,52 @@
     <a  class="btn btn-default  btn-xs active">Update Product</a>
   </div>
 </section>
+<script type="text/javascript" >
+        
+        //function get_product_sub_category_dropdown() {
+        //   $(document).ready(function () { 
+        //     get_product_category();
+        // });
+        $(function(){
+        $("#product_category_code").change(function(){
+
+        var code=$(this).val();
+        get_product_sub_category(code)
+        
+
+        });
+      })
+        </script>
+<script type="text/javascript">
+        function get_product_category(){
+          //$("#product_category_code").empty();
+          //var xx = "";
+          //var service_category_code_request = $("#service_category_code_request").val();
+          $.getJSON( "<?php echo base_url().'Product_category/get_product_category/'; ?>/", function( data ) {
+             console.log(data);
+            // return data.responseJSON;
+             for (var key in data) {
+              $("#product_category_code").append("<option value='"+data[key].Code+"'>"+data[key].ProductCategory+"</option>");
+              console.log(data[key].Code);
+            }
+
+          })
+
+        }
+        function get_product_sub_category(code){
+          $("#product_sub_category_code").empty();
+          $.getJSON( "<?php echo base_url().'Product_sub_category/get_product_sub_category'; ?>/"+code, function( data ) {
+            console.log(data);
+ 
+            
+            $("#product_sub_category_code").append("<option value='0'>--Choose Product Sub Category--</option>");
+            for (var key in data) {
+              console.log( data[key].ProductCategoryCode);
+              $("#product_sub_category_code").append("<option value='"+data[key].Code+"'>"+data[key].ProductSubCategory+"</option>");
+            }           
+          })
+        }
+      </script>
 <script type="text/javascript">
   function doMathPrice()
   {

@@ -16,15 +16,16 @@ class M_quotation extends CI_Model{
  function set_search_quotation($rules) {
   $this->other_table_columns = !empty($rules['join']['other_table_columns']) ? $rules['join']['other_table_columns'] : "" ;
   $this->join_table = !empty($rules['join']['join_table']) ? $rules['join']['join_table'] : "" ;
-  $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ; 
-  $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ; 
+  $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ;
+  $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ;
   $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
   $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
-  // $this->filter_value = isset($rules['filter_value']['is_published']) ? " AND product_tb.IsPublished = ".$rules['filter_value']['is_published'] : "" ; 
-  // $this->filter_value .= isset($rules['filter_value']['product_id']) ? " AND product_tb.Id = ".$rules['filter_value']['product_id'] : "" ; 
-  $this->filter_value = isset($rules['filter_value']['buyer_id']) ? " AND quotation_tb.BuyerId = ".$rules['filter_value']['buyer_id'] : "" ; 
-  // $this->filter_value .= isset($rules['filter_value']['product_category_code']) ? " AND productsubcategory_tb.ProductCategoryCode = ".$rules['filter_value']['product_category_code'] : "" ; 
-  // $this->filter_value .= isset($rules['filter_value']['product_sub_category_code']) ? " AND product_tb.ProductSubCategoryCode = ".$rules['filter_value']['product_sub_category_code'] : "" ; 
+  // $this->filter_value = isset($rules['filter_value']['is_published']) ? " AND product_tb.IsPublished = ".$rules['filter_value']['is_published'] : "" ;
+  // $this->filter_value .= isset($rules['filter_value']['product_id']) ? " AND product_tb.Id = ".$rules['filter_value']['product_id'] : "" ;
+  $this->filter_value = isset($rules['filter_value']['buyer_id']) ? " AND quotation_tb.BuyerId = ".$rules['filter_value']['buyer_id'] : "" ;
+  $this->filter_value .= isset($rules['filter_value']['supplier_id']) ? " AND quotation_tb.SupplierId = ".$rules['filter_value']['supplier_id'] : "" ;
+  // $this->filter_value .= isset($rules['filter_value']['product_category_code']) ? " AND productsubcategory_tb.ProductCategoryCode = ".$rules['filter_value']['product_category_code'] : "" ;
+  // $this->filter_value .= isset($rules['filter_value']['product_sub_category_code']) ? " AND product_tb.ProductSubCategoryCode = ".$rules['filter_value']['product_sub_category_code'] : "" ;
   // $this->filter_value .= isset($rules['filter_value']['search_value']) ? " AND product_tb.Name LIKE "."'%".$rules['filter_value']['search_value']."%'"  : "" ;
 }
 
@@ -33,7 +34,7 @@ function get_quotation() {
   FROM quotation_tb ".$this->join_table."
   WHERE 1=1 ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
   //echo $query;exit();
-  
+
   $query = $this->db->query($query);
   return $query;
 }

@@ -75,15 +75,26 @@ class Quotation extends CI_Controller{
     if (empty($supplier_id)) {
       redirect('Home/home_view');
     }
-    $get_quotation = $this->M_quotation->get_quotation("",$supplier_id);
+
+    $quotation_rules['join']['other_table_columns'] = " ,user_tb.*, product_tb.* ";
+		$quotation_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN product_tb
+		ON quotation_tb.BuyerId = user_tb.Id
+    AND quotation_tb.ProductId = product_tb.Id ";
+    $quotation_rules['filter_value'] =  array('supplier_id' => $supplier_id);
+		$this->M_quotation->set_search_quotation($quotation_rules);
+    $get_quotation = $this->M_quotation->get_quotation();
     $data['quotation'] = $get_quotation->result();
-    $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
-		$data_notification['unread_quotation'] = $get_quotation->result();
-    $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
-		$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
-		$data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-		$data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
-		$this->load->view('template/back/head_back',$data_notification);
+
+
+    // $get_quotation = $this->M_quotation->get_quotation("",$supplier_id);
+    // $data['quotation'] = $get_quotation->result();
+    // $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
+		// $data_notification['unread_quotation'] = $get_quotation->result();
+    // $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
+		// $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
+		// $data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+		// $data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
+		$this->load->view('template/back/head_back');
     $this->load->view('template/back/sidebar_back');
     $this->load->view('private/quotation/supplier_quotation_list',$data);
     $this->load->view('template/back/foot_back');
@@ -122,7 +133,8 @@ class Quotation extends CI_Controller{
     $quotation_rules['join']['other_table_columns'] = " ,user_tb.*, product_tb.* ";
 		$quotation_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN product_tb
 		ON quotation_tb.BuyerId = user_tb.Id
-		AND quotation_tb.ProductId = product_tb.Id ";
+    AND quotation_tb.ProductId = product_tb.Id ";
+    $quotation_rules['filter_value'] =  array('buyer_id' => $buyer_id);
 		$this->M_quotation->set_search_quotation($quotation_rules);
     $get_quotation = $this->M_quotation->get_quotation();
     $data['quotation'] = $get_quotation->result();

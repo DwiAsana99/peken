@@ -32,7 +32,7 @@
                 <?php foreach($quotation as $q){ ?>
                   <tr class="click">
                     <td>
-                      <a href="<?php echo base_url().'index.php/Quotation/supplier_quotation_detail?id_quotation='.$q->IdQuotation; ?>">To:
+                      <a href="<?php echo base_url().'index.php/Quotation/supplier_quotation_detail?id_quotation='.$q->Code; ?>">To:
                         <?php echo $q->CompanyName  ?>
                       </a>
                     </td>
@@ -43,7 +43,7 @@
                       <?php echo trim(substr($q->Content,0,50))." <b>...</b>" ?>
                     </td>
                     <td>
-                      <?php echo $q->DateSend  ?>
+                      <?php echo $q->SendDate  ?>
                     </td>
                   </tr>
                 <?php } ?>

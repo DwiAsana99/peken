@@ -543,7 +543,7 @@
               <a href="<?php echo base_url().'index.php/Supplier/dashboard_supplier_view';?>">Back to admin supplier page</a>
             </li>
             <li>
-              <a href="<?php echo base_url().'index.php/Login/logout';?>">Sign Out</a>
+              <a href="<?php echo base_url().'User/logout';?>">Sign Out</a>
             </li>
           </ul>
 
