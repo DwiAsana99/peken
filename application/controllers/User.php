@@ -209,7 +209,7 @@ class User extends CI_Controller{
     $this->load->view('private/supplier_account/supplier_account',$data);
     $this->load->view('template/back/foot_back');
   }
-  function edit_supplier_account(){
+  function update_company_profile(){
     $supplier_id = $this->session->userdata('supplier_id');
     $config['upload_path']   = './assets/supplier_upload/';
     $config['allowed_types'] = 'gif|jpg|png|pdf';
@@ -217,6 +217,7 @@ class User extends CI_Controller{
     $config['max_size']      = 1000;
     //$config['max_width']     = 1024;
     //$config['max_height']    = 1000;
+
     $this->load->library('upload', $config);
     $this->upload->do_upload('profile_image');
     $profile_image_lama = $this->input->post('profile_image_lama');
@@ -227,43 +228,47 @@ class User extends CI_Controller{
     }else{
       $profile_image = $profile_image_lama;
     }
-    $this->upload->do_upload('siup');
-    $siup_lama = $this->input->post('siup_lama');
-    $siup_file = $this->upload->data();
-    if (!empty($siup_file['file_name']) AND $siup_file['file_name'] != $profile_image_file['file_name']){
-      $siup = $siup_file['file_name'];
-    }else{
-      $siup = $siup_lama;
-    }
-    $this->upload->do_upload('tdp');
-    $tdp_lama = $this->input->post('tdp_lama');
-    $tdp_file = $this->upload->data();
-    if (!empty($tdp_file['file_name']) AND $tdp_file['file_name'] != $siup_file['file_name']){
-      $tdp = $tdp_file['file_name'];
-    }else{
-      $tdp = $tdp_lama;
-    }
+    // $this->upload->do_upload('siup');
+    // $siup_lama = $this->input->post('siup_lama');
+    // $siup_file = $this->upload->data();
+    // if (!empty($siup_file['file_name']) AND $siup_file['file_name'] != $profile_image_file['file_name']){
+    //   $siup = $siup_file['file_name'];
+    // }else{
+    //   $siup = $siup_lama;
+    // }
+    // $this->upload->do_upload('tdp');
+    // $tdp_lama = $this->input->post('tdp_lama');
+    // $tdp_file = $this->upload->data();
+    // if (!empty($tdp_file['file_name']) AND $tdp_file['file_name'] != $siup_file['file_name']){
+    //   $tdp = $tdp_file['file_name'];
+    // }else{
+    //   $tdp = $tdp_lama;
+    // }
     $data = array(
       'FirstName' => $this->input->post('first_name'),
       'LastName' => $this->input->post('last_name'),
       'CompanyName' => $this->input->post('company_name'),
-      'CompanyAddress' => $this->input->post('company_address'),
+      'Address' => $this->input->post('address'),
       'City' => $this->input->post('city'),
       'ZipCode' => $this->input->post('zip_code'),
-      'Location' => $this->input->post('location'),
-      'Npwp' => $this->input->post('npwp'),
+      'Province' => $this->input->post('province'),
+      'State' => $this->input->post('state'),
+      // 'Npwp' => $this->input->post('npwp'),
       'Phone' => $this->input->post('phone'),
       'CompanyDescription' => $this->input->post('company_description'),
-      'ProfilImage' => $profile_image,
-      'Siup' => $siup,
-      'Tdp' => $tdp
+      'ProfileImage' => $profile_image
+      // 'Siup' => $siup,
+      // 'Tdp' => $tdp
     );
-    $supplier_gallery_pic = $this->input->post('file');
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";exit();
+    //$supplier_gallery_pic = $this->input->post('file');
     $this->session->set_userdata('first_name',$this->input->post('first_name'));
     $this->session->set_userdata('company_name',$this->input->post('company_name'));
     // print_r($data);exit();
-    $this->M_user->edit_member($data,$supplier_id,$supplier_gallery_pic);
-    redirect('Supplier/supplier_account_view');
+    $this->M_user->update_user($data,$supplier_id);
+    redirect('User/supplier_account_view');
   }
   function supplier_upload_siup(){
     $id = $this->session->userdata('supplier_id');

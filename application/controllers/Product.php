@@ -13,7 +13,7 @@ class Product extends CI_Controller{
 		redirect('Product/public_product_list_view');
 	}
 	/* function public_product_list_view() digunakan untuk menampilkan product list
-	kepada public (non member, member)*/
+	kepada public (non member, member) 	*/
 	function public_product_list_view(){
 		$data_nav = "";
 		$product_rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.*, productcategory_tb.*, productsubcategory_tb.* ";

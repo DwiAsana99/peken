@@ -88,17 +88,17 @@ class M_user extends CI_Model{
       return TRUE;
     }
   }
-  public function update_user($data="",$id="",$supplier_gallery_pic=""){
+  public function update_user($data="",$id=""){
     $this->db->set($data);
     $this->db->where("Id",$id);
     $this->db->update("user_tb",$data);
-    if (!empty($supplier_gallery_pic)) {
-      foreach ($supplier_gallery_pic as $row => $value) {
-        $supplier_gallery_pic_data = array("Id" => $id,"FileName" => $value );
-        $this->db->insert('tbgallerypic', $supplier_gallery_pic_data);
-      }
-    }
-    
+    // if (!empty($supplier_gallery_pic)) {
+    //   foreach ($supplier_gallery_pic as $row => $value) {
+    //     $supplier_gallery_pic_data = array("Id" => $id,"FileName" => $value );
+    //     $this->db->insert('tbgallerypic', $supplier_gallery_pic_data);
+    //   }
+    // }
+
   }
 }
 
