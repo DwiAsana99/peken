@@ -6,10 +6,10 @@
       <div class="user-panel">
         <div class="pull-left image">
 
-          <img src="<?php if (empty($this->session->userdata('profil_image')) OR $this->session->userdata('profil_image') == "") {
+          <img src="<?php if (empty($this->session->userdata('profile_image')) OR $this->session->userdata('profile_image') == "") {
                                     echo base_url().'assets/icon/upload-icon.png';
                                 }else{
-                                    echo base_url().'assets/supplier_upload/'.$this->session->userdata('profil_image');
+                                    echo base_url().'assets/supplier_upload/'.$this->session->userdata('profile_image');
 
                                 }?>" width="75" class="img-circle" alt="User Image">
 
@@ -51,7 +51,7 @@
         <li><a href="<?php echo base_url().'Supplier/dashboard_supplier_view' ?>"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
         <li><a href="<?php echo base_url().'Product/product_view' ?>"><i class="glyphicon glyphicon-th-list"></i><span>My Product</span></a></li>
         <li><a href="<?php echo base_url().'Quotation/supplier_quotation_list' ?>"><i class="fa fa-envelope-o"></i><span >Quotation List</span></a></li>
-        <li><a href="<?php echo base_url().'Supplier/supplier_account_view' ?>"><i class="fa fa-user"></i> <span>Profil</span></a></li>
+        <li><a href="<?php echo base_url().'User/supplier_account_view' ?>"><i class="fa fa-user"></i> <span>Profil</span></a></li>
         <!-- <li><a href="<?php //echo base_url().'index.php/Support/supplier_support_list_view' ?>"><i class="glyphicon glyphicon-phone-alt"></i> <span>Support</span></a></li> -->
       </ul>
     </section>

@@ -91,13 +91,13 @@ public function edit_new_member_profile(){
     if ($this->input->post('is_supplier')==1) {
       $this->session->set_userdata('supplier_id',$id_member);
       $this->session->set_userdata('company_name',$row->CompanyName);
-      $this->session->set_userdata('profil_image',$row->ProfilImage);
+      $this->session->set_userdata('profile_image',$row->ProfilImage);
       $this->session->set_userdata('first_name',$row->FirstName);
       redirect('Supplier/dashboard_supplier_view');
     } else {
       $this->session->set_userdata('buyer_id',$id_member);
       $this->session->set_userdata('company_name',$row->CompanyName);
-      $this->session->set_userdata('profil_image',$row->ProfilImage);
+      $this->session->set_userdata('profile_image',$row->ProfilImage);
       $this->session->set_userdata('first_name',$row->FirstName);
       redirect('Home/home_view');
     }

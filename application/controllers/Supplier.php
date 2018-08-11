@@ -140,19 +140,19 @@
 //     //$config['max_width']     = 1024;
 //     //$config['max_height']    = 1000;
 //     $this->load->library('upload', $config);
-//     $this->upload->do_upload('profil_image');
-//     $profil_image_lama = $this->input->post('profil_image_lama');
-//     $profil_image_file = $this->upload->data();
-//     if (!empty($profil_image_file['file_name'])){
-//       $profil_image = $profil_image_file['file_name'];
-//       $this->session->set_userdata('profil_image',$profil_image);
+//     $this->upload->do_upload('profile_image');
+//     $profile_image_lama = $this->input->post('profile_image_lama');
+//     $profile_image_file = $this->upload->data();
+//     if (!empty($profile_image_file['file_name'])){
+//       $profile_image = $profile_image_file['file_name'];
+//       $this->session->set_userdata('profile_image',$profile_image);
 //     }else{
-//       $profil_image = $profil_image_lama;
+//       $profile_image = $profile_image_lama;
 //     }
 //     $this->upload->do_upload('siup');
 //     $siup_lama = $this->input->post('siup_lama');
 //     $siup_file = $this->upload->data();
-//     if (!empty($siup_file['file_name']) AND $siup_file['file_name'] != $profil_image_file['file_name']){
+//     if (!empty($siup_file['file_name']) AND $siup_file['file_name'] != $profile_image_file['file_name']){
 //       $siup = $siup_file['file_name'];
 //     }else{
 //       $siup = $siup_lama;
@@ -176,7 +176,7 @@
 //       'Npwp' => $this->input->post('npwp'),
 //       'Phone' => $this->input->post('phone'),
 //       'CompanyDescription' => $this->input->post('company_description'),
-//       'ProfilImage' => $profil_image,
+//       'ProfilImage' => $profile_image,
 //       'Siup' => $siup,
 //       'Tdp' => $tdp
 //     );

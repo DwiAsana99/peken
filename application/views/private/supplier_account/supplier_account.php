@@ -19,7 +19,7 @@
 
           <form method="post" id="Simpan"  action="<?php echo base_url().'index.php/Supplier/edit_supplier_account'; ?>" enctype="multipart/form-data"  onfocusout="edit(event)">
             <!-- <div class="form-group text-center">
-            <label  for="profil_image">Profil Image</label> <br>
+            <label  for="profile_image">Profil Image</label> <br>
             <img src="<?php //echo base_url().'assets/suplier_upload/'.$user[0]->Gambar; ?>" id = "fotoview" alt="" class="img-thumbnail" alt="Cinque Terre" width="304" height="236"><br>
             <a href="#" data-target="#myModal" data-toggle='modal' class="btn btn-default text-center">Change</a>
           </div> -->
@@ -27,17 +27,17 @@
             <label class="control-label">Profile Image</label><br>
 
             <div class="form-group text-center">
-              <label for="profil_image" class="btn">
-                <img src="<?php if (empty($user[0]->ProfilImage)) {
+              <label for="profile_image" class="btn">
+                <img src="<?php if (empty($user[0]->ProfileImage)) {
                   echo base_url().'assets/icon/upload-icon.png';
                 }else{
-                  echo base_url().'assets/supplier_upload/'.$user[0]->ProfilImage;
+                  echo base_url().'assets/supplier_upload/'.$user[0]->ProfileImage;
                 }?>" id = "fotoprofile" alt="" class="img-thumbnail" alt="Cinque Terre" width="175" height="175" ></label><br>
               </div>
 
-              <?php if (empty($user[0]->ProfilImage)): ?>
+              <?php if (empty($user[0]->ProfileImage)): ?>
                 <div class="form-group">
-                  <input type="file" name="profil_image" value="" id="profil_image"  size='20' onchange="readUrlProfilImage(this);"  data-validation="mime size required"
+                  <input type="file" name="profile_image" value="" id="profile_image"  size='20' onchange="readUrlProfileImage(this);"  data-validation="mime size required"
                   data-validation-allowing="jpg, png"
                   data-validation-max-size="300kb"
                   data-validation-error-msg-required="Gambar Belum Dipilih..." style="visibility:hidden;">
@@ -45,11 +45,11 @@
                 </div>
               <?php else: ?>
                 <div class="form-group">
-                  <input type="file" name="profil_image" value="" id="profil_image"  size='20' onchange="readUrlProfilImage(this);"  data-validation="mime size required"
+                  <input type="file" name="profile_image" value="" id="profile_image"  size='20' onchange="readUrlProfileImage(this);"  data-validation="mime size required"
                   data-validation-allowing="jpg, png"
                   data-validation-max-size="300kb"
                   data-validation-error-msg-required="Gambar Belum Dipilih..." style="visibility:hidden;">
-                  <input type="hidden" name="profil_image_lama" id="profil_image_lama" value="<?php echo $user[0]->ProfilImage; ?>">
+                  <input type="hidden" name="profile_image_lama" id="profile_image_lama" value="<?php echo $user[0]->ProfileImage; ?>">
                   <!-- <button type="submit" class="btn btn-danger" id="tambah_tdp">Delete</button> -->
                 </div>
               <?php endif; ?>
@@ -65,26 +65,30 @@
               <input type="text" name="last_name" id="description" value="<?php echo $user[0]->LastName; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
             </div>
             <div class="form-group col-lg-12">
-              <label class="control-label">Company Name</label>
-              <input type="text" name="company_name" id="description" value="<?php echo $user[0]->CompanyName; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
+              <label class="control-label">Zip Code</label>
+              <input type="text" name="zip_code" id="description" value="<?php echo $user[0]->ZipCode; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
             </div>
             <div class="form-group col-lg-12">
               <label class="control-label">Company Address</label>
-              <input type="text" name="company_address" id="" value="<?php echo $user[0]->CompanyAddress; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
+              <input type="text" name="company_address" id="" value="<?php echo $user[0]->Address; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
             </div>
             <div class="form-group col-lg-12">
               <label class="control-label">City</label>
               <input type="text" name="city" id="description" value="<?php echo $user[0]->City; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
             </div>
             <div class="form-group col-lg-12">
-              <label class="control-label">Zip Code</label>
-              <input type="text" name="zip_code" id="description" value="<?php echo $user[0]->ZipCode; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
+              <label class="control-label">Province</label>
+              <input type="text" name="province" id="description" value="<?php echo $user[0]->Province; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
             </div>
             <div class="form-group col-lg-12">
-              <label class="control-label">Location</label>
+              <label class="control-label">State</label>
               <select name="location" data-validation-error-msg="Please fill out category description..."  class="form-control">
                 <option value="indonesia">Indonesia</option>
               </select>
+            </div>
+            <div class="form-group col-lg-12">
+              <label class="control-label">Company Name</label>
+              <input type="text" name="company_name" id="description" value="<?php echo $user[0]->CompanyName; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
             </div>
             <div class="form-group col-lg-12">
               <label class="control-label">Taxpayer Registration Number</label>
@@ -178,22 +182,22 @@
                 <div class="form-group">
                   <label class="control-label">Company Gallery</label>
                 </div>
-                <?php foreach ($user as $us): ?>
+                <?php foreach ($supplier_gallery_pic as $sgp): ?>
 
-                  <div id="<?php echo "div".$us->IdGalleryPic; ?>" class="form-group col-lg-2 text-center">
+                  <div id="<?php echo "div".$sgp->Id; ?>" class="form-group col-lg-2 text-center">
                     <!-- <img src="<?php //echo base_url().'assets/icon/upload-icon.png'?>" alt="" style="width: 100px"> -->
                     <div class="form-group text-center">
 
-                      <img src="<?php if (empty($us->GalleryPicFileName)) {
+                      <img src="<?php if (empty($sgp->FileName)) {
                         echo base_url().'assets/icon/upload-icon.png';
                       }else{
-                        echo base_url().'assets/supplier_upload/'.$us->GalleryPicFileName;
+                        echo base_url().'assets/supplier_upload/'.$sgp->FileName;
                       }?>"  alt="" class="img-thumbnail" alt="Cinque Terre" width="200" >
                     </div>
                     <!--  -->
                     <!-- <input type="hidden" name="product_id_pic" id="product_id_pic" value="<?php //echo $p->IdProductPic; ?>"> -->
 
-                    <button type="button" class="btn btn-danger" id="delete_pic" value="<?php echo $us->IdGalleryPic; ?>">Delete</button>
+                    <button type="button" class="btn btn-danger" id="delete_pic" value="<?php echo $sgp->Id; ?>">Delete</button>
                   </div>
 
                 <?php endforeach; ?>
@@ -263,7 +267,7 @@
     }
     </script>
     <script type="text/javascript">
-    function readUrlProfilImage(input) {
+    function readUrlProfileImage(input) {
       if (input.files && input.files[0]) {
         var reader = new FileReader();
 

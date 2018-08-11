@@ -17,13 +17,13 @@
                   <h3 class="box-title">Edit Product Sub Category</h3>
                 </div>
                 <div class="box-body">
-                    <form method="post" id="Simpan" action="<?php echo base_url().'index.php/Product_sub_category/edit_product_sub_category'; ?>">
+                    <form method="post" id="Simpan" action="<?php echo base_url().'Product_sub_category/edit_product_sub_category'; ?>">
                       <div class="form-group">
                         <label for="">Product Category</label>
                         <select  disabled class="form-control" name="" id="product_category_code">
                           <option selected value=''><?php echo $data[0]->ProductCategory; ?></pilih>
 
-                          </select>
+                        </select>
                         </div>
                     <div class="form-group">
                             <label class="control-label">Product Sub Category</label>

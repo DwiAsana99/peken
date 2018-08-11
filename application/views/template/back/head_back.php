@@ -147,11 +147,11 @@
                   <!-- User Account: style can be found in dropdown.less -->
                   <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <!--<img src="//<?php //echo base_url('assets/supplier_upload/').$this->session->userdata('profil_image') ?>" height="160" class="user-image" alt="User Image">-->
-                      <img src="<?php if (empty($this->session->userdata('profil_image')) OR $this->session->userdata('profil_image') == "") {
+                      <!--<img src="//<?php //echo base_url('assets/supplier_upload/').$this->session->userdata('profile_image') ?>" height="160" class="user-image" alt="User Image">-->
+                      <img src="<?php if (empty($this->session->userdata('profile_image')) OR $this->session->userdata('profile_image') == "") {
                                     echo base_url().'assets/icon/upload-icon.png';
                                 }else{
-                                    echo base_url().'assets/supplier_upload/'.$this->session->userdata('profil_image');
+                                    echo base_url().'assets/supplier_upload/'.$this->session->userdata('profile_image');
 
                                 }?>" height="22" class="img-circle" alt="User Image">
                       <span class="hidden-xs"><?php echo $this->session->userdata('company_name'); ?></span>
@@ -159,10 +159,10 @@
                     <ul class="dropdown-menu">
                       <!-- User image -->
                       <li class="user-header">
-                        <img src="<?php if (empty($this->session->userdata('profil_image')) OR $this->session->userdata('profil_image') == "") {
+                        <img src="<?php if (empty($this->session->userdata('profile_image')) OR $this->session->userdata('profile_image') == "") {
                                     echo base_url().'assets/icon/upload-icon.png';
                                 }else{
-                                    echo base_url().'assets/supplier_upload/'.$this->session->userdata('profil_image');
+                                    echo base_url().'assets/supplier_upload/'.$this->session->userdata('profile_image');
 
                                 }?>" height="160" class="img-circle" alt="User Image">
 
@@ -192,7 +192,7 @@
                           <a href="<?php echo site_url('Home/home_view/') ;?>" class="btn btn-default btn-flat">Visite Site</a>
                         </div>
                         <div class="pull-right">
-                          <a href="<?php echo base_url().'index.php/Login/logout';?>" class="btn btn-default btn-flat">Sign out</a>
+                          <a href="<?php echo base_url().'User/logout';?>" class="btn btn-default btn-flat">Sign out</a>
                         </div>
                       </li>
                     </ul>

@@ -32,8 +32,8 @@ class Product_category extends CI_Controller{
 
   function product_category_view(){
     //$data['product_category'] = $this->M_product_category->get_product_category();
-    $id_admin = $this->session->userdata('id_admin');
-    if (empty($id_admin)) {
+    $admin_id = $this->session->userdata('user_id');
+    if (empty($admin_id)) {
       redirect('Home/home_view');
     }
     $this->load->view('template/back_admin/admin_head');
@@ -43,7 +43,8 @@ class Product_category extends CI_Controller{
     $this->load->view('template/back_admin/admin_foot');
   }
   function get_product_category_json(){
-    $get_product_category = $this->M_product_category->get_product_category();
+    $this->M_product_category->set_search_product_category();
+		$get_product_category = $this->M_product_category->get_product_category();
     // print_r($get_product_category->row());exit();
     $baris = $get_product_category->result();
     $data = array();
@@ -51,7 +52,7 @@ class Product_category extends CI_Controller{
       $row = array(
       "Code" => $bar->Code,
       "ProductCategory" => $bar->ProductCategory,
-      "EditButton" => '<a class="btn btn-warning"   href="'.base_url("index.php/Product_category/product_category_edit_view/").$bar->Code.'">
+      "EditButton" => '<a class="btn btn-warning"   href="'.base_url("Product_category/product_category_edit_view/").$bar->Code.'">
        <span class="fa fa-fw fa-edit" >
        </span>
       </a>'
@@ -71,8 +72,8 @@ class Product_category extends CI_Controller{
 
 
   function product_category_add_view(){
-    $id_admin = $this->session->userdata('id_admin');
-    if (empty($id_admin)) {
+    $admin_id = $this->session->userdata('user_id');
+    if (empty($admin_id)) {
       redirect('Home/home_view');
     }
     $this->load->view('template/back_admin/admin_head');
@@ -83,7 +84,11 @@ class Product_category extends CI_Controller{
   }
 
   function add_product_category(){
-    $get_product_category = $this->M_product_category->get_product_category("","ORDER BY Code DESC LIMIT 1");
+    //$get_product_category = $this->M_product_category->get_product_category("","ORDER BY Code DESC LIMIT 1");
+    $product_category_rules['order_by'] = ' Code DESC ';
+    $product_category_rules['limit'] = 1;
+    $this->M_product_category->set_search_product_category($product_category_rules);
+		$get_product_category = $this->M_product_category->get_product_category();
     $row = $get_product_category->row();
     $anInt = intval($row->Code);
     $code_oto = $anInt+1;
@@ -94,17 +99,22 @@ class Product_category extends CI_Controller{
       'Code' => $code_oto,
       'ProductCategory' => $this->input->post('product_category')
     );
-    $this->M_product_category->add_product_category('tbproductcategory',$data);
+    $this->M_product_category->add_product_category('productcategory_tb',$data);
     $this->session->set_flashdata('msg', 'Add Product Category successfully ...');
     redirect('Product_category/product_category_view');
   }
 
-  function product_category_edit_view($id){
-    $id_admin = $this->session->userdata('id_admin');
-    if (empty($id_admin)) {
+  function product_category_edit_view($code){
+    $admin_id = $this->session->userdata('user_id');
+    if (empty($admin_id)) {
       redirect('Home/home_view');
     }
-    $get_product_category = $this->M_product_category->get_product_category($id) ;
+    $product_category_rules['filter_value'] =  array('product_category_code' => $code);
+    $this->M_product_category->set_search_product_category($product_category_rules);
+    $get_product_category = $this->M_product_category->get_product_category();
+    
+
+    
     $data['data'] = $get_product_category->result();
     $this->load->view('template/back_admin/admin_head');
     $this->load->view('template/back_admin/admin_navigation');
@@ -116,7 +126,7 @@ class Product_category extends CI_Controller{
   function edit_product_category(){
     $product_category_code = $this->input->post('product_category_code');
     $data = array('ProductCategory' => $this->input->post('product_category'));
-    $this->M_product_category->edit_product_category($data,$product_category_code) ;
+    $this->M_product_category->update_product_category($data,$product_category_code) ;
     $this->session->set_flashdata('msg', 'Edit Product Category successfully...');
     redirect('Product_category/product_category_view');
   }

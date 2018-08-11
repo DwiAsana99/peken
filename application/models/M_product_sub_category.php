@@ -19,7 +19,7 @@ class M_product_sub_category extends CI_Model{
     $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
     $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
     $this->filter_value = isset($rules['filter_value']['product_sub_category_code']) ? " AND productsubcategory_tb.Code = ".$rules['filter_value']['product_sub_category_code'] : "" ;
-    $this->filter_value = isset($rules['filter_value']['product_category_code']) ? " AND productsubcategory_tb.ProductCategoryCode = ".$rules['filter_value']['product_category_code'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['product_category_code']) ? " AND productsubcategory_tb.ProductCategoryCode = ".$rules['filter_value']['product_category_code'] : "" ;
   }
 
   function get_product_sub_category(){
@@ -61,36 +61,36 @@ class M_product_sub_category extends CI_Model{
   //   }
   // }
 
-  function get_product_sub_category_all(){
-    $query = "SELECT * FROM tbproductsubcategory
-    ORDER BY ProductSubCategory ASC";
-    $query = $this->db->query($query);
-    return $query;
-  }
+  // function get_product_sub_category_all(){
+  //   $query = "SELECT * FROM tbproductsubcategory
+  //   ORDER BY ProductSubCategory ASC";
+  //   $query = $this->db->query($query);
+  //   return $query;
+  // }
 
-  function get_product_sub_category_query($product_sub_category_code='',$product_category_code='',$order_by="")
-  {
-    $filter_value = !empty($product_category_code) ? " AND tbproductsubcategory.ProductCategoryCode = $product_category_code " : "" ;
-    $filter_value .= !empty($product_sub_category_code) ? " AND tbproductsubcategory.Code = $product_sub_category_code " : "" ;
-    $query = "SELECT tbproductsubcategory.Code AS ProductSubCategoryCode,
-    tbproductsubcategory.ProductCategoryCode,
-    tbproductsubcategory.ProductSubCategory,
-    tbproductcategory.ProductCategory
-     FROM tbproductsubcategory INNER JOIN tbproductcategory
-     ON tbproductcategory.Code = tbproductsubcategory.ProductCategoryCode
-     WHERE 1=1 ".$filter_value.$order_by;
-    $query = $this->db->query($query);
-    return $query;
-  }
+  // function get_product_sub_category_query($product_sub_category_code='',$product_category_code='',$order_by="")
+  // {
+  //   $filter_value = !empty($product_category_code) ? " AND tbproductsubcategory.ProductCategoryCode = $product_category_code " : "" ;
+  //   $filter_value .= !empty($product_sub_category_code) ? " AND tbproductsubcategory.Code = $product_sub_category_code " : "" ;
+  //   $query = "SELECT tbproductsubcategory.Code AS ProductSubCategoryCode,
+  //   tbproductsubcategory.ProductCategoryCode,
+  //   tbproductsubcategory.ProductSubCategory,
+  //   tbproductcategory.ProductCategory
+  //    FROM tbproductsubcategory INNER JOIN tbproductcategory
+  //    ON tbproductcategory.Code = tbproductsubcategory.ProductCategoryCode
+  //    WHERE 1=1 ".$filter_value.$order_by;
+  //   $query = $this->db->query($query);
+  //   return $query;
+  // }
   // function diatas digunakan untuk mencari product_sub_category.
   // hanya digunakan untuk sementara harus nya bisa dirapikan dengan function
   // get_product_sub_category
   function add_product_sub_category($data) {
-    $this->db->insert('tbproductsubcategory',$data);
+    $this->db->insert('productsubcategory_tb',$data);
   }
   function edit_product_sub_category($data,$code) {
  			 $this->db->where('Code',$code );
- 			 $this->db->update("tbproductsubcategory",$data);
+ 			 $this->db->update("productsubcategory_tb",$data);
   }
   // function generate_product_sub_category(){
   //`

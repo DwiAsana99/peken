@@ -13,7 +13,7 @@
       <div class="box">
         <div class="box-header">
           <h3 class="box-title">Product Category</h3>
-          <a style="float:right"  href="<?php echo base_url("index.php/Product_category/product_category_add_view");?>" class="btn btn-primary">
+          <a style="float:right"  href="<?php echo base_url("Product_category/product_category_add_view");?>" class="btn btn-primary">
             <i class="glyphicon glyphicon-saved"></i>
             Add Product Category
           </a>

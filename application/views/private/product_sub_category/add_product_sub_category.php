@@ -16,7 +16,7 @@
           <h3 class="box-title">Add New Product Sub Category</h3>
         </div>
         <div class="box-body">
-          <form method="post" id="Simpan"  action="<?php echo base_url().'index.php/Product_sub_category/add_product_sub_category'; ?>">
+          <form method="post" id="Simpan"  action="<?php echo base_url().'Product_sub_category/add_product_sub_category'; ?>">
             <div class="form-group">
               <label for="">Product Category</label>
               <select class="form-control" name="product_category_code" id="product_category_code">

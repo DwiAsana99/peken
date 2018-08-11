@@ -8,6 +8,17 @@ class User extends CI_Controller{
     $this->load->helper(array('form', 'url'));
     $this->load->model(array('M_user','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation', 'M_quotation_detail','M_supplier_gallery_pic'));
   }
+  function admin_dashboard_view(){
+    $id_admin = $this->session->userdata('user_id');
+    if (empty($id_admin)) {
+      redirect('Home/home_view');
+    }
+    $this->load->view('template/back_admin/admin_head');
+    $this->load->view('template/back_admin/admin_navigation');
+    $this->load->view('template/back_admin/admin_sidebar');
+    $this->load->view('private/admin_dashboard');
+    $this->load->view('template/back_admin/admin_foot');
+  }
   function dashboard_supplier_view(){
     $supplier_id = $this->session->userdata('supplier_id');
     if (empty($supplier_id)) {
@@ -163,16 +174,37 @@ class User extends CI_Controller{
     if (empty($supplier_id)) {
       redirect('Home/home_view');
     }
-    $get_member = $this->M_user->get_member("",1,$supplier_id,"","","","","","include");
-    $data['user'] = $get_member->result();
+
+    $user_rules['filter_value'] =  array('user_id'=>$supplier_id, 'user_level'=>1);
+    $this->M_user->set_search_user($user_rules);
+    $get_supplier = $this->M_user->get_user();
+    $data['user'] = $get_supplier->result();
+
+    $supplier_gallery_pic_rules['filter_value'] =  array('user_id'=>$supplier_id);
+    $this->M_supplier_gallery_pic->set_search_supplier_gallery_pic($supplier_gallery_pic_rules);
+    $get_supplier_gallery_pic = $this->M_supplier_gallery_pic->get_supplier_gallery_pic();
+    $data['supplier_gallery_pic'] = $get_supplier_gallery_pic->result();
+    
+    // echo "<pre>";
+		// print_r($get_supplier->row());
+		// echo "</pre>";
+		// echo "</br>";
+		// echo "<pre>";
+		// print_r($get_supplier_gallery_pic->result());
+    // echo "</pre>";exit();
+    
+
+
+    // $get_member = $this->M_user->get_member("",1,$supplier_id,"","","","","","include");
+    // $data['user'] = $get_member->result();
     // print_r($data['user']);exit();
-    $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
-    $data_notification['unread_quotation'] = $get_quotation->result();
-    $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
-    $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
-    $data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-    $data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
-    $this->load->view('template/back/head_back',$data_notification);
+    // $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
+    // $data_notification['unread_quotation'] = $get_quotation->result();
+    // $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
+    // $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
+    // $data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
+    // $data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
+    $this->load->view('template/back/head_back');
     $this->load->view('template/back/sidebar_back');
     $this->load->view('private/supplier_account/supplier_account',$data);
     $this->load->view('template/back/foot_back');
@@ -186,19 +218,19 @@ class User extends CI_Controller{
     //$config['max_width']     = 1024;
     //$config['max_height']    = 1000;
     $this->load->library('upload', $config);
-    $this->upload->do_upload('profil_image');
-    $profil_image_lama = $this->input->post('profil_image_lama');
-    $profil_image_file = $this->upload->data();
-    if (!empty($profil_image_file['file_name'])){
-      $profil_image = $profil_image_file['file_name'];
-      $this->session->set_userdata('profil_image',$profil_image);
+    $this->upload->do_upload('profile_image');
+    $profile_image_lama = $this->input->post('profile_image_lama');
+    $profile_image_file = $this->upload->data();
+    if (!empty($profile_image_file['file_name'])){
+      $profile_image = $profile_image_file['file_name'];
+      $this->session->set_userdata('profile_image',$profile_image);
     }else{
-      $profil_image = $profil_image_lama;
+      $profile_image = $profile_image_lama;
     }
     $this->upload->do_upload('siup');
     $siup_lama = $this->input->post('siup_lama');
     $siup_file = $this->upload->data();
-    if (!empty($siup_file['file_name']) AND $siup_file['file_name'] != $profil_image_file['file_name']){
+    if (!empty($siup_file['file_name']) AND $siup_file['file_name'] != $profile_image_file['file_name']){
       $siup = $siup_file['file_name'];
     }else{
       $siup = $siup_lama;
@@ -222,7 +254,7 @@ class User extends CI_Controller{
       'Npwp' => $this->input->post('npwp'),
       'Phone' => $this->input->post('phone'),
       'CompanyDescription' => $this->input->post('company_description'),
-      'ProfilImage' => $profil_image,
+      'ProfilImage' => $profile_image,
       'Siup' => $siup,
       'Tdp' => $tdp
     );
@@ -382,37 +414,41 @@ class User extends CI_Controller{
 
       if ($num_rows > 0 AND $row->UserLevel == 1  ) {
        // echo "Supplier";exit;
-        $user_rules['filter_value'] =  array('supplier_id'=>$row->Id, 'user_level'=>1);
-        $this->M_user->set_search_user($user_rules);
-        $get_supplier = $this->M_user->get_user();
-        $data['supplier'] = $get_supplier->result();
+        // $user_rules['filter_value'] =  array('supplier_id'=>$row->Id, 'user_level'=>1);
+        // $this->M_user->set_search_user($user_rules);
+        // $get_supplier = $this->M_user->get_user();
+        // $data['supplier'] = $get_supplier->result();
         $this->session->set_userdata('supplier_id',$row->Id);
         $this->session->set_userdata('company_name',$row->CompanyName);
-        $this->session->set_userdata('profil_image',$row->ProfileImage);
+        $this->session->set_userdata('profile_image',$row->ProfileImage);
         $this->session->set_userdata('first_name',$row->FirstName);
         redirect('User/dashboard_supplier_view');
       }
       elseif ($num_rows > 0  AND $row->UserLevel == 2) {
         //echo "Buyer";exit;
-        $user_rules['filter_value'] =  array('supplier_id'=>$row->Id, 'user_level'=>0);
-        $this->M_user->set_search_user($user_rules);
-        $get_buyer = $this->M_user->get_user();
-        $data['buyer'] = $get_buyer->result();
+        // $user_rules['filter_value'] =  array('supplier_id'=>$row->Id, 'user_level'=>0);
+        // $this->M_user->set_search_user($user_rules);
+        // $get_buyer = $this->M_user->get_user();
+        // $data['buyer'] = $get_buyer->result();
         $this->session->set_userdata('buyer_id',$row->Id);
         // $this->session->set_userdata('company_name',$row->CompanyName);
-        // $this->session->set_userdata('profil_image',$row->ProfilImage);
+        // $this->session->set_userdata('profile_image',$row->ProfilImage);
         $this->session->set_userdata('first_name',$row->FirstName);
         redirect('Home/index');
       }
       elseif ($num_rows > 0 AND $row->UserLevel == 0) {
+
+        // echo "<pre>";
+        // print_r($row);
+        // echo "</pre>";exit();
         // 	$get_supplier = $this->M_user->get_member(1,0,$row->IdMember);
         // $data['supplier'] = $get_supplier->result();
-        echo "admin";exit();
-        // 	$this->session->set_userdata('id_admin',$row->IdMember);
+        //echo "admin";exit();
+        $this->session->set_userdata('user_id',$row->Id);
         // 	$this->session->set_userdata('company_name',$row->CompanyName);
-        // 	$this->session->set_userdata('profil_image',$row->ProfilImage);
+        $this->session->set_userdata('profile_image',$row->ProfileImage);
         // 	$this->session->set_userdata('first_name',$row->FirstName);
-        // 	redirect('Admin/admin_dashboard_view');
+        redirect('User/admin_dashboard_view');
       }
       else {
         echo "sinf ada";exit();

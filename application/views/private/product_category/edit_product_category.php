@@ -2,7 +2,7 @@
 <section class="content-header">
    <div class="btn-group btn-breadcrumb">
             <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
-             <a href="<?php echo base_url('index.php/Product_category/product_category_view');?>" class="btn btn-default  btn-xs">Product Category</a>
+             <a href="<?php echo base_url('Product_category/product_category_view');?>" class="btn btn-default  btn-xs">Product Category</a>
             <a  class="btn btn-default  btn-xs active">Edit Product Category</a>
         </div>
 </section>
@@ -17,7 +17,7 @@
                   <h3 class="box-title">Edit Product Category</h3>
                 </div>
                 <div class="box-body">
-                    <form method="post" id="Simpan" action="<?php echo base_url().'index.php/Product_category/edit_product_category'; ?>">
+                    <form method="post" id="Simpan" action="<?php echo base_url().'Product_category/edit_product_category'; ?>">
                     <div class="form-group">
                             <label class="control-label">Product Category</label>
                             <input type="text" name="product_category"  value="<?php echo $data[0]->ProductCategory; ?>"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..."  class="form-control"  placeholder="">

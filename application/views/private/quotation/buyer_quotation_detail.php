@@ -37,13 +37,13 @@ Qty           : 10 <br><br>
               <ul class="chat" >
                 <?php foreach ($quotation_detail as $qd): ?>
                   <?php if (!empty($qd->ProfilImage)): ?>
-                    <?php $profil_image = $qd->ProfilImage; ?>
+                    <?php $profile_image = $qd->ProfilImage; ?>
                   <?php else: ?>
-                    <?php $profil_image = "user_without_profile_image.png"; ?>
+                    <?php $profile_image = "user_without_profile_image.png"; ?>
                   <?php endif; ?>
                   <?php if ($this->session->userdata('buyer_id') == $qd->IdMember): ?>
                     <li class="right clearfix"><span class="chat-img pull-right">
-                      <img src="<?php echo base_url('assets/supplier_upload/').$profil_image; ?>" alt="User Avatar" width="45" class="img-circle" />
+                      <img src="<?php echo base_url('assets/supplier_upload/').$profile_image; ?>" alt="User Avatar" width="45" class="img-circle" />
                     </span>
                     <div class="chat-body clearfix">
                       <div class="header">
@@ -57,7 +57,7 @@ Qty           : 10 <br><br>
                   </li>
                   <?php else: ?>
                     <li class="left clearfix"><span class="chat-img pull-left">
-                      <img src="<?php echo base_url('assets/supplier_upload/').$profil_image; ?>" width="45" class="img-circle" />
+                      <img src="<?php echo base_url('assets/supplier_upload/').$profile_image; ?>" width="45" class="img-circle" />
                     </span>
                     <div class="chat-body clearfix">
                       <div class="header">

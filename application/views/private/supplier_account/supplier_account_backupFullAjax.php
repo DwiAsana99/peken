@@ -16,7 +16,7 @@ $this->load->view('template/back/sidebar_back');
 
                     <form method="post" id="Simpan"  action="<?php echo base_url().'index.php/Suplier/edit_supplier_account'; ?>" enctype="multipart/form-data"  onfocusout="edit(event)">
                     <!-- <div class="form-group text-center">
-                      <label  for="profil_image">Profil Image</label> <br>
+                      <label  for="profile_image">Profil Image</label> <br>
                       <img src="<?php //echo base_url().'assets/suplier_upload/'.$user[0]->Gambar; ?>" id = "fotoview" alt="" class="img-thumbnail" alt="Cinque Terre" width="304" height="236"><br>
                       <a href="#" data-target="#myModal" data-toggle='modal' class="btn btn-default text-center">Change</a>
                     </div> -->

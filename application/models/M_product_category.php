@@ -14,11 +14,11 @@ class M_product_category extends CI_Model{
   function set_search_product_category($rules = "") {
     $this->other_table_columns = !empty($rules['join']['other_table_columns']) ? $rules['join']['other_table_columns'] : "" ;
     $this->join_table = !empty($rules['join']['join_table']) ? $rules['join']['join_table'] : "" ;
-    $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ; 
-    $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ; 
+    $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ;
+    $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ;
     $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
     $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
-    //$this->filter_value = isset($rules['filter_value']['is_published']) ? " AND product_tb.IsPublished = ".$rules['filter_value']['is_published'] : "" ; 
+    $this->filter_value = isset($rules['filter_value']['product_category_code']) ? " AND productcategory_tb.Code = ".$rules['filter_value']['product_category_code'] : "" ;
   }
 
   function get_product_category(){
@@ -44,9 +44,9 @@ class M_product_category extends CI_Model{
 	}
 
 
-	function edit_product_category($data,$code) {
+	function update_product_category($data,$code) {
  			 $this->db->where('Code',$code );
- 			 $this->db->update("tbproductcategory",$data);
+ 			 $this->db->update("productcategory_tb",$data);
   }
 }
 
