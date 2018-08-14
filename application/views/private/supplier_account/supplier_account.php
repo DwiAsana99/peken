@@ -15,7 +15,7 @@
         <div class="box-header">
           <h2 class="box-title">Account</h2>
         </div>
-        
+
         <?php //echo $error;?>
         <div class="box-body">
 
@@ -35,17 +35,17 @@
 
 
               <div class="text-center">
-              <img src="<?php if (empty($user[0]->ProfileImage)) {
+                <img src="<?php if (empty($user[0]->ProfileImage)) {
                   echo base_url().'assets/icon/upload-icon.png';
                 }else{
                   echo base_url().'assets/supplier_upload/'.$user[0]->ProfileImage;
-                }?>"  alt="" class="img-thumbnail image img-circle" alt="Cinque Terre" width="175" height="175">
-                
-                  <p>
-                    <?php $supplier_id = $this->session->userdata('supplier_id'); ?>
-                    <a href="<?php echo site_url('supplier/public_supplier_detail_view?supplier_id=').$supplier_id ?>" class="text-center ">
+                }?>" alt="" class="img-thumbnail image img-circle" alt="Cinque Terre" width="175" height="175">
+
+                <p>
+                  <?php $supplier_id = $this->session->userdata('supplier_id'); ?>
+                  <a href="<?php echo site_url('supplier/public_supplier_detail_view?supplier_id=').$supplier_id ?>" class="text-center ">
                     <span class="glyphicon glyphicon-eye-open"></span> Preview Mini Site</a>
-                  </p>
+                </p>
 
               </div>
               </hr>
@@ -53,31 +53,71 @@
 
 
               <div class="panel panel-default">
-                <div class="panel-heading">    
-                  Company Profile              
+                <div class="panel-heading">
+                  Company Profile
                 </div>
                 <div class="panel-body" style="display:block;">
-                <h5><b>First Name</b></h5>
-                  <p><?php echo $user[0]->FirstName; ?></p>
-                  <h5><b>Last Name</b></h5>
-                  <p><?php echo $user[0]->LastName; ?></p>
-                  <h5><b>Company Name</b></h5>
-                  <p><?php echo $user[0]->CompanyName; ?></p>
-                  <h5><b>Zip Code</b></h5>
-                  <p><?php echo $user[0]->ZipCode; ?></p>
-                  <h5><b>Company Address</b></h5>
-                  <p><?php echo $user[0]->Address; ?></p>
-                  <h5><b>City</b></h5>
-                  <p><?php echo $user[0]->City; ?></p>
-                  <h5><b>Province</b></h5>
-                  <p><?php echo $user[0]->Province; ?></p>
-                  <h5><b>State</b></h5>
-                  <p><?php echo $user[0]->State; ?></p>
+                  <h5>
+                    <b>First Name</b>
+                  </h5>
+                  <p>
+                    <?php echo $user[0]->FirstName; ?>
+                  </p>
+                  <h5>
+                    <b>Last Name</b>
+                  </h5>
+                  <p>
+                    <?php echo $user[0]->LastName; ?>
+                  </p>
+                  <h5>
+                    <b>Company Name</b>
+                  </h5>
+                  <p>
+                    <?php echo $user[0]->CompanyName; ?>
+                  </p>
+                  <h5>
+                    <b>Zip Code</b>
+                  </h5>
+                  <p>
+                    <?php echo $user[0]->ZipCode; ?>
+                  </p>
+                  <h5>
+                    <b>Company Address</b>
+                  </h5>
+                  <p>
+                    <?php echo $user[0]->Address; ?>
+                  </p>
+                  <h5>
+                    <b>City</b>
+                  </h5>
+                  <p>
+                    <?php echo $user[0]->City; ?>
+                  </p>
+                  <h5>
+                    <b>Province</b>
+                  </h5>
+                  <p>
+                    <?php echo $user[0]->Province; ?>
+                  </p>
+                  <h5>
+                    <b>State</b>
+                  </h5>
+                  <p>
+                    <?php echo $user[0]->State; ?>
+                  </p>
 
-                  <h5><b>Phone Number</b></h5>
-                  <p><?php echo $user[0]->Phone; ?></p>
-                  <h5><b>Company Description</b></h5>
-                  <p><?php echo $user[0]->CompanyDescription; ?></p>
+                  <h5>
+                    <b>Phone Number</b>
+                  </h5>
+                  <p>
+                    <?php echo $user[0]->Phone; ?>
+                  </p>
+                  <h5>
+                    <b>Company Description</b>
+                  </h5>
+                  <p>
+                    <?php echo $user[0]->CompanyDescription; ?>
+                  </p>
                 </div>
               </div>
 
@@ -133,13 +173,14 @@
 
               <div class="tab-content">
                 <div class="tab-pane active" id="home">
-                  
-                  <form method="post" id="Simpan" action="<?php echo base_url().'User/update_company_profile'; ?>" enctype="multipart/form-data" onfocusout="edit(event)">
+
+                  <form method="post" id="Simpan" action="<?php echo base_url().'User/update_company_profile'; ?>" enctype="multipart/form-data"
+                    onfocusout="edit(event)">
                     <!-- <div class="form-group text-center">
-            <label  for="profile_image">Profil Image</label> <br>
-            <img src="<?php //echo base_url().'assets/suplier_upload/'.$user[0]->Gambar; ?>" id = "fotoview" alt="" class="img-thumbnail" alt="Cinque Terre" width="304" height="236"><br>
-            <a href="#" data-target="#myModal" data-toggle='modal' class="btn btn-default text-center">Change</a>
-          </div> -->
+                    <label  for="profile_image">Profil Image</label> <br>
+                    <img src="<?php //echo base_url().'assets/suplier_upload/'.$user[0]->Gambar; ?>" id = "fotoview" alt="" class="img-thumbnail" alt="Cinque Terre" width="304" height="236"><br>
+                    <a href="#" data-target="#myModal" data-toggle='modal' class="btn btn-default text-center">Change</a>
+                    </div> -->
                     <div class="form-group col-md-12 text-center">
                       <label class="control-label">Profile Image</label>
                       <br>
@@ -216,7 +257,7 @@
                         data-validation-length="min4" data-validation-error-msg="Please fill out category description..." class="form-control"
                         placeholder="">
                     </div>
-                    
+
                     <div class="form-group col-lg-12">
                       <label class="control-label">Phone Number</label>
                       <input type="text" name="phone" id="phone" value="<?php echo $user[0]->Phone; ?>" data-validation="length" data-validation-length="min4"
@@ -224,10 +265,12 @@
                     </div>
                     <div class="form-group col-lg-12">
                       <label class="control-label">Company Description</label>
-                      <textarea name="company_description" rows="6" class="form-control"><?php echo $user[0]->CompanyDescription; ?></textarea>
+                      <textarea name="company_description" rows="6" class="form-control">
+                        <?php echo $user[0]->CompanyDescription; ?>
+                      </textarea>
                     </div>
                     <div class="form-group col-lg-12 text-right">
-                    <button  class="btn btn-primary " type="submit">Save</button>
+                      <button class="btn btn-primary " type="submit">Save</button>
                     </div>
                   </form>
 
@@ -240,8 +283,8 @@
                   <h2></h2>
 
                   <hr>
-                  <form class="form" action="##" method="post" id="registrationForm">
-                  <div class="form-group col-lg-12">
+                  <form class="form" action="<?php echo base_url().'User/update_certificate_license'; ?>" enctype="multipart/form-data" method="post">
+                    <div class="form-group col-lg-12">
                       <label class="control-label">Taxpayer Registration Number</label>
                       <input type="text" name="npwp" id="description" value="<?php echo $user[0]->Npwp; ?>" data-validation="length" data-validation-length="min4"
                         data-validation-error-msg="Please fill out category description..." class="form-control" placeholder="">
@@ -253,10 +296,10 @@
                       <div class="form-group text-center">
                         <label for="siup" class="btn">
                           <img src="<?php if (empty($user[0]->Siup)) {
-                    echo base_url().'assets/icon/upload-icon.png';
-                  }else{
-                    echo base_url().'assets/supplier_upload/'.$user[0]->Siup;
-                  }?>" id="fotoview" alt="" class="img-thumbnail" alt="Cinque Terre" width="175" height="175">
+                            echo base_url().'assets/icon/upload-icon.png';
+                          }else{
+                            echo base_url().'assets/supplier_upload/'.$user[0]->Siup;
+                          }?>" id="fotoview" alt="" class="img-thumbnail" alt="Cinque Terre" width="175" height="175">
                         </label>
                       </div>
                       <?php if (empty($user[0]->Siup)): ?>
@@ -313,6 +356,9 @@
                       <!--  -->
 
                     </div>
+                    <div class="form-group col-lg-12 text-right">
+                      <button class="btn btn-primary " type="submit">Save</button>
+                    </div>
                   </form>
 
                 </div>
@@ -321,7 +367,7 @@
 
 
                   <hr>
-                  <form class="form" action="##" method="post" id="registrationForm">
+                  <form class="form" action="<?php echo base_url().'User/update_company_gallery'; ?>" enctype="multipart/form-data" method="post" id="">
                     <div class="form-group">
                       <label class="control-label"></label>
                       <div class="dropzone">
@@ -355,6 +401,9 @@
 
                       <?php endforeach; ?>
 
+                    </div>
+                    <div class="form-group col-lg-12 text-right">
+                      <button class="btn btn-primary " type="submit">Save</button>
                     </div>
                   </form>
                 </div>

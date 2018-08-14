@@ -34,6 +34,12 @@ class M_supplier_gallery_pic extends CI_Model{
     $query = $this->db->query($query);
     return $query;
   }
+  function update_supplier_gallery_pic($supplier_id,$supplier_gallery_pic) {
+    foreach ($supplier_gallery_pic as $row => $value) {
+      $supplier_gallery_pic_data = array("SupplierId" => $supplier_id,"FileName" => $value );
+      $this->db->insert('suppliergallerypic_tb', $supplier_gallery_pic_data);
+    }
+  }
 }
 
 ?>

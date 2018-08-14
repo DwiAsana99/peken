@@ -270,6 +270,48 @@ class User extends CI_Controller{
     $this->M_user->update_user($data,$supplier_id);
     redirect('User/supplier_account_view');
   }
+  function update_certificate_license(){
+    $supplier_id = $this->session->userdata('supplier_id');
+    $config['upload_path']   = './assets/supplier_upload/';
+    $config['allowed_types'] = 'gif|jpg|png|pdf';
+    $config['overwrite'] = TRUE;
+    $config['max_size']      = 1000;
+    //$config['max_width']     = 1024;
+    //$config['max_height']    = 1000;
+
+    $this->load->library('upload', $config);
+    $this->upload->do_upload('siup');
+    $siup_lama = $this->input->post('siup_lama');
+    $siup_file = $this->upload->data();
+    if (!empty($siup_file['file_name']) AND $siup_file['file_name'] ){
+      $siup = $siup_file['file_name'];
+    }else{
+      $siup = $siup_lama;
+    }
+    $this->upload->do_upload('tdp');
+    $tdp_lama = $this->input->post('tdp_lama');
+    $tdp_file = $this->upload->data();
+    if (!empty($tdp_file['file_name']) AND $tdp_file['file_name'] != $siup_file['file_name']){
+      $tdp = $tdp_file['file_name'];
+    }else{
+      $tdp = $tdp_lama;
+    }
+    $data = array(
+      'Npwp' => $this->input->post('npwp'),
+      'Siup' => $siup,
+      'Tdp' => $tdp
+    );
+    // echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";exit();
+    $this->M_user->update_user($data,$supplier_id);
+    redirect('User/supplier_account_view');
+  }
+  function update_company_gallery()  {
+    $supplier_id = $this->session->userdata('supplier_id');
+    $supplier_gallery_pic = $this->input->post('file');
+    $this->M_supplier_gallery_pic->update_supplier_gallery_pic($supplier_id,$supplier_gallery_pic);
+  }
   function supplier_upload_siup(){
     $id = $this->session->userdata('supplier_id');
     $config['upload_path']   = './assets/suplier_upload/';
