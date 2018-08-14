@@ -269,8 +269,8 @@
                         <?php echo $user[0]->CompanyDescription; ?>
                       </textarea>
                     </div>
-                    <div class="form-group col-lg-12 text-right">
-                      <button class="btn btn-primary " type="submit">Save</button>
+                    <div class="form-group ">
+                      <button class="btn btn-primary col-md-12" type="submit">Save</button>
                     </div>
                   </form>
 
@@ -356,8 +356,8 @@
                       <!--  -->
 
                     </div>
-                    <div class="form-group col-lg-12 text-right">
-                      <button class="btn btn-primary " type="submit">Save</button>
+                    <div class="form-group ">
+                      <button class="btn btn-primary col-md-12" type="submit">Save</button>
                     </div>
                   </form>
 
@@ -367,31 +367,23 @@
 
 
                   <hr>
-                  <form class="form" action="<?php echo base_url().'User/update_company_gallery'; ?>" enctype="multipart/form-data" method="post" id="">
-                    <div class="form-group">
-                      <label class="control-label"></label>
-                      <div class="dropzone">
-                        <div class="dz-message">
-                          <h4> Click or Drop gallery picture here..
-                            <br>Max File Size 1,8 MB</h4>
-                        </div>
-                      </div>
-                    </div>
+                  <form class="form" action="<?php echo base_url().'User/update_supplier_gallery'; ?>" enctype="multipart/form-data" method="post" id="">
+                    
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Company Gallery</label>
                       </div>
                       <?php foreach ($supplier_gallery_pic as $sgp): ?>
 
-                      <div id="<?php echo " div ".$sgp->Id; ?>" class="form-group col-lg-2 text-center">
+                      <div id="<?php echo "div".$sgp->Id; ?>" class="form-group col-lg-2 text-center">
                         <!-- <img src="<?php //echo base_url().'assets/icon/upload-icon.png'?>" alt="" style="width: 100px"> -->
                         <div class="form-group text-center">
 
                           <img src="<?php if (empty($sgp->FileName)) {
-                        echo base_url().'assets/icon/upload-icon.png';
-                      }else{
-                        echo base_url().'assets/supplier_upload/'.$sgp->FileName;
-                      }?>" alt="" class="img-thumbnail" alt="Cinque Terre" width="200">
+                              echo base_url().'assets/icon/upload-icon.png';
+                            }else{
+                              echo base_url().'assets/supplier_upload/'.$sgp->FileName;
+                            }?>" alt="" class="img-thumbnail" alt="Cinque Terre" width="200">
                         </div>
                         <!--  -->
                         <!-- <input type="hidden" name="product_id_pic" id="product_id_pic" value="<?php //echo $p->IdProductPic; ?>"> -->
@@ -402,8 +394,17 @@
                       <?php endforeach; ?>
 
                     </div>
-                    <div class="form-group col-lg-12 text-right">
-                      <button class="btn btn-primary " type="submit">Save</button>
+                    <div class="form-group">
+                      <label class="control-label"></label>
+                      <div class="dropzone">
+                        <div class="dz-message">
+                          <h4> Click or Drop gallery picture here..
+                            <br>Max File Size 1,8 MB</h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <button class="btn btn-primary col-md-12" type="submit">Save</button>
                     </div>
                   </form>
                 </div>
@@ -504,9 +505,9 @@
       console.log(value);
       $.ajax({
         type: "POST",
-        url: "<?php echo base_url('index.php/Supplier/remove_supplier_gallery_pic_button') ?>",
+        url: "<?php echo base_url('User/remove_supplier_gallery_pic_button') ?>",
         data: {
-          id_gallery_pic: value
+          supplier_gallery_pic_id: value
         },
         success: function (respond) {
           var divPic = "#div" + value;
@@ -641,7 +642,7 @@ return false;
     autoProcessQueue: false;
     var accept = ".png,.jpg,.JPEG";
     var foto_upload = new Dropzone(".dropzone", {
-      url: "<?php echo base_url('index.php/Supplier/add_supplier_gallery_pic') ?>",
+      url: "<?php echo base_url('User/add_supplier_gallery_pic') ?>",
       maxFilesize: 2000,
       method: "post",
       acceptedFiles: accept,
@@ -696,7 +697,7 @@ return false;
         data: {
           nama: namafile
         },
-        url: "<?php echo base_url('index.php/Supplier/remove_supplier_gallery_pic') ?>",
+        url: "<?php echo base_url('User/remove_supplier_gallery_pic') ?>",
         cache: false,
         dataType: 'json',
         success: function () {

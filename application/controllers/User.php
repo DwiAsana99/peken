@@ -307,10 +307,14 @@ class User extends CI_Controller{
     $this->M_user->update_user($data,$supplier_id);
     redirect('User/supplier_account_view');
   }
-  function update_company_gallery()  {
+  function update_supplier_gallery()  {
     $supplier_id = $this->session->userdata('supplier_id');
     $supplier_gallery_pic = $this->input->post('file');
+    // echo "<pre>";
+		// print_r($this->input->post('file'));
+		// echo "</pre>";exit();
     $this->M_supplier_gallery_pic->update_supplier_gallery_pic($supplier_id,$supplier_gallery_pic);
+    redirect('User/supplier_account_view');
   }
   function supplier_upload_siup(){
     $id = $this->session->userdata('supplier_id');
@@ -395,9 +399,9 @@ class User extends CI_Controller{
     echo json_encode($data);
   }
   function remove_supplier_gallery_pic_button(){
-    $id_gallery_pic=$this->input->post('id_gallery_pic');
-    $this->db->where('IdGalleryPic', $id_gallery_pic);
-    $this->db->delete('tbgallerypic');
+    $supplier_gallery_pic_id=$this->input->post('supplier_gallery_pic_id');
+    $this->db->where('Id', $supplier_gallery_pic_id);
+    $this->db->delete('suppliergallerypic_tb');
   }
   function remove_supplier_gallery_pic(){
     $nama=$this->input->post('nama');
@@ -405,7 +409,7 @@ class User extends CI_Controller{
       unlink($file);
     }
     echo "{}";
-    }
+  }
 
     function supplier_view(){
       //$data['product_category'] = $this->M_product_category->get_product_category();
