@@ -392,9 +392,9 @@
         </script>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <?php if (empty($this->session->userdata('buyer_id')) AND empty($this->session->userdata('supplier_id'))): ?>
+        <?php if (empty($this->session->userdata('user_id')) AND empty($this->session->userdata('user_id'))): ?>
         <li>
-          <a href="<?php echo base_url(); ?>index.php/Register">
+          <a href="<?php echo base_url().'User/registration';?>">
             <span class="glyphicon glyphicon-user"></span> Sign Up</a>
         </li>
 
@@ -428,7 +428,7 @@
             </li>
           </ul>
         </li>
-        <?php elseif (!empty($this->session->userdata('buyer_id'))): ?>
+        <?php elseif (!empty($this->session->userdata('user_id'))): ?>
         <!-- _____________||_____________ -->
         <li class="dropdown" id="unread_chat_notification_bell">
           <!-- <li class="dropdown"> -->
@@ -529,7 +529,7 @@
           </ul>
 
         </li>
-        <?php elseif (!empty($this->session->userdata('supplier_id'))): ?>
+        <?php elseif (!empty($this->session->userdata('user_id'))): ?>
         <!--<li><a href="#" >Back to admin supplier page</a>-->
         <!--</li>-->
         <li class="dropdown">
@@ -540,7 +540,7 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a href="<?php echo base_url().'index.php/Supplier/dashboard_supplier_view';?>">Back to admin supplier page</a>
+              <a href="<?php echo base_url().'User/dashboard_supplier_view';?>">Back to admin supplier page</a>
             </li>
             <li>
               <a href="<?php echo base_url().'User/logout';?>">Sign Out</a>

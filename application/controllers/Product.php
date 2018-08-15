@@ -136,8 +136,8 @@ class Product extends CI_Controller{
 
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
-		// if ($this->session->userdata('buyer_id')) {
-		// 	$buyer_id = $this->session->userdata('buyer_id');
+		// if ($this->session->userdata('user_id')) {
+		// 	$buyer_id = $this->session->userdata('user_id');
 		// 	$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
 		// 	$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
 		// 	$data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
@@ -173,8 +173,8 @@ class Product extends CI_Controller{
 
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
-		// if ($this->session->userdata('buyer_id')) {
-		// 	$buyer_id = $this->session->userdata('buyer_id');
+		// if ($this->session->userdata('user_id')) {
+		// 	$buyer_id = $this->session->userdata('user_id');
 		// 	$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
 		// 	$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
 		// 	$data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
@@ -191,7 +191,7 @@ class Product extends CI_Controller{
 		$this->load->view('template/front/foot_front');
 	}
 	function product_view(){
-		$supplier_id = $this->session->userdata('supplier_id');
+		$supplier_id = $this->session->userdata('user_id');
 		$product_rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.*, productcategory_tb.*, productsubcategory_tb.* ";
 		$product_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN productpic_tb INNER JOIN productcategory_tb INNER JOIN productsubcategory_tb
 		ON product_tb.Id = productpic_tb.ProductId
@@ -218,7 +218,7 @@ class Product extends CI_Controller{
 		$this->load->view('template/back/foot_back');
 	}
 	function product_edit_view($product_id){
-		$supplier_id = $this->session->userdata('supplier_id');
+		$supplier_id = $this->session->userdata('user_id');
 		if (empty($supplier_id)) {
 			redirect('Home/home_view');
 		}
@@ -288,7 +288,7 @@ class Product extends CI_Controller{
 	}
 
 	function update_product(){
-		$supplier_id = $this->session->userdata('supplier_id');
+		$supplier_id = $this->session->userdata('user_id');
 		$product_id = $this->input->post('product_id');
 		$data = array(
 			'Name' => $this->input->post('product_name'),
@@ -312,7 +312,7 @@ class Product extends CI_Controller{
 		redirect('Product/product_view');
 	}
 	function product_add_view(){
-		$supplier_id = $this->session->userdata('supplier_id');
+		$supplier_id = $this->session->userdata('user_id');
 		if (empty($supplier_id)) {
 			redirect('Home/home_view');
 		}
@@ -344,7 +344,7 @@ class Product extends CI_Controller{
 
 	}
 	function add_product(){
-		$supplier_id = $this->session->userdata('supplier_id');
+		$supplier_id = $this->session->userdata('user_id');
 		$data = array(
 			'Name' => $this->input->post('product_name'),
 			'Unit' => $this->input->post('unit'),
@@ -387,7 +387,7 @@ class Product extends CI_Controller{
 	}
 	function show_product_detail_modal()
 	{
-		$supplier_id = $this->session->userdata('supplier_id');
+		$supplier_id = $this->session->userdata('user_id');
 		$product_id = $this->input->post('product_id');
 		$get_product = $this->M_product->get_product($supplier_id,$product_id,"","","");
 		$product = $get_product->result();

@@ -83,12 +83,12 @@ class M_user extends CI_Model{
 
     return $query;
   }
-  public function add_member($data){
-    if ($this->db->insert("tbmember",$data)) {
+  function add_user($data){
+    if ($this->db->insert("user_tb",$data)) {
       return TRUE;
     }
   }
-  public function update_user($data="",$id=""){
+  function update_user($data="",$id=""){
     $this->db->set($data);
     $this->db->where("Id",$id);
     $this->db->update("user_tb",$data);

@@ -75,8 +75,8 @@ class Home extends CI_Controller{
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
 
-		// if ($this->session->userdata('buyer_id')) {
-		// 	$buyer_id = $this->session->userdata('buyer_id');
+		// if ($this->session->userdata('user_id')) {
+		// 	$buyer_id = $this->session->userdata('user_id');
 		// 	$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
 		// 	$data['unread_quotation_detail'] = $get_unread_qutation_detail->result();
 		// 	$data['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();

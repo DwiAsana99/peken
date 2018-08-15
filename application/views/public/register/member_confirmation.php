@@ -5,7 +5,7 @@
         <h4><img class="text-center" src="<?php echo base_url('assets/front_end_assets/img/2Dinilaku_Logo.png') ?>" alt=""></h4>
         <h4> <b> Registration</b> </h4>
       </div>
-      <?php echo form_open('Register/edit_new_member_profile'); ?>
+      <?php echo form_open('User/member_confirmation'); ?>
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
@@ -65,15 +65,18 @@
             <label for=""> I am a</label>
             <div class="radio">
               <label class="radio-inline">
-                <input  value="1" type="radio" name="is_supplier" id="seller" checked required>Seller
+                <input  value="1" type="radio" name="user_level" id="seller" checked required>Supplier
               </label>
               <label class="radio-inline">
-                <input  value="0" type="radio" name="is_supplier" id="buyer" required>Buyer
+                <input  value="2" type="radio" name="user_level" id="buyer" required>Buyer
+              </label>
+              <label class="radio-inline">
+                <input  value="3" type="radio" name="user_level" id="buyer" required>Both
               </label>
             </div>
           </div>
         </div>
-        <input type="hidden" name="id_member" value="<?php echo $user[0]->IdMember; ?>">
+        <input type="hidden" name="user_id" value="<?php echo $user[0]->Id; ?>">
         <div class="row">
           <div class="col-xs-12 text-right">
             <button type="submit" class="btn btn-default btn-lg">Submit</button>

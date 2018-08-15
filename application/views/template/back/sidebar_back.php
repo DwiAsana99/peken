@@ -48,7 +48,7 @@
 
           </ul>
         </li> -->
-        <li><a href="<?php echo base_url().'Supplier/dashboard_supplier_view' ?>"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+        <li><a href="<?php echo base_url().'User/dashboard_supplier_view' ?>"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
         <li><a href="<?php echo base_url().'Product/product_view' ?>"><i class="glyphicon glyphicon-th-list"></i><span>My Product</span></a></li>
         <li><a href="<?php echo base_url().'Quotation/supplier_quotation_list' ?>"><i class="fa fa-envelope-o"></i><span >Quotation List</span></a></li>
         <li><a href="<?php echo base_url().'User/supplier_account_view' ?>"><i class="fa fa-user"></i> <span>Profil</span></a></li>

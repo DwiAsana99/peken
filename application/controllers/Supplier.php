@@ -9,7 +9,7 @@
 //     $this->load->model(array('M_user','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation', 'M_quotation_detail'));
 //   }
 //   function dashboard_supplier_view(){
-//     $supplier_id = $this->session->userdata('supplier_id');
+//     $supplier_id = $this->session->userdata('user_id');
 //     if (empty($supplier_id)) {
 //       redirect('Home/home_view');
 //     }
@@ -66,8 +66,8 @@
 //     $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
 //     $data_nav['product_category'] = $get_product_category->result();
 //     $data_nav['product_sub_category'] = $get_product_sub_category->result();
-//     if ($this->session->userdata('buyer_id')) {
-//       $buyer_id = $this->session->userdata('buyer_id');
+//     if ($this->session->userdata('user_id')) {
+//       $buyer_id = $this->session->userdata('user_id');
 //       $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
 //       $data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
 //       $data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
@@ -99,8 +99,8 @@
 //     $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
 //     $data_nav['product_category'] = $get_product_category->result();
 //     $data_nav['product_sub_category'] = $get_product_sub_category->result();
-//     if ($this->session->userdata('buyer_id')) {
-//       $buyer_id = $this->session->userdata('buyer_id');
+//     if ($this->session->userdata('user_id')) {
+//       $buyer_id = $this->session->userdata('user_id');
 //       $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
 //       $data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
 //       $data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
@@ -113,7 +113,7 @@
 //   }
 
 //   function supplier_account_view(){
-//     $supplier_id = $this->session->userdata('supplier_id');
+//     $supplier_id = $this->session->userdata('user_id');
 //     if (empty($supplier_id)) {
 //       redirect('Home/home_view');
 //     }
@@ -132,7 +132,7 @@
 //     $this->load->view('template/back/foot_back');
 //   }
 //   public function edit_supplier_account(){
-//     $supplier_id = $this->session->userdata('supplier_id');
+//     $supplier_id = $this->session->userdata('user_id');
 //     $config['upload_path']   = './assets/supplier_upload/';
 //     $config['allowed_types'] = 'gif|jpg|png|pdf';
 //     $config['overwrite'] = TRUE;
@@ -188,7 +188,7 @@
 //     redirect('Supplier/supplier_account_view');
 //   }
 //   public function supplier_upload_siup(){
-//     $id = $this->session->userdata('supplier_id');
+//     $id = $this->session->userdata('user_id');
 //     $config['upload_path']   = './assets/suplier_upload/';
 //     $config['allowed_types'] = 'gif|jpg|png|pdf';
 //     $config['overwrite'] = TRUE;
@@ -222,7 +222,7 @@
 //   }
 
 //   public function suplier_upload_tdp(){
-//     $id = $this->session->userdata('supplier_id');
+//     $id = $this->session->userdata('user_id');
 //     $config['upload_path']   = './assets/suplier_upload/';
 //     $config['allowed_types'] = 'gif|jpg|png|pdf';
 //     $config['overwrite'] = TRUE;

@@ -102,7 +102,7 @@
                       <?php else: ?>
                         <?php $profile_image = "user_without_profile_image.png"; ?>
                       <?php endif; ?>
-                      <?php if ($this->session->userdata('supplier_id') == $qd->IdMember): ?>
+                      <?php if ($this->session->userdata('user_id') == $qd->IdMember): ?>
                         <li class="right clearfix"><span class="chat-img pull-right">
                           <img src="<?php echo base_url('assets/supplier_upload/').$profile_image; ?>" alt="User Avatar" width="45" class="img-circle" />
                         </span>
@@ -136,7 +136,7 @@
               <div class="panel-footer">
                 <!-- <form class="" id="Simpan" action="<?php //echo base_url().'index.php/Quotation/add_quotation_detail'; ?>" method="post" > -->
                 <div class="input-group">
-                  <input type="hidden" name="id_member" value="<?php echo $this->session->userdata('supplier_id'); ?>">
+                  <input type="hidden" name="id_member" value="<?php echo $this->session->userdata('user_id'); ?>">
                   <input type="hidden" name="id_quotation" value="<?php echo $quotation[0]->IdQuotation;; ?>">
                   <input onkeypress="return runScript(event)" type="text" id="txt_message" name="message" class="form-control input-sm" placeholder="Type your message here..." />
                   <span class="input-group-btn">

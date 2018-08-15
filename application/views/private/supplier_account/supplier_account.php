@@ -4,7 +4,7 @@
 
 <section class="content">
   <!-- <div class="text-center">
-    <?php //$supplier_id = $this->session->userdata('supplier_id'); ?>
+    <?php //$supplier_id = $this->session->userdata('user_id'); ?>
     <a href="<?php //echo site_url('supplier/public_supplier_detail_view?supplier_id=').$supplier_id ?>" class="text-center btn btn-info">
       <span class="glyphicon glyphicon-eye-open"></span> Preview Mini Site</a>
   </div> -->
@@ -42,7 +42,7 @@
                 }?>" alt="" class="img-thumbnail image img-circle" alt="Cinque Terre" width="175" height="175">
 
                 <p>
-                  <?php $supplier_id = $this->session->userdata('supplier_id'); ?>
+                  <?php $supplier_id = $this->session->userdata('user_id'); ?>
                   <a href="<?php echo site_url('supplier/public_supplier_detail_view?supplier_id=').$supplier_id ?>" class="text-center ">
                     <span class="glyphicon glyphicon-eye-open"></span> Preview Mini Site</a>
                 </p>

@@ -3,10 +3,10 @@
     <div class="col-xs-12 col-md-6 col-md-offset-3">
       <div class="text-center" style="margin-bottom:7%;">
         <h2><img class=" text-center" src="<?php echo base_url('assets/front_end_assets/img/2Dinilaku_Logo.png') ?>" alt=""></h2>
-        <h4>Register</h4>
+        <h4>Registration</h4>
       </div>
       <?php echo validation_errors();?>
-       <?php echo form_open('Register/index','class=""'); ?>
+       <?php echo form_open('User/registration','class=""'); ?>
 
         <div class="row">
           <div class="col-xs-12">

@@ -17,8 +17,8 @@ class Support extends CI_Controller{
 		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
-		if ($this->session->userdata('buyer_id')) {
-			$buyer_id = $this->session->userdata('buyer_id');
+		if ($this->session->userdata('user_id')) {
+			$buyer_id = $this->session->userdata('user_id');
 			$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
 			$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
 			$data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
@@ -32,7 +32,7 @@ class Support extends CI_Controller{
   function supplier_support_list_view(){
     // support belum siap
         redirect('Home/home_view');exit();
-    $supplier_id = $this->session->userdata('supplier_id');
+    $supplier_id = $this->session->userdata('user_id');
     $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
     $data_notification['unread_quotation'] = $get_quotation->result();
     $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
@@ -57,13 +57,13 @@ class Support extends CI_Controller{
   function buyer_support_detail(){
     // support belum siap
         redirect('Home/home_view');exit();
-    $buyer_id = $this->session->userdata('buyer_id');
+    $buyer_id = $this->session->userdata('user_id');
     $get_product_category = $this->M_product_category->get_product_category();
     $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
     $data_nav['product_category'] = $get_product_category->result();
     $data_nav['product_sub_category'] = $get_product_sub_category->result();
-    if ($this->session->userdata('buyer_id')) {
-      $buyer_id = $this->session->userdata('buyer_id');
+    if ($this->session->userdata('user_id')) {
+      $buyer_id = $this->session->userdata('user_id');
       $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
       $data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
       $data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
@@ -85,7 +85,7 @@ class Support extends CI_Controller{
   {
     // support belum siap
         redirect('Home/home_view');exit();
-    $buyer_id = $this->session->userdata('buyer_id');
+    $buyer_id = $this->session->userdata('user_id');
     $filter_value = array('id_member' => $buyer_id);
     $get_support = $this->M_support->get_support($filter_value, 'DateSend DESC');
     //print_r($get_support->row());exit();
@@ -117,7 +117,7 @@ class Support extends CI_Controller{
    function get_supplier_support_json(){
      // support belum siap
          redirect('Home/home_view');exit();
-     $supplier_id = $this->session->userdata('supplier_id');
+     $supplier_id = $this->session->userdata('user_id');
      $filter_value = array('id_member' => $supplier_id);
      $get_support = $this->M_support->get_support($filter_value, 'DateSend DESC');
      //print_r($get_support->row());exit();
@@ -149,7 +149,7 @@ class Support extends CI_Controller{
     function get_member_support_json(){
       // support belum siap
           redirect('Home/home_view');exit();
-      // $supplier_id = $this->session->userdata('supplier_id');
+      // $supplier_id = $this->session->userdata('user_id');
       // $filter_value = array('id_member' => $supplier_id);
       $get_support = $this->M_support->get_support("", 'DateSend DESC');
       //print_r($get_support->row());exit();
@@ -229,8 +229,8 @@ class Support extends CI_Controller{
      function get_support_detail_chat(){
        // support belum siap
            redirect('Home/home_view');exit();
-       $buyer_id = $this->session->userdata('buyer_id');
-       $supplier_id = $this->session->userdata('supplier_id');
+       $buyer_id = $this->session->userdata('user_id');
+       $supplier_id = $this->session->userdata('user_id');
        $id_member = !empty($buyer_id) ? $buyer_id : $supplier_id ;
        $id_quotation = $this->input->post('id_quotation');
        $get_quotation_detail = $this->M_quotation_detail->get_quotation_detail($id_quotation,"",0);

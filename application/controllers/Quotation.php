@@ -13,7 +13,7 @@ class Quotation extends CI_Controller{
   }
 
   function rfq_view(){
-    $buyer_id = $this->session->userdata('buyer_id');
+    $buyer_id = $this->session->userdata('user_id');
     if (empty($buyer_id)) {
       redirect('Home/home_view');
     }
@@ -45,8 +45,8 @@ class Quotation extends CI_Controller{
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
     
-    // if ($this->session->userdata('buyer_id')) {
-    //   $buyer_id = $this->session->userdata('buyer_id');
+    // if ($this->session->userdata('user_id')) {
+    //   $buyer_id = $this->session->userdata('user_id');
     //   $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
     //   $data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
     //   $data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
@@ -71,7 +71,7 @@ class Quotation extends CI_Controller{
 
   */
   function supplier_quotation_list(){
-    $supplier_id = $this->session->userdata('supplier_id');
+    $supplier_id = $this->session->userdata('user_id');
     if (empty($supplier_id)) {
       redirect('Home/home_view');
     }
@@ -100,7 +100,7 @@ class Quotation extends CI_Controller{
     $this->load->view('template/back/foot_back');
   }
   function supplier_quotation_detail(){
-    $supplier_id = $this->session->userdata('supplier_id');
+    $supplier_id = $this->session->userdata('user_id');
     if (empty($supplier_id)) {
       redirect('Home/home_view');
     }
@@ -125,7 +125,7 @@ class Quotation extends CI_Controller{
     $this->load->view('template/back/foot_back');
   }
   function buyer_quotation_list(){
-    $buyer_id = $this->session->userdata('buyer_id');
+    $buyer_id = $this->session->userdata('user_id');
     if (empty($buyer_id)) {
       redirect('Home/home_view');
     }
@@ -146,8 +146,8 @@ class Quotation extends CI_Controller{
 		
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
-    // if ($this->session->userdata('buyer_id')) {
-		// 	$buyer_id = $this->session->userdata('buyer_id');
+    // if ($this->session->userdata('user_id')) {
+		// 	$buyer_id = $this->session->userdata('user_id');
 		// 	$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
 		// 	$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
 		// 	$data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
@@ -164,7 +164,7 @@ class Quotation extends CI_Controller{
   */
 
   function buyer_quotation_detail(){
-    $buyer_id = $this->session->userdata('buyer_id');
+    $buyer_id = $this->session->userdata('user_id');
     if (empty($buyer_id)) {
       redirect('Home/home_view');
     }
@@ -182,8 +182,8 @@ class Quotation extends CI_Controller{
 		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category_all();
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
-    if ($this->session->userdata('buyer_id')) {
-			$buyer_id = $this->session->userdata('buyer_id');
+    if ($this->session->userdata('user_id')) {
+			$buyer_id = $this->session->userdata('user_id');
 			$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
 			$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
 			$data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
@@ -197,7 +197,7 @@ class Quotation extends CI_Controller{
 
   function get_unread_quotation_notification_bell()
   {
-    $supplier_id = $this->session->userdata('supplier_id');
+    $supplier_id = $this->session->userdata('user_id');
     $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
     $unread_quotation_notification_bell = $get_quotation->result();
     $unread_count = $get_quotation->num_rows();
@@ -238,8 +238,8 @@ class Quotation extends CI_Controller{
       echo $var;
   }
   function get_chat_notification_bell(){
-    $buyer_id = $this->session->userdata('buyer_id');
-    $supplier_id = $this->session->userdata('supplier_id');
+    $buyer_id = $this->session->userdata('user_id');
+    $supplier_id = $this->session->userdata('user_id');
     if (!empty($supplier_id)) {
 			$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
       $unread_count = $get_unread_qutation_detail->num_rows();
@@ -321,8 +321,8 @@ class Quotation extends CI_Controller{
     //exit();
   }
     function get_quotation_detail_chat(){
-    $buyer_id = $this->session->userdata('buyer_id');
-    $supplier_id = $this->session->userdata('supplier_id');
+    $buyer_id = $this->session->userdata('user_id');
+    $supplier_id = $this->session->userdata('user_id');
     $id_member = !empty($buyer_id) ? $buyer_id : $supplier_id ;
     $quotation_id = $this->input->post('quotation_id');
     $get_quotation_detail = $this->M_quotation_detail->get_quotation_detail($quotation_id,"",0);
@@ -403,7 +403,7 @@ class Quotation extends CI_Controller{
     // print_r($this->input->post());
     // exit();
 
-    $buyer_id = $this->session->userdata('buyer_id');
+    $buyer_id = $this->session->userdata('user_id');
     $supplier_email = $this->input->post('supplier_email');
     $supplier_id = $this->input->post('supplier_id');
     $product_id = $this->input->post('product_id');
