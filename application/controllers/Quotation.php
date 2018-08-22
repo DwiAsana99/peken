@@ -21,9 +21,9 @@ class Quotation extends CI_Controller{
     $supplier_id = $this->input->get('supplier_id');
     $product_rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.*, productcategory_tb.*, productsubcategory_tb.* ";
 		$product_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN productpic_tb INNER JOIN productcategory_tb INNER JOIN productsubcategory_tb
-		ON product_tb.Id = productpic_tb.ProductId 
-		AND user_tb.Id = product_tb.SupplierId 
-		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code 
+		ON product_tb.Id = productpic_tb.ProductId
+		AND user_tb.Id = product_tb.SupplierId
+		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code
 		AND productcategory_tb.Code = productsubcategory_tb.ProductCategoryCode";
 		$product_rules['filter_value'] =  array('product_id' => $product_id);
 		$product_rules['group_by'] = ' productpic_tb.ProductId ';
@@ -31,20 +31,20 @@ class Quotation extends CI_Controller{
     $user_rules['filter_value'] =  array('user_id'=>$supplier_id);
     $this->M_user->set_search_user($user_rules);
 
-    $get_supplier = $this->M_user->get_user();   
+    $get_supplier = $this->M_user->get_user();
     $get_product = $this->M_product->get_product();
 		$data['product'] = $get_product->result();
     $data['supplier'] = $get_supplier->result();
 
     $this->M_product_category->set_search_product_category();
 		$get_product_category = $this->M_product_category->get_product_category();
-	
+
 		$this->M_product_sub_category->set_search_product_sub_category();
 		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
-		
+
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
-    
+
     // if ($this->session->userdata('user_id')) {
     //   $buyer_id = $this->session->userdata('user_id');
     //   $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
@@ -119,7 +119,7 @@ class Quotation extends CI_Controller{
 		// $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
 		// $data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
     // $data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
-    
+
 
     $supplier_id = $this->session->userdata('user_id');
     if (empty($supplier_id)) {
@@ -136,7 +136,7 @@ class Quotation extends CI_Controller{
 
 
     $quotation_detail_rules['join']['other_table_columns'] = " , user_tb.*  ";
-		$quotation_detail_rules['join']['join_table'] = " INNER JOIN user_tb  
+		$quotation_detail_rules['join']['join_table'] = " INNER JOIN user_tb
 		ON user_tb.Id = quotationdetail_tb.MemberId  ";
     $quotation_detail_rules['filter_value'] =  array('quotation_code' => $quotation_code, 'is_read' => 1);
     $quotation_detail_rules['order_by'] =  " quotationdetail_tb.SendDate ASC ";
@@ -150,10 +150,10 @@ class Quotation extends CI_Controller{
     $quotation_row = $get_quotation->row();
     $product_rules['join']['other_table_columns'] = " , product_tb.Id AS ProductId, user_tb.* , productcategory_tb.*, productsubcategory_tb.* ";
 		$product_rules['join']['join_table'] = " INNER JOIN user_tb  INNER JOIN productcategory_tb INNER JOIN productsubcategory_tb
-		ON user_tb.Id = product_tb.SupplierId 
-		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code 
+		ON user_tb.Id = product_tb.SupplierId
+		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code
 		AND productcategory_tb.Code = productsubcategory_tb.ProductCategoryCode";
-		$product_rules['filter_value'] =  array('product_id' => $quotation_row->ProductId);		
+		$product_rules['filter_value'] =  array('product_id' => $quotation_row->ProductId);
 		$this->M_product->set_search_product($product_rules);
     $get_product = $this->M_product->get_product();
 
@@ -212,10 +212,10 @@ class Quotation extends CI_Controller{
     $data['quotation'] = $get_quotation->result();
     $this->M_product_category->set_search_product_category();
 		$get_product_category = $this->M_product_category->get_product_category();
-	
+
 		$this->M_product_sub_category->set_search_product_sub_category();
 		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
-		
+
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
     // if ($this->session->userdata('user_id')) {
@@ -251,7 +251,7 @@ class Quotation extends CI_Controller{
 
 
     $quotation_detail_rules['join']['other_table_columns'] = " , user_tb.*  ";
-		$quotation_detail_rules['join']['join_table'] = " INNER JOIN user_tb  
+		$quotation_detail_rules['join']['join_table'] = " INNER JOIN user_tb
 		ON user_tb.Id = quotationdetail_tb.MemberId  ";
     $quotation_detail_rules['filter_value'] =  array('quotation_code' => $quotation_code, 'is_read' => 1);
     $quotation_detail_rules['order_by'] =  " quotationdetail_tb.SendDate ASC ";
@@ -265,10 +265,10 @@ class Quotation extends CI_Controller{
     $quotation_row = $get_quotation->row();
     $product_rules['join']['other_table_columns'] = " , product_tb.Id AS ProductId, user_tb.* , productcategory_tb.*, productsubcategory_tb.* ";
 		$product_rules['join']['join_table'] = " INNER JOIN user_tb  INNER JOIN productcategory_tb INNER JOIN productsubcategory_tb
-		ON user_tb.Id = product_tb.SupplierId 
-		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code 
+		ON user_tb.Id = product_tb.SupplierId
+		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code
 		AND productcategory_tb.Code = productsubcategory_tb.ProductCategoryCode";
-		$product_rules['filter_value'] =  array('product_id' => $quotation_row->ProductId);		
+		$product_rules['filter_value'] =  array('product_id' => $quotation_row->ProductId);
 		$this->M_product->set_search_product($product_rules);
     $get_product = $this->M_product->get_product();
 
@@ -306,14 +306,14 @@ class Quotation extends CI_Controller{
 
     $data_nav['product_category'] = $get_product_category->result();
     $data_nav['product_sub_category'] = $get_product_sub_category->result();
-    
+
     // if ($this->session->userdata('user_id')) {
 		// 	$buyer_id = $this->session->userdata('user_id');
 		// 	$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
 		// 	$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
 		// 	$data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
     // }
-    
+
     $head_data['page_title'] = "Quotation Detail";
     $this->load->view('template/front/head_front',$head_data);
     $this->load->view('template/front/navigation',$data_nav);
@@ -445,22 +445,20 @@ class Quotation extends CI_Controller{
 
     //exit();
   }
-    function get_quotation_detail_chat(){
-      // ============
-      $member_id = $this->session->userdata('user_id');
-      $quotation_code = $this->input->post('quotation_code');
-      //echo $member_id." ".$quotation_code;exit();
-      // echo "<pre>";
-      // print_r($quotation_detail_rules);
-      // echo "</pre>";exit();
-      $quotation_detail_rules['join']['other_table_columns'] = " , user_tb.Id AS UserId,  quotationdetail_tb.Id AS QuotationDetailId, user_tb.*  ";
-      $quotation_detail_rules['join']['join_table'] = " INNER JOIN user_tb  
-      ON user_tb.Id = quotationdetail_tb.MemberId  ";
-      $quotation_detail_rules['filter_value'] =  array('quotation_code' => $quotation_code, 'is_read' => 0);
-      $this->M_quotation_detail->set_search_quotation_detail($quotation_detail_rules);
-      $get_quotation_detail = $this->M_quotation_detail->get_quotation_detail();
-
-
+  function get_quotation_detail_chat(){
+    // ============
+    $member_id = $this->session->userdata('user_id');
+    $quotation_code = $this->input->post('quotation_code');
+    //echo $member_id." ".$quotation_code;exit();
+    // echo "<pre>";
+    // print_r($quotation_detail_rules);
+    // echo "</pre>";exit();
+    $quotation_detail_rules['join']['other_table_columns'] = " , user_tb.Id AS UserId,  quotationdetail_tb.Id AS QuotationDetailId, user_tb.*  ";
+    $quotation_detail_rules['join']['join_table'] = " INNER JOIN user_tb
+    ON user_tb.Id = quotationdetail_tb.MemberId  ";
+    $quotation_detail_rules['filter_value'] =  array('quotation_code' => $quotation_code, 'is_read' => 0);
+    $this->M_quotation_detail->set_search_quotation_detail($quotation_detail_rules);
+    $get_quotation_detail = $this->M_quotation_detail->get_quotation_detail();
       // =========================
     // $buyer_id = $this->session->userdata('user_id');
     // $supplier_id = $this->session->userdata('user_id');
@@ -499,7 +497,7 @@ class Quotation extends CI_Controller{
           }
         }
       }
-    }
+      }
     //echo "d";
 
   }
@@ -516,7 +514,7 @@ class Quotation extends CI_Controller{
     );
     $quotation_detail_id = $this->M_quotation_detail->add_quotation_detail($data);
     $quotation_detail_rules['join']['other_table_columns'] = " , user_tb.*  ";
-		$quotation_detail_rules['join']['join_table'] = " INNER JOIN user_tb  
+		$quotation_detail_rules['join']['join_table'] = " INNER JOIN user_tb
 		ON user_tb.Id = quotationdetail_tb.MemberId  ";
     $quotation_detail_rules['filter_value'] =  array('quotation_detail_id' => $quotation_detail_id);
     $this->M_quotation_detail->set_search_quotation_detail($quotation_detail_rules);
@@ -539,7 +537,7 @@ class Quotation extends CI_Controller{
         '.$quotation_detail->Message.'
       </p>
     </div>
-  </li>';
+    </li>';
     // echo '<li class="left clearfix"><span class="chat-img pull-left">
     //   <img src='.base_url('assets/supplier_upload/').$quotation_detail->ProfilImage.' alt="User Avatar" class="img-circle" />
     // </span>
