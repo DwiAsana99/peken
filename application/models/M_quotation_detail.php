@@ -58,31 +58,31 @@ function get_quotation_detail() {
 
 
 
-//  function get_unread_qutation_detail($supplier_id='',$buyer_id='')
-//  {
-//    $tbmember_join_tbquotation = "";
-//    $filter_value = " AND tbquotationdetail.IsRead = 0 ";
-//    $filter_value .= !empty($supplier_id) ? " AND tbquotation.IdSupplier = $supplier_id" : "" ;
-//    $filter_value .= !empty($supplier_id) ? " AND tbquotationdetail.IdMember <> $supplier_id" : "" ;
-//    $filter_value .= !empty($buyer_id) ? " AND tbquotation.IdBuyer = $buyer_id" : "" ;
-//    $filter_value .= !empty($buyer_id) ? " AND tbquotationdetail.IdMember <> $buyer_id" : "" ;
-//    if (!empty($buyer_id)) {
-//       $tbmember_join_tbquotation = " AND tbmember.IdMember = tbquotation.IdSupplier ";
-//    } elseif(!empty($supplier_id)){
-//       $tbmember_join_tbquotation = " AND tbmember.IdMember = tbquotation.IdBuyer ";
-//    }
-//    $query = "SELECT
-//    tbmember.*,
-//    tbquotation.*,
-//    count( tbquotationdetail.IdQuotation) as UnreadCount
-//    FROM tbquotation INNER JOIN tbquotationdetail INNER JOIN tbmember
-//    ON tbquotation.IdQuotation = tbquotationdetail.IdQuotation ".$tbmember_join_tbquotation."
-//    WHERE 1=1 ".$filter_value."
-//    GROUP by tbquotation.IdQuotation";
-//    $query = $this->db->query($query);
-
-//    return $query;
-//  }
+ // function get_unread_qutation_detail($supplier_id='',$buyer_id='')
+ // {
+ //   $tbmember_join_tbquotation = "";
+ //   $filter_value = " AND tbquotationdetail.IsRead = 0 ";
+ //   $filter_value .= !empty($supplier_id) ? " AND tbquotation.IdSupplier = $supplier_id" : "" ;
+ //   $filter_value .= !empty($supplier_id) ? " AND tbquotationdetail.IdMember <> $supplier_id" : "" ;
+ //   $filter_value .= !empty($buyer_id) ? " AND tbquotation.IdBuyer = $buyer_id" : "" ;
+ //   $filter_value .= !empty($buyer_id) ? " AND tbquotationdetail.IdMember <> $buyer_id" : "" ;
+ //   if (!empty($buyer_id)) {
+ //      $tbmember_join_tbquotation = " AND tbmember.IdMember = tbquotation.IdSupplier ";
+ //   } elseif(!empty($supplier_id)){
+ //      $tbmember_join_tbquotation = " AND tbmember.IdMember = tbquotation.IdBuyer ";
+ //   }
+ //   $query = "SELECT
+ //   tbmember.*,
+ //   tbquotation.*,
+ //   count( tbquotationdetail.IdQuotation) as UnreadCount
+ //   FROM tbquotation INNER JOIN tbquotationdetail INNER JOIN tbmember
+ //   ON tbquotation.IdQuotation = tbquotationdetail.IdQuotation ".$tbmember_join_tbquotation."
+ //   WHERE 1=1 ".$filter_value."
+ //   GROUP by tbquotation.IdQuotation";
+ //   $query = $this->db->query($query);
+ //
+ //   return $query;
+ // }
 //  function get_quotation_detail(
 //    $id_quotation = "", $id_quotation_detail="",$is_read=""
 //  ){

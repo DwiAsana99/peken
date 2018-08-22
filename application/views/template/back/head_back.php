@@ -152,7 +152,7 @@
                 $.ajax({
                   type: 'POST',
                   dataType: 'html',
-                  url: "<?php echo base_url().'Quotation/get_chat_notification_bell'; ?>",
+                  url: "<?php echo base_url().'Quotation/get_supplier_chat_notification_bell'; ?>",
                   cache: false,
                   data: data,
                   success: function (response) {
@@ -164,8 +164,9 @@
             <script type="text/javascript">
               $(document).ready(function () {
                 // alert('tes');
+                reload_unread_chat_notification_bell();
                 setInterval(
-                  reload_unread_chat_notification_bell, 1000000000 //10000
+                  reload_unread_chat_notification_bell, 5000 //10000
                 );
               });
             </script>

@@ -362,50 +362,20 @@ class Quotation extends CI_Controller{
     </ul>";
       echo $var;
   }
-  function get_chat_notification_bell(){
+  function get_buyer_chat_notification_bell()  {
     $buyer_id = $this->session->userdata('user_id');
-    $supplier_id = $this->session->userdata('user_id');
-    if (!empty($supplier_id)) {
-			$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
-      $unread_count = $get_unread_qutation_detail->num_rows();
-      $unread_chat_notification_bell = $get_unread_qutation_detail->result();
-      if ($unread_count > 0) {
-        $msg = "You have unread comment in ".$unread_count." quotation";
-      } else {
-        $msg = "You have not unread comment ";
-      }
-      $var = "";
-      $var .= "<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-        <i class='glyphicon glyphicon-comment'></i>
-        <span class='label label-warning'>".$unread_count."</span>
-      </a>
-      <ul class='dropdown-menu'>
-        <li class='header'>".$msg."</li>
-        <li>
-          <ul class='menu'>";
-        foreach ($unread_chat_notification_bell as $ucnb) {
-          $profile_image = $ucnb->ProfilImage;
-          $profile_image = !empty($profile_image) ? $profile_image : "user_without_profile_image.png" ;
-          $var .= "<li>
-            <a href=".base_url()."index.php/Quotation/supplier_quotation_detail?quotation_id=".$ucnb->IdQuotation.">
-              <div class='pull-left'>
-                <img src=".base_url()."assets/supplier_upload/".$profile_image." height='50' width='50' class='img-circle' alt=''>
-              </div>
-              <h4>
-                ".$ucnb->CompanyName."
-              </h4>
-              <span class='badge' style='background-color:red;'>".$ucnb->UnreadCount."</span> <span class='label label-info'> unread comment</span>
-            </a>
-          </li>";
-        }
-        $var .= "</ul>
-      </li>
-      <li class='footer'><a href='#'>See All Notifications</a></li>
-    </ul>";
-      echo $var;
-		}
-    if (!empty($buyer_id)) {
-			$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
+    //if (!empty($buyer_id)) {
+      $quotation_rules['join']['other_table_columns'] = " , user_tb.* , quotation_tb.Code AS QuotationCode ,  count( quotationdetail_tb.QuotationCode) as UnreadCount";
+      $quotation_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN quotationdetail_tb
+      ON quotation_tb.Code = quotationdetail_tb.QuotationCode AND user_tb.Id = quotation_tb.SupplierId  ";
+      $quotation_rules['filter_value'] =  array('quotation_detail_is_read' => 0, 'buyer_id'=>$buyer_id, 'quotation_detail_interlocutors'=> $buyer_id);//interlocutors adalah lawan bicara
+      $quotation_rules['group_by'] =  " quotation_tb.Code ";
+      $this->M_quotation->set_search_quotation($quotation_rules);
+      $get_unread_qutation_detail = $this->M_quotation->get_quotation();
+
+
+
+			//$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
       $unread_count = $get_unread_qutation_detail->num_rows();
       $unread_chat_notification_bell = $get_unread_qutation_detail->result();
       if ($unread_count > 0) {
@@ -424,8 +394,8 @@ class Quotation extends CI_Controller{
           <div class='drop-content'>";
         foreach ($unread_chat_notification_bell as $ucnb) {
           $var .= "<li>
-                    <a href=".base_url()."index.php/Quotation/buyer_quotation_detail?quotation_id=".$ucnb->IdQuotation.">
-                    <div class='col-md-3 col-sm-3 col-xs-3'><div class='notify-img'><img src=".base_url()."assets/supplier_upload/".$ucnb->ProfilImage." height='50' width='50' class='img-circle' alt=''></div></div>
+                    <a href=".base_url()."index.php/Quotation/buyer_quotation_detail?quotation_code=".$ucnb->QuotationCode.">
+                    <div class='col-md-3 col-sm-3 col-xs-3'><div class='notify-img'><img src=".base_url()."assets/supplier_upload/".$ucnb->ProfileImage." height='50' width='50' class='img-circle' alt=''></div></div>
                     <div class='col-md-9 col-sm-9 col-xs-9 pd-l0'>
                       <h5><b>".$ucnb->CompanyName."</b></h5>
                       <hr>
@@ -440,7 +410,101 @@ class Quotation extends CI_Controller{
         </div>
       </ul>";
       echo $var;
-		}
+		
+  }
+  function get_supplier_chat_notification_bell(){
+    //$buyer_id = $this->session->userdata('user_id');
+    $supplier_id = $this->session->userdata('user_id');
+    //if (!empty($supplier_id)) {
+      $quotation_rules['join']['other_table_columns'] = " , user_tb.* , quotation_tb.Code AS QuotationCode ,  count( quotationdetail_tb.QuotationCode) as UnreadCount";
+      $quotation_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN quotationdetail_tb
+      ON quotation_tb.Code = quotationdetail_tb.QuotationCode AND user_tb.Id = quotation_tb.BuyerId  ";
+      $quotation_rules['filter_value'] =  array('quotation_detail_is_read' => 0, 'supplier_id'=>$supplier_id, 'quotation_detail_interlocutors'=> $supplier_id);//interlocutors adalah lawan bicara
+      $quotation_rules['group_by'] =  " quotation_tb.Code ";
+      $this->M_quotation->set_search_quotation($quotation_rules);
+      $get_unread_qutation_detail = $this->M_quotation->get_quotation();
+      // echo "<pre>";
+      // print_r($quotation_rules);
+      // echo "</pre>";exit();
+
+
+
+
+			//$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
+      $unread_count = $get_unread_qutation_detail->num_rows();
+      $unread_chat_notification_bell = $get_unread_qutation_detail->result();
+      if ($unread_count > 0) {
+        $msg = "You have unread comment in ".$unread_count." quotation";
+      } else {
+        $msg = "You have not unread comment ";
+      }
+      $var = "";
+      $var .= "<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
+        <i class='glyphicon glyphicon-comment'></i>
+        <span class='label label-warning'>".$unread_count."</span>
+      </a>
+      <ul class='dropdown-menu'>
+        <li class='header'>".$msg."</li>
+        <li>
+          <ul class='menu'>";
+        foreach ($unread_chat_notification_bell as $ucnb) {
+          $profile_image = $ucnb->ProfileImage;
+          $profile_image = !empty($profile_image) ? $profile_image : "user_without_profile_image.png" ;
+          $var .= "<li>
+            <a href=".base_url()."Quotation/supplier_quotation_detail?quotation_code=".$ucnb->QuotationCode.">
+              <div class='pull-left'>
+                <img src=".base_url()."assets/supplier_upload/".$profile_image." height='50' width='50' class='img-circle' alt=''>
+              </div>
+              <h4>
+                ".$ucnb->CompanyName."
+              </h4>
+              <span class='badge' style='background-color:red;'>".$ucnb->UnreadCount."</span> <span class='label label-info'> unread comment</span>
+            </a>
+          </li>";
+        }
+        $var .= "</ul>
+      </li>
+      <li class='footer'><a href='#'>See All Notifications</a></li>
+    </ul>";
+      echo $var;
+		
+    // if (!empty($buyer_id)) {
+		// 	$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
+    //   $unread_count = $get_unread_qutation_detail->num_rows();
+    //   $unread_chat_notification_bell = $get_unread_qutation_detail->result();
+    //   if ($unread_count > 0) {
+    //     $msg = "You have unread comment in ".$unread_count." quotation";
+    //   } else {
+    //     $msg = "You have not unread comment ";
+    //   }
+    //   $var = "";
+    //   $var .= "<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><i class='glyphicon glyphicon-comment'></i><span style='' class='badge'>".$unread_count."</span></a>
+    //     <ul class='dropdown-menu notify-drop'>
+    //       <div class='notify-drop-title'>
+    //         <div class='row'>
+    //           <div class='col-md-12 col-sm-6 col-xs-6'>".$msg."</div>
+    //         </div>
+    //       </div>
+    //       <div class='drop-content'>";
+    //     foreach ($unread_chat_notification_bell as $ucnb) {
+    //       $var .= "<li>
+    //                 <a href=".base_url()."index.php/Quotation/buyer_quotation_detail?quotation_id=".$ucnb->IdQuotation.">
+    //                 <div class='col-md-3 col-sm-3 col-xs-3'><div class='notify-img'><img src=".base_url()."assets/supplier_upload/".$ucnb->ProfilImage." height='50' width='50' class='img-circle' alt=''></div></div>
+    //                 <div class='col-md-9 col-sm-9 col-xs-9 pd-l0'>
+    //                   <h5><b>".$ucnb->CompanyName."</b></h5>
+    //                   <hr>
+    //                   <span class='badge' style='background-color:orange;'>".$ucnb->UnreadCount."</span> <span class='label label-info'> unread comment</span>
+    //                 </div>
+    //               </a>
+    //             </li>";
+    //     }
+    //     $var .= "</div>
+    //     <div class='notify-drop-footer text-center'>
+    //       <a href=''><i class='fa fa-eye'></i> See All Notifications</a>
+    //     </div>
+    //   </ul>";
+    //   echo $var;
+		// }
     //$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
 
     //exit();
