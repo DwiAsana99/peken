@@ -23,7 +23,7 @@
     });
   });
 </script>
-<form action="<?php echo base_url().'index.php/Quotation/add_quotation'; ?>" method="post">
+<form action="<?php echo base_url().'Quotation/add_quotation'; ?>" method="post">
   <div id="info" class="container">
     <ol class="breadcrumb">
       <?php if (isset($breadcrumb)): ?>

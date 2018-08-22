@@ -13,15 +13,15 @@
     <div class="row">
       <div class="col-md-7 detail">
         <div class="block cover-container">
-          <?php foreach($product as $p){ ?>
+          <?php foreach($product_pic as $pc){ ?>
 
-          <img src="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" alt="">
+          <img src="<?php echo base_url('assets/supplier_upload/').$pc->FileName;?>" alt="">
           <?php } ?>
         </div>
         <br>
-Quotation id  : 1 <br>
-Supplier Name : <?php echo $quotation[0]->CompanyName; ?><br>
-Product Name  : <?php echo $quotation[0]->Name; ?><br>
+<!-- Quotation id  : 1 <br> -->
+Supplier Name : <?php echo $product[0]->CompanyName; ?><br>
+Product Name  : <?php echo $product[0]->Name; ?><br>
 Qty           : 10 <br><br>
 
         <p><?php echo $quotation[0]->Content; ?></p>
@@ -36,18 +36,18 @@ Qty           : 10 <br><br>
             <div class="panel-body" >
               <ul class="chat" >
                 <?php foreach ($quotation_detail as $qd): ?>
-                  <?php if (!empty($qd->ProfilImage)): ?>
-                    <?php $profile_image = $qd->ProfilImage; ?>
+                  <?php if (!empty($qd->ProfileImage)): ?>
+                    <?php $profile_image = $qd->ProfileImage; ?>
                   <?php else: ?>
                     <?php $profile_image = "user_without_profile_image.png"; ?>
                   <?php endif; ?>
-                  <?php if ($this->session->userdata('user_id') == $qd->IdMember): ?>
+                  <?php if ($this->session->userdata('user_id') == $qd->MemberId): ?>
                     <li class="right clearfix"><span class="chat-img pull-right">
                       <img src="<?php echo base_url('assets/supplier_upload/').$profile_image; ?>" alt="User Avatar" width="45" class="img-circle" />
                     </span>
                     <div class="chat-body clearfix">
                       <div class="header">
-                        <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
+                        <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?php echo $qd->SendDate; ?></small>
                         <strong class="pull-right primary-font">Me</strong>
                       </div>
                       <p class="word-wrap">
@@ -62,7 +62,7 @@ Qty           : 10 <br><br>
                     <div class="chat-body clearfix">
                       <div class="header">
                         <strong class="primary-font"><?php echo $qd->CompanyName; ?></strong>
-                        <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span><?php echo $qd->DateSend; ?></small>
+                        <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span><?php echo $qd->SendDate; ?></small>
                         </div>
                         <p class="word-wrap">
                           <?php echo $qd->Message; ?>
@@ -81,8 +81,8 @@ Qty           : 10 <br><br>
         <div class="panel-footer">
           <!-- <form class="" id="Simpan" action="<?php //echo base_url().'index.php/Quotation/add_quotation_detail'; ?>" method="post" > -->
           <div class="input-group">
-              <input type="hidden" name="id_member" value="<?php echo $this->session->userdata('user_id'); ?>">
-              <input type="hidden" name="id_quotation" value="<?php echo $quotation[0]->IdQuotation;; ?>">
+              <input type="hidden" name="member_id" value="<?php echo $this->session->userdata('user_id'); ?>">
+              <input type="hidden" name="quotation_code" value="<?php echo $quotation[0]->Code; ?>">
             <input id="txt_message" onkeypress="return runScript(event)" type="text"  name="message" class="form-control input-sm " placeholder="Type your message here..." />
             <span class="input-group-btn">
               <a type="submit" id="addPesan" class="btn btn-warning btn-sm" id="btn-chat" >
@@ -112,15 +112,15 @@ Qty           : 10 <br><br>
         // alert("test");
       e.preventDefault();
       var data = {
-        'id_quotation'              : $('input[name=id_quotation]').val(),
-          'id_member'              : $('input[name=id_member]').val(),
-          'message'             : $('input[name=message]').val()
+        'quotation_code'              : $('input[name=quotation_code]').val(),
+        'member_id'              : $('input[name=member_id]').val(),
+        'message'             : $('input[name=message]').val()
       };
       // lakukan proses ajax
       $.ajax({
           type        : 'POST',
           dataType:'html',
-          url         : "<?php echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
+          url         : "<?php echo base_url().'Quotation/add_quotation_detail'; ?>",
           cache: false,
           data        :  data,
           success: function(response) {
@@ -139,12 +139,12 @@ Qty           : 10 <br><br>
   <script type="text/javascript">
     function reload_chat() {
       var data = {
-        'id_quotation'              : $('input[name=id_quotation]').val()
+        'quotation_code'              : $('input[name=quotation_code]').val()
       };
       $.ajax({
           type        : 'POST',
           dataType:'html',
-          url         : "<?php echo base_url().'index.php/Quotation/get_quotation_detail_chat'; ?>",
+          url         : "<?php echo base_url().'Quotation/get_quotation_detail_chat'; ?>",
           cache: false,
           data        :  data,
           success: function(response) {
@@ -156,6 +156,7 @@ Qty           : 10 <br><br>
   <script type="text/javascript">
     $(document).ready(function(){
       // alert('tes');
+      reload_chat();
         setInterval(
           reload_chat
           , 1000
@@ -166,15 +167,15 @@ Qty           : 10 <br><br>
          // ambil inputannya
          e.preventDefault();
          var data = {
-           'id_quotation'              : $('input[name=id_quotation]').val(),
-             'id_member'              : $('input[name=id_member]').val(),
+           'quotation_code'              : $('input[name=quotation_code]').val(),
+             'member_id'              : $('input[name=member_id]').val(),
              'message'             : $('input[name=message]').val()
          };
          // lakukan proses ajax
          $.ajax({
              type        : 'POST',
              dataType:'html',
-             url         : "<?php echo base_url().'index.php/Quotation/add_quotation_detail'; ?>",
+             url         : "<?php echo base_url().'Quotation/add_quotation_detail'; ?>",
              cache: false,
              data        :  data,
              success: function(response) {

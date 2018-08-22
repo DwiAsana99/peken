@@ -32,7 +32,7 @@
                 <?php foreach($quotation as $q){ ?>
                   <tr class="click">
                     <td>
-                      <a href="<?php echo base_url().'index.php/Quotation/supplier_quotation_detail?id_quotation='.$q->Code; ?>">To:
+                      <a href="<?php echo base_url().'Quotation/supplier_quotation_detail?quotation_code='.$q->Code; ?>">To:
                         <?php echo $q->CompanyName  ?>
                       </a>
                     </td>

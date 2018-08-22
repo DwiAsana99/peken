@@ -61,30 +61,30 @@
                     </ul>
                   </li>
                   <script type="text/javascript">
-                    function reload_unread_quotation_notification_bell() {
-                      var data = {
-                        'id_quotation'              : 1
-                      };
-                      $.ajax({
-                          type        : 'POST',
-                          dataType:'html',
-                          url         : "<?php echo base_url().'index.php/Quotation/get_unread_quotation_notification_bell'; ?>",
-                          cache: false,
-                          data        :  data,
-                          success: function(response) {
-                              $("#supplier_unread_quotation_notification_bell").html(response);
-                          }
-                      });
-                    }
+                    // function reload_unread_quotation_notification_bell() {
+                    //   var data = {
+                    //     'id_quotation'              : 1
+                    //   };
+                    //   $.ajax({
+                    //       type        : 'POST',
+                    //       dataType:'html',
+                    //       url         : "<?php //echo base_url().'index.php/Quotation/get_unread_quotation_notification_bell'; ?>",
+                    //       cache: false,
+                    //       data        :  data,
+                    //       success: function(response) {
+                    //           $("#supplier_unread_quotation_notification_bell").html(response);
+                    //       }
+                    //   });
+                    // }
                   </script>
                   <script type="text/javascript">
-                  $(document).ready(function(){
-                    // alert('tes');
-                      setInterval(
-                        reload_unread_quotation_notification_bell
-                        , 1000000000 //10000
-                      );
-                      });
+                  // $(document).ready(function(){
+                  //   // alert('tes');
+                  //     setInterval(
+                  //       reload_unread_quotation_notification_bell
+                  //       , 1000000000 //10000
+                  //     );
+                  //     });
                   </script>
                   <!-- Messages: style can be found in dropdown.less-->
                   <li class="dropdown messages-menu" id="supplier_unread_chat_notification_bell">

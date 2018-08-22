@@ -24,7 +24,7 @@ class M_quotation extends CI_Model{
   // $this->filter_value .= isset($rules['filter_value']['product_id']) ? " AND product_tb.Id = ".$rules['filter_value']['product_id'] : "" ;
   $this->filter_value = isset($rules['filter_value']['buyer_id']) ? " AND quotation_tb.BuyerId = ".$rules['filter_value']['buyer_id'] : "" ;
   $this->filter_value .= isset($rules['filter_value']['supplier_id']) ? " AND quotation_tb.SupplierId = ".$rules['filter_value']['supplier_id'] : "" ;
-  // $this->filter_value .= isset($rules['filter_value']['product_category_code']) ? " AND productsubcategory_tb.ProductCategoryCode = ".$rules['filter_value']['product_category_code'] : "" ;
+  $this->filter_value .= isset($rules['filter_value']['quotation_code']) ? " AND quotation_tb.Code = ".$rules['filter_value']['quotation_code'] : "" ;
   // $this->filter_value .= isset($rules['filter_value']['product_sub_category_code']) ? " AND product_tb.ProductSubCategoryCode = ".$rules['filter_value']['product_sub_category_code'] : "" ;
   // $this->filter_value .= isset($rules['filter_value']['search_value']) ? " AND product_tb.Name LIKE "."'%".$rules['filter_value']['search_value']."%'"  : "" ;
 }

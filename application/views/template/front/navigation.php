@@ -479,29 +479,29 @@
           <!-- </li> -->
         </li>
         <script type="text/javascript">
-          function reload_unread_chat_notification_bell() {
-            var data = {
-              'id_quotation': 1
-            };
-            $.ajax({
-              type: 'POST',
-              dataType: 'html',
-              url: "<?php echo base_url().'index.php/Quotation/get_chat_notification_bell'; ?>",
-              cache: false,
-              data: data,
-              success: function (response) {
-                $("#unread_chat_notification_bell").html(response);
-              }
-            });
-          }
+          // function reload_unread_chat_notification_bell() {
+          //   var data = {
+          //     'id_quotation': 1
+          //   };
+          //   $.ajax({
+          //     type: 'POST',
+          //     dataType: 'html',
+          //     url: "<?php// echo base_url().'index.php/Quotation/get_chat_notification_bell'; ?>",
+          //     cache: false,
+          //     data: data,
+          //     success: function (response) {
+          //       $("#unread_chat_notification_bell").html(response);
+          //     }
+          //   });
+          // }
         </script>
         <script type="text/javascript">
-          $(document).ready(function () {
-            // alert('tes');
-            setInterval(
-              reload_unread_chat_notification_bell, 10000
-            );
-          });
+          // $(document).ready(function () {
+          //   // alert('tes');
+          //   setInterval(
+          //     reload_unread_chat_notification_bell, 10000
+          //   );
+          // });
         </script>
         <!-- __________________________ -->
         <li class="dropdown">
