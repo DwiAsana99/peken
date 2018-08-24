@@ -24,10 +24,11 @@ class M_quotation extends CI_Model{
     // $this->filter_value .= isset($rules['filter_value']['product_id']) ? " AND product_tb.Id = ".$rules['filter_value']['product_id'] : "" ;
     $this->filter_value = isset($rules['filter_value']['buyer_id']) ? " AND quotation_tb.BuyerId = ".$rules['filter_value']['buyer_id'] : "" ;
     $this->filter_value .= isset($rules['filter_value']['supplier_id']) ? " AND quotation_tb.SupplierId = ".$rules['filter_value']['supplier_id'] : "" ;
-    $this->filter_value .= isset($rules['filter_value']['quotation_code']) ? " AND quotation_tb.Code = ".$rules['filter_value']['quotation_code'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['quotation_code']) ? " AND quotation_tb.Code = "."'".$rules['filter_value']['quotation_code']."'" : "" ;
+    $this->filter_value .= isset($rules['filter_value']['quotation_is_read']) ? " AND quotation_tb.IsRead = ".$rules['filter_value']['quotation_is_read'] : "" ;
     $this->filter_value .= isset($rules['filter_value']['quotation_detail_is_read']) ? " AND quotationdetail_tb.IsRead = ".$rules['filter_value']['quotation_detail_is_read'] : "" ;
     $this->filter_value .= isset($rules['filter_value']['quotation_detail_interlocutors']) ? " AND quotationdetail_tb.MemberId <> ".$rules['filter_value']['quotation_detail_interlocutors'] : "" ;
-    // $this->filter_value .= isset($rules['filter_value']['product_sub_category_code']) ? " AND product_tb.ProductSubCategoryCode = ".$rules['filter_value']['product_sub_category_code'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['date']) ? " AND DATE(quotation_tb.SendDate) = "."'".$rules['filter_value']['date']."'" : "" ;
     // $this->filter_value .= isset($rules['filter_value']['search_value']) ? " AND product_tb.Name LIKE "."'%".$rules['filter_value']['search_value']."%'"  : "" ;
   }
 
@@ -64,9 +65,9 @@ class M_quotation extends CI_Model{
   //    return $query;
 
   //  }
-  function update_quotation($data="", $id_quotation=""){
-    $this->db->where('IdQuotation',$id_quotation );
-    $this->db->update('tbquotation',$data);
+  function update_quotation($data="", $quotation_code=""){
+    $this->db->where('Code',$quotation_code );
+    $this->db->update('quotation_tb',$data);
   }
 }
 

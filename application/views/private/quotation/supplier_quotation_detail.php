@@ -80,9 +80,6 @@
       <!-- /.box-header -->
       <div class="box-body">
         <div class="col-md-6">
-          <p><?php echo $product[0]->CompanyName; ?></p>
-          <p><?php echo $quotation[0]->SendDate; ?></p>
-          <p><?php echo $quotation[0]->Subject; ?></p>
           <p><?php echo $quotation[0]->Content; ?></p>
         </div>
 

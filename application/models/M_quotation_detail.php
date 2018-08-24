@@ -24,7 +24,7 @@ class M_quotation_detail extends CI_Model{
   $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
   // $this->filter_value = isset($rules['filter_value']['is_published']) ? " AND product_tb.IsPublished = ".$rules['filter_value']['is_published'] : "" ;
   // $this->filter_value .= isset($rules['filter_value']['product_id']) ? " AND product_tb.Id = ".$rules['filter_value']['product_id'] : "" ;
-  $this->filter_value = isset($rules['filter_value']['quotation_code']) ? " AND quotationdetail_tb.QuotationCode = ".$rules['filter_value']['quotation_code'] : "" ;
+  $this->filter_value = isset($rules['filter_value']['quotation_code']) ? " AND quotationdetail_tb.QuotationCode = "."'".$rules['filter_value']['quotation_code']."'" : "" ;
   $this->filter_value .= isset($rules['filter_value']['member_id']) ? " AND quotationdetail_tb.MemberId = ".$rules['filter_value']['member_id'] : "" ;
   $this->filter_value .= isset($rules['filter_value']['quotation_detail_id']) ? " AND quotationdetail_tb.Id = ".$rules['filter_value']['quotation_detail_id'] : "" ;
   $this->filter_value .= isset($rules['filter_value']['is_read']) ? " AND quotationdetail_tb.IsRead = ".$rules['filter_value']['is_read'] : "" ;

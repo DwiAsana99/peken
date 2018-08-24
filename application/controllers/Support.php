@@ -187,7 +187,7 @@ class Support extends CI_Controller{
        $id_member = $this->input->post('id_member');
        // echo $id_member;exit();
        $message = $this->input->post('message');
-       $date = $this->M_date->get_date_sql_format();
+       $date = $this->M_date->get_datetime_sql_format();
        $data = array(
          'SupportCode' => $support_code,
          'IdMember' => $id_member,
