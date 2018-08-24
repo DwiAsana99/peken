@@ -185,14 +185,41 @@
                       <label class="control-label">Profile Image</label>
                       <br>
 
-                      <div class="form-group text-center">
-                        <label for="profile_image" class="btn">
+                      <div class="form-group text-center" >
+                        <!-- <label for="profile_image" class="btn"> -->
                           <img src="<?php if (empty($user[0]->ProfileImage)) {
                             echo base_url().'assets/icon/upload-icon.png';
                           }else{
                             echo base_url().'assets/supplier_upload/'.$user[0]->ProfileImage;
                           }?>" id="fotoprofile" alt="" class="img-thumbnail" alt="Cinque Terre" width="175" height="175">
-                        </label>
+                        <!-- </label> -->
+
+
+                          <!-- _________________dropdown______________ -->
+                      <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <span class="glyphicon glyphicon-camera"></span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="margin-left: 50%; margin-right: 50%;">
+                          <li><a href="#"><label for="profile_image" class="" style="font-weight:400">Change Profile Image</label></a></li>
+
+
+
+                          <?php if (!empty($user[0]->ProfileImage)): ?>
+                            <li>
+                              <a href="#" data-toggle="modal" data-target="#lightbox">
+                                <img src="<?php echo base_url().'assets/supplier_upload/'.$user[0]->ProfileImage;?>" style="display: none;" alt="">
+                                View Profile Image
+                              </a>
+                            </li>
+                          <?php endif; ?>
+                          
+                        </ul>
+                      </div>
+                      <!-- _________________dropdown______________ -->
+
+
+
                         <br>
                       </div>
 
@@ -215,6 +242,13 @@
                       <!--  -->
 
                     </div>
+
+
+
+
+
+
+
                     <div class="form-group col-lg-6">
                       <label class="control-label">First Name</label>
                       <input type="text" name="first_name" id="category" value="<?php echo $user[0]->FirstName; ?>" data-validation="length" data-validation-length="min4"
@@ -265,9 +299,7 @@
                     </div>
                     <div class="form-group col-lg-12">
                       <label class="control-label">Company Description</label>
-                      <textarea name="company_description" rows="6" class="form-control">
-                        <?php echo $user[0]->CompanyDescription; ?>
-                      </textarea>
+                      <textarea name="company_description" rows="6" class="form-control"><?php echo $user[0]->CompanyDescription; ?></textarea>
                     </div>
                     <div class="form-group ">
                       <button class="btn btn-primary col-md-12" type="submit">Save</button>
@@ -294,13 +326,36 @@
                       <br>
                       <!-- <img src="<?php //echo base_url().'assets/icon/upload-icon.png'?>" alt="" style="width: 100px"> -->
                       <div class="form-group text-center">
-                        <label for="siup" class="btn">
+                        <!-- <label for="siup" class="btn"> -->
                           <img src="<?php if (empty($user[0]->Siup)) {
                             echo base_url().'assets/icon/upload-icon.png';
                           }else{
                             echo base_url().'assets/supplier_upload/'.$user[0]->Siup;
                           }?>" id="fotoview" alt="" class="img-thumbnail" alt="Cinque Terre" width="175" height="175">
-                        </label>
+                        <!-- </label> -->
+
+                        <!-- _________________dropdown______________ -->
+                        <div class="dropdown">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-camera"></span> <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="margin-left: 50%; margin-right: 50%;">
+                            <li><a href="#"><label for="siup" class="" style="font-weight:400">Change Profile Image</label></a></li>
+
+
+
+                            <?php if (!empty($user[0]->Siup)): ?>
+                              <li>
+                                <a href="#" data-toggle="modal" data-target="#lightbox">
+                                  <img src="<?php echo base_url().'assets/supplier_upload/'.$user[0]->Siup;?>" style="display: none;" alt="">
+                                  View Profile Image
+                                </a>
+                              </li>
+                            <?php endif; ?>
+                            
+                          </ul>
+                        </div>
+                        <!-- _________________dropdown______________ -->
                       </div>
                       <?php if (empty($user[0]->Siup)): ?>
                       <div class="form-group">
@@ -327,13 +382,35 @@
                       <br>
 
                       <div class="form-group text-center">
-                        <label for="tdp" class="btn">
+                        <!-- <label for="tdp" class="btn"> -->
                           <img src="<?php if (empty($user[0]->Tdp)) {
-                    echo base_url().'assets/icon/upload-icon.png';
-                  }else{
-                    echo base_url().'assets/supplier_upload/'.$user[0]->Tdp;
-                  }?>" id="fotoedit" alt="" class="img-thumbnail" alt="Cinque Terre" width="175" height="175">
-                        </label>
+                            echo base_url().'assets/icon/upload-icon.png';
+                          }else{
+                            echo base_url().'assets/supplier_upload/'.$user[0]->Tdp;
+                          }?>" id="fotoedit" alt="" class="img-thumbnail" alt="Cinque Terre" width="175" height="175">
+                        <!-- </label> -->
+                        <!-- _________________dropdown______________ -->
+                        <div class="dropdown">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-camera"></span> <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="margin-left: 50%; margin-right: 50%;">
+                            <li><a href="#"><label for="tdp" class="" style="font-weight:400">Change Profile Image</label></a></li>
+
+
+
+                            <?php if (!empty($user[0]->Tdp)): ?>
+                              <li>
+                                <a href="#" data-toggle="modal" data-target="#lightbox">
+                                  <img src="<?php echo base_url().'assets/supplier_upload/'.$user[0]->Tdp;?>" style="display: none;" alt="">
+                                  View Profile Image
+                                </a>
+                              </li>
+                            <?php endif; ?>
+                            
+                          </ul>
+                        </div>
+                        <!-- _________________dropdown______________ -->
                         <br>
                       </div>
 
@@ -368,7 +445,7 @@
 
                   <hr>
                   <form class="form" action="<?php echo base_url().'User/update_supplier_gallery'; ?>" enctype="multipart/form-data" method="post" id="">
-                    
+
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Company Gallery</label>
@@ -471,6 +548,65 @@
           <!-- <button type="submit" class="btn btn-primary col-md-12" name="button">Save</button> -->
 
 
+                            <script>
+                              $(document).ready(function() {
+                              var $lightbox = $('#lightbox');
+
+                              $('[data-target="#lightbox"]').on('click', function(event) {
+                                  var $img = $(this).find('img'),
+                                      src = $img.attr('src'),
+                                      alt = $img.attr('alt'),
+                                      css = {
+                                          'maxWidth': $(window).width() - 100,
+                                          'maxHeight': $(window).height() - 100
+                                      };
+
+                                  $lightbox.find('.close').addClass('hidden');
+                                  $lightbox.find('img').attr('src', src);
+                                  $lightbox.find('img').attr('alt', alt);
+                                  $lightbox.find('img').css(css);
+                              });
+
+                              $lightbox.on('shown.bs.modal', function (e) {
+                                  var $img = $lightbox.find('img');
+
+                                  $lightbox.find('.modal-dialog').css({'width': $img.width()});
+                                  $lightbox.find('.close').removeClass('hidden');
+                              });
+                          });
+                            </script>
+                            <style>
+                              #lightbox .modal-content {
+                                  display: inline-block;
+                                  text-align: center;
+                              }
+
+                              #lightbox .close {
+                                  opacity: 1;
+                                  color: rgb(255, 255, 255);
+                                  background-color: rgb(25, 25, 25);
+                                  padding: 5px 8px;
+                                  border-radius: 30px;
+                                  border: 2px solid rgb(255, 255, 255);
+                                  position: absolute;
+                                  top: -15px;
+                                  right: -55px;
+
+                                  z-index:1032;
+                              }
+                            </style>
+                            <!-- ______________________lightbox_____________ -->
+          <div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+              <div class="modal-dialog ">
+                  <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">×</button>
+                  <div class="modal-content">
+                      <div class="modal-body">
+                          <img src="" alt="" />
+                      </div>
+                  </div>
+              </div>
+          </div>
+                            <!-- ______________________lightbox_____________ -->
 
 
 

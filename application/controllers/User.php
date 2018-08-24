@@ -413,21 +413,22 @@
       echo "{}";
     }
 
-    function supplier_view(){
+    function member_view(){
       //$data['product_category'] = $this->M_product_category->get_product_category();
-      $id_admin = $this->session->userdata('id_admin');
-      if (empty($id_admin)) {
+      $admin_id = $this->session->userdata('user_id');
+      if (empty($admin_id)) {
         redirect('Home/home_view');
       }
       $this->load->view('template/back_admin/admin_head');
       $this->load->view('template/back_admin/admin_navigation');
       $this->load->view('template/back_admin/admin_sidebar');
-      $this->load->view('private/supplier/supplier');
+      $this->load->view('private/member/member');
       $this->load->view('template/back_admin/admin_foot');
     }
 
-    function get_supplier_json(){
-      $get_member = $this->M_user->get_member(0,1);
+    function get_member_json(){
+      $this->M_user->set_search_user();
+      $get_member = $this->M_user->get_user();
       // print_r($get_product_category->row());exit();
       $baris = $get_member->result();
       $data = array();
@@ -436,8 +437,8 @@
           "CompanyName" => $bar->CompanyName,
           "Email" => $bar->Email,
           "Phone" => $bar->Phone,
-          "Location" => $bar->Location,
           "City" => $bar->City,
+          "State" => $bar->State,
           "DetailButton" => '<a   id="id_detail" class="btn btn-info id_detail" ><span class="fa fa-fw fa-search" >
           </span></a>'
         );
