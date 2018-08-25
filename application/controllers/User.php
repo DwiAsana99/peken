@@ -427,7 +427,9 @@
     }
 
     function get_member_json(){
-      $this->M_user->set_search_user();
+      $user_rules['filter_value']['search_value'] = isset($this->input->get('search_value')) ? $this->input->get('search_value') : "" ;
+      //$user_rules['filter_value'] =  array('search_value'=>1);;
+      $this->M_user->set_search_user($user_rules);
       $get_member = $this->M_user->get_user();
       // print_r($get_product_category->row());exit();
       $baris = $get_member->result();

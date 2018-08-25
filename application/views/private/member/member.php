@@ -1,7 +1,7 @@
 <section class="content-header">
   <div class="btn-group btn-breadcrumb">
     <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
-    <a  class="btn btn-default  btn-xs active">Supplier</a>
+    <a  class="btn btn-default  btn-xs active">Member List</a>
   </div>
 </section>
 <style>
@@ -17,7 +17,7 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Supplier</h3>
+          <h3 class="box-title">Member List</h3>
           <!-- <a style="float:right"  href="<?php ?>" class="btn btn-primary">
             <i class="glyphicon glyphicon-saved"></i>
             Add Supplier
@@ -72,7 +72,7 @@
               }
           </style>
           <div class="input-group" style="float:right" id="adv-search">
-                <input type="text" class="form-control" placeholder="Search for snippets" />
+                <input type="text" class="form-control" placeholder="Search for company name" />
                 <div class="input-group-btn">
                     <div class="btn-group" role="group">
                         <div class="dropdown dropdown-lg">
@@ -80,23 +80,22 @@
                             <div class="dropdown-menu dropdown-menu-right" role="menu">
                                 <form class="form-horizontal" role="form">
                                   <div class="form-group">
-                                    <label for="filter">Filter by</label>
+                                    <label for="filter">Filter by member category</label>
                                     <select class="form-control">
-                                        <option value="0" selected>All Snippets</option>
-                                        <option value="1">Featured</option>
-                                        <option value="2">Most popular</option>
-                                        <option value="3">Top rated</option>
-                                        <option value="4">Most commented</option>
+                                      <option value="-1" selected>All Category</option>
+                                      <option value="1">Supplier</option>
+                                      <option value="2">Buyer</option>
+                                      <option value="3">Both</option>                                      
                                     </select>
                                   </div>
-                                  <div class="form-group">
-                                    <label for="contain">Author</label>
+                                  <!-- <div class="form-group">
+                                    <label for="contain">State</label>
                                     <input class="form-control" type="text" />
                                   </div>
                                   <div class="form-group">
-                                    <label for="contain">Contains the words</label>
+                                    <label for="contain">Province</label>
                                     <input class="form-control" type="text" />
-                                  </div>
+                                  </div> -->
                                   <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                 </form>
                             </div>
@@ -154,7 +153,7 @@ $(document).ready(function() {
     "serverSide": false, //Feature control DataTables' server-side processing mode.
     "paging": true,
     "lengthChange": true,
-    "searching": true,
+    "searching": false,
     "ordering": true,
     "info": true,
     "autoWidth": false,
