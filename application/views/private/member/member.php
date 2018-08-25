@@ -26,7 +26,7 @@
         <!-- /.box-header -->
         <div class="box-body">
           <div class="table-responsive">
-          
+
 
           <!--  -->
           <style>
@@ -77,17 +77,40 @@
                     <div class="btn-group" role="group">
                         <div class="dropdown dropdown-lg">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" role="form">
+                            <div class="dropdown-menu dropdown-menu-right form-horizontal" role="menu">
+                                <form class="form-horizontal" method="GET"  role="form" action="<?php echo site_url('User/member_view'); ?>">
                                   <div class="form-group">
                                     <label for="filter">Filter by member category</label>
-                                    <select class="form-control">
-                                      <option value="-1" selected>All Category</option>
-                                      <option value="1">Supplier</option>
-                                      <option value="2">Buyer</option>
-                                      <option value="3">Both</option>                                      
+                                    <select class="form-control" name="user_level" id="user_level">
+                                      <?php if ($user_level == 1){ ?>
+                                        <option value="-1" >All Category</option>
+                                        <option value="1" selected>Supplier</option>
+                                        <option value="2" >Buyer</option>
+                                        <option value="3">Both</option>
+                                      <?php }elseif($user_level == 2){ ?>
+                                        <option value="-1" >All Category</option>
+                                        <option value="1" >Supplier</option>
+                                        <option value="2" selected>Buyer</option>
+                                        <option value="3">Both</option>
+                                      <?php }elseif($user_level == 3){ ?>
+                                        <option value="-1" >All Category</option>
+                                        <option value="1" >Supplier</option>
+                                        <option value="2" >Buyer</option>
+                                        <option value="3" selected>Both</option>
+                                      <?php }elseif($user_level == -1){ ?>
+                                        <option value="-1" selected>All Category</option>
+                                        <option value="1" >Supplier</option>
+                                        <option value="2" >Buyer</option>
+                                        <option value="3">Both</option>
+                                      <?php }else{ ?>
+                                        <option value="-1" selected>All Category</option>
+                                        <option value="1" >Supplier</option>
+                                        <option value="2" >Buyer</option>
+                                        <option value="3">Both</option>
+                                       <?php } ?>
                                     </select>
                                   </div>
+                                  <button type="submit" class="btn btn-primary" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                   <!-- <div class="form-group">
                                     <label for="contain">State</label>
                                     <input class="form-control" type="text" />
@@ -96,7 +119,6 @@
                                     <label for="contain">Province</label>
                                     <input class="form-control" type="text" />
                                   </div> -->
-                                  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                 </form>
                             </div>
                         </div>
@@ -118,7 +140,16 @@
                 </tr>
               </thead>
               <tbody class="text-center">
-
+              <?php foreach($member as $m){?>
+              <tr  class='odd gradeX context'>
+                <td><?php echo $m->CompanyName?></td>
+                <td><?php echo $m->Email?></td>
+                <td><?php echo $m->Phone?></td>
+                <td><?php echo $m->City?></td>
+                <td><?php echo $m->State?></td>
+                <td><?php echo $m->Province?></td>
+                </tr>
+                <?php } ?>
               </tbody>
             </table>
           </div>
@@ -128,52 +159,79 @@
   </div><!-- /.row -->
 </section><!-- /.content -->
 
+
+
+  <script type="text/javascript">
+    // function search(e){
+    //   e.preventDefault();
+    //   // ambil url pada atribute form action
+    //   //var url = $('#Simpan').attr('action');
+    //   // ambil inputannya
+    //   var data = {
+    //       'user_level'              : $('input[name=user_level]').val()
+    //   }
+    //   lakukan proses ajax
+    //   $.ajax({
+    //       type        : 'GET',
+    //       url         : <?php //echo site_url('User/member_view'); ?>,
+    //       data        :  data,
+    //       success: function(response) {
+    //         //  $('#Simpan').find('input').val();
+    //       }
+
+    //   });
+
+    //   return false;
+    // }
+  </script>
+
+
 <script>
-// $(function () {
-//   $("#example1").DataTable();
-//   $('#example2').DataTable({
-//     "paging": true,
-//     "lengthChange": false,
-//     "searching": false,
-//     "ordering": true,
-//     "info": true,
-//     "autoWidth": false
-//   });
-// });
-</script>
-<script type="text/javascript">
-
-var save_method; //for save method string
-var table;
-
-$(document).ready(function() {
-  //datatables
-  table = $('#example1').DataTable({
-    "processing": true, //Feature control the processing indicator.
-    "serverSide": false, //Feature control DataTables' server-side processing mode.
+$(function () {
+  $("#example1").DataTable();
+  $('#example2').DataTable({
     "paging": true,
-    "lengthChange": true,
+    "lengthChange": false,
     "searching": false,
     "ordering": true,
     "info": true,
-    "autoWidth": false,
-    "order": [], //Initial no order.
-    // Load data for the table's content from an Ajax source
-    "ajax": {
-      "url": '<?php echo site_url('User/get_member_json'); ?>',
-      "type": "POST"
-    },
-    //Set column definition initialisation properties.
-    "columns": [
-      {"data": "CompanyName"},
-      {"data": "Email"},
-      {"data": "Phone"},
-      {"data": "City"},
-      {"data": "State"},
-      {"data": "DetailButton"}
-    ],
-
+    "autoWidth": false
   });
-
 });
+</script>
+<script type="text/javascript">
+
+// var save_method; //for save method string
+// var table;
+
+// $(document).ready(function() {
+//   //datatables
+//   table = $('#example1').DataTable({
+//     "processing": true, //Feature control the processing indicator.
+//     "serverSide": false, //Feature control DataTables' server-side processing mode.
+//     "paging": true,
+//     "lengthChange": true,
+//     "searching": false,
+//     "ordering": true,
+//     "info": true,
+//     "autoWidth": false,
+//     "order": [], //Initial no order.
+//     // Load data for the table's content from an Ajax source
+//     "ajax": {
+//       "url": '<?php// echo site_url('User/get_member_json'); ?>',
+//       "type": "POST"
+//     },
+//     //Set column definition initialisation properties.
+//     "columns": [
+//       {"data": "CompanyName"},
+//       {"data": "Email"},
+//       {"data": "Phone"},
+//       {"data": "City"},
+//       {"data": "State"},
+//       {"data": "DetailButton"}
+//     ],
+
+//   });
+
+// });
 </script>

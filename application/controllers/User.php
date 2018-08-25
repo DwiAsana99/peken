@@ -419,17 +419,38 @@
       if (empty($admin_id)) {
         redirect('Home/home_view');
       }
+      if (!empty($this->input->get())) {
+        $user_level = $this->input->get('user_level');
+        $user_level = ($user_level == -1) ? "1 OR user_tb.UserLevel = 2 OR user_tb.UserLevel = 3" : $user_level ;
+        $user_rules['filter_value']['user_level'] = $user_level;
+        $data['user_level'] = $this->input->get('user_level');;
+        $this->M_user->set_search_user($user_rules);
+      } else {
+        $user_rules['filter_value']['user_level'] = "1 OR user_tb.UserLevel = 2 OR user_tb.UserLevel = 3";
+        $this->M_user->set_search_user($user_rules);
+      }
+      
+      //$this->M_user->set_search_user($user_rules);
+      $get_member = $this->M_user->get_user();
+      $data['member'] = $get_member->result();
       $this->load->view('template/back_admin/admin_head');
       $this->load->view('template/back_admin/admin_navigation');
       $this->load->view('template/back_admin/admin_sidebar');
-      $this->load->view('private/member/member');
+      $this->load->view('private/member/member',$data);
       $this->load->view('template/back_admin/admin_foot');
     }
 
     function get_member_json(){
-      $user_rules['filter_value']['search_value'] = isset($this->input->get('search_value')) ? $this->input->get('search_value') : "" ;
+      // !empty() ? $this->input->get('user_level') : "" ;
       //$user_rules['filter_value'] =  array('search_value'=>1);;
-      $this->M_user->set_search_user($user_rules);
+      if (!empty($this->input->get())) {
+        $user_rules['filter_value']['user_level'] = $this->input->get('user_level');
+        $this->M_user->set_search_user($user_rules);
+      } else {
+        $this->M_user->set_search_user();
+      }
+      
+      //$this->M_user->set_search_user($user_rules);
       $get_member = $this->M_user->get_user();
       // print_r($get_product_category->row());exit();
       $baris = $get_member->result();
