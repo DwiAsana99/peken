@@ -416,14 +416,24 @@
     function member_view(){
       //$data['product_category'] = $this->M_product_category->get_product_category();
       $admin_id = $this->session->userdata('user_id');
+      $filter_num = 0;
       if (empty($admin_id)) {
         redirect('Home/home_view');
       }
-      if (!empty($this->input->get())) {
-        $user_level = $this->input->get('user_level');
-        $user_level = ($user_level == -1) ? "1 OR user_tb.UserLevel = 2 OR user_tb.UserLevel = 3" : $user_level ;
-        $user_rules['filter_value']['user_level'] = $user_level;
-        $data['user_level'] = $this->input->get('user_level');;
+      if (!empty($this->input->get())) {         
+        if (!empty($this->input->get('user_level'))) {
+          $user_level = $this->input->get('user_level');
+          $user_level = ($user_level == -1) ? "-1 OR user_tb.UserLevel <> 0 " : $user_level ;
+          $filter_num = ($user_level == -1) ? $filter_num+0 : $filter_num+1 ;
+          $user_rules['filter_value']['user_level'] = $user_level;
+          $data['user_level'] = $this->input->get('user_level');
+        }
+        if (!empty($this->input->get('search_company_name'))) {
+          $search_company_name = $this->input->get('search_company_name');
+          $user_rules['filter_value']['search_value'] = $search_company_name;
+          $filter_num = !empty($search_company_name) ? $filter_num+1 : $filter_num+0 ;
+          $data['search_company_name'] = $this->input->get('search_company_name');
+        }
         $this->M_user->set_search_user($user_rules);
       } else {
         $user_rules['filter_value']['user_level'] = "1 OR user_tb.UserLevel = 2 OR user_tb.UserLevel = 3";
@@ -431,6 +441,7 @@
       }
       
       //$this->M_user->set_search_user($user_rules);
+      $data['filter_num']= $filter_num;
       $get_member = $this->M_user->get_user();
       $data['member'] = $get_member->result();
       $this->load->view('template/back_admin/admin_head');

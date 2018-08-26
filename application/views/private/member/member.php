@@ -5,11 +5,11 @@
   </div>
 </section>
 <style>
-  .dataTables_wrapper .dataTables_filter {
+  /* .dataTables_wrapper .dataTables_filter {
   float: right;
   text-align: right;
   visibility: hidden;
-  }
+  } */
 </style>
 <!-- Main content -->
 <section class="content">
@@ -18,7 +18,8 @@
       <div class="box">
         <div class="box-header">
           <h3 class="box-title">Member List</h3>
-          <!-- <a style="float:right"  href="<?php ?>" class="btn btn-primary">
+          <button type="button" style="float:right" class="btn btn-info " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-filter"></span> Add Filter <span  class="badge"><?php echo $filter_num ?></span></button>
+          <!-- <a style="float:right"  href="" class="btn btn-primary">
             <i class="glyphicon glyphicon-saved"></i>
             Add Supplier
           </a> -->
@@ -26,60 +27,26 @@
         <!-- /.box-header -->
         <div class="box-body">
           <div class="table-responsive">
-
-
+          
           <!--  -->
-          <style>
+          <!-- Button trigger modal -->
+          
 
-                .dropdown.dropdown-lg .dropdown-menu {
-                    margin-top: -1px;
-                    padding: 6px 20px;
-                }
-                .input-group-btn .btn-group {
-                    display: flex !important;
-                }
-                .btn-group .btn {
-                    border-radius: 0;
-                    margin-left: -1px;
-                }
-                .btn-group .btn:last-child {
-                    border-top-right-radius: 4px;
-                    border-bottom-right-radius: 4px;
-                }
-                .btn-group .form-horizontal .btn[type="submit"] {
-                  border-top-left-radius: 4px;
-                  border-bottom-left-radius: 4px;
-                }
-                .form-horizontal .form-group {
-                    margin-left: 0;
-                    margin-right: 0;
-                }
-                .form-group .form-control:last-child {
-                    border-top-left-radius: 4px;
-                    border-bottom-left-radius: 4px;
-                }
-            @media screen and (min-width: 768px) {
-                  #adv-search {
-                      width: 275px;
-                      margin: 0 auto;
-                  }
-                  .dropdown.dropdown-lg {
-                      position: static !important;
-                  }
-                  .dropdown.dropdown-lg .dropdown-menu {
-                      min-width: 275px;
-                  }
-              }
-          </style>
-          <div class="input-group" style="float:right" id="adv-search">
-                <input type="text" class="form-control" placeholder="Search for company name" />
-                <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                        <div class="dropdown dropdown-lg">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right form-horizontal" role="menu">
-                                <form class="form-horizontal" method="GET"  role="form" action="<?php echo site_url('User/member_view'); ?>">
-                                  <div class="form-group">
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Filter</h4>
+                  </div>
+                  <div class="modal-body">
+                  <div class="form-group">
+                  <label for="filter">Company Name</label>
+                  <input type="text" class="form-control"  id="search_company_name" placeholder="Search for company name" value="<?php echo $search_company_name = isset($search_company_name) ? $search_company_name : "" ;  ?>" />
+                  </div>
+                  
+                  <div class="form-group">
                                     <label for="filter">Filter by member category</label>
                                     <select class="form-control" name="user_level" id="user_level">
                                       <?php if ($user_level == 1){ ?>
@@ -110,24 +77,19 @@
                                        <?php } ?>
                                     </select>
                                   </div>
-                                  <button type="submit" class="btn btn-primary" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                  <!-- <div class="form-group">
-                                    <label for="contain">State</label>
-                                    <input class="form-control" type="text" />
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="contain">Province</label>
-                                    <input class="form-control" type="text" />
-                                  </div> -->
-                                </form>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <a id="search_btn" href=""   class="btn btn-primary">
+                      <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 
+                      Search 
+                    </a>
+                  </div>
                 </div>
+              </div>
             </div>
           <!--  -->
-
+        
             <table id="example1" class="table table-bordered table-striped">
               <thead class="text-center">
                 <tr>
@@ -162,27 +124,15 @@
 
 
   <script type="text/javascript">
-    // function search(e){
-    //   e.preventDefault();
-    //   // ambil url pada atribute form action
-    //   //var url = $('#Simpan').attr('action');
-    //   // ambil inputannya
-    //   var data = {
-    //       'user_level'              : $('input[name=user_level]').val()
-    //   }
-    //   lakukan proses ajax
-    //   $.ajax({
-    //       type        : 'GET',
-    //       url         : <?php //echo site_url('User/member_view'); ?>,
-    //       data        :  data,
-    //       success: function(response) {
-    //         //  $('#Simpan').find('input').val();
-    //       }
-
-    //   });
-
-    //   return false;
-    // }
+    var search_btn = document.getElementById('search_btn');
+    var search_company_name = document.getElementById('search_company_name');
+    var user_level = document.getElementById('user_level');
+    function get_member() {      
+      user_level = "user_level="+user_level.value;
+      search_company_name = "search_company_name="+search_company_name.value;
+      search_btn.setAttribute("href","<?php echo site_url('User/member_view?'); ?>"+user_level+"&"+search_company_name);
+    }
+    search_btn.addEventListener("click", get_member);
   </script>
 
 
