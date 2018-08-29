@@ -753,7 +753,25 @@
       }
     }
 
+    function supplier_reset_password_view(){
+      $supplier_id = $this->session->userdata('user_id');
+      if (empty($supplier_id)) {
+        redirect('Home/home_view');
+      }
+      $this->load->view('template/back/head_back');
+      $this->load->view('template/back/sidebar_back');
+      $this->load->view('private/supplier_account/supplier_reset_password');
+      $this->load->view('template/back/foot_back');
+    }
+    function update_password() {
+      $old_password = $this->input->post('old_password');
+      $new_password = $this->input->post('new_password');
+      $c_new_password = $this->input->post('c_new_password');
 
+      // echo "<pre>";
+      // print_r($this->input->post());
+      // echo "</pre>";exit();
+    }
 
 
   }
