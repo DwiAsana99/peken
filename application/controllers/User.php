@@ -772,6 +772,21 @@
       // print_r($this->input->post());
       // echo "</pre>";exit();
     }
+    function get_user_password()  {
+      $member_id = $this->session->userdata('user_id');
+      $old_password = $this->input->post('old_password');
+      //echo $old_password." ".$member_id;exit();
+      $user_rules['filter_value'] =  array('user_id'=>$member_id, 'password'=>sha1($old_password));
+      $this->M_user->set_search_user($user_rules);
+      $get_user = $this->M_user->get_user();
+      $num_rows = $get_user->num_rows();
+      if ($num_rows == 1) {
+        echo "1";
+      } else {
+        echo "0";
+      }
+      
+    }
 
 
   }
