@@ -150,14 +150,17 @@
                     $("#span_old_password").html("your pasword wrong");
                     span_old_password.className = "help-block";
                     form_group_old_password.className = "form-group has-error";
-                    e.preventDefault();
+                    
                 } else if (response == 1 ){
                     $("#span_old_password").html("");
                     form_group_old_password.className = "form-group has-success";
                    // e.preventDefault();
                 }
+                
             }
+            e.preventDefault();
         });
+        
         //===== Untuk Validasi username ==== //
         var new_password_error = "";
 
@@ -191,7 +194,7 @@
             // c_new_password.style.border = "2px solid red";
             e.preventDefault();
         } else {
-            //c_new_password.style.border = "2px solid green";
+            form_group_c_new_password.className = "form-group has-success";
         }
 
     }
