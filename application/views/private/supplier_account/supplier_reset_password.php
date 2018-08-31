@@ -53,32 +53,43 @@
     </div>
 </section>
 <script type="text/javascript">
-    // $("#Simpan").submit(function () {
-    //     var category = $('#category').val();
-    //     var description = $('#description').val();
-    //     if (category == '' || description == '') {
-    //         File_Kosong();
-    //         return false;
-    //     } else {
-    //         event.preventDefault();
-    //         $.confirm({
-    //             title: 'Confirmation',
-    //             content: 'Are You Sure to Save?',
-    //             type: 'blue',
-    //             buttons: {
-    //                 Simpan: function () {
-    //                     $.LoadingOverlay("show");
-    //                     $("#Simpan").submit();
-    //                 },
-    //                 Batal: function () {
+    
 
-    //                     $.alert('Data Tidak Disimpan...');
-    //                 },
-    //             }
-    //         });
-    //     }
 
-    // });
+    $("#reset_password_form").submit(function () {
+        var old_password = $('#old_password').val();
+        var data = {
+            'old_password': old_password
+        };
+        $.ajax({
+            type: 'POST',
+            dataType: 'html',
+            url: "<?php echo base_url().'User/get_user_password'; ?>",
+            cache: false,
+            data: data,
+            success: function (response) {
+                //console.log(response);
+                // if (old_password.trim() === "") {
+                //     $("#span_old_password").html("Please fill out old password...");
+                //     span_old_password.className = "help-block";
+                //     form_group_old_password.className = "form-group has-error";
+                //     e.preventDefault();
+                // } else 
+                //e.preventDefault();
+                if (response == 0 ) {
+                    $("#span_old_password").html("your pasword wrong");
+                    span_old_password.className = "help-block";
+                    form_group_old_password.className = "form-group has-error";
+                    
+                } else if (response == 1 ){
+                    $("#span_old_password").html("");
+                    form_group_old_password.className = "form-group has-success";
+                   // e.preventDefault();
+                }
+            }
+        });
+        event.preventDefault();
+    });
 </script>
 <script type="text/javascript">
     
@@ -127,37 +138,7 @@
     // var emailSpanNode = document.getElementById("emailSpan");
 
     function validation(e) {
-        var old_password = $('#old_password').val();
-        var data = {
-            'old_password': old_password
-        };
-        $.ajax({
-            type: 'POST',
-            dataType: 'html',
-            url: "<?php echo base_url().'User/get_user_password'; ?>",
-            cache: false,
-            data: data,
-            success: function (response) {
-                //console.log(response);
-                // if (old_password.trim() === "") {
-                //     $("#span_old_password").html("Please fill out old password...");
-                //     span_old_password.className = "help-block";
-                //     form_group_old_password.className = "form-group has-error";
-                //     e.preventDefault();
-                // } else 
-                //e.preventDefault();
-                if (response == 0 ) {
-                    $("#span_old_password").html("your pasword wrong");
-                    span_old_password.className = "help-block";
-                    form_group_old_password.className = "form-group has-error";
-                    e.preventDefault();
-                } else if (response == 1 ){
-                    $("#span_old_password").html("");
-                    form_group_old_password.className = "form-group has-success";
-                   // e.preventDefault();
-                }
-            }
-        });
+        
         //===== Untuk Validasi username ==== //
         var new_password_error = "";
 
