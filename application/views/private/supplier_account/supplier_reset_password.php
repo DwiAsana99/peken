@@ -127,39 +127,6 @@
     // var emailSpanNode = document.getElementById("emailSpan");
 
     function validation(e) {
-        var old_password = $('#old_password').val();
-        var data = {
-            'old_password': old_password
-        };
-        $.ajax({
-            type: 'POST',
-            dataType: 'html',
-            url: "<?php echo base_url().'User/get_user_password'; ?>",
-            cache: false,
-            data: data,
-            success: function (response) {
-                //console.log(response);
-                // if (old_password.trim() === "") {
-                //     $("#span_old_password").html("Please fill out old password...");
-                //     span_old_password.className = "help-block";
-                //     form_group_old_password.className = "form-group has-error";
-                //     e.preventDefault();
-                // } else 
-                //e.preventDefault();
-                if (response == 0 ) {
-                    $("#span_old_password").html("your pasword wrong");
-                    span_old_password.className = "help-block";
-                    form_group_old_password.className = "form-group has-error";
-                    
-                } else if (response == 1 ){
-                    $("#span_old_password").html("");
-                    form_group_old_password.className = "form-group has-success";
-                   // e.preventDefault();
-                }
-                
-            }
-            e.preventDefault();
-        });
         
         //===== Untuk Validasi username ==== //
         var new_password_error = "";
@@ -172,8 +139,8 @@
             span_new_password.innerHTML = new_password_error;
             span_new_password.className = "help-block";
             form_group_new_password.className = "form-group has-error";
-            e.preventDefault();
-            console.log(response);
+            // e.preventDefault();
+            // console.log(response);
             e.preventDefault();
         } else {
             form_group_new_password.className = "form-group has-success";
@@ -195,6 +162,51 @@
             e.preventDefault();
         } else {
             form_group_c_new_password.className = "form-group has-success";
+        }
+
+
+
+
+
+
+        var old_password = $('#old_password').val();
+        var data = {
+            'old_password': old_password
+        };
+        $.ajax({
+            type: 'POST',
+            dataType: 'html',
+            url: "<?php echo base_url().'User/get_user_password'; ?>",
+            cache: false,
+            data: data,
+            success: function (response) {
+                //console.log(response);
+                if (old_password.trim() == "") {
+                    $("#span_old_password").html("Please fill out old password...");
+                    span_old_password.className = "help-block";
+                    form_group_old_password.className = "form-group has-error";
+                    <?php $old_password = "empty"; ?>
+                } else if (response == 0 ) {
+                    $("#span_old_password").html("your pasword wrong");
+                    span_old_password.className = "help-block";
+                    form_group_old_password.className = "form-group has-error";
+                    <?php $old_password = "empty"; ?>
+                } else if (response == 1 ){
+                    $("#span_old_password").html("");
+                    form_group_old_password.className = "form-group has-success";
+                    <?php $old_password = ""; ?>
+                   // e.preventDefault();
+                }
+                
+            }
+            
+        });
+        
+        console.log("<?php echo $old_password; ?>");    
+        e.preventDefault();
+        if ("empty" == "<?php echo $old_password; ?>") {    
+                
+            e.preventDefault();
         }
 
     }
