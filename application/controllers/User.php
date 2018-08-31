@@ -764,9 +764,16 @@
       $this->load->view('template/back/foot_back');
     }
     function update_password() {
+      $user_id = $this->session->userdata('user_id');
       $old_password = $this->input->post('old_password');
       $new_password = $this->input->post('new_password');
       $c_new_password = $this->input->post('c_new_password');
+
+      $data = array('Password' => sha1($new_password));
+
+
+      $this->M_user->update_user($data,$user_id);
+
 
       // echo "<pre>";
       // print_r($this->input->post());
