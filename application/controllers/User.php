@@ -420,7 +420,7 @@
       if (empty($admin_id)) {
         redirect('Home/home_view');
       }
-      if (!empty($this->input->get())) {         
+      if (!empty($this->input->get())) {
         if (!empty($this->input->get('user_level'))) {
           $user_level = $this->input->get('user_level');
           $user_level = ($user_level == -1) ? "-1 OR user_tb.UserLevel <> 0 " : $user_level ;
@@ -439,7 +439,7 @@
         $user_rules['filter_value']['user_level'] = "1 OR user_tb.UserLevel = 2 OR user_tb.UserLevel = 3";
         $this->M_user->set_search_user($user_rules);
       }
-      
+
       //$this->M_user->set_search_user($user_rules);
       $data['filter_num']= $filter_num;
       $get_member = $this->M_user->get_user();
@@ -460,7 +460,7 @@
       } else {
         $this->M_user->set_search_user();
       }
-      
+
       //$this->M_user->set_search_user($user_rules);
       $get_member = $this->M_user->get_user();
       // print_r($get_product_category->row());exit();
@@ -747,7 +747,7 @@
           // $this->session->set_userdata('last_name',$this->input->post('last_name'));
           // redirect('User/dashboard_supplier_view');
         }
-    
+
       } else {
         redirect('Home/home_view');
       }
