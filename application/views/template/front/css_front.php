@@ -10,3 +10,6 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/front_end_assets/css/req_quotation.css') ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/front_end_assets/css/quotation_list.css') ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/front_end_assets/css/quotation_detail.css') ?>">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
+<link href="<?php echo base_url('assets/css/pnoty/pnotify.css') ?>"  rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('assets/css/pnoty/pnotify.brighttheme.css') ?>" rel="stylesheet" type="text/css" />

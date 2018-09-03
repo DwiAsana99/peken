@@ -145,6 +145,17 @@
                 </div>
               </div>
             </div>
+            <?php if ($quotation[0]->IsAccepted == 0 OR $quotation[0]->IsAccepted == 1): ?>
+              <?php if ($quotation[0]->IsAccepted == 1): ?>
+                <div class="col-md-12 text-center">
+                  <p style="font-size: large;">You Quotation Accepted</p>
+                </div>
+              <?php else: ?>
+                <div class="col-md-12 text-center">
+                  <p style="font-size: large;">You Quotation Rejected</p>
+                </div>
+              <?php endif; ?>
+            <?php endif; ?>
           </div>
         <!-- </div> -->
         </div>

@@ -229,13 +229,13 @@ class Quotation extends CI_Controller{
     yang berisi daftar quotation yang pernah dilakukan oleh buyer
   */
 
-  function buyer_quotation_detail(){
+  function buyer_quotation_detail($quotation_code){
     $buyer_id = $this->session->userdata('user_id');
     if (empty($buyer_id)) {
       redirect('Home/home_view');
     }
 
-    $quotation_code = $this->input->get('quotation_code');
+    //$quotation_code = $this->input->get('quotation_code');
     $set_quotation_data = array('IsRead' => 1);
     $this->M_quotation->update_quotation($set_quotation_data,$quotation_code);
 
@@ -635,6 +635,15 @@ class Quotation extends CI_Controller{
     //   </div>
     // </li>';
   }
+  function update_quotation_status(){
+    $quotation_code = $this->input->post('quotation_code');
+    $status = $this->input->post('status');
+    $data = array('IsAccepted' => $status);
+    $this->M_quotation->update_quotation($data,$quotation_code) ;
+    //$this->session->set_flashdata('msg', 'Edit Product Category successfully...');
+    redirect('Quotation/buyer_quotation_detail/'.$quotation_code);
+    
+  }
   function add_quotation(){
     // print_r($this->input->post());
     // exit();
@@ -708,6 +717,7 @@ class Quotation extends CI_Controller{
       'Subject' => $subject,
       'Content' => $content,
       'ProductId' => $product_id,
+      'IsAccepted' => -1,
       'Qty' => $qty
     );
 

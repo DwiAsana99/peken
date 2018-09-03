@@ -43,7 +43,7 @@
             <?php foreach($quotation as $q){ ?>
             <tr class="click">
                 <td>
-                    <a href="<?php echo base_url().'index.php/Quotation/buyer_quotation_detail?quotation_code='.$q->Code; ?>">To:
+                    <a href="<?php echo base_url().'Quotation/buyer_quotation_detail/'.$q->Code; ?>">To:
                         <?php echo $q->CompanyName  ?>
                     </a>
                 </td>
