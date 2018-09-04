@@ -51,7 +51,7 @@
         $search_value = $this->input->get('search_value');
         $data['search_value'] = $search_value;
 
-        $user_rules['filter_value'] =  array( 'search_value'=>$search_value, 'user_level'=>1);
+        $user_rules['filter_value'] =  array( 'search_value'=>$search_value, 'user_level'=>"1 OR user_tb.UserLevel = 3");
         $this->M_user->set_search_user($user_rules);
         $get_supplier = $this->M_user->get_user();
         $this->M_pagination->set_config(
@@ -68,7 +68,7 @@
         $data['breadcrumb'] .= "<li class='active'>"."Search for '".$search_value."''</li>";
       }
       else {
-        $user_rules['filter_value'] =  array('user_level'=>1);
+        $user_rules['filter_value'] =  array('user_level'=>"1 OR user_tb.UserLevel = 3");
         $this->M_user->set_search_user($user_rules);
         $get_supplier = $this->M_user->get_user();
         $this->M_pagination->set_config(
@@ -507,6 +507,7 @@
         // $get_supplier = $this->M_user->get_user();
         // $data['supplier'] = $get_supplier->result();
         $this->session->set_userdata('user_id',$row->Id);
+        $this->session->set_userdata('user_level',$row->UserLevel);
         $this->session->set_userdata('company_name',$row->CompanyName);
         $this->session->set_userdata('profile_image',$row->ProfileImage);
         $this->session->set_userdata('last_name',$row->LastName);
@@ -519,6 +520,7 @@
         // $get_buyer = $this->M_user->get_user();
         // $data['buyer'] = $get_buyer->result();
         $this->session->set_userdata('user_id',$row->Id);
+        $this->session->set_userdata('user_level',$row->UserLevel);
         $this->session->set_userdata('company_name',$row->CompanyName);
         $this->session->set_userdata('profile_image',$row->ProfilImage);
         $this->session->set_userdata('last_name',$row->LastName);
@@ -533,6 +535,7 @@
         // $data['supplier'] = $get_supplier->result();
         //echo "admin";exit();
         $this->session->set_userdata('user_id',$row->Id);
+        $this->session->set_userdata('user_level',$row->UserLevel);
         // 	$this->session->set_userdata('company_name',$row->CompanyName);
         $this->session->set_userdata('profile_image',$row->ProfileImage);
         // 	$this->session->set_userdata('first_name',$row->FirstName);
@@ -552,12 +555,12 @@
     }
 
     function buyer_account_view(){
-      $buyer_id = $this->session->userdata('user_id');
-      if (empty($buyer_id)) {
+      $user_id = $this->session->userdata('user_id');
+      if (empty($user_id)) {
         redirect('Home/home_view');
       }
 
-      $user_rules['filter_value'] =  array('user_id'=>$buyer_id, 'user_level'=>2);
+      $user_rules['filter_value'] =  array('user_id'=>$user_id);
       $this->M_user->set_search_user($user_rules);
       $get_buyer = $this->M_user->get_user();
       $data['buyer'] = $get_buyer->result();
@@ -614,7 +617,6 @@
         'ProfileImage' => $profile_image,
         'Phone' => $this->input->post('phone')
       );
-      // print_r($data);exit();
       $this->M_user->update_user($data,$buyer_id);
       redirect('User/buyer_account_view');
     }
@@ -626,6 +628,8 @@
       $word = $this->session->userdata('captcha_word');
       $captcha = $this->input->post('captcha');
       $email = $this->input->post('email');
+      // Jika validasi form salah atau validasi form benar tetapi captcha yang dimasukan
+      // salah maka lakukan
       if (
         ($this->form_validation->run() == FALSE)||
         ($this->form_validation->run() == TRUE && $captcha != $word)
@@ -648,18 +652,32 @@
       }
       elseif($this->form_validation->run() == TRUE && $captcha == $word){
         $this->session->unset_userdata('captcha_word');
-        $data = array("Email" => $email);
-        $this->M_user->add_user($data);
-        $this->email->from('marketplacesilver@gmail.com', 'marketplacesilver');
-        $this->email->to($email);
-        $this->email->subject('Email Konfirmasi Akun');
+        // mencari tau apakah email yg sudah terkonfirmasi sebelumnya
+        $user_rules['filter_value'] =  array('email'=>$email, "IsConfirmated"=>1);
+        $this->M_user->set_search_user($user_rules);
+        $get_user_confirmated = $this->M_user->get_user();
+        /*
+        jika email yg dimasukan tidak ada, maka insert ke database
+        tetapi jika email ternya sdh terdaftar tapi tidak terkonfirmasi
+        sistem hanya menghirimkan ulang email pendaftaran
+        */
+        if ($get_user_confirmated->num_rows() == 0) {
+          $data = array("Email" => $email);
+          $this->M_user->add_user($data);
+        }
 
+        $this->M_user->set_search_user();//bersih bersih
         $user_rules['filter_value'] =  array('email'=>$email);
         $this->M_user->set_search_user($user_rules);
         $get_user = $this->M_user->get_user();
         $row = $get_user->row();
 
-        $this->email->message("<a href='".base_url().
+        $this->email->from('marketplacesilver@gmail.com', 'marketplacesilver');
+        $this->email->to($email);
+        $this->email->subject('Email Konfirmasi Akun');
+
+        $this->email->message(" <p><img  src='http://dinilaku.com/assets/front_end_assets/img/2Dinilaku_Logo.png' width='175' alt=''></p>
+        <a href='".base_url().
         "User/member_confirmation_view/".$row->Id.
         "'><i class='glyphicon glyphicon-time'></i>VERIFY YOUR ACCOUNTS</a>"
         );
@@ -703,9 +721,9 @@
     }
 
     function check_email($str){
-      $query = $this->db->get_where("user_tb",array("Email"=>$str));
+      $query = $this->db->get_where("user_tb",array("Email"=>$str, "IsConfirmated"=>1));
       if ($query->num_rows() >= 1) {
-        $this->form_validation->set_message('check_email', 'Email yang anda masukan sudah terdaftar');
+        $this->form_validation->set_message('check_email', 'Email you have entered is registered');
         return FALSE;
       } else {
         return TRUE;
@@ -719,6 +737,7 @@
         'FirstName' => $this->input->post('first_name'),
         'LastName' => $this->input->post('last_name'),
         'CompanyName' => $this->input->post('company_name'),
+        'IsConfirmated' => 1,
         'Phone' => $this->input->post('phone')
         );
       $user_id = $this->input->post('user_id');
