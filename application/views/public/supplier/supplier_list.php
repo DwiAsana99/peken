@@ -8,7 +8,7 @@
     .seller > .my-container {
       grid-gap: 0;
     }
-}
+  }
 </style>
 
     <div class="container">

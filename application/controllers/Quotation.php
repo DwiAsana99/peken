@@ -645,9 +645,6 @@ class Quotation extends CI_Controller{
     
   }
   function add_quotation(){
-    // print_r($this->input->post());
-    // exit();
-    //Q960924001 FORMAT
     $buyer_id = $this->session->userdata('user_id');
     $supplier_email = $this->input->post('supplier_email');
     $supplier_id = $this->input->post('supplier_id');

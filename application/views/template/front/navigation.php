@@ -525,7 +525,7 @@ $(document).ready(function () {
                     </li>
                     <?php if ($user_level == 3): ?>
                       <li>
-                        <a href="<?php echo base_url().'User/dashboard_supplier_view';?>">
+                        <a href="<?php echo base_url().'User/supplier_dashboard_view';?>">
                           <span class="glyphicon glyphicon-dashboard"></span> Back to admin supplier page
                         </a>
                       </li>
@@ -549,7 +549,7 @@ $(document).ready(function () {
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="<?php echo base_url().'User/dashboard_supplier_view';?>">
+                    <a href="<?php echo base_url().'User/supplier_dashboard_view';?>">
                       <span class="glyphicon glyphicon-dashboard"></span> Back to admin supplier page
                     </a>
                   </li>

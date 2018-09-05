@@ -9,8 +9,10 @@
       $this->load->model(array('M_user','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation', 'M_quotation_detail','M_supplier_gallery_pic','M_captcha'));
     }
     function admin_dashboard_view(){
-      $id_admin = $this->session->userdata('user_id');
-      if (empty($id_admin)) {
+      $user_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || $user_level != 0) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
       $this->load->view('template/back_admin/admin_head');
@@ -19,19 +21,13 @@
       $this->load->view('private/admin_dashboard');
       $this->load->view('template/back_admin/admin_foot');
     }
-    function dashboard_supplier_view(){
+    function supplier_dashboard_view(){
       $user_id = $this->session->userdata('user_id');
       $user_level = $this->session->userdata('user_level');
-      //echo $user_level." ".$user_id; exit();
-      if (empty($user_id) OR $user_level == 2 ) {
+      if (empty($user_id) || ($user_level != 1 && $user_level != 3)) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
-      // $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
-      // $data_notification['unread_quotation'] = $get_quotation->result();
-      // $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
-      // $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
-      // $data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-      // $data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
       $this->load->view('template/back/head_back');
       $this->load->view('template/back/sidebar_back');
       $this->load->view('private/dashboard_supplier');
@@ -172,40 +168,22 @@
     }
 
     function supplier_account_view(){
-      $supplier_id = $this->session->userdata('user_id');
-      if (empty($supplier_id)) {
+      $user_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || ($user_level != 1 && $user_level != 3)) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
-
-      $user_rules['filter_value'] =  array('user_id'=>$supplier_id);
+      $user_rules['filter_value'] =  array('user_id'=>$user_id);
       $this->M_user->set_search_user($user_rules);
       $get_supplier = $this->M_user->get_user();
       $data['user'] = $get_supplier->result();
 
-      $supplier_gallery_pic_rules['filter_value'] =  array('user_id'=>$supplier_id);
+      $supplier_gallery_pic_rules['filter_value'] =  array('user_id'=>$user_id);
       $this->M_supplier_gallery_pic->set_search_supplier_gallery_pic($supplier_gallery_pic_rules);
       $get_supplier_gallery_pic = $this->M_supplier_gallery_pic->get_supplier_gallery_pic();
       $data['supplier_gallery_pic'] = $get_supplier_gallery_pic->result();
 
-      // echo "<pre>";
-  		// print_r($get_supplier->row());
-  		// echo "</pre>";
-  		// echo "</br>";
-  		// echo "<pre>";
-  		// print_r($get_supplier_gallery_pic->result());
-      // echo "</pre>";exit();
-
-
-
-      // $get_member = $this->M_user->get_member("",1,$supplier_id,"","","","","","include");
-      // $data['user'] = $get_member->result();
-      // print_r($data['user']);exit();
-      // $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
-      // $data_notification['unread_quotation'] = $get_quotation->result();
-      // $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
-      // $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
-      // $data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-      // $data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
       $this->load->view('template/back/head_back');
       $this->load->view('template/back/sidebar_back');
       $this->load->view('private/supplier_account/supplier_account',$data);
@@ -230,22 +208,7 @@
       }else{
         $profile_image = $profile_image_lama;
       }
-      // $this->upload->do_upload('siup');
-      // $siup_lama = $this->input->post('siup_lama');
-      // $siup_file = $this->upload->data();
-      // if (!empty($siup_file['file_name']) AND $siup_file['file_name'] != $profile_image_file['file_name']){
-      //   $siup = $siup_file['file_name'];
-      // }else{
-      //   $siup = $siup_lama;
-      // }
-      // $this->upload->do_upload('tdp');
-      // $tdp_lama = $this->input->post('tdp_lama');
-      // $tdp_file = $this->upload->data();
-      // if (!empty($tdp_file['file_name']) AND $tdp_file['file_name'] != $siup_file['file_name']){
-      //   $tdp = $tdp_file['file_name'];
-      // }else{
-      //   $tdp = $tdp_lama;
-      // }
+
       $data = array(
         'FirstName' => $this->input->post('first_name'),
         'LastName' => $this->input->post('last_name'),
@@ -255,20 +218,13 @@
         'ZipCode' => $this->input->post('zip_code'),
         'Province' => $this->input->post('province'),
         'State' => $this->input->post('state'),
-        // 'Npwp' => $this->input->post('npwp'),
         'Phone' => $this->input->post('phone'),
         'CompanyDescription' => $this->input->post('company_description'),
         'ProfileImage' => $profile_image
-        // 'Siup' => $siup,
-        // 'Tdp' => $tdp
+
       );
-      // echo "<pre>";
-  		// print_r($data);
-  		// echo "</pre>";exit();
-      //$supplier_gallery_pic = $this->input->post('file');
       $this->session->set_userdata('first_name',$this->input->post('first_name'));
       $this->session->set_userdata('company_name',$this->input->post('company_name'));
-      // print_r($data);exit();
       $this->M_user->update_user($data,$supplier_id);
       redirect('User/supplier_account_view');
     }
@@ -414,12 +370,13 @@
     }
 
     function member_view(){
-      //$data['product_category'] = $this->M_product_category->get_product_category();
-      $admin_id = $this->session->userdata('user_id');
-      $filter_num = 0;
-      if (empty($admin_id)) {
+      $user_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || $user_level != 0) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
+      $filter_num = 0;
       if (!empty($this->input->get())) {
         if (!empty($this->input->get('user_level'))) {
           $user_level = $this->input->get('user_level');
@@ -511,7 +468,7 @@
         $this->session->set_userdata('company_name',$row->CompanyName);
         $this->session->set_userdata('profile_image',$row->ProfileImage);
         $this->session->set_userdata('last_name',$row->LastName);
-        redirect('User/dashboard_supplier_view');
+        redirect('User/supplier_dashboard_view');
       }
       elseif ($num_rows > 0  AND $row->UserLevel == 2) {
         //echo "Buyer";exit;
@@ -556,20 +513,17 @@
 
     function buyer_account_view(){
       $user_id = $this->session->userdata('user_id');
-      if (empty($user_id)) {
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || ($user_level != 2 && $user_level != 3)) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
-
       $user_rules['filter_value'] =  array('user_id'=>$user_id);
       $this->M_user->set_search_user($user_rules);
       $get_buyer = $this->M_user->get_user();
       $data['buyer'] = $get_buyer->result();
-
-
-
       $this->M_product_category->set_search_product_category();
       $get_product_category = $this->M_product_category->get_product_category();
-
       $this->M_product_sub_category->set_search_product_sub_category();
       $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
       $data_nav['product_category'] = $get_product_category->result();
@@ -750,7 +704,7 @@
           //$this->session->set_userdata('profile_image',$row->ProfilImage);
           $this->session->set_userdata('last_name',$this->input->post('last_name'));
           //echo "both";exit();
-          redirect('User/dashboard_supplier_view');
+          redirect('User/supplier_dashboard_view');
         } elseif ($user_level==2) {
           $this->session->set_userdata('user_id',$user_id);
           $this->session->set_userdata('user_level',$user_level);
@@ -764,7 +718,7 @@
           // $this->session->set_userdata('company_name',$this->input->post('company_name'));
           // //$this->session->set_userdata('profile_image',$row->ProfilImage);
           // $this->session->set_userdata('last_name',$this->input->post('last_name'));
-          // redirect('User/dashboard_supplier_view');
+          // redirect('User/supplier_dashboard_view');
         }
 
       } else {

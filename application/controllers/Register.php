@@ -93,7 +93,7 @@ public function edit_new_member_profile(){
       $this->session->set_userdata('company_name',$row->CompanyName);
       $this->session->set_userdata('profile_image',$row->ProfilImage);
       $this->session->set_userdata('first_name',$row->FirstName);
-      redirect('Supplier/dashboard_supplier_view');
+      redirect('Supplier/supplier_dashboard_view');
     } else {
       $this->session->set_userdata('buyer_id',$id_member);
       $this->session->set_userdata('company_name',$row->CompanyName);
