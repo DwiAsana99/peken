@@ -480,30 +480,30 @@ $(document).ready(function () {
                   <!-- </li> -->
                 </li>
                 <script type="text/javascript">
-                function reload_unread_chat_notification_bell() {
-                  var data = {
-                    'id_quotation': 1
-                  };
-                  $.ajax({
-                    type: 'POST',
-                    dataType: 'html',
-                    url: "<?php echo base_url().'Quotation/get_buyer_chat_notification_bell'; ?>",
-                    cache: false,
-                    data: data,
-                    success: function (response) {
-                      $("#unread_chat_notification_bell").html(response);
-                    }
-                  });
-                }
+                // function reload_unread_chat_notification_bell() {
+                //   var data = {
+                //     'id_quotation': 1
+                //   };
+                //   $.ajax({
+                //     type: 'POST',
+                //     dataType: 'html',
+                //     url: "<?php //echo base_url().'Quotation/get_buyer_chat_notification_bell'; ?>",
+                //     cache: false,
+                //     data: data,
+                //     success: function (response) {
+                //       $("#unread_chat_notification_bell").html(response);
+                //     }
+                //   });
+                // }
                 </script>
                 <script type="text/javascript">
-                $(document).ready(function () {
-                  // alert('tes');
-                  reload_unread_chat_notification_bell();
-                  setInterval(
-                    reload_unread_chat_notification_bell, 5000
-                  );
-                });
+                // $(document).ready(function () {
+                //   // alert('tes');
+                //   reload_unread_chat_notification_bell();
+                //   setInterval(
+                //     reload_unread_chat_notification_bell, 5000
+                //   );
+                // });
                 </script>
                 <!-- __________________________ -->
                 <li class="dropdown">

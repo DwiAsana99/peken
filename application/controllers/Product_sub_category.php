@@ -16,8 +16,10 @@ class Product_sub_category extends CI_Controller
     }
 
     function product_sub_category_view(){
-      $admin_id = $this->session->userdata('user_id');
-      if (empty($admin_id)) {
+      $user_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || $user_level != 0) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
       //$data['product_category'] = $this->M_product_category->get_product_category();
@@ -30,7 +32,7 @@ class Product_sub_category extends CI_Controller
     function get_product_sub_category_json(){
 
       $product_sub_category_rules['join']['other_table_columns'] = " ,productsubcategory_tb.Code as ProductSubCategoryCode,productcategory_tb.* ";
-      $product_sub_category_rules['join']['join_table'] = "  INNER JOIN productcategory_tb 
+      $product_sub_category_rules['join']['join_table'] = "  INNER JOIN productcategory_tb
       ON productsubcategory_tb.ProductCategoryCode =  productcategory_tb.Code";
       $this->M_product_sub_category->set_search_product_sub_category($product_sub_category_rules);
 		  $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
@@ -102,8 +104,10 @@ class Product_sub_category extends CI_Controller
       // redirect('Product_category/product_category_view');
     }
     function product_sub_category_add_view(){
-      $admin_id = $this->session->userdata('user_id');
-      if (empty($admin_id)) {
+      $user_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || $user_level != 0) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
       $this->M_product_category->set_search_product_category();
@@ -117,12 +121,14 @@ class Product_sub_category extends CI_Controller
     }
 
     function product_sub_category_edit_view($code){
-      $admin_id = $this->session->userdata('user_id');
-      if (empty($admin_id)) {
+      $user_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || $user_level != 0) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
       $product_sub_category_rules['join']['other_table_columns'] = " ,productsubcategory_tb.Code as ProductSubCategoryCode,productcategory_tb.* ";
-      $product_sub_category_rules['join']['join_table'] = "  INNER JOIN productcategory_tb 
+      $product_sub_category_rules['join']['join_table'] = "  INNER JOIN productcategory_tb
       ON productsubcategory_tb.ProductCategoryCode =  productcategory_tb.Code";
       $product_sub_category_rules['filter_value'] =  array('product_sub_category_code' => $code);
       $this->M_product_sub_category->set_search_product_sub_category($product_sub_category_rules);
@@ -142,7 +148,7 @@ class Product_sub_category extends CI_Controller
     $data = array();
     foreach ($product_sub_category as $psc) {
       $row = array(
-        'Code' => $psc->Code, 
+        'Code' => $psc->Code,
         'ProductCategoryCode' => $psc->ProductCategoryCode,
         'ProductSubCategory' => $psc->ProductSubCategory
       );

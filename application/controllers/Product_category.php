@@ -22,8 +22,8 @@ class Product_category extends CI_Controller{
     $data = array();
     foreach ($product_category as $pc) {
       $row = array(
-        'Code' => $pc->Code, 
-        'ProductCategory' => $pc->ProductCategory, 
+        'Code' => $pc->Code,
+        'ProductCategory' => $pc->ProductCategory,
       );
       $data[] = $row;
     }
@@ -31,9 +31,10 @@ class Product_category extends CI_Controller{
   }
 
   function product_category_view(){
-    //$data['product_category'] = $this->M_product_category->get_product_category();
-    $admin_id = $this->session->userdata('user_id');
-    if (empty($admin_id)) {
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || $user_level != 0) {
+      $this->session->sess_destroy();
       redirect('Home/home_view');
     }
     $this->load->view('template/back_admin/admin_head');
@@ -72,8 +73,10 @@ class Product_category extends CI_Controller{
 
 
   function product_category_add_view(){
-    $admin_id = $this->session->userdata('user_id');
-    if (empty($admin_id)) {
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || $user_level != 0) {
+      $this->session->sess_destroy();
       redirect('Home/home_view');
     }
     $this->load->view('template/back_admin/admin_head');
@@ -105,16 +108,15 @@ class Product_category extends CI_Controller{
   }
 
   function product_category_edit_view($code){
-    $admin_id = $this->session->userdata('user_id');
-    if (empty($admin_id)) {
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || $user_level != 0) {
+      $this->session->sess_destroy();
       redirect('Home/home_view');
     }
     $product_category_rules['filter_value'] =  array('product_category_code' => $code);
     $this->M_product_category->set_search_product_category($product_category_rules);
     $get_product_category = $this->M_product_category->get_product_category();
-    
-
-    
     $data['data'] = $get_product_category->result();
     $this->load->view('template/back_admin/admin_head');
     $this->load->view('template/back_admin/admin_navigation');
