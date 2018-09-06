@@ -725,6 +725,23 @@
         redirect('Home/home_view');
       }
     }
+    function supplier_verification_view($user_id)
+    {
+      $user_rules['filter_value'] =  array('user_id'=>$user_id);
+      $this->M_user->set_search_user($user_rules);
+      $get_supplier = $this->M_user->get_user();
+      $data['user'] = $get_supplier->result();
+
+      $supplier_gallery_pic_rules['filter_value'] =  array('user_id'=>$user_id);
+      $this->M_supplier_gallery_pic->set_search_supplier_gallery_pic($supplier_gallery_pic_rules);
+      $get_supplier_gallery_pic = $this->M_supplier_gallery_pic->get_supplier_gallery_pic();
+      $data['supplier_gallery_pic'] = $get_supplier_gallery_pic->result();
+
+      $this->load->view('template/back/head_back');
+      $this->load->view('template/back/sidebar_back');
+      $this->load->view('private/member/supplier_verification',$data);
+      $this->load->view('template/back/foot_back');
+    }
 
 
 
