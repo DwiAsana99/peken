@@ -252,7 +252,7 @@
       <hr>
       <div class="text-center">
         <h6>
-          <?php echo $p->CompanyName; ?>
+          <img src="<?php echo base_url().'assets/supplier_upload/'.'verified.png' ?>" alt="" width="25"><?php echo $p->CompanyName; ?>
         </h6>
         <a href="<?php echo site_url('Quotation/rfq_view?')." product_id=".$p->ProductId." & "."supplier_id=".$p->SupplierId ?>"
           class="btn btn-default">Contact Supplier</a>

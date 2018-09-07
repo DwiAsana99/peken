@@ -737,12 +737,21 @@
       $get_supplier_gallery_pic = $this->M_supplier_gallery_pic->get_supplier_gallery_pic();
       $data['supplier_gallery_pic'] = $get_supplier_gallery_pic->result();
 
-      $this->load->view('template/back/head_back');
-      $this->load->view('template/back/sidebar_back');
+      $this->load->view('template/back_admin/admin_head');
+      $this->load->view('template/back_admin/admin_navigation');
+      $this->load->view('template/back_admin/admin_sidebar');
       $this->load->view('private/member/supplier_verification',$data);
-      $this->load->view('template/back/foot_back');
+      $this->load->view('template/back_admin/admin_foot');
     }
-
+    function verify_supplier()
+    {
+      $user_id = $this->input->post('user_id');
+      $data = array(
+        'IsVerifiedSupplier' => $this->input->post('is_verified_supplier')
+      );
+      $this->M_user->update_user($data,$user_id);
+      redirect('User/supplier_verification_view/'.$user_id);
+    }
 
 
 

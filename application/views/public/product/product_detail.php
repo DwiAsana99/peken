@@ -257,7 +257,7 @@
             height="100" alt="">
         </p>
         <p>
-          <?php echo $p->CompanyName; ?>
+          <img src="<?php echo base_url().'assets/supplier_upload/'.'verified.png' ?>" alt="" width="25"><?php echo $p->CompanyName; ?>
         </p>
       </a>
       <div>kfc@gmail.com</div>

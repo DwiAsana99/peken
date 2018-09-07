@@ -27,31 +27,50 @@
 
 
         <div class="row">
-          <div class="col-sm-3">
+          <div class="col-sm-4">
             <!--left col-->
 
 
             <div class="text-center">
-              <img src="<?php if (empty($user[0]->ProfileImage)) {
-                echo base_url().'assets/icon/upload-icon.png';
-              }else{
-                echo base_url().'assets/supplier_upload/'.$user[0]->ProfileImage;
-              }?>" alt="" class="img-thumbnail image img-circle" alt="Cinque Terre" width="175" height="175">
+              <p>
+                <img src="<?php if (empty($user[0]->ProfileImage)) {
+                  echo base_url().'assets/icon/upload-icon.png';
+                }else{
+                  echo base_url().'assets/supplier_upload/'.$user[0]->ProfileImage;
+                }?>" alt="" class="img-thumbnail image img-circle" alt="Cinque Terre" width="175" height="175">
+              </p>
+              <?php if ($user[0]->IsVerifiedSupplier == 1): ?>
+                <p><img src="<?php echo base_url().'assets/supplier_upload/'.'verified.png' ?>" alt="" width="25"></p>
+                <p style="font-style: oblique;font-weight: bold; margin-top: -12px; margin-bottom: 3px;">Verified Supplier</p>
+              <?php else: ?>
+                <p><img src="<?php echo base_url().'assets/supplier_upload/'.'unverified.png' ?>" alt="" width="25"></p>
+                <p style="font-style: oblique;font-weight: bold; margin-top: -12px; margin-bottom: 3px;">Unverified Supplier</p>
+              <?php endif; ?>
+
 
               <p>
-                <?php $supplier_id = $this->session->userdata('user_id'); ?>
-                <a href="<?php echo site_url('User/supplier_mini_site_view?')."supplier_id=".$supplier_id ?>" class="text-center ">
+
+                <a href="<?php echo site_url('User/supplier_mini_site_view?')."supplier_id=".$user[0]->Id ?>" class="text-center ">
                   <span class="glyphicon glyphicon-eye-open"></span> Preview Mini Site</a>
                 </p>
                 <div class="col-md-12">
+                  <form class="" action="<?php echo base_url().'User/verify_supplier'; ?>" id="Verify" method="post">
+                  <input type="hidden" name="user_id" value="<?php echo $user[0]->Id; ?>">
                   <div class="input-group">
-                    <select class="form-control" name="">
-                      <option value="">VERIFY</option>
-                    </select>
-                    <span class="input-group-btn">
-                      <button class="btn btn-success" type="button">Save</button>
-                    </span>
+                      <select class="form-control" name="is_verified_supplier">
+                        <?php if ($user[0]->IsVerifiedSupplier == 1): ?>
+                          <option value="0" >Unverify</option>
+                          <option value="1" selected>Verify</option>
+                        <?php else: ?>
+                          <option value="0" selected>Unverify</option>
+                          <option value="1" >Verify</option>
+                        <?php endif; ?>
+                      </select>
+                      <span class="input-group-btn">
+                        <button class="btn btn-success" type="submit">Save</button>
+                      </span>
                   </div><!-- /input-group -->
+                </form>
                 </div>
                 <br>
               </div>
@@ -130,7 +149,7 @@
 
           </div>
           <!--/col-3-->
-          <div class="col-sm-9">
+          <div class="col-sm-8">
             <ul class="nav nav-tabs">
               <li class="active">
                 <a data-toggle="tab" href="#messages">Certificate & License</a>
@@ -147,10 +166,10 @@
               <div class="tab-pane active" id="messages">
 
                 <form class="form" action="<?php echo base_url().'User/update_certificate_license'; ?>" enctype="multipart/form-data" method="post">
-                  <div class="form-group col-lg-12">
-                    <label class="control-label">Taxpayer Registration Number</label>
-                    <input type="text" name="npwp" id="description" value="<?php echo $user[0]->Npwp; ?>" data-validation="length" data-validation-length="min4"
-                    data-validation-error-msg="Please fill out category description..." class="form-control" placeholder="">
+                  <div class="form-group col-lg-12 text-center">
+
+                    <p  style="font-size: x-large;">Taxpayer Registration Number</p>
+                    <p style="font-size: x-large;font-style: oblique;font-weight: bold;"><?php echo $user[0]->Npwp; ?></p>
                   </div>
                   <div class="form-group col-lg-6 text-center">
                     <label class="control-label">Trade Business License</label>
@@ -171,7 +190,7 @@
                           <span class="glyphicon glyphicon-camera"></span> <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="margin-left: 50%; margin-right: 50%;">
-                          <li><a href="#"><label for="siup" class="" style="font-weight:400">Change Profile Image</label></a></li>
+
 
 
 
@@ -188,21 +207,7 @@
                       </div>
                       <!-- _________________dropdown______________ -->
                     </div>
-                    <?php if (empty($user[0]->Siup)): ?>
-                      <div class="form-group">
-                        <input type="file" name="siup" value="" id="siup" size='20' onchange="readURL(this);" data-validation="mime size required"
-                        data-validation-allowing="jpg, png" data-validation-max-size="300kb" data-validation-error-msg-required="Gambar Belum Dipilih..."
-                        style="visibility:hidden;">
-                      </div>
-                    <?php else: ?>
-                      <div class="form-group">
-                        <input type="file" name="siup" value="" id="siup" size='20' onchange="readURL(this);" data-validation="mime size required"
-                        data-validation-allowing="jpg, png" data-validation-max-size="300kb" data-validation-error-msg-required="Gambar Belum Dipilih..."
-                        style="visibility:hidden;">
-                        <input type="hidden" name="siup_lama" id="siup_lama" value="<?php echo $user[0]->Siup; ?>">
-                        <!-- <button type="submit" class="btn btn-danger" id="tambah_siup">Delete</button> -->
-                      </div>
-                    <?php endif; ?>
+
 
                     <!--  -->
 
@@ -226,9 +231,6 @@
                           <span class="glyphicon glyphicon-camera"></span> <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="margin-left: 50%; margin-right: 50%;">
-                          <li><a href="#"><label for="tdp" class="" style="font-weight:400">Change Profile Image</label></a></li>
-
-
 
                           <?php if (!empty($user[0]->Tdp)): ?>
                             <li>
@@ -245,23 +247,6 @@
                       <br>
                     </div>
 
-                    <?php if (empty($user[0]->Tdp)): ?>
-                      <div class="form-group">
-                        <input type="file" name="tdp" value="" id="tdp" size='20' onchange="readUrlTdp(this);" data-validation="mime size required"
-                        data-validation-allowing="jpg, png" data-validation-max-size="300kb" data-validation-error-msg-required="Gambar Belum Dipilih..."
-                        style="visibility:hidden;">
-
-                      </div>
-                    <?php else: ?>
-                      <div class="form-group">
-                        <input type="file" name="tdp" value="" id="tdp" size='20' onchange="readUrlTdp(this);" data-validation="mime size required"
-                        data-validation-allowing="jpg, png" data-validation-max-size="300kb" data-validation-error-msg-required="Gambar Belum Dipilih..."
-                        style="visibility:hidden;">
-                        <input type="hidden" name="tdp_lama" id="tdp_lama" value="<?php echo $user[0]->Tdp; ?>">
-                        <!-- <button type="submit" class="btn btn-danger" id="tambah_tdp">Delete</button> -->
-                      </div>
-                    <?php endif; ?>
-                    <!--  -->
 
                   </div>
 
@@ -299,7 +284,7 @@
                                   View Profile Image
                                 </a>
                               </li>
-                              <li><a href="#" id="delete_pic" class="<?php echo $sgp->Id; ?>">Delete</a></li>
+                              
                             </ul>
                           </div>
                         </div>
@@ -319,61 +304,33 @@
 
         </div>
         <!--/col-9-->
+        <script type="text/javascript">
+        $("#Verify").submit(function() {
+          var category = $('#category').val();
+          var description = $('#description').val();
+          if (category == ''|| description==''){
+            File_Kosong(); return false;
+          }else{
+            event.preventDefault();
+            $.confirm({
+              title: 'Confirmation',
+              content: 'Are You Sure to Save?',
+              type: 'green',
+              buttons: {
+                Simpan: function () {
+                  $.LoadingOverlay("show");
+                  $("#Verify").submit();
+                },
+                Batal: function () {
 
+                  $.alert('Data Tidak Disimpan...');
+                },
+              }
+            });
+          }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- <a href="">                                                </a> -->
-
-
-
-
-        <!-- <button type="submit" class="btn btn-primary col-md-12" name="button">Save</button> -->
-
-
+        });
+        </script>
         <script>
         $(document).ready(function() {
           var $lightbox = $('#lightbox');
@@ -440,236 +397,3 @@
     </div>
   </div>
 </div>
-
-
-</section>
-<script src="<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/dropzone/js/dropzone-amd-module.min.js') ?>"></script>
-<script type="text/javascript">
-function readURL(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-      $('#fotoview')
-      .attr('src', e.target.result)
-      .width(250);
-    };
-
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-</script>
-<script type="text/javascript">
-$(function () {
-  $(document).click(function (event) {
-    var value = $(event.target).attr('class');
-    console.log(value);
-    $.ajax({
-      type: "POST",
-      url: "<?php echo base_url('User/remove_supplier_gallery_pic_button') ?>",
-      data: {
-        supplier_gallery_pic_id: value
-      },
-      success: function (respond) {
-        var divPic = "#div" + value;
-        $(divPic).remove();
-      }
-    })
-  });
-})
-</script>
-<script type="text/javascript">
-function readUrlTdp(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-      $('#fotoedit')
-      .attr('src', e.target.result)
-      .width(300);
-    };
-
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-</script>
-<script type="text/javascript">
-function readUrlProfileImage(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-      $('#fotoprofile')
-      .attr('src', e.target.result)
-      .width(300);
-    };
-
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-</script>
-<!-- <script type="text/javascript">
-function edit(e){
-e.preventDefault();
-// ambil url pada atribute form action
-var url = $('#Simpan').attr('action');
-// ambil inputannya
-var data = {
-'first_name'              : $('input[name=first_name]').val(),
-'last_name'              : $('input[name=last_name]').val(),
-'company_name'             : $('input[name=company_name]').val(),
-'company_address'    : $('input[name=company_address]').val(),
-'city'          : $('input[name=city]').val(),
-'zip_code'    : $('input[name=zip_code]').val(),
-'location'           : $('textarea[name=location]:checked').val(),
-'npwp'           : $('input[name=npwp]').val()
-};
-// lakukan proses ajax
-$.ajax({
-type        : 'POST',
-url         : url,
-data        :  data,
-success: function(response) {
-$('#Simpan').find('input').val();
-}
-
-});
-
-return false;
-}
-</script> -->
-
-<script>
-$(document).on('click', '#tambah_siup', function (e) {
-  e.preventDefault();
-  var file_data = $('#siup').prop('files')[0];
-  var form_data = new FormData();
-
-  form_data.append('siup', file_data);
-  $.ajax({
-    url: '<?php echo base_url().'
-    index.php / Suplier / suplier_upload_siup '; ?>', // point to server-side PHP script
-    dataType: 'json', // what to expect back from the PHP script, if anything
-    cache: false,
-    contentType: false,
-    processData: false,
-    data: form_data,
-    type: 'post',
-    success: function (data, status) {
-      alert(php_script_response); // display response from the PHP script, if any
-      if (data.status != 'error') {
-        $('#siup').val('');
-        alert(data.msg);
-      } else {
-        alert(data.msg);
-      }
-    }
-  });
-})
-</script>
-
-<script>
-$(document).on('click', '#tambah_tdp', function (e) {
-  e.preventDefault();
-  var file_data = $('#tdp').prop('files')[0];
-  var form_data = new FormData();
-
-  form_data.append('tdp', file_data);
-  $.ajax({
-    url: '<?php echo base_url().'
-    index.php / Suplier / suplier_upload_tdp '; ?>', // point to server-side PHP script
-    dataType: 'json', // what to expect back from the PHP script, if anything
-    cache: false,
-    contentType: false,
-    processData: false,
-    data: form_data,
-    type: 'post',
-    success: function (data, status) {
-      alert(php_script_response); // display response from the PHP script, if any
-      if (data.status != 'error') {
-        $('#tdp').val('');
-        alert(data.msg);
-      } else {
-        alert(data.msg);
-      }
-    }
-  });
-})
-</script>
-<script type="text/javascript">
-$(document).ready(function () {
-  var i = 1;
-  Dropzone.autoDiscover = false;
-  autoProcessQueue: false;
-  var accept = ".png,.jpg,.JPEG";
-  var foto_upload = new Dropzone(".dropzone", {
-    url: "<?php echo base_url('User/add_supplier_gallery_pic') ?>",
-    maxFilesize: 2000,
-    method: "post",
-    acceptedFiles: accept,
-    paramName: "userfiles",
-    maxFiles: 5,
-    dictInvalidFileType: "Type file ini tidak dizinkan",
-    addRemoveLinks: true,
-
-    success: function (file, data) {
-
-      var data_array = data.split(',');
-      var nama = data_array[0];
-      var namafile = nama.replace('"', '');
-      var token = data_array[1];
-      var tokenfile = token.replace('"', '');
-      var str = String(tokenfile);
-      var res = str.substring(3, 10);
-      $('<input>').attr({
-        type: 'hidden',
-        id: res, //a.token,
-        class: tokenfile,
-        name: 'file[' + i + ']',
-        value: $.trim(namafile)
-      }).appendTo('form');
-      i++;
-    }
-  });
-
-  foto_upload.on("addedfile", function (file) {
-    if (!file.type.match(/image.*/)) {
-      foto_upload.emit("thumbnail", file, "<?php echo base_url('assets/img/pdf.png') ?>");
-    }
-  });
-
-  // mengupload
-  foto_upload.on("sending", function (a, b, c) {
-    a.token = Math.random();
-    var str = String(a.token);
-    var res = str.substring(3, 10);
-    c.append("token_foto", a.token); //Menmpersiapkan token untuk masing masing foto
-  });
-
-  //hapus
-  foto_upload.on("removedfile", function (a) {
-    var token = a.token;
-    var str = String(a.token);
-    var res = str.substring(3, 10);
-    var namafile = $('#' + res).val();
-    $('#' + res).remove();
-    $.ajax({
-      type: "post",
-      data: {
-        nama: namafile
-      },
-      url: "<?php echo base_url('User/remove_supplier_gallery_pic') ?>",
-      cache: false,
-      dataType: 'json',
-      success: function () {
-        console.log("Foto terhapus");
-      },
-      error: function () {
-        console.log("Error");
-
-      }
-    });
-  });
-});
-</script>

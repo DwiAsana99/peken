@@ -40,7 +40,13 @@
               }else{
                 echo base_url().'assets/supplier_upload/'.$user[0]->ProfileImage;
               }?>" alt="" class="img-thumbnail image img-circle" alt="Cinque Terre" width="175" height="175">
-
+              <?php if ($user[0]->IsVerifiedSupplier == 1): ?>
+                <p><img src="<?php echo base_url().'assets/supplier_upload/'.'verified.png' ?>" alt="" width="25"></p>
+                <p style="font-style: oblique;font-weight: bold; margin-top: -12px; margin-bottom: 3px;">Verified Supplier</p>
+              <?php else: ?>
+                <p><img src="<?php echo base_url().'assets/supplier_upload/'.'unverified.png' ?>" alt="" width="25"></p>
+                <p style="font-style: oblique;font-weight: bold; margin-top: -12px; margin-bottom: 3px;">Unverified Supplier</p>
+              <?php endif; ?>
               <p>
                 <?php $supplier_id = $this->session->userdata('user_id'); ?>
                 <a href="<?php echo site_url('User/supplier_mini_site_view?')."supplier_id=".$supplier_id ?>" class="text-center ">
@@ -50,7 +56,6 @@
               </div>
             </hr>
             <br>
-
 
             <div class="panel panel-default">
               <div class="panel-heading">
