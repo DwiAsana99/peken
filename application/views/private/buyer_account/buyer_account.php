@@ -39,6 +39,19 @@
           <?php endif; ?>
           <!--  -->
 
+          <h4><b>Member Level</b></h4>
+          <h4>
+            <i>
+            <?php
+              if ($buyer[0]->UserLevel == 2) {
+                echo "Buyer Only";
+              }elseif ($buyer[0]->UserLevel == 3){
+                echo "Supplier & Buyer";
+              }
+            ?>
+          </i>
+            <a href="#" data-toggle="popover"  title="Popover title" data-content=" Cek di menu "> <span class="glyphicon glyphicon-info-sign"></span> </a>
+          </h4>
       </div>
     <div class="form-group">
       <label class="">Email</label>
@@ -86,6 +99,9 @@
   </form>
 
 </div>
+<script type="text/javascript">
+  $("[data-toggle=popover]").popover();
+</script>
 <script type="text/javascript">
 function readUrlProfileImage(input) {
     if (input.files && input.files[0]) {
