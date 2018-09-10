@@ -24,7 +24,7 @@
        <thead class="text-center">
         <tr >
            <th style="display:none;"></th>
-         <th>No</th>
+         <th></th>
 
          <th>Name</th>
          <th>Product <br> Category</th>
@@ -41,7 +41,7 @@
         <?php $i = 1; foreach($product as $u){?>
          <tr  class='odd gradeX context'>
            <td class="idk" style="display:none;"><?php echo $u->ProductId?></td>
-          <td><?php  echo $i++; ?></td>
+          <td><img src="<?php echo base_url().'assets/supplier_upload/'.$u->FileName ?>" alt="" width="25"></td>
 
           <td><?php echo $u->Name?></td>
           <td><?php echo $u->ProductCategory?></td>

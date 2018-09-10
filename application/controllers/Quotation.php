@@ -387,16 +387,16 @@ class Quotation extends CI_Controller{
         <ul class='dropdown-menu notify-drop'>
           <div class='notify-drop-title'>
             <div class='row'>
-              <div class='col-md-12 col-sm-6 col-xs-6'>".$msg."</div>
+              <div class='col-md-12 col-sm-12 col-xs-6'>".$msg."</div>
             </div>
           </div>
           <div class='drop-content'>";
         foreach ($unread_chat_notification_bell as $ucnb) {
           $var .= "<li>
-                    <a href=".base_url()."index.php/Quotation/buyer_quotation_detail?quotation_code=".$ucnb->QuotationCode.">
-                    <div class='col-md-3 col-sm-3 col-xs-3'><div class='notify-img'><img src=".base_url()."assets/supplier_upload/".$ucnb->ProfileImage." height='50' width='50' class='img-circle' alt=''></div></div>
+                    <a href=".base_url()."Quotation/buyer_quotation_detail/".$ucnb->QuotationCode.">
+                    <div class='col-md-3 col-sm-3 col-xs-3'><div class='notify-img'><img src=".base_url()."assets/supplier_upload/".$ucnb->ProfileImage." height='40' width='40' class='img-circle' alt=''></div></div>
                     <div class='col-md-9 col-sm-9 col-xs-9 pd-l0'>
-                      <h5><b>".$ucnb->CompanyName."</b></h5>
+                      <h5 style='margin-top: -5px; margin-bottom: -2px;'><b>".$ucnb->CompanyName."</b></h5>
                       <hr>
                       <span class='badge' style='background-color:orange;'>".$ucnb->UnreadCount."</span> <span class='label label-info'> unread comment</span>
                     </div>
@@ -404,7 +404,7 @@ class Quotation extends CI_Controller{
                 </li>";
         }
         $var .= "</div>
-        <div class='notify-drop-footer text-center'>
+        <div class='notify-drop-footer text-center' style='padding-bottom: 300px;'>
           <a href=''><i class='fa fa-eye'></i> See All Notifications</a>
         </div>
       </ul>";
@@ -422,14 +422,6 @@ class Quotation extends CI_Controller{
       $quotation_rules['group_by'] =  " quotation_tb.Code ";
       $this->M_quotation->set_search_quotation($quotation_rules);
       $get_unread_qutation_detail = $this->M_quotation->get_quotation();
-      // echo "<pre>";
-      // print_r($quotation_rules);
-      // echo "</pre>";exit();
-
-
-
-
-			//$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
       $unread_count = $get_unread_qutation_detail->num_rows();
       $unread_chat_notification_bell = $get_unread_qutation_detail->result();
       if ($unread_count > 0) {
@@ -463,7 +455,7 @@ class Quotation extends CI_Controller{
         }
         $var .= "</ul>
       </li>
-      <li class='footer'><a href='#'>See All Notifications</a></li>
+      <li class='footer'><a href='".base_url()."Quotation/supplier_all_notifications_chat_view'>See All Notifications</a></li>
     </ul>";
       echo $var;
 
@@ -712,6 +704,12 @@ class Quotation extends CI_Controller{
 // }
     redirect('Home');
  // exit();
+  }
+  function supplier_all_notifications_chat_view(){
+    $this->load->view('template/back/head_back');
+    $this->load->view('template/back/sidebar_back');
+    $this->load->view('private/quotation/supplier_all_notifications_chat');
+    $this->load->view('template/back/foot_back');
   }
 }
 
