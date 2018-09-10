@@ -30,9 +30,9 @@
          <th>Product <br> Category</th>
          <th>Product Sub <br> Category</th>
          <th>Unit</th>
-         <th>Price</th>
-         <th>Supply Abilty</th>
-         <th>Period Supply <br> Ability</th>
+         <th>Min Price</th>
+         <th>Max Price</th>
+
          <th>Action</th>
 
         </tr>
@@ -47,9 +47,9 @@
           <td><?php echo $u->ProductCategory?></td>
           <td><?php echo $u->ProductSubCategory?></td>
           <td><?php echo $u->Unit?></td>
-          <td><?php echo $u->MinPrice?></td>
-          <td><?php echo $u->SupplyAbility?></td>
-          <td><?php echo $u->PeriodSupplyAbility?></td>
+          <td class="text-right"><?php echo number_format($u->MinPrice, 2, '.', ',')?></td>
+          <td class="text-right"><?php echo number_format($u->MaxPrice, 2, '.', ',')?></td>
+
 
           <td>
            <a class="btn btn-warning"   href="<?php echo base_url('Product/product_edit_view/').$u->ProductId;?>">
@@ -81,7 +81,7 @@ $(function(){
   //alert(value);
   $.ajax({
    type:"POST",
-   url: "<?php echo base_url('index.php/Product/show_product_detail_modal') ?>",
+   url: "<?php echo base_url('Product/show_product_detail_modal') ?>",
    data:{product_id:value},
    success: function(respond){
     //  $("#modal_product_detail").empty();

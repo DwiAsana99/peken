@@ -108,8 +108,8 @@
         <a href="<?php echo site_url('Product/public_product_detail_view/').$p->ProductId ?>">
           <img class="img-responsive" src="<?php echo base_url('assets/supplier_upload/').$p->FileName?>" alt="">
         </a>
-        <h4>Rp.
-          <?php echo number_format($p->MinPrice, 0, '.', '.'); ?>
+        <h4>US $
+          <?php echo number_format($p->MinPrice, 2, '.', ','); ?> - <?php echo number_format($p->MaxPrice, 2, '.', ','); ?>
         </h4>
         <h5>
           <?php echo $p->Name; ?>

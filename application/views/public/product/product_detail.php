@@ -208,9 +208,9 @@
       <h1>
         <?php echo $product[0]->Name; ?>
       </h1>
-      <h2>Rp.
-        <?php echo number_format($product[0]->MinPrice, 0, '.', '.'); ?>
-      </h2>
+      <h3>US $
+        <?php echo number_format($p->MinPrice, 2, '.', ','); ?> - <?php echo number_format($p->MaxPrice, 2, '.', ','); ?>
+      </h3>
       <p>Category :
         <?php echo $product[0]->ProductCategory; ?>
       </p>

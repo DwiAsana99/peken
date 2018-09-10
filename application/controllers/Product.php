@@ -158,7 +158,7 @@ class Product extends CI_Controller{
 		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code
 		AND productcategory_tb.Code = productsubcategory_tb.ProductCategoryCode";
 		$product_rules['filter_value'] =  array('product_id' => $product_id);
-		$product_rules['group_by'] = ' productpic_tb.ProductId ';
+		//$product_rules['group_by'] = ' productpic_tb.ProductId ';
 		$this->M_product->set_search_product($product_rules);
 
 
@@ -367,18 +367,29 @@ class Product extends CI_Controller{
 	{
 		$supplier_id = $this->session->userdata('user_id');
 		$product_id = $this->input->post('product_id');
-		$get_product = $this->M_product->get_product($supplier_id,$product_id,"","","");
+		$product_rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.*, productcategory_tb.*, productsubcategory_tb.* ";
+		$product_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN productpic_tb INNER JOIN productcategory_tb INNER JOIN productsubcategory_tb
+		ON product_tb.Id = productpic_tb.ProductId
+		AND user_tb.Id = product_tb.SupplierId
+		AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code
+		AND productcategory_tb.Code = productsubcategory_tb.ProductCategoryCode";
+		$product_rules['filter_value'] =  array('product_id' => $product_id, 'supplier_id' => $supplier_id);
+		// /$product_rules['group_by'] = ' productpic_tb.ProductId ';
+		$this->M_product->set_search_product($product_rules);
+		$get_product = $this->M_product->get_product();
+
 		$product = $get_product->result();
 		$row = $get_product->row();
-		echo "<div class'text-right'><a href='".site_url('Product/public_product_detail_view/').$row->IdProduct."' class=' btn btn-info'><span class='glyphicon glyphicon-eye-open'></span> Preview Product Detail in Published</a><div><br>";
+		echo "<div class'text-right'><a href='".site_url('Product/public_product_detail_view/').$row->ProductId."' class=' btn btn-info'><span class='glyphicon glyphicon-eye-open'></span> Preview Product Detail in Published</a><div><br>";
 		// print_r($row);exit();
 		foreach ($product as $key ) {
 			// echo $row->Name;
-			echo "<img src=".base_url()."assets/supplier_upload/".$key->FileName." alt='' width='110'>";
+			echo "<img style='margin-right: 3px' src=".base_url()."assets/supplier_upload/".$key->FileName." alt='' width='110'>";
 
 		}
 		//
-		$status = ($row->IsActive==1) ? "published" : "no published" ;
+
+		$status = ($row->IsPublished==1) ? "published" : "no published" ;
 		echo "
 		<br>
 		<h4 class=''><b>Product Name</b></h4>
@@ -393,8 +404,11 @@ class Product extends CI_Controller{
 		<h4 class=''><b>Product Sub Category</b></h4>
 		<p class=''>".$row->ProductSubCategory."</p>".
 		"
-		<h4 class=''><b>Product Price</b></h4>
-		<p class=''>".$row->Price."</p>".
+		<h4 class=''><b>Min Price</b></h4>
+		<p class=''>US $".number_format($row->MinPrice, 2, '.', ',')."</p>".
+		"
+		<h4 class=''><b>Max Price</b></h4>
+		<p class=''>US $".number_format($row->MaxPrice, 2, '.', ',')."</p>".
 		"
 		<h4 class=''><b>Supply Ability</b></h4>
 		<p class=''>".$row->SupplyAbility."</p>".
@@ -410,6 +424,7 @@ class Product extends CI_Controller{
 		"
 		<h4 class=''><b>Product Status</b></h4>
 		<p class=''>".$status."</p>";
+
 	}
 	function remove_product_picture(){
 		$nama=$this->input->post('nama');

@@ -568,7 +568,7 @@
         'Province' => $this->input->post('province'),
         'ZipCode' => $this->input->post('zip_code'),
         'State' => $this->input->post('state'),
-        'ProfileImage' => $profile_image,
+        'ProfileImage' => trim($profile_image) ,
         'Phone' => $this->input->post('phone')
       );
       $this->M_user->update_user($data,$buyer_id);
