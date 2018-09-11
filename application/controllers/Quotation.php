@@ -459,46 +459,6 @@ class Quotation extends CI_Controller{
     </ul>";
       echo $var;
 
-    // if (!empty($buyer_id)) {
-		// 	$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
-    //   $unread_count = $get_unread_qutation_detail->num_rows();
-    //   $unread_chat_notification_bell = $get_unread_qutation_detail->result();
-    //   if ($unread_count > 0) {
-    //     $msg = "You have unread comment in ".$unread_count." quotation";
-    //   } else {
-    //     $msg = "You have not unread comment ";
-    //   }
-    //   $var = "";
-    //   $var .= "<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><i class='glyphicon glyphicon-comment'></i><span style='' class='badge'>".$unread_count."</span></a>
-    //     <ul class='dropdown-menu notify-drop'>
-    //       <div class='notify-drop-title'>
-    //         <div class='row'>
-    //           <div class='col-md-12 col-sm-6 col-xs-6'>".$msg."</div>
-    //         </div>
-    //       </div>
-    //       <div class='drop-content'>";
-    //     foreach ($unread_chat_notification_bell as $ucnb) {
-    //       $var .= "<li>
-    //                 <a href=".base_url()."index.php/Quotation/buyer_quotation_detail?quotation_id=".$ucnb->IdQuotation.">
-    //                 <div class='col-md-3 col-sm-3 col-xs-3'><div class='notify-img'><img src=".base_url()."assets/supplier_upload/".$ucnb->ProfilImage." height='50' width='50' class='img-circle' alt=''></div></div>
-    //                 <div class='col-md-9 col-sm-9 col-xs-9 pd-l0'>
-    //                   <h5><b>".$ucnb->CompanyName."</b></h5>
-    //                   <hr>
-    //                   <span class='badge' style='background-color:orange;'>".$ucnb->UnreadCount."</span> <span class='label label-info'> unread comment</span>
-    //                 </div>
-    //               </a>
-    //             </li>";
-    //     }
-    //     $var .= "</div>
-    //     <div class='notify-drop-footer text-center'>
-    //       <a href=''><i class='fa fa-eye'></i> See All Notifications</a>
-    //     </div>
-    //   </ul>";
-    //   echo $var;
-		// }
-    //$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-
-    //exit();
   }
   function get_quotation_detail_chat(){
     // ============
@@ -705,7 +665,35 @@ class Quotation extends CI_Controller{
     redirect('Home');
  // exit();
   }
+  function get_supplier_all_notifications_chat_json()
+  {
+    $supplier_id = $this->session->userdata('user_id');
+    $quotation_rules['join']['other_table_columns'] = " , user_tb.* , quotation_tb.Code AS QuotationCode ,  count( quotationdetail_tb.QuotationCode) as UnreadCount";
+    $quotation_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN quotationdetail_tb
+    ON quotation_tb.Code = quotationdetail_tb.QuotationCode AND user_tb.Id = quotation_tb.BuyerId  ";
+    $quotation_rules['filter_value'] =  array('quotation_detail_is_read' => 0, 'supplier_id'=>$supplier_id, 'quotation_detail_interlocutors'=> $supplier_id);//interlocutors adalah lawan bicara
+    $quotation_rules['group_by'] =  " quotation_tb.Code ";
+    $this->M_quotation->set_search_quotation($quotation_rules);
+    $get_unread_qutation_detail = $this->M_quotation->get_quotation();
+    $unread_chat_notification = $get_unread_qutation_detail->result();
+
+    $data = array();
+    foreach ($unread_chat_notification as $ucn) {
+      $row = array(
+        'Link' => base_url()."Quotation/supplier_quotation_detail?quotation_code=".$ucn->QuotationCode,
+        'QuotationCode' => $ucn->QuotationCode,
+        'LastName' => $ucn->LastName,
+        'Subject' => $ucn->Subject,
+        'ProfileImage' => base_url()."assets/supplier_upload/".$ucn->ProfileImage,
+        'UnreadCount' => $ucn->UnreadCount
+      );
+      $data[] = $row;
+    }
+    echo json_encode($data);
+  }
   function supplier_all_notifications_chat_view(){
+
+
     $this->load->view('template/back/head_back');
     $this->load->view('template/back/sidebar_back');
     $this->load->view('private/quotation/supplier_all_notifications_chat');
