@@ -77,11 +77,11 @@ hr { margin-top: 5px;margin-bottom: 10px; }
         "<span class='name' style='min-width: 50px;display: inline-block;'>"+
         "<img src='"+data[key].ProfileImage+"' alt='' width='25'>"+
         "</span>"+
-        "<span class='name' style='min-width: 120px;display: inline-block;'>"+data[key].QuotationCode+"</span>"+
+        "<span class='name' style='min-width: 120px;display: inline-block;'><b>"+data[key].QuotationCode+"</b></span>"+
         "<span class='name' style='min-width: 120px;display: inline-block;'>"+data[key].LastName+"</span>"+
         "<span class=''>"+data[key].Subject+"</span>"+
         "<span class='pull-right'>"+
-        "<span class='badge' style='background-color:#3db73d;'>"+data[key].SendDate+"</span>"+
+        "<span class='badge' >"+data[key].SendDate+"</span>"+
         "</span>"+
         "</a>";
 
