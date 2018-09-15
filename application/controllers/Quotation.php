@@ -189,7 +189,7 @@ class Quotation extends CI_Controller{
 
     $quotation_rules['join']['other_table_columns'] = " ,user_tb.*, product_tb.* ";
 		$quotation_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN product_tb
-		ON quotation_tb.BuyerId = user_tb.Id
+		ON quotation_tb.SupplierId = user_tb.Id
     AND quotation_tb.ProductId = product_tb.Id ";
     $quotation_rules['filter_value'] =  array('buyer_id' => $user_id);
 		$this->M_quotation->set_search_quotation($quotation_rules);
