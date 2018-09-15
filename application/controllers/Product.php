@@ -208,6 +208,9 @@ class Product extends CI_Controller{
 		$this->M_product->set_search_product($product_rules);
 		$get_product = $this->M_product->get_product();
 		$data['product'] = $get_product->result();
+		// echo "<pre>";
+		// print_r($data['product']);
+		// echo "</pre>";
 		// $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
 		// $data_notification['unread_quotation'] = $get_quotation->result();
 		// $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();

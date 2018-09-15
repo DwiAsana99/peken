@@ -393,8 +393,8 @@ $(document).ready(function () {
       </form>
       <ul class="nav navbar-nav navbar-right">
         <?php
-          $user_id = $this->session->userdata('user_id');
-          $user_level = $this->session->userdata('user_level');
+        $user_id = $this->session->userdata('user_id');
+        $user_level = $this->session->userdata('user_level');
         ?>
         <?php if (empty($user_id)): ?>
           <li>
@@ -406,25 +406,25 @@ $(document).ready(function () {
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <span class="glyphicon glyphicon-log-in"></span> Login
             </a>
-              <ul id="login-dp" class="dropdown-menu">
-                <li>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <form class="form" role="form" method="post" action="<?php echo base_url().'user/login';?>" accept-charset="UTF-8"
-                        id="login-nav">
-                        <div class="form-group">
-                          <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                          <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
-                        </div>
-                        <div class="form-group">
-                          <label class="sr-only" for="exampleInputPassword2">Password</label>
-                          <input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                        </div>
-                        <div class="form-group">
-                          <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                        </div>
-                      </form>
-                    </div>
+            <ul id="login-dp" class="dropdown-menu">
+              <li>
+                <div class="row">
+                  <div class="col-md-12">
+                    <form class="form" role="form" method="post" action="<?php echo base_url().'user/login';?>" accept-charset="UTF-8"
+                      id="login-nav">
+                      <div class="form-group">
+                        <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                      </div>
+                      <div class="form-group">
+                        <label class="sr-only" for="exampleInputPassword2">Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </li>
             </ul>
@@ -442,7 +442,7 @@ $(document).ready(function () {
             <ul class="dropdown-menu notify-drop">
               <div class="notify-drop-title">
                 <div class="row">
-                  <div class="col-md-12 col-sm-6 col-xs-6">You have unread comment in
+                  <div class="col-md-12 col-sm-12 col-xs-12">You have unread comment in
                     <?php //echo $unread_quotation_detail_num_rows; ?> quotation</div>
                   </div>
                 </div>
@@ -452,14 +452,14 @@ $(document).ready(function () {
                       <a href="<?php //echo base_url().'index.php/Quotation/buyer_quotation_detail?id_quotation='.$uqd->IdQuotation; ?>">
                         <div class="col-md-3 col-sm-3 col-xs-3">
                           <div class="notify-img">
-                            <img src="<?php //echo base_url().'assets/supplier_upload/'.$uqd->ProfilImage ?>" height="50" width="50" class="img-circle"
+                            <img src="<?php echo base_url().'assets/supplier_upload/'.'verified.png' ?>" height="40" width="40" class="img-circle"
                             alt="">
                           </div>
                         </div>
                         <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
                           <h5>
                             <b>
-                              <?php //echo $uqd->CompanyName; ?>
+                              <?php echo "string"; ?>
                             </b>
                           </h5>
                           <hr>
@@ -480,30 +480,30 @@ $(document).ready(function () {
                   <!-- </li> -->
                 </li>
                 <script type="text/javascript">
-                // function reload_unread_chat_notification_bell() {
-                //   var data = {
-                //     'id_quotation': 1
-                //   };
-                //   $.ajax({
-                //     type: 'POST',
-                //     dataType: 'html',
-                //     url: "<?php //echo base_url().'Quotation/get_buyer_chat_notification_bell'; ?>",
-                //     cache: false,
-                //     data: data,
-                //     success: function (response) {
-                //       $("#unread_chat_notification_bell").html(response);
-                //     }
-                //   });
-                // }
+                function reload_unread_chat_notification_bell() {
+                  var data = {
+                    'id_quotation': 1
+                  };
+                  $.ajax({
+                    type: 'POST',
+                    dataType: 'html',
+                    url: "<?php echo base_url().'Quotation/get_buyer_chat_notification_bell'; ?>",
+                    cache: false,
+                    data: data,
+                    success: function (response) {
+                      $("#unread_chat_notification_bell").html(response);
+                    }
+                  });
+                }
                 </script>
                 <script type="text/javascript">
-                // $(document).ready(function () {
-                //   // alert('tes');
-                //   reload_unread_chat_notification_bell();
-                //   setInterval(
-                //     reload_unread_chat_notification_bell, 5000
-                //   );
-                // });
+                  $(document).ready(function () {
+                    // alert('tes');
+                    reload_unread_chat_notification_bell();
+                    setInterval(
+                      reload_unread_chat_notification_bell, 5000
+                    );
+                  });
                 </script>
                 <!-- __________________________ -->
                 <li class="dropdown">

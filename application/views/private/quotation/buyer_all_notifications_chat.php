@@ -17,18 +17,9 @@ hr { margin-top: 5px;margin-bottom: 10px; }
 </style>
 
 
-<!-- Main content -->
-<section class="content">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h3 class="box-title">Unread Chat Notifications</h3>
-
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <button type="button" class="btn btn-default" data-toggle="tooltip" id="BtnRefresh" title="Refresh">
+<div class="container">
+  <h3>Unread Chat Notifications</h3>
+          <button type="button" style="border-radius: 5px" class="btn btn-default" data-toggle="tooltip" id="BtnRefresh" title="Refresh">
             <span class="glyphicon glyphicon-refresh"></span>   
           </button>
             <hr>
@@ -57,19 +48,11 @@ hr { margin-top: 5px;margin-bottom: 10px; }
               </div>
             </div>
 
-
-
-          </div><!-- /.box-body -->
-        </div><!-- /.box -->
-      </div><!-- /.col -->
-    </div><!-- /.row -->
-    <!-- Modal -->
-
-  </section><!-- /.content -->
+</div>
 <script type="text/javascript">
 
-  function get_supplier_all_notifications_chat(){
-    $.getJSON( "<?php echo base_url().'Quotation/get_supplier_all_notifications_chat_json/'; ?>", function( data ) {
+  function get_buyer_all_notifications_chat(){
+    $.getJSON( "<?php echo base_url().'Quotation/get_buyer_all_notifications_chat_json/'; ?>", function( data ) {
       $("#notif_list").empty();
       for (var key in data) {
         var notif =
@@ -91,13 +74,13 @@ hr { margin-top: 5px;margin-bottom: 10px; }
     })
   }
   $(document).ready(function () {
-    get_supplier_all_notifications_chat();
-    setInterval(get_supplier_all_notifications_chat, 60000);
+    get_buyer_all_notifications_chat();
+    setInterval(get_buyer_all_notifications_chat, 60000);
   });
   $(function(){
     $("#BtnRefresh").click(function(event){
       $("#notif_list").empty();
-      get_supplier_all_notifications_chat();
+      get_buyer_all_notifications_chat();
     });
   });
   $(document).on('click', 'a', function () {

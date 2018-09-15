@@ -727,6 +727,12 @@
     }
     function supplier_verification_view($user_id)
     {
+      $admin_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($admin_id) || $user_level != 0) {
+        $this->session->sess_destroy();
+        redirect('Home/home_view');
+      }
       $user_rules['filter_value'] =  array('user_id'=>$user_id);
       $this->M_user->set_search_user($user_rules);
       $get_supplier = $this->M_user->get_user();

@@ -23,7 +23,7 @@ hr { margin-top: 5px;margin-bottom: 10px; }
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Unread Chat Notifications</h3>
+          <h3 class="box-title">Unread Request for Quotation Notifications</h3>
 
         </div>
         <!-- /.box-header -->
@@ -68,8 +68,8 @@ hr { margin-top: 5px;margin-bottom: 10px; }
   </section><!-- /.content -->
 <script type="text/javascript">
 
-  function get_supplier_all_notifications_chat(){
-    $.getJSON( "<?php echo base_url().'Quotation/get_supplier_all_notifications_chat_json/'; ?>", function( data ) {
+  function get_supplier_all_notifications_rfq(){
+    $.getJSON( "<?php echo base_url().'Quotation/get_supplier_all_notifications_rfq_json/'; ?>", function( data ) {
       $("#notif_list").empty();
       for (var key in data) {
         var notif =
@@ -77,11 +77,11 @@ hr { margin-top: 5px;margin-bottom: 10px; }
         "<span class='name' style='min-width: 50px;display: inline-block;'>"+
         "<img src='"+data[key].ProfileImage+"' alt='' width='25'>"+
         "</span>"+
-        "<span class='name' style='min-width: 120px;display: inline-block;'>"+data[key].QuotationCode+"</span>"+
+        "<span class='name' style='min-width: 120px;display: inline-block;'><b>"+data[key].QuotationCode+"</b></span>"+
         "<span class='name' style='min-width: 120px;display: inline-block;'>"+data[key].LastName+"</span>"+
         "<span class=''>"+data[key].Subject+"</span>"+
         "<span class='pull-right'>"+
-        "<span class='badge' style='background-color:#3db73d;'>"+data[key].UnreadCount+"</span>"+
+        "<span class='badge' >"+data[key].SendDate+"</span>"+
         "</span>"+
         "</a>";
 
@@ -91,13 +91,13 @@ hr { margin-top: 5px;margin-bottom: 10px; }
     })
   }
   $(document).ready(function () {
-    get_supplier_all_notifications_chat();
-    setInterval(get_supplier_all_notifications_chat, 60000);
+    get_supplier_all_notifications_rfq();
+    setInterval(get_supplier_all_notifications_rfq, 60000);
   });
   $(function(){
     $("#BtnRefresh").click(function(event){
       $("#notif_list").empty();
-      get_supplier_all_notifications_chat();
+      get_supplier_all_notifications_rfq();
     });
   });
   $(document).on('click', 'a', function () {
