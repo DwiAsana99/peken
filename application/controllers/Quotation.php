@@ -655,15 +655,15 @@ class Quotation extends CI_Controller{
     $this->email->message($content);
     $this->email->set_newline("\r\n");
     $this->email->send();
-//     if($this->email->send()){
+    //     if($this->email->send()){
 //    //Success email Sent
 //    echo $this->email->print_debugger();
 // }else{
 //    //Email Failed To Send
 //    echo $this->email->print_debugger();
 // }
-    redirect('Home');
- // exit();
+      redirect('Home');
+      // exit();
   }
   function get_supplier_all_notifications_chat_json()
   {
@@ -719,7 +719,12 @@ class Quotation extends CI_Controller{
     echo json_encode($data);
   }
   function supplier_all_notifications_chat_view(){
-
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || ($user_level != 1 && $user_level != 3)) {
+      $this->session->sess_destroy();
+      redirect('Home/home_view');
+    }
 
     $this->load->view('template/back/head_back');
     $this->load->view('template/back/sidebar_back');
@@ -727,6 +732,13 @@ class Quotation extends CI_Controller{
     $this->load->view('template/back/foot_back');
   }
   function buyer_all_notifications_chat_view(){
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || ($user_level != 2 && $user_level != 3)) {
+      $this->session->sess_destroy();
+      redirect('Home/home_view');
+    }
+
     $this->M_product_category->set_search_product_category();
 		$get_product_category = $this->M_product_category->get_product_category();
 
@@ -774,7 +786,12 @@ class Quotation extends CI_Controller{
     echo json_encode($data);
   }
   function supplier_all_notifications_rfq_view(){
-
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || ($user_level != 1 && $user_level != 3)) {
+      $this->session->sess_destroy();
+      redirect('Home/home_view');
+    }
 
     $this->load->view('template/back/head_back');
     $this->load->view('template/back/sidebar_back');
