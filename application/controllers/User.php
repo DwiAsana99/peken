@@ -9,8 +9,10 @@
       $this->load->model(array('M_user','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation', 'M_quotation_detail','M_supplier_gallery_pic','M_captcha'));
     }
     function admin_dashboard_view(){
-      $id_admin = $this->session->userdata('user_id');
-      if (empty($id_admin)) {
+      $user_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || $user_level != 0) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
       $this->load->view('template/back_admin/admin_head');
@@ -19,19 +21,13 @@
       $this->load->view('private/admin_dashboard');
       $this->load->view('template/back_admin/admin_foot');
     }
-    function dashboard_supplier_view(){
+    function supplier_dashboard_view(){
       $user_id = $this->session->userdata('user_id');
       $user_level = $this->session->userdata('user_level');
-      //echo $user_level." ".$user_id; exit();
-      if (empty($user_id) OR $user_level == 2 ) {
+      if (empty($user_id) || ($user_level != 1 && $user_level != 3)) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
-      // $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
-      // $data_notification['unread_quotation'] = $get_quotation->result();
-      // $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
-      // $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
-      // $data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-      // $data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
       $this->load->view('template/back/head_back');
       $this->load->view('template/back/sidebar_back');
       $this->load->view('private/dashboard_supplier');
@@ -51,7 +47,7 @@
         $search_value = $this->input->get('search_value');
         $data['search_value'] = $search_value;
 
-        $user_rules['filter_value'] =  array( 'search_value'=>$search_value, 'user_level'=>1);
+        $user_rules['filter_value'] =  array( 'search_value'=>$search_value, 'user_level'=>"1 OR user_tb.UserLevel = 3");
         $this->M_user->set_search_user($user_rules);
         $get_supplier = $this->M_user->get_user();
         $this->M_pagination->set_config(
@@ -68,7 +64,7 @@
         $data['breadcrumb'] .= "<li class='active'>"."Search for '".$search_value."''</li>";
       }
       else {
-        $user_rules['filter_value'] =  array('user_level'=>1);
+        $user_rules['filter_value'] =  array('user_level'=>"1 OR user_tb.UserLevel = 3");
         $this->M_user->set_search_user($user_rules);
         $get_supplier = $this->M_user->get_user();
         $this->M_pagination->set_config(
@@ -172,40 +168,22 @@
     }
 
     function supplier_account_view(){
-      $supplier_id = $this->session->userdata('user_id');
-      if (empty($supplier_id)) {
+      $user_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || ($user_level != 1 && $user_level != 3)) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
-
-      $user_rules['filter_value'] =  array('user_id'=>$supplier_id);
+      $user_rules['filter_value'] =  array('user_id'=>$user_id);
       $this->M_user->set_search_user($user_rules);
       $get_supplier = $this->M_user->get_user();
       $data['user'] = $get_supplier->result();
 
-      $supplier_gallery_pic_rules['filter_value'] =  array('user_id'=>$supplier_id);
+      $supplier_gallery_pic_rules['filter_value'] =  array('user_id'=>$user_id);
       $this->M_supplier_gallery_pic->set_search_supplier_gallery_pic($supplier_gallery_pic_rules);
       $get_supplier_gallery_pic = $this->M_supplier_gallery_pic->get_supplier_gallery_pic();
       $data['supplier_gallery_pic'] = $get_supplier_gallery_pic->result();
 
-      // echo "<pre>";
-  		// print_r($get_supplier->row());
-  		// echo "</pre>";
-  		// echo "</br>";
-  		// echo "<pre>";
-  		// print_r($get_supplier_gallery_pic->result());
-      // echo "</pre>";exit();
-
-
-
-      // $get_member = $this->M_user->get_member("",1,$supplier_id,"","","","","","include");
-      // $data['user'] = $get_member->result();
-      // print_r($data['user']);exit();
-      // $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
-      // $data_notification['unread_quotation'] = $get_quotation->result();
-      // $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
-      // $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
-      // $data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-      // $data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
       $this->load->view('template/back/head_back');
       $this->load->view('template/back/sidebar_back');
       $this->load->view('private/supplier_account/supplier_account',$data);
@@ -230,22 +208,7 @@
       }else{
         $profile_image = $profile_image_lama;
       }
-      // $this->upload->do_upload('siup');
-      // $siup_lama = $this->input->post('siup_lama');
-      // $siup_file = $this->upload->data();
-      // if (!empty($siup_file['file_name']) AND $siup_file['file_name'] != $profile_image_file['file_name']){
-      //   $siup = $siup_file['file_name'];
-      // }else{
-      //   $siup = $siup_lama;
-      // }
-      // $this->upload->do_upload('tdp');
-      // $tdp_lama = $this->input->post('tdp_lama');
-      // $tdp_file = $this->upload->data();
-      // if (!empty($tdp_file['file_name']) AND $tdp_file['file_name'] != $siup_file['file_name']){
-      //   $tdp = $tdp_file['file_name'];
-      // }else{
-      //   $tdp = $tdp_lama;
-      // }
+
       $data = array(
         'FirstName' => $this->input->post('first_name'),
         'LastName' => $this->input->post('last_name'),
@@ -255,20 +218,13 @@
         'ZipCode' => $this->input->post('zip_code'),
         'Province' => $this->input->post('province'),
         'State' => $this->input->post('state'),
-        // 'Npwp' => $this->input->post('npwp'),
         'Phone' => $this->input->post('phone'),
         'CompanyDescription' => $this->input->post('company_description'),
         'ProfileImage' => $profile_image
-        // 'Siup' => $siup,
-        // 'Tdp' => $tdp
+
       );
-      // echo "<pre>";
-  		// print_r($data);
-  		// echo "</pre>";exit();
-      //$supplier_gallery_pic = $this->input->post('file');
       $this->session->set_userdata('first_name',$this->input->post('first_name'));
       $this->session->set_userdata('company_name',$this->input->post('company_name'));
-      // print_r($data);exit();
       $this->M_user->update_user($data,$supplier_id);
       redirect('User/supplier_account_view');
     }
@@ -414,13 +370,14 @@
     }
 
     function member_view(){
-      //$data['product_category'] = $this->M_product_category->get_product_category();
-      $admin_id = $this->session->userdata('user_id');
-      $filter_num = 0;
-      if (empty($admin_id)) {
+      $user_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || $user_level != 0) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
-      if (!empty($this->input->get())) {         
+      $filter_num = 0;
+      if (!empty($this->input->get())) {
         if (!empty($this->input->get('user_level'))) {
           $user_level = $this->input->get('user_level');
           $user_level = ($user_level == -1) ? "-1 OR user_tb.UserLevel <> 0 " : $user_level ;
@@ -439,7 +396,7 @@
         $user_rules['filter_value']['user_level'] = "1 OR user_tb.UserLevel = 2 OR user_tb.UserLevel = 3";
         $this->M_user->set_search_user($user_rules);
       }
-      
+
       //$this->M_user->set_search_user($user_rules);
       $data['filter_num']= $filter_num;
       $get_member = $this->M_user->get_user();
@@ -460,7 +417,7 @@
       } else {
         $this->M_user->set_search_user();
       }
-      
+
       //$this->M_user->set_search_user($user_rules);
       $get_member = $this->M_user->get_user();
       // print_r($get_product_category->row());exit();
@@ -507,10 +464,11 @@
         // $get_supplier = $this->M_user->get_user();
         // $data['supplier'] = $get_supplier->result();
         $this->session->set_userdata('user_id',$row->Id);
+        $this->session->set_userdata('user_level',$row->UserLevel);
         $this->session->set_userdata('company_name',$row->CompanyName);
         $this->session->set_userdata('profile_image',$row->ProfileImage);
         $this->session->set_userdata('last_name',$row->LastName);
-        redirect('User/dashboard_supplier_view');
+        redirect('User/supplier_dashboard_view');
       }
       elseif ($num_rows > 0  AND $row->UserLevel == 2) {
         //echo "Buyer";exit;
@@ -519,6 +477,7 @@
         // $get_buyer = $this->M_user->get_user();
         // $data['buyer'] = $get_buyer->result();
         $this->session->set_userdata('user_id',$row->Id);
+        $this->session->set_userdata('user_level',$row->UserLevel);
         $this->session->set_userdata('company_name',$row->CompanyName);
         $this->session->set_userdata('profile_image',$row->ProfilImage);
         $this->session->set_userdata('last_name',$row->LastName);
@@ -533,6 +492,7 @@
         // $data['supplier'] = $get_supplier->result();
         //echo "admin";exit();
         $this->session->set_userdata('user_id',$row->Id);
+        $this->session->set_userdata('user_level',$row->UserLevel);
         // 	$this->session->set_userdata('company_name',$row->CompanyName);
         $this->session->set_userdata('profile_image',$row->ProfileImage);
         // 	$this->session->set_userdata('first_name',$row->FirstName);
@@ -552,21 +512,18 @@
     }
 
     function buyer_account_view(){
-      $buyer_id = $this->session->userdata('user_id');
-      if (empty($buyer_id)) {
+      $user_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || ($user_level != 2 && $user_level != 3)) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
-
-      $user_rules['filter_value'] =  array('user_id'=>$buyer_id, 'user_level'=>2);
+      $user_rules['filter_value'] =  array('user_id'=>$user_id);
       $this->M_user->set_search_user($user_rules);
       $get_buyer = $this->M_user->get_user();
       $data['buyer'] = $get_buyer->result();
-
-
-
       $this->M_product_category->set_search_product_category();
       $get_product_category = $this->M_product_category->get_product_category();
-
       $this->M_product_sub_category->set_search_product_sub_category();
       $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
       $data_nav['product_category'] = $get_product_category->result();
@@ -611,10 +568,9 @@
         'Province' => $this->input->post('province'),
         'ZipCode' => $this->input->post('zip_code'),
         'State' => $this->input->post('state'),
-        'ProfileImage' => $profile_image,
+        'ProfileImage' => trim($profile_image) ,
         'Phone' => $this->input->post('phone')
       );
-      // print_r($data);exit();
       $this->M_user->update_user($data,$buyer_id);
       redirect('User/buyer_account_view');
     }
@@ -626,6 +582,8 @@
       $word = $this->session->userdata('captcha_word');
       $captcha = $this->input->post('captcha');
       $email = $this->input->post('email');
+      // Jika validasi form salah atau validasi form benar tetapi captcha yang dimasukan
+      // salah maka lakukan
       if (
         ($this->form_validation->run() == FALSE)||
         ($this->form_validation->run() == TRUE && $captcha != $word)
@@ -648,18 +606,32 @@
       }
       elseif($this->form_validation->run() == TRUE && $captcha == $word){
         $this->session->unset_userdata('captcha_word');
-        $data = array("Email" => $email);
-        $this->M_user->add_user($data);
-        $this->email->from('marketplacesilver@gmail.com', 'marketplacesilver');
-        $this->email->to($email);
-        $this->email->subject('Email Konfirmasi Akun');
+        // mencari tau apakah email yg sudah terkonfirmasi sebelumnya
+        $user_rules['filter_value'] =  array('email'=>$email, "IsConfirmated"=>1);
+        $this->M_user->set_search_user($user_rules);
+        $get_user_confirmated = $this->M_user->get_user();
+        /*
+        jika email yg dimasukan tidak ada, maka insert ke database
+        tetapi jika email ternya sdh terdaftar tapi tidak terkonfirmasi
+        sistem hanya menghirimkan ulang email pendaftaran
+        */
+        if ($get_user_confirmated->num_rows() == 0) {
+          $data = array("Email" => $email);
+          $this->M_user->add_user($data);
+        }
 
+        $this->M_user->set_search_user();//bersih bersih
         $user_rules['filter_value'] =  array('email'=>$email);
         $this->M_user->set_search_user($user_rules);
         $get_user = $this->M_user->get_user();
         $row = $get_user->row();
 
-        $this->email->message("<a href='".base_url().
+        $this->email->from('marketplacesilver@gmail.com', 'marketplacesilver');
+        $this->email->to($email);
+        $this->email->subject('Email Konfirmasi Akun');
+
+        $this->email->message(" <p><img  src='http://dinilaku.com/assets/front_end_assets/img/2Dinilaku_Logo.png' width='175' alt=''></p>
+        <a href='".base_url().
         "User/member_confirmation_view/".$row->Id.
         "'><i class='glyphicon glyphicon-time'></i>VERIFY YOUR ACCOUNTS</a>"
         );
@@ -703,9 +675,9 @@
     }
 
     function check_email($str){
-      $query = $this->db->get_where("user_tb",array("Email"=>$str));
+      $query = $this->db->get_where("user_tb",array("Email"=>$str, "IsConfirmated"=>1));
       if ($query->num_rows() >= 1) {
-        $this->form_validation->set_message('check_email', 'Email yang anda masukan sudah terdaftar');
+        $this->form_validation->set_message('check_email', 'Email you have entered is registered');
         return FALSE;
       } else {
         return TRUE;
@@ -719,6 +691,7 @@
         'FirstName' => $this->input->post('first_name'),
         'LastName' => $this->input->post('last_name'),
         'CompanyName' => $this->input->post('company_name'),
+        'IsConfirmated' => 1,
         'Phone' => $this->input->post('phone')
         );
       $user_id = $this->input->post('user_id');
@@ -731,7 +704,7 @@
           //$this->session->set_userdata('profile_image',$row->ProfilImage);
           $this->session->set_userdata('last_name',$this->input->post('last_name'));
           //echo "both";exit();
-          redirect('User/dashboard_supplier_view');
+          redirect('User/supplier_dashboard_view');
         } elseif ($user_level==2) {
           $this->session->set_userdata('user_id',$user_id);
           $this->session->set_userdata('user_level',$user_level);
@@ -745,13 +718,49 @@
           // $this->session->set_userdata('company_name',$this->input->post('company_name'));
           // //$this->session->set_userdata('profile_image',$row->ProfilImage);
           // $this->session->set_userdata('last_name',$this->input->post('last_name'));
-          // redirect('User/dashboard_supplier_view');
+          // redirect('User/supplier_dashboard_view');
         }
-    
+
       } else {
         redirect('Home/home_view');
       }
     }
+    function supplier_verification_view($user_id)
+    {
+      $admin_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($admin_id) || $user_level != 0) {
+        $this->session->sess_destroy();
+        redirect('Home/home_view');
+      }
+      $user_rules['filter_value'] =  array('user_id'=>$user_id);
+      $this->M_user->set_search_user($user_rules);
+      $get_supplier = $this->M_user->get_user();
+      $data['user'] = $get_supplier->result();
+
+      $supplier_gallery_pic_rules['filter_value'] =  array('user_id'=>$user_id);
+      $this->M_supplier_gallery_pic->set_search_supplier_gallery_pic($supplier_gallery_pic_rules);
+      $get_supplier_gallery_pic = $this->M_supplier_gallery_pic->get_supplier_gallery_pic();
+      $data['supplier_gallery_pic'] = $get_supplier_gallery_pic->result();
+
+      $this->load->view('template/back_admin/admin_head');
+      $this->load->view('template/back_admin/admin_navigation');
+      $this->load->view('template/back_admin/admin_sidebar');
+      $this->load->view('private/member/supplier_verification',$data);
+      $this->load->view('template/back_admin/admin_foot');
+    }
+    function verify_supplier()
+    {
+      $user_id = $this->input->post('user_id');
+      $data = array(
+        'IsVerifiedSupplier' => $this->input->post('is_verified_supplier')
+      );
+      $this->M_user->update_user($data,$user_id);
+      redirect('User/supplier_verification_view/'.$user_id);
+    }
+
+
+
 
     function supplier_reset_password_view(){
       $supplier_id = $this->session->userdata('user_id');
@@ -768,7 +777,6 @@
       $old_password = $this->input->post('old_password');
       $new_password = $this->input->post('new_password');
       $c_new_password = $this->input->post('c_new_password');
-
       $data = array('Password' => sha1($new_password));
 
 
@@ -792,7 +800,7 @@
       } else {
         echo "0";
       }
-      
+
     }
 
 

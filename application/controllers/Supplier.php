@@ -8,7 +8,7 @@
 //     $this->load->helper(array('form', 'url'));
 //     $this->load->model(array('M_user','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation', 'M_quotation_detail'));
 //   }
-//   function dashboard_supplier_view(){
+//   function supplier_dashboard_view(){
 //     $supplier_id = $this->session->userdata('user_id');
 //     if (empty($supplier_id)) {
 //       redirect('Home/home_view');

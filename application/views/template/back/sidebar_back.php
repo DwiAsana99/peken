@@ -5,7 +5,7 @@
     <div class="user-panel">
       <div class="pull-left image">
 
-        <img src="<?php 
+        <img src="<?php
           if (empty($this->session->userdata('profile_image')) OR $this->session->userdata('profile_image') == " ") {
             echo base_url().'assets/icon/upload-icon.png';
           }else{

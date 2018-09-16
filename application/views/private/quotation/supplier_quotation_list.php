@@ -24,7 +24,7 @@
                 <tr>
                   <th>Send</th>
                   <th>Subject</th>
-                  <th>Message</th>
+
                   <th>Date</th>
                 </tr>
               </thead>
@@ -39,9 +39,7 @@
                     <td>Pembelian
                       <?php echo $q->Name  ?>
                     </td>
-                    <td>
-                      <?php echo trim(substr($q->Content,0,50))." <b>...</b>" ?>
-                    </td>
+
                     <td>
                       <?php echo $q->SendDate  ?>
                     </td>

@@ -13,10 +13,12 @@ class Quotation extends CI_Controller{
   }
 
   function rfq_view(){
-    $buyer_id = $this->session->userdata('user_id');
-    if (empty($buyer_id)) {
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || ($user_level != 2 && $user_level != 3)) {
       redirect('Home/home_view');
     }
+
     $product_id = $this->input->get('product_id');
     $supplier_id = $this->input->get('supplier_id');
     $product_rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.*, productcategory_tb.*, productsubcategory_tb.* ";
@@ -68,11 +70,12 @@ class Quotation extends CI_Controller{
      product berdasarkan product_id.
    - $data['product'] berisi multiple row (beberapa baris) data berdasarkan jumlah gambar
      dari 1 product tunggal.
-
   */
   function supplier_quotation_list(){
-    $supplier_id = $this->session->userdata('user_id');
-    if (empty($supplier_id)) {
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || ($user_level != 1 && $user_level != 3)) {
+      $this->session->sess_destroy();
       redirect('Home/home_view');
     }
 
@@ -80,11 +83,10 @@ class Quotation extends CI_Controller{
 		$quotation_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN product_tb
 		ON quotation_tb.BuyerId = user_tb.Id
     AND quotation_tb.ProductId = product_tb.Id ";
-    $quotation_rules['filter_value'] =  array('supplier_id' => $supplier_id);
+    $quotation_rules['filter_value'] =  array('supplier_id' => $user_id);
 		$this->M_quotation->set_search_quotation($quotation_rules);
     $get_quotation = $this->M_quotation->get_quotation();
     $data['quotation'] = $get_quotation->result();
-
 
     // $get_quotation = $this->M_quotation->get_quotation("",$supplier_id);
     // $data['quotation'] = $get_quotation->result();
@@ -100,29 +102,13 @@ class Quotation extends CI_Controller{
     $this->load->view('template/back/foot_back');
   }
   function supplier_quotation_detail(){
-    // $supplier_id = $this->session->userdata('user_id');
-    // if (empty($supplier_id)) {
-    //   redirect('Home/home_view');
-    // }
-    // $quotation_id = $this->input->get('quotation_id');
-    // $set_quotation_detail_data = array('IsRead' => 1);
-    // $this->M_quotation_detail->update_quotation_detail($set_quotation_detail_data,$quotation_id);
-    // $set_quotation_data = array('IsRead' => 1);
-    // $this->M_quotation->update_quotation($set_quotation_data,$quotation_id);
-    // $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,$quotation_id);
-    // $get_quotation_detail = $this->M_quotation_detail->get_quotation_detail($quotation_id);
-    // $data['quotation'] = $get_quotation->result();
-    // $data['quotation_detail'] = $get_quotation_detail->result();
-    // $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
-		// $data_notification['unread_quotation'] = $get_quotation->result();
-    // $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
-		// $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
-		// $data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-    // $data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
-    $supplier_id = $this->session->userdata('user_id');
-    if (empty($supplier_id)) {
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || ($user_level != 1 && $user_level != 3)) {
+      $this->session->sess_destroy();
       redirect('Home/home_view');
     }
+
     $quotation_code = $this->input->get('quotation_code');
     $set_quotation_data = array('IsRead' => 1);
     $this->M_quotation->update_quotation($set_quotation_data,$quotation_code);
@@ -146,11 +132,14 @@ class Quotation extends CI_Controller{
     // $set_quotation_detail_data = array('IsRead' => 1);
     // $this->M_quotation_detail->update_quotation_detail($set_quotation_detail_data,$quotation_id);
 
-    //$get_quotation = $this->M_quotation->get_quotation($supplier_id,"",$quotation_id);
-    $quotation_rules['filter_value'] =  array('supplier_id' => $supplier_id, 'quotation_code'=>$quotation_code);
+    //$get_quotation = $this->M_quotation->get_quotation($user_id,"",$quotation_id);
+    $quotation_rules['filter_value'] =  array('supplier_id' => $user_id, 'quotation_code'=>$quotation_code);
 		$this->M_quotation->set_search_quotation($quotation_rules);
     $get_quotation = $this->M_quotation->get_quotation();
-
+    // mencegah supplier lain mengakses halaman quotation detail supplier lain
+    if ($get_quotation->num_rows() == 0) {
+			redirect('Quotation/supplier_quotation_list');
+		}
 
     $this->M_quotation_detail->set_search_quotation_detail();// memastikan untuk bersih
     $quotation_detail_rules['join']['other_table_columns'] = " , user_tb.*  ";
@@ -191,16 +180,18 @@ class Quotation extends CI_Controller{
     $this->load->view('template/back/foot_back');
   }
   function buyer_quotation_list(){
-    $buyer_id = $this->session->userdata('user_id');
-    if (empty($buyer_id)) {
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || ($user_level != 2 && $user_level != 3)) {
+      $this->session->sess_destroy();
       redirect('Home/home_view');
     }
 
     $quotation_rules['join']['other_table_columns'] = " ,user_tb.*, product_tb.* ";
 		$quotation_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN product_tb
-		ON quotation_tb.BuyerId = user_tb.Id
+		ON quotation_tb.SupplierId = user_tb.Id
     AND quotation_tb.ProductId = product_tb.Id ";
-    $quotation_rules['filter_value'] =  array('buyer_id' => $buyer_id);
+    $quotation_rules['filter_value'] =  array('buyer_id' => $user_id);
 		$this->M_quotation->set_search_quotation($quotation_rules);
     $get_quotation = $this->M_quotation->get_quotation();
     $data['quotation'] = $get_quotation->result();
@@ -213,8 +204,8 @@ class Quotation extends CI_Controller{
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
     // if ($this->session->userdata('user_id')) {
-		// 	$buyer_id = $this->session->userdata('user_id');
-		// 	$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
+		// 	$user_id = $this->session->userdata('user_id');
+		// 	$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$user_id);
 		// 	$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
 		// 	$data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
 		// }
@@ -229,13 +220,15 @@ class Quotation extends CI_Controller{
     yang berisi daftar quotation yang pernah dilakukan oleh buyer
   */
 
-  function buyer_quotation_detail(){
-    $buyer_id = $this->session->userdata('user_id');
-    if (empty($buyer_id)) {
+  function buyer_quotation_detail($quotation_code){
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || ($user_level != 2 && $user_level != 3)) {
+      $this->session->sess_destroy();
       redirect('Home/home_view');
     }
 
-    $quotation_code = $this->input->get('quotation_code');
+    //$quotation_code = $this->input->get('quotation_code');
     $set_quotation_data = array('IsRead' => 1);
     $this->M_quotation->update_quotation($set_quotation_data,$quotation_code);
 
@@ -255,20 +248,21 @@ class Quotation extends CI_Controller{
     // $set_quotation_detail_data = array('IsRead' => 1);
     // $this->M_quotation_detail->update_quotation_detail($set_quotation_detail_data,$quotation_id);
 
-    //$get_quotation = $this->M_quotation->get_quotation($buyer_id,"",$quotation_id);
-    $quotation_rules['filter_value'] =  array('buyer_id' => $buyer_id, 'quotation_code'=>$quotation_code);
+    //$get_quotation = $this->M_quotation->get_quotation($user_id,"",$quotation_id);
+    $quotation_rules['filter_value'] =  array('buyer_id' => $user_id, 'quotation_code'=>$quotation_code);
 		$this->M_quotation->set_search_quotation($quotation_rules);
     $get_quotation = $this->M_quotation->get_quotation();
-
+    // mencegah supplier lain mengakses halaman quotation detail supplier lain
+    if ($get_quotation->num_rows() == 0) {
+			redirect('Quotation/buyer_quotation_list');
+		}
     $this->M_quotation_detail->set_search_quotation_detail();// memastikan untuk bersih
     $quotation_detail_rules['join']['other_table_columns'] = " , user_tb.*  ";
 		$quotation_detail_rules['join']['join_table'] = " INNER JOIN user_tb
 		ON user_tb.Id = quotationdetail_tb.MemberId  ";
     $quotation_detail_rules['filter_value'] =  array('quotation_code' => $quotation_code, 'is_read' => 1);
     $quotation_detail_rules['order_by'] =  " quotationdetail_tb.SendDate ASC ";
-    // echo "<pre>";
-		// print_r($quotation_detail_rules);
-		// echo "</pre>";exit();
+
 		$this->M_quotation_detail->set_search_quotation_detail($quotation_detail_rules);
     $get_quotation_detail = $this->M_quotation_detail->get_quotation_detail();
 
@@ -288,22 +282,6 @@ class Quotation extends CI_Controller{
 		$get_product_pic = $this->M_product->get_product_pic();
     // $get_product = $this->M_product->get_product("",$quotation_row->IdProduct);
 
-    // echo "<pre>";
-		// print_r($get_product->result());
-		// echo "</pre>";
-		// echo "</br>";
-		// echo "<pre>";
-		// print_r($get_product_pic->result());
-		// echo "</pre>";
-		// echo "</br>";
-		// echo "<pre>";
-		// print_r($get_quotation->result());
-		// echo "</pre>";
-		// echo "</br>";
-		// echo "<pre>";
-		// print_r($get_quotation_detail->result());exit();
-		// echo "</pre>";
-
     $data['quotation'] = $get_quotation->result();
     $data['product'] = $get_product->result();
     $data['product_pic'] = $get_product_pic->result();
@@ -319,8 +297,8 @@ class Quotation extends CI_Controller{
     $data_nav['product_sub_category'] = $get_product_sub_category->result();
 
     // if ($this->session->userdata('user_id')) {
-		// 	$buyer_id = $this->session->userdata('user_id');
-		// 	$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
+		// 	$user_id = $this->session->userdata('user_id');
+		// 	$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$user_id);
 		// 	$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
 		// 	$data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
     // }
@@ -379,7 +357,7 @@ class Quotation extends CI_Controller{
         }
         $var .= "</ul>
       </li>
-      <li class='footer'><a href='#'>See All Notifications</a></li>
+      <li class='footer'><a href='".base_url()."Quotation/supplier_all_notifications_rfq_view'>See All Notifications</a></li>
     </ul>";
       echo $var;
   }
@@ -409,16 +387,16 @@ class Quotation extends CI_Controller{
         <ul class='dropdown-menu notify-drop'>
           <div class='notify-drop-title'>
             <div class='row'>
-              <div class='col-md-12 col-sm-6 col-xs-6'>".$msg."</div>
+              <div class='col-md-12 col-sm-12 col-xs-6'>".$msg."</div>
             </div>
           </div>
           <div class='drop-content'>";
         foreach ($unread_chat_notification_bell as $ucnb) {
           $var .= "<li>
-                    <a href=".base_url()."index.php/Quotation/buyer_quotation_detail?quotation_code=".$ucnb->QuotationCode.">
-                    <div class='col-md-3 col-sm-3 col-xs-3'><div class='notify-img'><img src=".base_url()."assets/supplier_upload/".$ucnb->ProfileImage." height='50' width='50' class='img-circle' alt=''></div></div>
+                    <a href=".base_url()."Quotation/buyer_quotation_detail/".$ucnb->QuotationCode.">
+                    <div class='col-md-3 col-sm-3 col-xs-3'><div class='notify-img'><img src=".base_url()."assets/supplier_upload/".$ucnb->ProfileImage." height='40' width='40' class='img-circle' alt=''></div></div>
                     <div class='col-md-9 col-sm-9 col-xs-9 pd-l0'>
-                      <h5><b>".$ucnb->CompanyName."</b></h5>
+                      <h5 style='margin-top: -5px; margin-bottom: -2px;'><b>".$ucnb->CompanyName."</b></h5>
                       <hr>
                       <span class='badge' style='background-color:orange;'>".$ucnb->UnreadCount."</span> <span class='label label-info'> unread comment</span>
                     </div>
@@ -426,8 +404,8 @@ class Quotation extends CI_Controller{
                 </li>";
         }
         $var .= "</div>
-        <div class='notify-drop-footer text-center'>
-          <a href=''><i class='fa fa-eye'></i> See All Notifications</a>
+        <div class='notify-drop-footer text-center' style='padding-bottom: 300px;'>
+          <a href='".base_url()."Quotation/buyer_all_notifications_chat_view'><i class='fa fa-eye'></i> See All Notifications</a>
         </div>
       </ul>";
       echo $var;
@@ -444,14 +422,6 @@ class Quotation extends CI_Controller{
       $quotation_rules['group_by'] =  " quotation_tb.Code ";
       $this->M_quotation->set_search_quotation($quotation_rules);
       $get_unread_qutation_detail = $this->M_quotation->get_quotation();
-      // echo "<pre>";
-      // print_r($quotation_rules);
-      // echo "</pre>";exit();
-
-
-
-
-			//$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
       $unread_count = $get_unread_qutation_detail->num_rows();
       $unread_chat_notification_bell = $get_unread_qutation_detail->result();
       if ($unread_count > 0) {
@@ -485,50 +455,10 @@ class Quotation extends CI_Controller{
         }
         $var .= "</ul>
       </li>
-      <li class='footer'><a href='#'>See All Notifications</a></li>
+      <li class='footer'><a href='".base_url()."Quotation/supplier_all_notifications_chat_view'>See All Notifications</a></li>
     </ul>";
       echo $var;
 
-    // if (!empty($buyer_id)) {
-		// 	$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
-    //   $unread_count = $get_unread_qutation_detail->num_rows();
-    //   $unread_chat_notification_bell = $get_unread_qutation_detail->result();
-    //   if ($unread_count > 0) {
-    //     $msg = "You have unread comment in ".$unread_count." quotation";
-    //   } else {
-    //     $msg = "You have not unread comment ";
-    //   }
-    //   $var = "";
-    //   $var .= "<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><i class='glyphicon glyphicon-comment'></i><span style='' class='badge'>".$unread_count."</span></a>
-    //     <ul class='dropdown-menu notify-drop'>
-    //       <div class='notify-drop-title'>
-    //         <div class='row'>
-    //           <div class='col-md-12 col-sm-6 col-xs-6'>".$msg."</div>
-    //         </div>
-    //       </div>
-    //       <div class='drop-content'>";
-    //     foreach ($unread_chat_notification_bell as $ucnb) {
-    //       $var .= "<li>
-    //                 <a href=".base_url()."index.php/Quotation/buyer_quotation_detail?quotation_id=".$ucnb->IdQuotation.">
-    //                 <div class='col-md-3 col-sm-3 col-xs-3'><div class='notify-img'><img src=".base_url()."assets/supplier_upload/".$ucnb->ProfilImage." height='50' width='50' class='img-circle' alt=''></div></div>
-    //                 <div class='col-md-9 col-sm-9 col-xs-9 pd-l0'>
-    //                   <h5><b>".$ucnb->CompanyName."</b></h5>
-    //                   <hr>
-    //                   <span class='badge' style='background-color:orange;'>".$ucnb->UnreadCount."</span> <span class='label label-info'> unread comment</span>
-    //                 </div>
-    //               </a>
-    //             </li>";
-    //     }
-    //     $var .= "</div>
-    //     <div class='notify-drop-footer text-center'>
-    //       <a href=''><i class='fa fa-eye'></i> See All Notifications</a>
-    //     </div>
-    //   </ul>";
-    //   echo $var;
-		// }
-    //$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-
-    //exit();
   }
   function get_quotation_detail_chat(){
     // ============
@@ -635,10 +565,16 @@ class Quotation extends CI_Controller{
     //   </div>
     // </li>';
   }
+  function update_quotation_status(){
+    $quotation_code = $this->input->post('quotation_code');
+    $status = $this->input->post('status');
+    $data = array('IsAccepted' => $status);
+    $this->M_quotation->update_quotation($data,$quotation_code) ;
+    //$this->session->set_flashdata('msg', 'Edit Product Category successfully...');
+    redirect('Quotation/buyer_quotation_detail/'.$quotation_code);
+
+  }
   function add_quotation(){
-    // print_r($this->input->post());
-    // exit();
-    //Q960924001 FORMAT
     $buyer_id = $this->session->userdata('user_id');
     $supplier_email = $this->input->post('supplier_email');
     $supplier_id = $this->input->post('supplier_id');
@@ -708,6 +644,7 @@ class Quotation extends CI_Controller{
       'Subject' => $subject,
       'Content' => $content,
       'ProductId' => $product_id,
+      'IsAccepted' => -1,
       'Qty' => $qty
     );
 
@@ -718,15 +655,148 @@ class Quotation extends CI_Controller{
     $this->email->message($content);
     $this->email->set_newline("\r\n");
     $this->email->send();
-//     if($this->email->send()){
+    //     if($this->email->send()){
 //    //Success email Sent
 //    echo $this->email->print_debugger();
 // }else{
 //    //Email Failed To Send
 //    echo $this->email->print_debugger();
 // }
-    redirect('Home');
- // exit();
+      redirect('Home');
+      // exit();
+  }
+  function get_supplier_all_notifications_chat_json()
+  {
+    $supplier_id = $this->session->userdata('user_id');
+    $quotation_rules['join']['other_table_columns'] = " , user_tb.* , quotation_tb.Code AS QuotationCode ,  count( quotationdetail_tb.QuotationCode) as UnreadCount";
+    $quotation_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN quotationdetail_tb
+    ON quotation_tb.Code = quotationdetail_tb.QuotationCode AND user_tb.Id = quotation_tb.BuyerId  ";
+    $quotation_rules['filter_value'] =  array('quotation_detail_is_read' => 0, 'supplier_id'=>$supplier_id, 'quotation_detail_interlocutors'=> $supplier_id);//interlocutors adalah lawan bicara
+    $quotation_rules['group_by'] =  " quotation_tb.Code ";
+    $this->M_quotation->set_search_quotation($quotation_rules);
+    $get_unread_qutation_detail = $this->M_quotation->get_quotation();
+    $unread_chat_notification = $get_unread_qutation_detail->result();
+
+    $data = array();
+    foreach ($unread_chat_notification as $ucn) {
+      $row = array(
+        'Link' => base_url()."Quotation/supplier_quotation_detail?quotation_code=".$ucn->QuotationCode,
+        'QuotationCode' => $ucn->QuotationCode,
+        'LastName' => $ucn->LastName,
+        'Subject' => $ucn->Subject,
+        'ProfileImage' => base_url()."assets/supplier_upload/".$ucn->ProfileImage,
+        'UnreadCount' => $ucn->UnreadCount
+      );
+      $data[] = $row;
+    }
+    echo json_encode($data);
+  }
+  function get_buyer_all_notifications_chat_json()
+  {
+    $buyer_id = $this->session->userdata('user_id');
+    //if (!empty($buyer_id)) {
+      $quotation_rules['join']['other_table_columns'] = " , user_tb.* , quotation_tb.Code AS QuotationCode ,  count( quotationdetail_tb.QuotationCode) as UnreadCount";
+      $quotation_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN quotationdetail_tb
+      ON quotation_tb.Code = quotationdetail_tb.QuotationCode AND user_tb.Id = quotation_tb.SupplierId  ";
+      $quotation_rules['filter_value'] =  array('quotation_detail_is_read' => 0, 'buyer_id'=>$buyer_id, 'quotation_detail_interlocutors'=> $buyer_id);//interlocutors adalah lawan bicara
+      $quotation_rules['group_by'] =  " quotation_tb.Code ";
+      $this->M_quotation->set_search_quotation($quotation_rules);
+      $get_unread_qutation_detail = $this->M_quotation->get_quotation();
+    $unread_chat_notification = $get_unread_qutation_detail->result();
+
+    $data = array();
+    foreach ($unread_chat_notification as $ucn) {
+      $row = array(
+        'Link' => base_url()."Quotation/buyer_quotation_detail/".$ucn->QuotationCode,
+        'QuotationCode' => $ucn->QuotationCode,
+        'LastName' => $ucn->LastName,
+        'Subject' => $ucn->Subject,
+        'ProfileImage' => base_url()."assets/supplier_upload/".$ucn->ProfileImage,
+        'UnreadCount' => $ucn->UnreadCount
+      );
+      $data[] = $row;
+    }
+    echo json_encode($data);
+  }
+  function supplier_all_notifications_chat_view(){
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || ($user_level != 1 && $user_level != 3)) {
+      $this->session->sess_destroy();
+      redirect('Home/home_view');
+    }
+
+    $this->load->view('template/back/head_back');
+    $this->load->view('template/back/sidebar_back');
+    $this->load->view('private/quotation/supplier_all_notifications_chat');
+    $this->load->view('template/back/foot_back');
+  }
+  function buyer_all_notifications_chat_view(){
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || ($user_level != 2 && $user_level != 3)) {
+      $this->session->sess_destroy();
+      redirect('Home/home_view');
+    }
+
+    $this->M_product_category->set_search_product_category();
+		$get_product_category = $this->M_product_category->get_product_category();
+
+		$this->M_product_sub_category->set_search_product_sub_category();
+		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
+
+		$data_nav['product_category'] = $get_product_category->result();
+		$data_nav['product_sub_category'] = $get_product_sub_category->result();
+
+    $head_data['page_title'] = "Dinilaku";
+    $this->load->view('template/front/head_front',$head_data);
+    $this->load->view('template/front/navigation',$data_nav);
+    $this->load->view('private/quotation/buyer_all_notifications_chat');
+    $this->load->view('template/front/foot_front');
+
+  }
+  function get_supplier_all_notifications_rfq_json()
+  {
+    $supplier_id = $this->session->userdata('user_id');
+    $quotation_rules['join']['other_table_columns'] = " , user_tb.* , quotation_tb.Code AS QuotationCode ";
+    $quotation_rules['join']['join_table'] = " INNER JOIN user_tb
+    ON  user_tb.Id = quotation_tb.BuyerId  ";
+    $quotation_rules['filter_value'] =  array('quotation_is_read' => 0, 'supplier_id'=>$supplier_id);//interlocutors adalah lawan bicara
+    //$quotation_rules['group_by'] =  " quotation_tb.Code ";
+    $this->M_quotation->set_search_quotation($quotation_rules);
+    $get_quotation = $this->M_quotation->get_quotation();
+
+
+
+    //$get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
+    $unread_quotation_notification = $get_quotation->result();
+
+    $data = array();
+    foreach ($unread_quotation_notification as $uqn) {
+      $row = array(
+        'Link' => base_url()."Quotation/supplier_quotation_detail?quotation_code=".$uqn->QuotationCode,
+        'QuotationCode' => $uqn->QuotationCode,
+        'LastName' => $uqn->LastName,
+        'Subject' => $uqn->Subject,
+        'ProfileImage' => base_url()."assets/supplier_upload/".$uqn->ProfileImage,
+        'SendDate' => $uqn->SendDate
+      );
+      $data[] = $row;
+    }
+    echo json_encode($data);
+  }
+  function supplier_all_notifications_rfq_view(){
+    $user_id = $this->session->userdata('user_id');
+    $user_level = $this->session->userdata('user_level');
+    if (empty($user_id) || ($user_level != 1 && $user_level != 3)) {
+      $this->session->sess_destroy();
+      redirect('Home/home_view');
+    }
+
+    $this->load->view('template/back/head_back');
+    $this->load->view('template/back/sidebar_back');
+    $this->load->view('private/quotation/supplier_all_notifications_rfq');
+    $this->load->view('template/back/foot_back');
   }
 }
 

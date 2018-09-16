@@ -1,3 +1,4 @@
+<?php $this->load->view('template/back/msg_sukses'); ?>
 <footer class="footer">
     <div class="container">
         <div class="row">
