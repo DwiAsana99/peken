@@ -513,12 +513,16 @@
           </a>
           <ul class="dropdown-menu">
             <li>
+              <a href="<?php echo base_url().'Quotation/buyer_quotation_list';?>">
+                <span class="glyphicon glyphicon-th-list"></span> Request for Quotation List</a>
+              </li>
+            <li>
               <a href="<?php echo base_url().'User/buyer_account_view';?>">
                 <span class="glyphicon glyphicon-user"></span> Profile</a>
             </li>
             <li>
-              <a href="<?php echo base_url().'index.php/Quotation/buyer_quotation_list';?>">
-                <span class="glyphicon glyphicon-th-list"></span> Request for Quotation List</a>
+              <a href="<?php echo base_url().'User/buyer_reset_password_view';?>">
+                <span class="glyphicon glyphicon-user"></span> Reset Password</a>
             </li>
             <!-- <li>
             <a href="<?php //echo base_url().'index.php/Support/buyer_support_list_view';?>"><span class="glyphicon glyphicon-phone-alt"></span> Support</a>
