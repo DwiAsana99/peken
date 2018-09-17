@@ -474,7 +474,8 @@ $(document).ready(function () {
                   </div>
                   <div class="notify-drop-footer text-center">
                     <a href="">
-                      <i class="fa fa-eye"></i> See All Notifications</a>
+                      <i class="fa fa-eye"></i> See All Notifications
+                    </a>
                     </div>
                   </ul>
                   <!-- </li> -->
@@ -514,16 +515,29 @@ $(document).ready(function () {
                   </a>
                   <ul class="dropdown-menu">
                     <li>
-                      <a href="<?php echo base_url().'User/buyer_account_view';?>">
-                        <span class="glyphicon glyphicon-user"></span> Profile
-                      </a>
-                    </li>
-                    <li>
                       <a href="<?php echo base_url().'index.php/Quotation/buyer_quotation_list';?>">
                         <span class="glyphicon glyphicon-th-list"></span> Request for Quotation List
                       </a>
                     </li>
+                    <li>
+                      <a href="<?php echo base_url().'User/buyer_account_view';?>">
+                        <span class="glyphicon glyphicon-user"></span> Profile
+                      </a>
+                    </li>
+                    <?php if ($user_level == 2): ?>
+                      <li>
+                        <a href="<?php echo base_url().'User/buyer_reset_password_view';?>">
+                          <span class="glyphicon glyphicon-user"></span> Reset Password
+                        </a>
+                      </li>
+                    <?php endif; ?>
+
                     <?php if ($user_level == 3): ?>
+                      <li>
+                        <a href="<?php echo base_url().'User/supplier_reset_password_view';?>">
+                          <span class="glyphicon glyphicon-user"></span> Reset Password
+                        </a>
+                      </li>
                       <li>
                         <a href="<?php echo base_url().'User/supplier_dashboard_view';?>">
                           <span class="glyphicon glyphicon-dashboard"></span> Back to admin supplier page

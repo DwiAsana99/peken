@@ -16,7 +16,7 @@ class Home extends CI_Controller{
 		$this->M_product_category->set_search_product_category();
 		$get_product_category = $this->M_product_category->get_product_category();
 		$product_category = $get_product_category->result();
-	
+
 		$this->M_product_sub_category->set_search_product_sub_category();
 		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
 		$product_sub_category = $get_product_sub_category->result();
@@ -46,17 +46,17 @@ class Home extends CI_Controller{
 	function home_view(){
 		$product_rules['limit'] = 8;
 		$product_rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.* ";
-		$product_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN productpic_tb	
+		$product_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN productpic_tb
 		ON product_tb.Id = productpic_tb.ProductId AND user_tb.Id = product_tb.SupplierId ";
 		$product_rules['filter_value'] =  array('is_published' => 1);
 		$product_rules['group_by'] = ' productpic_tb.ProductId ';
 		$this->M_product->set_search_product($product_rules);
 		$get_product= $this->M_product->get_product();
 		$data['product'] = $get_product->result();
-		
+
 		$user_rules['limit'] = 8;
 		// $rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.* ";
-		// $rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN productpic_tb	
+		// $rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN productpic_tb
 		// ON product_tb.Id = productpic_tb.ProductId AND user_tb.Id = product_tb.SupplierId ";
 		//$rules['filter_value'] =  array('is_published' => 1);
 		//$rules['group_by'] = ' productpic_tb.ProductId ';
@@ -68,10 +68,10 @@ class Home extends CI_Controller{
 
 		$this->M_product_category->set_search_product_category();
 		$get_product_category = $this->M_product_category->get_product_category();
-	
+
 		$this->M_product_sub_category->set_search_product_sub_category();
 		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
-		
+
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
 

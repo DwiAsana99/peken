@@ -759,12 +759,34 @@
       redirect('User/supplier_verification_view/'.$user_id);
     }
 
+    function buyer_reset_password_view(){
+      $user_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || ($user_level != 2)) {
+        $this->session->sess_destroy();
+        redirect('Home/home_view');
+      }
 
+      $this->M_product_category->set_search_product_category();
+      $get_product_category = $this->M_product_category->get_product_category();
+      $this->M_product_sub_category->set_search_product_sub_category();
+      $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
+      $data_nav['product_category'] = $get_product_category->result();
+      $data_nav['product_sub_category'] = $get_product_sub_category->result();
+
+      $head_data['page_title'] = "Dinilaku";
+      $this->load->view('template/front/head_front',$head_data);
+      $this->load->view('template/front/navigation', $data_nav);
+      $this->load->view('private/buyer_account/buyer_reset_password');
+      $this->load->view('template/front/foot_front');
+    }
 
 
     function supplier_reset_password_view(){
-      $supplier_id = $this->session->userdata('user_id');
-      if (empty($supplier_id)) {
+      $user_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || ($user_level != 1 && $user_level != 3)) {
+        $this->session->sess_destroy();
         redirect('Home/home_view');
       }
       $this->load->view('template/back/head_back');
@@ -773,6 +795,7 @@
       $this->load->view('template/back/foot_back');
     }
     function update_password() {
+      $user_level = $this->session->userdata('user_level');
       $user_id = $this->session->userdata('user_id');
       $old_password = $this->input->post('old_password');
       $new_password = $this->input->post('new_password');
@@ -781,7 +804,13 @@
 
 
       $this->M_user->update_user($data,$user_id);
-
+      if ($user_level == 1 || $user_level == 3) {
+        $this->session->set_flashdata('msg', 'Your password has changed ...');
+        redirect('User/supplier_reset_password_view');
+      } elseif ($user_level == 2) {
+        $this->session->set_flashdata('msg', 'Your password has changed ...');
+        redirect('User/buyer_reset_password_view');
+      }
 
       // echo "<pre>";
       // print_r($this->input->post());
