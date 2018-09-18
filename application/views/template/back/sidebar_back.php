@@ -41,7 +41,7 @@
           </ul>
         </li> -->
       <li>
-        <a href="<?php echo base_url().'User/dashboard_supplier_view' ?>">
+        <a href="<?php echo base_url().'User/supplier_dashboard_view' ?>">
           <i class="fa fa-dashboard"></i>
           <span>Dashboard</span>
         </a>
