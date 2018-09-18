@@ -36,7 +36,7 @@ class M_quotation extends CI_Model{
     $query = "SELECT quotation_tb.* ".$this->other_table_columns."
     FROM quotation_tb ".$this->join_table."
     WHERE 1=1 ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
-    //echo $query;exit();
+    // /echo $query;exit();
 
     $query = $this->db->query($query);
     return $query;
