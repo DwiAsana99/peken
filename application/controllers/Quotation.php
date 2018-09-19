@@ -798,6 +798,63 @@ class Quotation extends CI_Controller{
     $this->load->view('private/quotation/supplier_all_notifications_rfq');
     $this->load->view('template/back/foot_back');
   }
+  function get_rfq_recap()
+  {
+    $get_accepted_rfq_recap = $this->M_quotation->get_accepted_rfq_recap();
+    $accepted_rfq_recap = $get_accepted_rfq_recap->result();
+    $get_rejected_rfq_recap = $this->M_quotation->get_rejected_rfq_recap();
+    $rejected_rfq_recap = $get_rejected_rfq_recap->result();
+    echo "<pre>";
+    print_r($accepted_rfq_recap);
+    echo "</pre>";
+    echo "++++++++++++++++++++++++++++++++++++++++++";
+    echo "<pre>";
+    print_r($rejected_rfq_recap);
+    echo "</pre>";
+    $data = array();
+    //$x = array( 0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+    //print_r($x);exit();
+     $x = 1;
+     while ($x <= 12) {
+
+      foreach ($accepted_rfq_recap as $arc) {
+        if ($x == $arc->bulan ) {
+            $row = array(
+              'Date' => $arc->bulan,
+              'Accepted' => $arc->jmlh_terima,
+              'Rejected' => 0
+            );
+            $data[] = $row;
+        }
+      }//foreach
+
+      if (!isset($data[$x-1])) {
+        $row = array(
+          'Date' => $x,
+          'Accepted' => 0,
+          'Rejected' => 0
+
+        );
+        $data[] = $row;
+      }
+      $x++;
+
+    }//while
+    $i= 1;
+    while ($i <= 12) {
+
+      foreach ($rejected_rfq_recap as $rrc) {
+        if ($data[$i-1]['Date'] == $rrc->bulan ) {
+            $data[$i-1]['Rejected'] = $rrc->jmlh_tdk_terima;
+        }
+      }//foreach
+      $i++;
+    }
+    echo json_encode($data);
+    echo "<pre>";
+    print_r($data);
+    echo "</pre>";exit();
+  }
 }
 
 ?>

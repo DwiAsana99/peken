@@ -33,6 +33,7 @@
       $this->load->view('private/dashboard_supplier');
       $this->load->view('template/back/foot_back');
     }
+    
     /* function public_supplier_list_view() digunakan untuk menampilkan supplier list
     kepada public (non member, member)*/
     function public_supplier_list_view(){
