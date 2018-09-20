@@ -800,17 +800,33 @@ class Quotation extends CI_Controller{
   }
   function get_rfq_recap()
   {
-    $get_accepted_rfq_recap = $this->M_quotation->get_accepted_rfq_recap();
+    $accepted_rfq_recap_rules['select']['columns'] = " YEAR(quotation_tb.SendDate) AS Year,
+    MONTH(quotation_tb.SendDate) AS Month,  COUNT(quotation_tb.Code) AS Accepted ";
+    $accepted_rfq_recap_rules['from']['table'] = " quotation_tb ";
+    $accepted_rfq_recap_rules['filter_value'] =  array('is_accepted' => 1, 'year'=>'2018');
+    $accepted_rfq_recap_rules['group_by'] =  " MONTH(quotation_tb.SendDate), quotation_tb.IsAccepted ";
+    $this->M_quotation->set_search_rfq_recap($accepted_rfq_recap_rules);
+    $get_accepted_rfq_recap = $this->M_quotation->get_rfq_recap();
     $accepted_rfq_recap = $get_accepted_rfq_recap->result();
-    $get_rejected_rfq_recap = $this->M_quotation->get_rejected_rfq_recap();
+
+    $rejected_rfq_recap_rules['select']['columns'] = " YEAR(quotation_tb.SendDate) AS Year,
+    MONTH(quotation_tb.SendDate) AS Month,  COUNT(quotation_tb.Code) AS Rejected ";
+    $rejected_rfq_recap_rules['from']['table'] = " quotation_tb ";
+    $rejected_rfq_recap_rules['filter_value'] =  array('is_accepted' => 0, 'year'=>'2018');
+    $rejected_rfq_recap_rules['group_by'] =  " MONTH(quotation_tb.SendDate), quotation_tb.IsAccepted ";
+    $this->M_quotation->set_search_rfq_recap($rejected_rfq_recap_rules);
+    $get_rejected_rfq_recap = $this->M_quotation->get_rfq_recap();
     $rejected_rfq_recap = $get_rejected_rfq_recap->result();
-    echo "<pre>";
-    print_r($accepted_rfq_recap);
-    echo "</pre>";
-    echo "++++++++++++++++++++++++++++++++++++++++++";
-    echo "<pre>";
-    print_r($rejected_rfq_recap);
-    echo "</pre>";
+    //
+    // $get_rejected_rfq_recap = $this->M_quotation->get_rejected_rfq_recap();
+    // $rejected_rfq_recap = $get_rejected_rfq_recap->result();
+    // echo "<pre>";
+    // print_r($accepted_rfq_recap);
+    // echo "</pre>";
+    // echo "++++++++++++++++++++++++++++++++++++++++++";
+    // echo "<pre>";
+    // print_r($rejected_rfq_recap);
+    // echo "</pre>";
     $data = array();
     //$x = array( 0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
     //print_r($x);exit();
@@ -818,10 +834,11 @@ class Quotation extends CI_Controller{
      while ($x <= 12) {
 
       foreach ($accepted_rfq_recap as $arc) {
-        if ($x == $arc->bulan ) {
+        if ($x == $arc->Month ) {
             $row = array(
-              'Date' => $arc->bulan,
-              'Accepted' => $arc->jmlh_terima,
+              'Year' => $arc->Year,
+              'Month' => $arc->Month,
+              'Accepted' => $arc->Accepted,
               'Rejected' => 0
             );
             $data[] = $row;
@@ -830,7 +847,8 @@ class Quotation extends CI_Controller{
 
       if (!isset($data[$x-1])) {
         $row = array(
-          'Date' => $x,
+          'Year' => 2018,
+          'Month' => $x,
           'Accepted' => 0,
           'Rejected' => 0
 
@@ -844,16 +862,16 @@ class Quotation extends CI_Controller{
     while ($i <= 12) {
 
       foreach ($rejected_rfq_recap as $rrc) {
-        if ($data[$i-1]['Date'] == $rrc->bulan ) {
-            $data[$i-1]['Rejected'] = $rrc->jmlh_tdk_terima;
+        if ($data[$i-1]['Month'] == $rrc->Month ) {
+            $data[$i-1]['Rejected'] = $rrc->Rejected;
         }
       }//foreach
       $i++;
     }
     echo json_encode($data);
-    echo "<pre>";
-    print_r($data);
-    echo "</pre>";exit();
+    // echo "<pre>";
+    // print_r($data);
+    // echo "</pre>";exit();
   }
 }
 

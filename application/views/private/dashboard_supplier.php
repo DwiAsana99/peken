@@ -30,25 +30,49 @@
 
 
 <script type="text/javascript">
+function get_rfq_recap(){
+  $.getJSON( "<?php// echo base_url().'Quotation/get_rfq_recap/'; ?>", function( data ) {
+
+    var area = new Morris.Line({
+    element   : 'revenue-chart',
+    resize    : true,
+    data      : [
+    for (var key in data) {
+      { y: "'"+data[key].Year+"-"+data[key].Month+"'", item1: data[key].Accepted, item2: data[key].Rejected },
+    }
+    { y: '2019-12', item1: 8432, item2: 5713 }
+  ],
+  xkey      : 'y',
+  ykeys     : ['item1', 'item2'],
+    labels    : ['Accept', 'Reject'],
+  lineColors: ['#05c10c', '#ed0404'],
+  hideHover : 'auto'
+  });
+  })
+}
+$(document).ready(function () {
+  get_rfq_recap();
+
+});
+</script>
+
+
+
+<script type="text/javascript">
 $(function () {
-/* Morris.js Charts */
-// Sales chart
+
 var area = new Morris.Line({
 element   : 'revenue-chart',
 resize    : true,
 data      : [
-  { y: '2011-01', item1: 2666, item2: 2666 },
-  { y: '2011-02', item1: 2778, item2: 2294 },
-  { y: '2011-03', item1: 4912, item2: 1969 },
-  { y: '2011-04', item1: 3767, item2: 3597 },
-  { y: '2011-05', item1: 30000, item2: 1914 },
-  { y: '2011-06', item1: 5670, item2: 4293 },
-  { y: '2011-07', item1: 4820, item2: 3795 },
-  { y: '2011-08', item1: 15073, item2: 40000 },
-  { y: '2011-09', item1: 10687, item2: 4460 },
-  { y: '2011-10', item1: 10687, item2: 4460 },
-  { y: '2011-11', item1: 10687, item2: 4460 },
-  { y: '2011-12', item1: 8432, item2: 5713 }
+  $.getJSON( "<?php echo base_url().'Quotation/get_rfq_recap/'; ?>", function( data ) {
+
+    for (var key in data) {
+      { y: "'"+data[key].Year+"-"+data[key].Month+"'", item1: data[key].Accepted, item2: data[key].Rejected },
+    }
+    { y: '2019-12', item1: 8432, item2: 5713 }
+
+    })
 ],
 xkey      : 'y',
 ykeys     : ['item1', 'item2'],
@@ -56,5 +80,39 @@ ykeys     : ['item1', 'item2'],
 lineColors: ['#05c10c', '#ed0404'],
 hideHover : 'auto'
 });
+
+
+
 });
+</script>
+<script type="text/javascript">
+// $(function () {
+//
+// var area = new Morris.Line({
+// element   : 'revenue-chart',
+// resize    : true,
+// data      : [
+//   { y: '2011-01', item1: 2666, item2: 2666 },
+//   { y: '2011-02', item1: 2778, item2: 2294 },
+//   { y: '2011-03', item1: 4912, item2: 1969 },
+//   { y: '2011-04', item1: 3767, item2: 3597 },
+//   { y: '2011-05', item1: 30000, item2: 1914 },
+//   { y: '2011-06', item1: 5670, item2: 4293 },
+//   { y: '2011-07', item1: 4820, item2: 3795 },
+//   { y: '2011-08', item1: 15073, item2: 40000 },
+//   { y: '2011-09', item1: 10687, item2: 4460 },
+//   { y: '2011-10', item1: 10687, item2: 4460 },
+//   { y: '2011-11', item1: 10687, item2: 4460 },
+//   { y: '2011-12', item1: 8432, item2: 5713 }
+// ],
+// xkey      : 'y',
+// ykeys     : ['item1', 'item2'],
+//   labels    : ['Accept', 'Reject'],
+// lineColors: ['#05c10c', '#ed0404'],
+// hideHover : 'auto'
+// });
+//
+//
+//
+// });
 </script>
