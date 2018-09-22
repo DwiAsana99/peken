@@ -77,6 +77,7 @@ class M_quotation extends CI_Model{
     $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
     $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
     $this->filter_value = "1=1" ;
+    $this->filter_value .= isset($rules['filter_value']['supplier_id']) ? " AND quotation_tb.SupplierId = ".$rules['filter_value']['supplier_id'] : "" ;
     $this->filter_value .= isset($rules['filter_value']['is_accepted']) ? " AND quotation_tb.IsAccepted = ".$rules['filter_value']['is_accepted'] : "" ;
     $this->filter_value .= isset($rules['filter_value']['year']) ? " AND YEAR(quotation_tb.SendDate) = "."'".$rules['filter_value']['year']."'" : "" ;
 
@@ -86,7 +87,7 @@ class M_quotation extends CI_Model{
     $query = "SELECT  ".$this->select_columns."
     FROM ".$this->from_table."
     WHERE ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
-    // /echo $query;exit();
+    //echo $query;exit();
 
     $query = $this->db->query($query);
     return $query;

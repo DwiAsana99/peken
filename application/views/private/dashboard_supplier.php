@@ -3,116 +3,138 @@
 
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1>
+<div class="row">
+  <div class="col-md-6">
+    <h3 style="margin-top:0px;">
       Dashboard
       <small>Control panel</small>
-    </h1>
-    <ol class="breadcrumb">
+    </h3>
+  </div>
+
+  <div class="col-md-6 text-center">
+    <select class="form-control " name="report_year" id="report_year">
+      <?php
+        $date = date("Y");
+        $a = $member_since;
+        //echo $date."||".$a;exit();
+        while ($a <= $date) {?>
+          <option <?php if ($a== $date) { echo "selected";  } ?> value="<?php echo $a; ?>"><?php echo $a; ?></option>
+      <?php  $a++;} ?>
+
+    </select>
+  </div>
+</div>
+
+
+</section>
+    <!-- <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
       <li class="active">Dashboard</li>
-    </ol>
+    </ol> -->
+<section class="content" style="padding-top:0px;">
+
+
+    <div class="row">
+      <h1></h1>
+
+       <!-- ./col -->
+       <div class="col-lg-6 col-xs-6">
+         <!-- small box -->
+         <div class="small-box bg-green">
+           <div class="inner">
+             <h3 id="accepted_quotation">44</h3>
+
+             <p>Total Quotation Accepted</p>
+           </div>
+           <div class="icon">
+             <i class="ion-ios-checkmark-outline"></i>
+           </div>
+           <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
+         </div>
+       </div>
+       <!-- ./col -->
+       <div class="col-lg-6 col-xs-6">
+         <!-- small box -->
+         <div class="small-box bg-red">
+           <div class="inner">
+             <h3 id="rejected_quotation">65</h3>
+
+             <p>Total Quotation Rejected</p>
+           </div>
+           <div class="icon">
+             <i class="ion-ios-close-outline"></i>
+           </div>
+           <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
+         </div>
+       </div>
+       <!-- ./col -->
+     </div>
+
+
+
+
+
+
+
     <div class="nav-tabs-custom">
       <!-- Tabs within a box -->
       <ul class="nav nav-tabs pull-right">
-        <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-        <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
-        <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
+
+        <li class="pull-left header"><i class="fa fa-inbox"></i> Monthly Quotation Recap Report</li>
+
       </ul>
       <div class="tab-content no-padding">
-        <!-- Morris chart - Sales -->
+
         <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-        <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+
       </div>
     </div>
   </section>
 
 
 
-
 <script type="text/javascript">
-function get_rfq_recap(){
-  $.getJSON( "<?php// echo base_url().'Quotation/get_rfq_recap/'; ?>", function( data ) {
-
-    var area = new Morris.Line({
-    element   : 'revenue-chart',
-    resize    : true,
-    data      : [
-    for (var key in data) {
-      { y: "'"+data[key].Year+"-"+data[key].Month+"'", item1: data[key].Accepted, item2: data[key].Rejected },
-    }
-    { y: '2019-12', item1: 8432, item2: 5713 }
-  ],
-  xkey      : 'y',
-  ykeys     : ['item1', 'item2'],
-    labels    : ['Accept', 'Reject'],
-  lineColors: ['#05c10c', '#ed0404'],
-  hideHover : 'auto'
-  });
+function get_supplier_box_stats(reportYear)
+{
+  $("#accepted_quotation").empty();
+  $("#rejected_quotation").empty();
+  $.getJSON( "<?php echo base_url().'Quotation/get_supplier_box_stats'; ?>/"+reportYear, function( data ) {
+    console.log(data);
+    $("#accepted_quotation").html(data.AcceptedQuotation);
+    $("#rejected_quotation").html(data.RejectedQuotation);
   })
 }
-$(document).ready(function () {
-  get_rfq_recap();
-
-});
-</script>
-
-
-
-<script type="text/javascript">
-$(function () {
-
-var area = new Morris.Line({
-element   : 'revenue-chart',
-resize    : true,
-data      : [
-  $.getJSON( "<?php echo base_url().'Quotation/get_rfq_recap/'; ?>", function( data ) {
-
-    for (var key in data) {
-      { y: "'"+data[key].Year+"-"+data[key].Month+"'", item1: data[key].Accepted, item2: data[key].Rejected },
+function get_rfq_recap(reportYear) {
+  $.ajax({
+    url: "<?php echo base_url().'Quotation/get_rfq_recap/'; ?>",
+    dataType: 'JSON',
+    type: 'POST',
+    data: {report_year:reportYear},
+    success: function(response) {
+      var area = new Morris.Line({
+        element   : 'revenue-chart',
+        resize    : true,
+        data      : response,
+        xkey      : 'y',
+        ykeys     : ['item1', 'item2'],
+        labels    : ['Accept', 'Reject'],
+        lineColors: ['#05c10c', '#ed0404'],
+        hideHover : 'auto'
+      });
     }
-    { y: '2019-12', item1: 8432, item2: 5713 }
+  });
+}
+$(function(){
+  $("#report_year").change(function(){
+    $("#revenue-chart").empty();
+    var report_year=$(this).val();
+    get_rfq_recap(report_year);
+    get_supplier_box_stats(report_year);
+  });
+})
 
-    })
-],
-xkey      : 'y',
-ykeys     : ['item1', 'item2'],
-  labels    : ['Accept', 'Reject'],
-lineColors: ['#05c10c', '#ed0404'],
-hideHover : 'auto'
+$(document).ready(function(){
+  get_rfq_recap(<?php echo date("Y"); ?>);
+  get_supplier_box_stats(<?php echo date("Y"); ?>);
 });
-
-
-
-});
-</script>
-<script type="text/javascript">
-// $(function () {
-//
-// var area = new Morris.Line({
-// element   : 'revenue-chart',
-// resize    : true,
-// data      : [
-//   { y: '2011-01', item1: 2666, item2: 2666 },
-//   { y: '2011-02', item1: 2778, item2: 2294 },
-//   { y: '2011-03', item1: 4912, item2: 1969 },
-//   { y: '2011-04', item1: 3767, item2: 3597 },
-//   { y: '2011-05', item1: 30000, item2: 1914 },
-//   { y: '2011-06', item1: 5670, item2: 4293 },
-//   { y: '2011-07', item1: 4820, item2: 3795 },
-//   { y: '2011-08', item1: 15073, item2: 40000 },
-//   { y: '2011-09', item1: 10687, item2: 4460 },
-//   { y: '2011-10', item1: 10687, item2: 4460 },
-//   { y: '2011-11', item1: 10687, item2: 4460 },
-//   { y: '2011-12', item1: 8432, item2: 5713 }
-// ],
-// xkey      : 'y',
-// ykeys     : ['item1', 'item2'],
-//   labels    : ['Accept', 'Reject'],
-// lineColors: ['#05c10c', '#ed0404'],
-// hideHover : 'auto'
-// });
-//
-//
-//
-// });
 </script>

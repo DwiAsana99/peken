@@ -65,9 +65,9 @@
 
 
       <script type="text/javascript" >
-        
+
         //function get_product_sub_category_dropdown() {
-          $(document).ready(function () { 
+          $(document).ready(function () {
             get_product_category();
         });
         $(function(){
@@ -75,7 +75,7 @@
 
         var code=$(this).val();
         get_product_sub_category(code)
-        
+
 
         });
       })
@@ -114,13 +114,13 @@
           $("#product_sub_category_code").empty();
           $.getJSON( "<?php echo base_url().'Product_sub_category/get_product_sub_category'; ?>/"+code, function( data ) {
             console.log(data);
- 
-            
+
+
             $("#product_sub_category_code").append("<option value='0'>--Choose Product Sub Category--</option>");
             for (var key in data) {
               console.log( data[key].ProductCategoryCode);
               $("#product_sub_category_code").append("<option value='"+data[key].Code+"'>"+data[key].ProductSubCategory+"</option>");
-            }           
+            }
           })
         }
       </script>
@@ -146,7 +146,7 @@
             <div class="form-group">
               <label for="">Product Category</label>
               <select class="form-control" name="product_category_code" id="product_category_code" >
-                <option value='0'>--Choose Product Category--</option>               
+                <option value='0'>--Choose Product Category--</option>
               </select>
             </div>
             <div class="form-group">

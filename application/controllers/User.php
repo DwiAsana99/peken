@@ -28,12 +28,21 @@
         $this->session->sess_destroy();
         redirect('Home/home_view');
       }
+      $user_rules['join']['other_table_columns'] = " ,YEAR(user_tb.MemberDate) AS MemberSince ";
+      $user_rules['filter_value'] =  array('user_id'=>$user_id);
+      $this->M_user->set_search_user($user_rules);
+      $get_supplier = $this->M_user->get_user();
+      $row = $get_supplier->row();
+      // /print_r($get_supplier->result());exit();
+      //echo $row->MemberSince;exit();
+      $data['member_since'] = $row->MemberSince;
+
       $this->load->view('template/back/head_back');
       $this->load->view('template/back/sidebar_back');
-      $this->load->view('private/dashboard_supplier');
+      $this->load->view('private/dashboard_supplier',$data);
       $this->load->view('template/back/foot_back');
     }
-    
+
     /* function public_supplier_list_view() digunakan untuk menampilkan supplier list
     kepada public (non member, member)*/
     function public_supplier_list_view(){

@@ -800,10 +800,12 @@ class Quotation extends CI_Controller{
   }
   function get_rfq_recap()
   {
+    $user_id = $this->session->userdata('user_id');
+    $report_year = $this->input->post('report_year');
     $accepted_rfq_recap_rules['select']['columns'] = " YEAR(quotation_tb.SendDate) AS Year,
     MONTH(quotation_tb.SendDate) AS Month,  COUNT(quotation_tb.Code) AS Accepted ";
     $accepted_rfq_recap_rules['from']['table'] = " quotation_tb ";
-    $accepted_rfq_recap_rules['filter_value'] =  array('is_accepted' => 1, 'year'=>'2018');
+    $accepted_rfq_recap_rules['filter_value'] =  array('is_accepted' => 1, 'year'=>$report_year, 'supplier_id' =>$user_id);
     $accepted_rfq_recap_rules['group_by'] =  " MONTH(quotation_tb.SendDate), quotation_tb.IsAccepted ";
     $this->M_quotation->set_search_rfq_recap($accepted_rfq_recap_rules);
     $get_accepted_rfq_recap = $this->M_quotation->get_rfq_recap();
@@ -812,7 +814,7 @@ class Quotation extends CI_Controller{
     $rejected_rfq_recap_rules['select']['columns'] = " YEAR(quotation_tb.SendDate) AS Year,
     MONTH(quotation_tb.SendDate) AS Month,  COUNT(quotation_tb.Code) AS Rejected ";
     $rejected_rfq_recap_rules['from']['table'] = " quotation_tb ";
-    $rejected_rfq_recap_rules['filter_value'] =  array('is_accepted' => 0, 'year'=>'2018');
+    $rejected_rfq_recap_rules['filter_value'] =  array('is_accepted' => 0, 'year'=>$report_year, 'supplier_id' =>$user_id);
     $rejected_rfq_recap_rules['group_by'] =  " MONTH(quotation_tb.SendDate), quotation_tb.IsAccepted ";
     $this->M_quotation->set_search_rfq_recap($rejected_rfq_recap_rules);
     $get_rejected_rfq_recap = $this->M_quotation->get_rfq_recap();
@@ -827,7 +829,7 @@ class Quotation extends CI_Controller{
     // echo "<pre>";
     // print_r($rejected_rfq_recap);
     // echo "</pre>";
-    $data = array();
+    // $data = array();
     //$x = array( 0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
     //print_r($x);exit();
      $x = 1;
@@ -836,10 +838,9 @@ class Quotation extends CI_Controller{
       foreach ($accepted_rfq_recap as $arc) {
         if ($x == $arc->Month ) {
             $row = array(
-              'Year' => $arc->Year,
-              'Month' => $arc->Month,
-              'Accepted' => $arc->Accepted,
-              'Rejected' => 0
+              'y' => $arc->Year."-".$arc->Month,
+              'item1' => (int)$arc->Accepted,
+              'item2' => 0
             );
             $data[] = $row;
         }
@@ -847,10 +848,9 @@ class Quotation extends CI_Controller{
 
       if (!isset($data[$x-1])) {
         $row = array(
-          'Year' => 2018,
-          'Month' => $x,
-          'Accepted' => 0,
-          'Rejected' => 0
+          'y' => $report_year."-".$x,
+          'item1' => 0,
+          'item2' => 0
 
         );
         $data[] = $row;
@@ -862,16 +862,38 @@ class Quotation extends CI_Controller{
     while ($i <= 12) {
 
       foreach ($rejected_rfq_recap as $rrc) {
-        if ($data[$i-1]['Month'] == $rrc->Month ) {
-            $data[$i-1]['Rejected'] = $rrc->Rejected;
+        if ($data[$i-1]['y'] == $report_year."-".$rrc->Month ) {
+            $data[$i-1]['item2'] = (int)$rrc->Rejected;
         }
       }//foreach
       $i++;
     }
     echo json_encode($data);
-    // echo "<pre>";
-    // print_r($data);
-    // echo "</pre>";exit();
+  }
+  function get_supplier_box_stats($report_year)
+  {
+    $user_id = $this->session->userdata('user_id');
+    $accepted_rfq_recap_rules['select']['columns'] = " YEAR(quotation_tb.SendDate) AS Year, COUNT(quotation_tb.Code) AS AcceptedQuotation ";
+    $accepted_rfq_recap_rules['from']['table'] = " quotation_tb ";
+    $accepted_rfq_recap_rules['filter_value'] =  array('is_accepted' => 1, 'year'=>$report_year, 'supplier_id' =>$user_id);
+    $this->M_quotation->set_search_rfq_recap($accepted_rfq_recap_rules);
+    $get_accepted_rfq_recap = $this->M_quotation->get_rfq_recap();
+    $row_accepted = $get_accepted_rfq_recap->row();
+
+    $rejected_rfq_recap_rules['select']['columns'] = " YEAR(quotation_tb.SendDate) AS Year,COUNT(quotation_tb.Code) AS RejectedQuotation ";
+    $rejected_rfq_recap_rules['from']['table'] = " quotation_tb ";
+    $rejected_rfq_recap_rules['filter_value'] =  array('is_accepted' => 0, 'year'=>$report_year, 'supplier_id' =>$user_id);
+    $this->M_quotation->set_search_rfq_recap($rejected_rfq_recap_rules);
+    $get_rejected_rfq_recap = $this->M_quotation->get_rfq_recap();
+    $row_rejected = $get_rejected_rfq_recap->row();
+
+    $row = array(
+      'year' => $row_accepted->Year,
+      'AcceptedQuotation' => $row_accepted->AcceptedQuotation,
+      'RejectedQuotation' => $row_rejected->RejectedQuotation
+    );
+    //$data[] = $row;
+    echo json_encode($row);
   }
 }
 
