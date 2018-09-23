@@ -22,12 +22,12 @@
            <!-- small box -->
            <div class="small-box bg-blue">
              <div class="inner">
-               <h3 id="total_supplier">44</h3>
+               <h3 id="total_supplier"></h3>
 
                <p>Total Supplier</p>
              </div>
              <div class="icon">
-               <i class="ion-ios-checkmark-outline"></i>
+               <i class="ion ion-person"></i>
              </div>
              <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
            </div>
@@ -36,12 +36,12 @@
            <!-- small box -->
            <div class="small-box bg-yellow">
              <div class="inner">
-               <h3 id="total_buyer">44</h3>
+               <h3 id="total_buyer"></h3>
 
                <p>Total Buyer</p>
              </div>
              <div class="icon">
-               <i class="ion-ios-checkmark-outline"></i>
+               <i class="ion ion-person"></i>
              </div>
              <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
            </div>
@@ -50,12 +50,12 @@
            <!-- small box -->
            <div class="small-box bg-green">
              <div class="inner">
-               <h3 id="total_both">44</h3>
+               <h3 id="total_both"></h3>
 
                <p>Total Supplier & Buyer</p>
              </div>
              <div class="icon">
-               <i class="ion-ios-checkmark-outline"></i>
+               <i class="ion ion-person"></i>
              </div>
              <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
            </div>
@@ -65,12 +65,12 @@
            <!-- small box -->
            <div class="small-box bg-red">
              <div class="inner">
-               <h3 id="total_member">X</h3>
+               <h3 id="total_member"></h3>
 
-               <p>Total Quotation Rejected</p>
+               <p>Total Member</p>
              </div>
              <div class="icon">
-               <i class="ion-ios-close-outline"></i>
+               <i class="ion ion-person"></i>
              </div>
              <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
            </div>
@@ -93,14 +93,16 @@
 <script type="text/javascript">
 function get_user_box_stats()
 {
-  $("#accepted_quotation").empty();
-  $("#rejected_quotation").empty();
-  $("#accepted_quotation").empty();
-  $("#rejected_quotation").empty();
-  $.getJSON( "<?php echo base_url().'Quotation/get_user_box_stats'; ?>", function( data ) {
+  $("#total_supplier").empty();
+  $("#total_buyer").empty();
+  $("#total_both").empty();
+  $("#total_member").empty();
+  $.getJSON( "<?php echo base_url().'User/get_user_box_stats'; ?>", function( data ) {
     console.log(data);
-    $("#accepted_quotation").html(data.AcceptedQuotation);
-    $("#rejected_quotation").html(data.RejectedQuotation);
+    $("#total_supplier").html(data.NumSupplier);
+    $("#total_buyer").html(data.NumBuyer);
+    $("#total_both").html(data.NumBoth);
+    $("#total_member").html(data.NumMember);
   })
 }
 function get_user_recap() {
@@ -121,9 +123,10 @@ function get_user_recap() {
     }
   });
 }
-$(function(){
+// $(function(){
 $(document).ready(function(){
   get_user_recap();
+  get_user_box_stats();
 });
-});
+// });
 </script>
