@@ -88,6 +88,31 @@ class M_user extends CI_Model{
       return TRUE;
     }
   }
+  function set_search_user_recap($rules) {
+    $this->select_columns = !empty($rules['select']['columns']) ? $rules['select']['columns'] : "" ;
+    $this->from_table = !empty($rules['from']['table']) ? $rules['from']['table'] : "" ;
+    $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ;
+    $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ;
+    $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
+    $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
+    $this->filter_value = "1=1" ;
+    $this->filter_value .= isset($rules['filter_value']['user_level']) ? " AND user_tb.UserLevel = ".$rules['filter_value']['user_level'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['not_member']) ? " AND user_tb.UserLevel <> ".$rules['filter_value']['not_member'] : "" ;
+    // $this->filter_value .= isset($rules['filter_value']['supplier_id']) ? " AND quotation_tb.SupplierId = ".$rules['filter_value']['supplier_id'] : "" ;
+    // $this->filter_value .= isset($rules['filter_value']['is_accepted']) ? " AND quotation_tb.IsAccepted = ".$rules['filter_value']['is_accepted'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['year']) ? " AND YEAR(MemberDate) = "."'".$rules['filter_value']['year']."'" : "" ;
+
+  }
+  function get_user_recap()
+  {
+    $query = "SELECT  ".$this->select_columns."
+    FROM ".$this->from_table."
+    WHERE ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
+    //echo $query;exit();
+
+    $query = $this->db->query($query);
+    return $query;
+  }
   function update_user($data="",$id=""){
     $this->db->set($data);
     $this->db->where("Id",$id);

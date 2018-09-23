@@ -841,6 +841,119 @@
       }
 
     }
+    function get_user_box_stats()
+    {
+      $supplier_recap_rules['select']['columns'] = " COUNT(Id) AS NumSupplier ";
+      $supplier_recap_rules['from']['table'] = " user_tb ";
+      $supplier_recap_rules['filter_value'] =  array('user_level'=> 1);
+      $this->M_user->set_search_user_recap($supplier_recap_rules);
+      $get_supplier_recap = $this->M_user->get_user_recap();
+      $supplier_row = $get_supplier_recap->row();
+
+      $buyer_recap_rules['select']['columns'] = " COUNT(Id) AS NumBuyer ";
+      $buyer_recap_rules['from']['table'] = " user_tb ";
+      $buyer_recap_rules['filter_value'] =  array('user_level'=> 2);
+      $this->M_user->set_search_user_recap($buyer_recap_rules);
+      $get_buyer_recap = $this->M_user->get_user_recap();
+      $buyer_row = $get_buyer_recap->row();
+
+      $both_recap_rules['select']['columns'] = " COUNT(Id) AS NumBoth ";
+      $both_recap_rules['from']['table'] = " user_tb ";
+      $both_recap_rules['filter_value'] =  array('user_level'=> 3);
+      $this->M_user->set_search_user_recap($both_recap_rules);
+      $get_both_recap = $this->M_user->get_user_recap();
+      $both_row = $get_both_recap->row();
+
+      $member_recap_rules['select']['columns'] = " COUNT(Id) AS NumMember ";
+      $member_recap_rules['from']['table'] = " user_tb ";
+      $member_recap_rules['filter_value'] =  array('not_member'=> 0);
+      $this->M_user->set_search_user_recap($member_recap_rules);
+      $get_member_recap = $this->M_user->get_user_recap();
+      $member_row = $get_member_recap->row();
+      $row = array(
+        'NumSupplier' => $supplier_row->NumSupplier,
+        'NumBuyer' => $buyer_row->NumBuyer,
+        'NumBoth' => $both_row->NumBoth,
+        'NumMember' => $member_row->NumMember
+      );
+      echo json_encode($row);
+    }
+    function get_user_recap()
+    {
+      //$report_year = $this->input->post('report_year');
+      $supplier_recap_rules['select']['columns'] = " COUNT(Id) AS NumSupplier ";
+      $supplier_recap_rules['from']['table'] = " user_tb ";
+      $supplier_recap_rules['filter_value'] =  array('user_level'=> 1);
+      $this->M_user->set_search_user_recap($supplier_recap_rules);
+      $get_supplier_recap = $this->M_user->get_user_recap();
+      $supplier_row = $get_supplier_recap->row();
+
+      $buyer_recap_rules['select']['columns'] = " COUNT(Id) AS NumBuyer ";
+      $buyer_recap_rules['from']['table'] = " user_tb ";
+      $buyer_recap_rules['filter_value'] =  array('user_level'=> 2);
+      $this->M_user->set_search_user_recap($buyer_recap_rules);
+      $get_buyer_recap = $this->M_user->get_user_recap();
+      $buyer_row = $get_buyer_recap->row();
+
+      $both_recap_rules['select']['columns'] = " COUNT(Id) AS NumBoth ";
+      $both_recap_rules['from']['table'] = " user_tb ";
+      $both_recap_rules['filter_value'] =  array('user_level'=> 3);
+      $this->M_user->set_search_user_recap($both_recap_rules);
+      $get_both_recap = $this->M_user->get_user_recap();
+      $both_row = $get_both_recap->row();
+      // echo "<pre>";
+      // echo $supplier_row->NumSupplier."||";
+      // echo $buyer_row->NumBuyer."||";
+      // echo $both_row->NumBoth."||";
+      // echo "</pre>";exit();
+      // $report_year = $this->input->post('report_year');
+      // $user_recap_rules['select']['columns'] = " YEAR(MemberDate) AS Year, MONTH(MemberDate) AS Month, COUNT(Id) AS NumMember ";
+      // $user_recap_rules['from']['table'] = " user_tb ";
+      // $user_recap_rules['filter_value'] =  array('year'=>$report_year);
+      // $user_recap_rules['group_by'] =  " MONTH(MemberDate) ";
+      // $this->M_user->set_search_user_recap($user_recap_rules);
+      // $get_user_recap = $this->M_user->get_user_recap();
+      // $user_recap = $get_user_recap->result();
+
+      //
+      // $get_rejected_user_recap = $this->M_quotation->get_rejected_user_recap();
+      // $rejected_user_recap = $get_rejected_user_recap->result();
+      // echo "<pre>";
+      // print_r($user_recap);
+      // echo "</pre>";exit();
+      // echo "++++++++++++++++++++++++++++++++++++++++++";
+      // echo "<pre>";
+      // print_r($rejected_user_recap);
+      // echo "</pre>";
+      // $data = array();
+      //$x = array( 0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+      //print_r($x);exit();
+      // $row = array(
+      //   'NumSupplier' => $supplier_row->NumSupplier,
+      //   'NumBuyer' => $buyer_row->NumBuyer,
+      //   'NumBoth' => $both_row->NumBoth
+      // );
+      $row = array(
+        'label' => 'Supplier',
+        'value' => (int)$supplier_row->NumSupplier
+      );
+      $data[] = $row;
+      $row = array(
+        'label' => 'Buyer',
+        'value' => (int)$buyer_row->NumBuyer
+
+      );
+      $data[] = $row;
+      $row = array(
+        'label' => 'Both',
+        'value' => (int)$both_row->NumBoth
+
+      );
+      $data[] = $row;
+      echo json_encode($data);
+    }
+
+
 
 
   }
