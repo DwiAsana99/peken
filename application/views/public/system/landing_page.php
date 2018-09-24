@@ -182,3 +182,15 @@
     </div>
   </div> -->
 </div>
+<?php if($this->session->flashdata('msg')): ?>
+  <script type="text/javascript">
+  $(function(){
+    new PNotify({
+      title: 'Sorry',
+      text: ' <?php echo $this->session->flashdata('msg'); ?>',
+      delay: 12000,
+      type: 'warning'
+    });
+  });
+  </script>
+<?php endif; ?>

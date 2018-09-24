@@ -76,7 +76,9 @@
               }
             ?>
           </i>
-            <a href="#" data-toggle="popover"  title="Popover title" data-content=" Cek di menu "> <span class="glyphicon glyphicon-info-sign"></span> </a>
+          <a href="#" data-toggle="popover"  title="Member Level" data-content=" To change member level you can contact Dinilaku Admin in the following email dinilaku@gmail.com">
+            <span class="glyphicon glyphicon-info-sign"></span>
+          </a>
           </h4>
       </div>
     <div class="form-group">
@@ -213,3 +215,15 @@ $(document).ready(function() {
   z-index:1032;
 }
 </style>
+<?php if($this->session->flashdata('msg')): ?>
+  <script type="text/javascript">
+  $(function(){
+    new PNotify({
+      title: 'Success!',
+      text: ' <?php echo $this->session->flashdata('msg'); ?>',
+      delay: 5000,
+      type: 'success'
+    });
+  });
+  </script>
+<?php endif; ?>

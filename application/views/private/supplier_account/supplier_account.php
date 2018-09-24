@@ -46,7 +46,7 @@
               <?php else: ?>
                 <p><img src="<?php echo base_url().'assets/supplier_upload/'.'unverified.png' ?>" alt="" width="25"></p>
                 <p style="font-style: oblique;font-weight: bold; margin-top: -12px; margin-bottom: 3px;">Unverified Supplier
-                  <a href="#" data-toggle="popover"  title="Popover title" data-content=" Cek di menu ">
+                  <a href="#" data-toggle="popover"  title="How to be verified supplier" data-content=" to become a verified supplier You can contact Dinilaku Admin on the following email dinilaku@gmail.com ">
                     <span class="glyphicon glyphicon-info-sign">
                     </span>
                   </a>
@@ -70,16 +70,18 @@
                 <h5><b>Member level</b></h5>
                 <p>
                   <i>
-                  <?php
+                    <?php
                     if ($user[0]->UserLevel == 1) {
                       echo "Supplier Only";
                     }elseif ($user[0]->UserLevel == 3){
                       echo "Supplier & Buyer";
                     }
-                  ?>
+                    ?>
 
                   </i>
-                  <a href="#" data-toggle="popover"  title="Popover title" data-content=" Cek di menu "> <span class="glyphicon glyphicon-info-sign"></span> </a>
+                  <a href="#" data-toggle="popover"  title="Member Level" data-content=" To change member level you can contact Dinilaku Admin in the following email dinilaku@gmail.com">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                  </a>
                 </p>
                 <h5><b>First Name</b></h5>
                 <p><?php echo $user[0]->FirstName; ?></p>
@@ -595,7 +597,7 @@ function readURL(input) {
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
-$("[data-toggle=popover]").popover();
+  $("[data-toggle=popover]").popover();
 });
 </script>
 <script type="text/javascript">

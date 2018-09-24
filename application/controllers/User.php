@@ -582,6 +582,7 @@
         'Phone' => $this->input->post('phone')
       );
       $this->M_user->update_user($data,$buyer_id);
+      $this->session->set_flashdata('msg', 'Your profile has changed ...');
       redirect('User/buyer_account_view');
     }
 

@@ -16,6 +16,7 @@ class Quotation extends CI_Controller{
     $user_id = $this->session->userdata('user_id');
     $user_level = $this->session->userdata('user_level');
     if (empty($user_id) || ($user_level != 2 && $user_level != 3)) {
+      $this->session->set_flashdata('msg', 'Request for Quotation can only be made by  Buyer Member Level, if you want to be Supplier & Buyer Member Level please contact dinilaku@gmail.com');
       redirect('Home/home_view');
     }
 
