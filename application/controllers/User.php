@@ -954,6 +954,25 @@
       echo json_encode($data);
     }
 
+    function edit_member_account_view($member_id)
+    {
+      $user_id = $this->session->userdata('user_id');
+      $user_level = $this->session->userdata('user_level');
+      if (empty($user_id) || $user_level != 0) {
+        $this->session->sess_destroy();
+        redirect('Home/home_view');
+      }
+      $user_rules['filter_value'] =  array('user_id'=>$member_id);
+      $this->M_user->set_search_user($user_rules);
+      $get_buyer = $this->M_user->get_user();
+      $data['member'] = $get_buyer->result();
+      $this->load->view('template/back_admin/admin_head');
+      $this->load->view('template/back_admin/admin_navigation');
+      $this->load->view('template/back_admin/admin_sidebar');
+      $this->load->view('private/member/edit_member_account', $data);
+      $this->load->view('template/back_admin/admin_foot');
+    }
+
 
 
 

@@ -119,15 +119,17 @@ visibility: hidden;
                   <td><?php echo $m->State?></td>
                   <td>
                     <?php if ($m->UserLevel == 1 || $m->UserLevel == 3): ?>
-                      <a class="btn btn-info" href="#" style="padding: 0px 0px;" data-toggle="tooltip" data-placement="bottom" title="Member Detail Profile">
-                        <span class="glyphicon glyphicon-eye-open" style="padding-right: 5px; padding-left: 5px;"> </span>
+                      <a class="btn btn-info" href="<?php echo site_url('User/edit_member_account_view/').$m->Id ?>" style="padding: 0px 0px;" data-toggle="tooltip"
+                         data-placement="bottom" title="Edit Member Account">
+                        <span class="glyphicon glyphicon-edit" style="padding-right: 5px; padding-left: 5px;"> </span>
                       </a>
-                      <a class="btn btn-success" href="<?php echo site_url('User/supplier_verification_view/').$m->Id ?>" style="padding: 0px 0px;" data-toggle="tooltip" data-placement="bottom" title="Supplier Verification">
+                      <a class="btn btn-success" href="<?php echo site_url('User/supplier_verification_view/').$m->Id ?>"
+                         style="padding: 0px 0px;" data-toggle="tooltip" data-placement="bottom" title="Supplier Verification">
                         <span class="glyphicon glyphicon-certificate" style="padding-right: 5px; padding-left: 5px;"> </span>
                       </a>
                     <?php else: ?>
-                      <a class="btn btn-info" href="#" style="padding: 0px 0px;" data-toggle="tooltip" data-placement="bottom" title="Member Detail Profile">
-                        <span class="glyphicon glyphicon-eye-open" style="padding-right: 5px; padding-left: 5px;"> </span>
+                      <a class="btn btn-info" href="<?php echo site_url('User/edit_member_account_view/').$m->Id ?>" style="padding: 0px 0px;" data-toggle="tooltip" data-placement="bottom" title="Edit Member Account">
+                        <span class="glyphicon glyphicon-edit" style="padding-right: 5px; padding-left: 5px;"></span>
                       </a>
                     <?php endif; ?>
                   </td>
