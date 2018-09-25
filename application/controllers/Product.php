@@ -297,14 +297,7 @@ class Product extends CI_Controller{
 		if (empty($supplier_id)) {
 			redirect('Home/home_view');
 		}
-		// $get_product_category = $this->M_product_category->get_product_category();
-		// $data['product_category'] = $get_product_category->result();
-		// $get_quotation = $this->M_quotation->get_quotation("",$supplier_id,"",0);
-		// $data_notification['unread_quotation'] = $get_quotation->result();
-		// $data_notification['unread_quotation_num_rows'] = $get_quotation->num_rows();
-		// $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail($supplier_id);
-		// $data_notification['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-		// $data_notification['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
+
 		$this->load->view('template/back/head_back');
 		$this->load->view('template/back/sidebar_back');
 		$this->load->view('private/product/add_product');
@@ -314,15 +307,6 @@ class Product extends CI_Controller{
 		$product_category_code=$this->input->post('product_category_code');
 		$product_sub_category = $this->M_product_sub_category->get_product_sub_category($product_category_code,1);
 		echo $product_sub_category;
-		// echo $product_category_code ;exit();
-
-		// foreach ($this->M_product_sub_category->get_product_sub_category($product_category_code)->result_array() as $data ){
-		// echo "<option value='$data[Code]'>$data[ProductSubCategory]</option>";
-		// }
-		// foreach ($get_product_sub_category->result_array() as $data) {
-		// 	echo "<option value=".$data['Code'].">".$data["product_sub_category_code"]."</option>";
-		// }
-
 	}
 	function add_product(){
 		$supplier_id = $this->session->userdata('user_id');
