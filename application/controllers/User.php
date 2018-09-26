@@ -585,6 +585,23 @@
       $this->session->set_flashdata('msg', 'Your profile has changed ...');
       redirect('User/buyer_account_view');
     }
+    function edit_member_account($user_id){
+      $data = array(
+        'FirstName' => $this->input->post('first_name'),
+        'LastName' => $this->input->post('last_name'),
+        'CompanyName' => $this->input->post('company_name'),
+        'Address' => $this->input->post('address'),
+        'City' => $this->input->post('city'),
+        'Province' => $this->input->post('province'),
+        'ZipCode' => $this->input->post('zip_code'),
+        'State' => $this->input->post('state'),
+        'Phone' => $this->input->post('phone'),
+        'UserLevel' => $this->input->post('user_level')
+      );
+      $this->M_user->update_user($data,$user_id);
+      $this->session->set_flashdata('msg', ' profile has changed ...');
+      redirect('User/member_view');
+    }
 
     function registration(){
 

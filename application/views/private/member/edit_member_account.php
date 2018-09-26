@@ -1,7 +1,24 @@
+<section class="content-header">
+  <div class="btn-group btn-breadcrumb">
+    <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
+    <a href="<?php echo base_url('User/member_view');?>" class="btn btn-default  btn-xs">Member List</a>
+    <a  class="btn btn-default  btn-xs active">Edit Member Account</a>
+  </div>
+</section>
 
-<div class="container" style="">
+<!-- Main content -->
+<section class="content">
+ <div class="row">
+  <div class="col-xs-12">
+   <div class="box">
+    <div class="box-header">
+     <h3 class="box-title">Edit Member Account</h3>
 
-  <form method="post" id="Simpan"  action="<?php echo base_url().'User/edit_buyer_account'; ?>" enctype="multipart/form-data"  onfocusout="edit(event)">
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+  <form method="post" id="Simpan"  action="<?php echo base_url().'User/edit_member_account/'.$member[0]->Id; ?>" enctype="multipart/form-data"  onfocusout="edit(event)">
     <!-- <div class=" ">
     <label  for="profile_image">Profil Image</label> <br>
     <img src="<?php //echo base_url().'assets/suplier_upload/'.$member[0]->Gambar; ?>" id = "fotoview" alt="" class="img-thumbnail" alt="Cinque Terre" width="304" height="236"><br>
@@ -20,66 +37,16 @@
         <!-- </label> -->
 
 
-        <!-- _________________dropdown______________ -->
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="glyphicon glyphicon-camera"></span> <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="margin-left: 50%; margin-right: 50%;">
-            <li><a href="#"><label for="profile_image" class="" style="font-weight:400">Change Profile Image</label></a></li>
 
-
-
-            <?php if (!empty($member[0]->ProfileImage)): ?>
-              <li>
-                <a href="#" data-toggle="modal" data-target="#lightbox">
-                  <img src="<?php echo base_url().'assets/supplier_upload/'.$member[0]->ProfileImage;?>" style="display: none;" alt="">
-                  View Profile Image
-                </a>
-              </li>
-            <?php endif; ?>
-
-          </ul>
-        </div>
-        <!-- _________________dropdown______________ -->
 
 
 
         <br>
       </div>
 
-      <?php if (empty($member[0]->ProfileImage)): ?>
-        <div class="form-group">
-          <input type="file" name="profile_image" value="" id="profile_image" size='20' onchange="readUrlProfileImage(this);" data-validation="mime size required"
-          data-validation-allowing="jpg, png" data-validation-max-size="300kb" data-validation-error-msg-required="Gambar Belum Dipilih..."
-          style="visibility:hidden;">
 
-        </div>
-      <?php else: ?>
-        <div class="form-group">
-          <input type="file" name="profile_image" value="" id="profile_image" size='20' onchange="readUrlProfileImage(this);" data-validation="mime size required"
-          data-validation-allowing="jpg, png" data-validation-max-size="300kb" data-validation-error-msg-required="Gambar Belum Dipilih..."
-          style="visibility:hidden;">
-          <input type="hidden" name="profile_image_lama" id="profile_image_lama" value="<?php echo $member[0]->ProfileImage; ?>">
-          <!-- <button type="submit" class="btn btn-danger" id="tambah_tdp">Delete</button> -->
-        </div>
-      <?php endif; ?>
 
-          <h4><b>Member Level</b></h4>
-          <h4>
-            <i>
-            <?php
-              if ($member[0]->UserLevel == 2) {
-                echo "Buyer Only";
-              }elseif ($member[0]->UserLevel == 3){
-                echo "Supplier & Buyer";
-              }
-            ?>
-          </i>
-          <a href="#" data-toggle="popover"  title="Member Level" data-content=" To change member level you can contact Dinilaku Admin in the following email dinilaku@gmail.com">
-            <span class="glyphicon glyphicon-info-sign"></span>
-          </a>
-          </h4>
+
       </div>
     <div class="form-group">
       <label class="">Email</label>
@@ -123,10 +90,51 @@
       <label class="">Phone</label>
       <input class="form-control" type="number" name="phone" id="description" value="<?php echo $member[0]->Phone; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class=""  placeholder="">
     </div>
+    <div class="radio">
+      <?php if ($member[0]->UserLevel == 1){ ?>
+        <label class="radio-inline">
+          <input  value="1" type="radio" name="user_level" checked >Supplier
+        </label>
+        <label class="radio-inline">
+          <input  value="2" type="radio" name="user_level" >Buyer
+        </label>
+        <label class="radio-inline">
+          <input  value="3" type="radio" name="user_level" >Both
+        </label>
+      <?php }elseif($member[0]->UserLevel == 2){ ?>
+        <label class="radio-inline">
+          <input  value="1" type="radio" name="user_level"  >Supplier
+        </label>
+        <label class="radio-inline">
+          <input  value="2" type="radio" name="user_level" checked>Buyer
+        </label>
+        <label class="radio-inline">
+          <input  value="3" type="radio" name="user_level" >Both
+        </label>
+      <?php }elseif($member[0]->UserLevel == 3){ ?>
+        <label class="radio-inline">
+          <input  value="1" type="radio" name="user_level"  >Supplier
+        </label>
+        <label class="radio-inline">
+          <input  value="2" type="radio" name="user_level" >Buyer
+        </label>
+        <label class="radio-inline">
+          <input  value="3" type="radio" name="user_level" checked>Both
+        </label>
+      <?php } ?>
+
+
+
+    </div>
     <button type="submit" class="btn btn-primary " name="button">Save</button>
   </form>
+</div><!-- /.box-body -->
+</div><!-- /.box -->
+</div><!-- /.col -->
+</div><!-- /.row -->
+<!-- Modal -->
 
-</div>
+</section><!-- /.content -->
 <script type="text/javascript">
   $("[data-toggle=popover]").popover();
 </script>
@@ -152,78 +160,3 @@ function readUrlProfileImage(input) {
 <div class='col-md-9'>
 
 </div>
-
-
-
-
-<!-- ______________________lightbox_____________ -->
-<div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog ">
-    <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">×</button>
-    <div class="modal-content">
-      <div class="modal-body">
-        <img src="" alt="" />
-      </div>
-    </div>
-  </div>
-</div>
-<!-- ______________________lightbox_____________ -->
-<script>
-$(document).ready(function() {
-  var $lightbox = $('#lightbox');
-
-  $('[data-target="#lightbox"]').on('click', function(event) {
-    var $img = $(this).find('img'),
-    src = $img.attr('src'),
-    alt = $img.attr('alt'),
-    css = {
-      'maxWidth': $(window).width() - 100,
-      'maxHeight': $(window).height() - 100
-    };
-
-    $lightbox.find('.close').addClass('hidden');
-    $lightbox.find('img').attr('src', src);
-    $lightbox.find('img').attr('alt', alt);
-    $lightbox.find('img').css(css);
-  });
-
-  $lightbox.on('shown.bs.modal', function (e) {
-    var $img = $lightbox.find('img');
-
-    $lightbox.find('.modal-dialog').css({'width': $img.width()});
-    $lightbox.find('.close').removeClass('hidden');
-  });
-});
-</script>
-<style>
-#lightbox .modal-content {
-  display: inline-block;
-  text-align: center;
-}
-
-#lightbox .close {
-  opacity: 1;
-  color: rgb(255, 255, 255);
-  background-color: rgb(25, 25, 25);
-  padding: 5px 8px;
-  border-radius: 30px;
-  border: 2px solid rgb(255, 255, 255);
-  position: absolute;
-  top: -15px;
-  right: -55px;
-
-  z-index:1032;
-}
-</style>
-<?php if($this->session->flashdata('msg')): ?>
-  <script type="text/javascript">
-  $(function(){
-    new PNotify({
-      title: 'Success!',
-      text: ' <?php echo $this->session->flashdata('msg'); ?>',
-      delay: 5000,
-      type: 'success'
-    });
-  });
-  </script>
-<?php endif; ?>
