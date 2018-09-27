@@ -45,7 +45,7 @@ class Product_sub_category extends CI_Controller
         "ProductCategoryCode" => $bar->ProductCategoryCode,
         "ProductCategory" => $bar->ProductCategory,
         "ProductSubCategory" => $bar->ProductSubCategory,
-        "EditButton" => '<a class="btn btn-warning"   href="'.base_url("Product_sub_category/product_sub_category_edit_view/").$bar->ProductSubCategoryCode.'">
+        "EditButton" => '<a class="btn btn-warning" style="padding: 0px 0px;"  href="'.base_url("Product_sub_category/product_sub_category_edit_view/").$bar->ProductSubCategoryCode.'">
          <span class="fa fa-fw fa-edit" >
          </span>
         </a>'

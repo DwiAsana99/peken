@@ -53,8 +53,8 @@ class Product_category extends CI_Controller{
       $row = array(
       "Code" => $bar->Code,
       "ProductCategory" => $bar->ProductCategory,
-      "EditButton" => '<a class="btn btn-warning"   href="'.base_url("Product_category/product_category_edit_view/").$bar->Code.'">
-       <span class="fa fa-fw fa-edit" >
+      "EditButton" => '<a  class="btn btn-warning" style="padding: 0px 0px;"  href="'.base_url("Product_category/product_category_edit_view/").$bar->Code.'">
+       <span  class="fa fa-fw fa-edit" >
        </span>
       </a>'
       );

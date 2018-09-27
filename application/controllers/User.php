@@ -599,7 +599,7 @@
         'UserLevel' => $this->input->post('user_level')
       );
       $this->M_user->update_user($data,$user_id);
-      $this->session->set_flashdata('msg', ' profile has changed ...');
+      $this->session->set_flashdata('msg', $this->input->post('last_name').' profile has changed ...');
       redirect('User/member_view');
     }
 
