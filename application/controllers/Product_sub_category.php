@@ -86,7 +86,7 @@ class Product_sub_category extends CI_Controller
         'ProductSubCategory' => $product_sub_category
       );
       $this->M_product_sub_category->add_product_sub_category($data);
-      $this->session->set_flashdata('msg', 'Add Product Category successfully ...');
+      $this->session->set_flashdata('msg', 'Add Product Sub Category successfully ...');
       redirect('Product_sub_category/product_sub_category_view');
 
       // echo $product_category_code." ".$row->ProductSubCategoryCode;exit();
