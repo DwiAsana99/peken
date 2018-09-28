@@ -103,12 +103,7 @@
 
       $data_nav['product_category'] = $get_product_category->result();
       $data_nav['product_sub_category'] = $get_product_sub_category->result();
-      // if ($this->session->userdata('user_id')) {
-      // $buyer_id = $this->session->userdata('user_id');
-      // $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
-      // $data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-      // $data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
-      // }
+
       $head_data['page_title'] = "Dinilaku";
       $this->load->view('template/front/head_front',$head_data);
       $this->load->view('template/front/navigation',$data_nav);
@@ -139,9 +134,6 @@
       $this->M_product->set_search_product($product_rules);
       $get_product = $this->M_product->get_product();
 
-      // $user_rules['join']['other_table_columns'] = " ,suppliergallerypic_tb.* ";
-      // $user_rules['join']['join_table'] = " INNER JOIN suppliergallerypic_tb
-      // ON user_tb.Id = suppliergallerypic_tb.SupplierId ";
       $supplier_gallery_pic_rules['filter_value'] =  array('user_id'=>$supplier_id);
       $this->M_supplier_gallery_pic->set_search_supplier_gallery_pic($supplier_gallery_pic_rules);
       $get_supplier_gallery_pic = $this->M_supplier_gallery_pic->get_supplier_gallery_pic();
@@ -164,12 +156,7 @@
 
       $data_nav['product_category'] = $get_product_category->result();
       $data_nav['product_sub_category'] = $get_product_sub_category->result();
-      // if ($this->session->userdata('user_id')) {
-      // $buyer_id = $this->session->userdata('user_id');
-      // $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
-      // $data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-      // $data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
-      // }
+
       $head_data['page_title'] = "Dinilaku";
       $this->load->view('template/front/head_front',$head_data);
       $this->load->view('template/front/navigation',$data_nav);
@@ -419,8 +406,7 @@
     }
 
     function get_member_json(){
-      // !empty() ? $this->input->get('user_level') : "" ;
-      //$user_rules['filter_value'] =  array('search_value'=>1);;
+
       if (!empty($this->input->get())) {
         $user_rules['filter_value']['user_level'] = $this->input->get('user_level');
         $this->M_user->set_search_user($user_rules);
@@ -468,11 +454,7 @@
       $row = $get_member->row();
 
       if ($num_rows > 0 AND ($row->UserLevel == 1 OR $row->UserLevel == 3 )) {
-       // echo "Supplier";exit;
-        // $user_rules['filter_value'] =  array('supplier_id'=>$row->Id, 'user_level'=>1);
-        // $this->M_user->set_search_user($user_rules);
-        // $get_supplier = $this->M_user->get_user();
-        // $data['supplier'] = $get_supplier->result();
+
         $this->session->set_userdata('user_id',$row->Id);
         $this->session->set_userdata('user_level',$row->UserLevel);
         $this->session->set_userdata('company_name',$row->CompanyName);
@@ -481,11 +463,7 @@
         redirect('User/supplier_dashboard_view');
       }
       elseif ($num_rows > 0  AND $row->UserLevel == 2) {
-        //echo "Buyer";exit;
-        // $user_rules['filter_value'] =  array('supplier_id'=>$row->Id, 'user_level'=>0);
-        // $this->M_user->set_search_user($user_rules);
-        // $get_buyer = $this->M_user->get_user();
-        // $data['buyer'] = $get_buyer->result();
+
         $this->session->set_userdata('user_id',$row->Id);
         $this->session->set_userdata('user_level',$row->UserLevel);
         $this->session->set_userdata('company_name',$row->CompanyName);
@@ -495,12 +473,6 @@
       }
       elseif ($num_rows > 0 AND $row->UserLevel == 0) {
 
-        // echo "<pre>";
-        // print_r($row);
-        // echo "</pre>";exit();
-        // 	$get_supplier = $this->M_user->get_member(1,0,$row->IdMember);
-        // $data['supplier'] = $get_supplier->result();
-        //echo "admin";exit();
         $this->session->set_userdata('user_id',$row->Id);
         $this->session->set_userdata('user_level',$row->UserLevel);
         // 	$this->session->set_userdata('company_name',$row->CompanyName);
@@ -538,12 +510,7 @@
       $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
       $data_nav['product_category'] = $get_product_category->result();
       $data_nav['product_sub_category'] = $get_product_sub_category->result();
-      // if ($this->session->userdata('user_id')) {
-      //         $buyer_id = $this->session->userdata('user_id');
-      //         $get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
-      //         $data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-      //         $data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
-      //     }
+
       $head_data['page_title'] = "Dinilaku";
       $this->load->view('template/front/head_front',$head_data);
       $this->load->view('template/front/navigation', $data_nav);
@@ -682,6 +649,15 @@
       }
     }
 
+    function check_email($str){
+      $query = $this->db->get_where("user_tb",array("Email"=>$str, "IsConfirmated"=>1));
+      if ($query->num_rows() >= 1) {
+        $this->form_validation->set_message('check_email', 'Email you have entered is registered');
+        return FALSE;
+      } else {
+        return TRUE;
+      }
+    }
     function member_confirmation_view($user_id){
       $user_rules['filter_value'] =  array('user_id'=>$user_id);
       $this->M_user->set_search_user($user_rules);
@@ -702,15 +678,6 @@
       $this->load->view('template/front/foot_front');
     }
 
-    function check_email($str){
-      $query = $this->db->get_where("user_tb",array("Email"=>$str, "IsConfirmated"=>1));
-      if ($query->num_rows() >= 1) {
-        $this->form_validation->set_message('check_email', 'Email you have entered is registered');
-        return FALSE;
-      } else {
-        return TRUE;
-      }
-    }
 
     function member_confirmation(){
       if ($this->input->post('password')===$this->input->post('c_password')) {

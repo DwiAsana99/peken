@@ -14,17 +14,13 @@
   </div>
 </section>
 <script type="text/javascript" >
-        
-        //function get_product_sub_category_dropdown() {
-        //   $(document).ready(function () { 
-        //     get_product_category();
-        // });
+
         $(function(){
         $("#product_category_code").change(function(){
 
         var code=$(this).val();
         get_product_sub_category(code)
-        
+
 
         });
       })
@@ -49,13 +45,13 @@
           $("#product_sub_category_code").empty();
           $.getJSON( "<?php echo base_url().'Product_sub_category/get_product_sub_category'; ?>/"+code, function( data ) {
             console.log(data);
- 
-            
+
+
             $("#product_sub_category_code").append("<option value='0'>--Choose Product Sub Category--</option>");
             for (var key in data) {
               console.log( data[key].ProductCategoryCode);
               $("#product_sub_category_code").append("<option value='"+data[key].Code+"'>"+data[key].ProductSubCategory+"</option>");
-            }           
+            }
           })
         }
       </script>
@@ -85,7 +81,7 @@
       // document.getElementById('fp1').value = finalprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
       // document.getElementById('fp').value = finalprice;
   }
-  $(document).ready(function () { 
+  $(document).ready(function () {
     doMathPrice();
   });
 </script>
@@ -125,12 +121,16 @@
           <form method="post"  enctype="multipart/form-data" id="Simpan"  action="<?php echo base_url().'Product/update_product'; ?>">
             <div class="form-group">
               <label class="control-label">Product Name</label>
-              <input type="text" value="<?php echo $product[0]->Name ?>" name="product_name" id="product_name"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..."  class="form-control"  placeholder="">
+              <input type="text" value="<?php echo $product[0]->Name ?>"
+                name="product_name" id="product_name"  data-validation="length"
+                data-validation-length="min4" data-validation-error-msg="Please fill out product name..."
+                class="form-control"  placeholder="">
             </div>
             <div class="form-group">
               <label for="">Product Category</label>
-              <select class="form-control" name="product_category_code" id="product_category_code">
-                <option value='0'>--Choose Product Category--</pilih>
+              <select class="form-control" name="product_category_code" id="product_category_code"
+                data-validation="length" data-validation-length="min1">
+                <option value=''>--Choose Product Category--</pilih>
                   <?php $i = 1; foreach($product_category as $pc){
                     if ($product[0]->ProductCategoryCode == $pc->Code) {
                       ?>
@@ -147,8 +147,9 @@
               </div>
               <div class="form-group">
                 <label for="">Product Sub Category</label>
-                <select class="form-control" name="product_sub_category_code" id="product_sub_category_code">
-                  <option value='0'>--Choose Product Sub Category--</pilih>
+                <select class="form-control" name="product_sub_category_code" id="product_sub_category_code"
+                  data-validation="length" data-validation-length="min1">
+                  <option value=''>--Choose Product Sub Category--</pilih>
                   <?php $i = 1; foreach($product_sub_category as $psc){
                     if ($product[0]->ProductSubCategoryCode == $psc->Code) {
                       ?>
@@ -165,22 +166,32 @@
               </div>
               <div class="form-group">
                 <label for="">Unit</label>
-                <input type="text" value="<?php echo $product[0]->Unit ?>" name="unit" class="form-control" value="">
+                <input type="text" value="<?php echo $product[0]->Unit ?>" name="unit" class="form-control" value=""
+                  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out unit name..." >
               </div>
               <div class="form-group">
                 <label class="control-label">Min Price</label>
-                <input type="text" value="<?php echo $product[0]->MinPrice ?>" name="min_price1" id="min_price1" onkeyup="doMathPrice()" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out product price..."  class="form-control input-1"  placeholder="">
-                <input type="hidden"  value="<?php echo $product[0]->MinPrice ?>" name="min_price" id="min_price" onkeyup="doMathPrice()" class="form-control"  placeholder="">
+                <input type="text" value="<?php echo $product[0]->MinPrice ?>" name="min_price1" id="min_price1"
+                  onkeyup="doMathPrice()" data-validation="length" data-validation-length="min1"
+                  data-validation-error-msg="Please fill out product price..."  class="form-control input-1"  placeholder="">
+                <input type="hidden"  value="<?php echo $product[0]->MinPrice ?>" name="min_price" id="min_price"
+                  onkeyup="doMathPrice()" class="form-control"  placeholder="">
               </div>
               <div class="form-group">
                 <label class="control-label">Max Price</label>
-                <input type="text" value="<?php echo $product[0]->MaxPrice ?>" name="max_price1" id="max_price1" onkeyup="doMathPrice()" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out product price..."  class="form-control input-2"  placeholder="">
-                <input type="hidden" value="<?php echo $product[0]->MaxPrice ?>" name="max_price" id="max_price" onkeyup="doMathPrice()" class="form-control"  placeholder="">
+                <input type="text" value="<?php echo $product[0]->MaxPrice ?>" name="max_price1" id="max_price1"
+                  onkeyup="doMathPrice()" data-validation="length" data-validation-length="min1"
+                  data-validation-error-msg="Please fill out product price..."  class="form-control input-2"  placeholder="">
+                <input type="hidden" value="<?php echo $product[0]->MaxPrice ?>" name="max_price" id="max_price" onkeyup="doMathPrice()"
+                  class="form-control"  placeholder="">
               </div>
               <div class="form-group">
                 <label class="control-label">Supply Ability</label>
-                <input type="text" value="<?php echo $product[0]->SupplyAbility ?>" name="supply_ability1" id="supply_ability1" onkeyup="doMathPrice()" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out supply ability..."  class="form-control input-3"  placeholder="">
-                <input type="hidden" value="<?php echo $product[0]->SupplyAbility ?>" name="supply_ability" id="supply_ability" onkeyup="doMathPrice()"   class="form-control"  placeholder="">
+                <input type="text" value="<?php echo $product[0]->SupplyAbility ?>" name="supply_ability1" id="supply_ability1"
+                  onkeyup="doMathPrice()" data-validation="length" data-validation-length="min1"
+                  data-validation-error-msg="Please fill out supply ability..."  class="form-control input-3"  placeholder="">
+                <input type="hidden" value="<?php echo $product[0]->SupplyAbility ?>" name="supply_ability" id="supply_ability"
+                  onkeyup="doMathPrice()"   class="form-control"  placeholder="">
               </div>
               <div class="form-group">
                 <label for="">Period Supply Ability</label>
@@ -193,11 +204,15 @@
               </div>
               <div class="form-group">
                 <label for="">Product Description</label>
-                <textarea class="form-control" rows="5" name="product_description" ><?php echo $product[0]->ProductDescription ?></textarea>
+                <textarea class="form-control" rows="5" name="product_description" data-validation="length"
+                  data-validation-length="min4"
+                  data-validation-error-msg="Please fill out product description..."><?php echo $product[0]->ProductDescription ?></textarea>
               </div>
               <div class="form-group">
                 <label for="">Packaging & Delivery</label>
-                <textarea class="form-control" rows="5" name="pkg_delivery" ><?php echo $product[0]->PkgDelivery ?></textarea>
+                <textarea class="form-control" rows="5" name="pkg_delivery" data-validation="length"
+                 data-validation-length="min4"
+                 data-validation-error-msg="Please fill out packaging & delivery..."><?php echo $product[0]->PkgDelivery ?></textarea>
               </div>
               <div class="form-group">
                 <label for="">Product Status</label>
@@ -268,6 +283,11 @@
 
 <script src= "<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>" ></script>
 <script src= "<?php echo base_url('assets/dropzone/js/dropzone-amd-module.min.js') ?>" ></script>
+<script>
+  $.validate({
+    lang: 'es'
+  });
+</script>
 <script type="text/javascript">
   function readURL(input) {
         if (input.files && input.files[0]) {

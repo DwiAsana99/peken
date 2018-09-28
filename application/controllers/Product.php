@@ -320,9 +320,15 @@ class Product extends CI_Controller{
 			'ProductSubCategoryCode' => $this->input->post('product_sub_category_code'),
 			'ProductDescription' => $this->input->post('product_description'),
 			'PkgDelivery' => $this->input->post('pkg_delivery'),
+			'IsPublished' => $this->input->post('status'),
 			'SupplierId' => $supplier_id
 		);
+		// $this->form_validation->set_rules('product_name', "ProductName", 'required');
+		// $this->form_validation->run();
 		$product_pictures = $this->input->post('file');
+		// if (empty($product_pictures) || !isset($product_pictures)) {
+		// 	redirect('Product/product_add_view');
+		// }
 		$product_id = $this->M_product->add_product($data,$product_pictures);
 		$this->session->set_flashdata('msg', 'Add Product successfully ...');
 		redirect('Product/product_view');

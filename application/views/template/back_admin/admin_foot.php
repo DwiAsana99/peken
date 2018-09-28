@@ -2,6 +2,7 @@
 
 
 
+<?php $this->load->view('template/back/js_back'); ?>
 
 </div><!-- /.content-wrapper -->
 
@@ -17,5 +18,4 @@
     </body>
 </html>
 <script src="http://malsup.github.io/jquery.blockUI.js" type="text/javascript"></script>
-<?php $this->load->view('template/back/js_back'); ?>
  <?php $this->load->view('template/back/msg_sukses'); ?>

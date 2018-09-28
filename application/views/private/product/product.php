@@ -41,7 +41,7 @@
         <?php $i = 1; foreach($product as $u){?>
          <tr  class='odd gradeX context'>
            <td class="idk" style="display:none;"><?php echo $u->ProductId?></td>
-          <td><img src="<?php echo base_url().'assets/supplier_upload/'.$u->FileName ?>" alt="" width="25"></td>
+          <td><img src="<?php echo base_url().'assets/supplier_upload/'.$u->FileName ?>" alt="" height="30"></td>
 
           <td><?php echo $u->Name?></td>
           <td><?php echo $u->ProductCategory?></td>
@@ -52,11 +52,13 @@
 
 
           <td>
-           <a class="btn btn-warning"   href="<?php echo base_url('Product/product_edit_view/').$u->ProductId;?>">
+           <a class="btn btn-warning" style="padding: 0px 0px;"  href="<?php echo base_url('Product/product_edit_view/').$u->ProductId;?>" data-toggle="tooltip"
+              data-placement="bottom" title="Edit Product">
             <span class="fa fa-fw fa-edit" >
             </span>
            </a>
-           <a   id="id_detail" class="btn btn-info id_detail" ><span class="fa fa-fw fa-search" >
+           <a style="padding: 0px 0px;"  id="id_detail" class="btn btn-info id_detail" ><span class="fa fa-fw fa-search" data-toggle="tooltip"
+              data-placement="bottom" title="Product Detail">
            </span></a>
            <!-- <input type="hidden" id="btnhapus" value="<?php //echo $u->category ?>" > -->
           </td>

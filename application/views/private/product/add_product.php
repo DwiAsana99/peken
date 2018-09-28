@@ -138,21 +138,22 @@
           <h3 class="box-title">Add New Product</h3>
         </div>
         <div class="box-body">
+
           <form method="post"  enctype="multipart/form-data" id="Simpan"  action="<?php echo base_url().'Product/add_product'; ?>">
             <div class="form-group">
               <label class="control-label">Product Name</label>
-              <input type="text" name="product_name" id="product_name"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out product name..."  class="form-control"  placeholder="">
+              <input type="text"  name="product_name" id="product_name"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out product name..."  class="form-control"  placeholder="">
             </div>
             <div class="form-group">
               <label for="">Product Category</label>
-              <select class="form-control" name="product_category_code" id="product_category_code" >
-                <option value='0'>--Choose Product Category--</option>
+              <select class="form-control" name="product_category_code" id="product_category_code" data-validation="length" data-validation-length="min1">
+                <option value=''>--Choose Product Category--</option>
               </select>
             </div>
             <div class="form-group">
               <label for="">Product Sub Category</label>
-              <select class="form-control" name="product_sub_category_code" id="product_sub_category_code" >
-              <option value='0'>--Choose Product Sub Category--</option>
+              <select class="form-control" name="product_sub_category_code" id="product_sub_category_code" data-validation="length" data-validation-length="min1">
+              <option value=''>--Choose Product Sub Category--</option>
               </select>
             </div>
             <div class="form-group">
@@ -176,7 +177,7 @@
             </div>
             <div class="form-group">
               <label for="">Period Supply Ability</label>
-              <select class="form-control" name="period_supply_ability">
+              <select class="form-control" name="period_supply_ability" data-validation="length" data-validation-length="min1">
                 <option value="daily">Daily</option>
                 <option value="weekly">Weekly</option>
                 <option value="monthly">Monthly</option>
@@ -192,20 +193,31 @@
               <textarea class="form-control" rows="5" name="pkg_delivery" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out packaging & delivery..."></textarea>
             </div>
             <div class="form-group">
-              <label class="control-label">Product Image</label>
+              <label for="">Period Supply Ability</label>
+              <select class="form-control" name="status" data-validation="length" data-validation-length="min1">
+                <option value="">--Choose Product Status--</option>
+                <option value="1">Published</option>
+                <option value="0">Do not publish</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label danger">Product Image</label>
               <div class="dropzone">
                 <div class="dz-message">
                   <h4> Click or Drop product image here..<br>Max File Size 1,8 MB</h4>
                 </div>
               </div>
             </div>
-
+            <div id="product_image_alert" class="" role="alert">
+              <p id="product_image_error"></p>
+            </div>
             <!-- <div class="form-group">
             <label class="control-label">Description</label>
             <input type="text" name="description" id="description"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
           </div> -->
           <div class="form-group text-right">
-            <button type="submit" value="Validate" class="btn btn-default "><i class='glyphicon glyphicon-ok'></i> Save</button>
+            <button type="submit" value="Validate" class="btn btn-default " id="BtnSubmit"><i class='glyphicon glyphicon-ok'></i> Save</button>
+            <!-- <button type="button" id="BtnTest"  class="btn btn-default "><i class='glyphicon glyphicon-ok'></i> TEST</button> -->
           </div>
         </form>
       </div>
@@ -226,29 +238,27 @@
   });
 </script>
 <script type="text/javascript">
-// $(function(){
+$(function(){
+  $('#BtnSubmit').click(function(event){
+    var productImage ="x";
+    $('input[name^="file"]').each(function() {
+      //console.log($(this).val());
+       productImage = "ada";
+    });
+    //console.log(productImage);
+    if (productImage == "ada") {
+      console.log('silahkan masuk');
+      $("#product_image_alert").removeAttr("class");
+      $("#product_image_error").html('');
+    } else {
+      event.preventDefault();
+      $("#product_image_alert").addClass('alert alert-danger');
+      $("#product_image_error").html('You must fill in the product image');
+      // alert('You must fill in the product image');
+    }
 
-// $.ajaxSetup({
-// type:"POST",
-// url: "<?php// echo base_url('index.php/Product/generate_product_sub_category') ?>",
-// cache: false,
-// });
-
-// $("#product_category_code").change(function(){
-
-// var value=$(this).val();
-
-// $.ajax({
-// data:{product_category_code:value},
-// success: function(respond){
-// $("#product_sub_category_code").html(respond);
-// }
-// })
-
-
-// });
-// })
-
+});
+})
 </script>
 <script type="text/javascript">
 $("#Simpan").submit(function() {

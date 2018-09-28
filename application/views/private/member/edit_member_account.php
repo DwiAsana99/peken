@@ -1,3 +1,4 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 <section class="content-header">
   <div class="btn-group btn-breadcrumb">
     <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
@@ -54,31 +55,31 @@
     </div>
     <div class="form-group ">
       <label class="">First Name</label>
-      <input class="form-control" type="text" name="first_name" id="category" value="<?php echo $member[0]->FirstName; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..."    placeholder="">
+      <input class="form-control" type="text" name="first_name" id="category" value="<?php echo $member[0]->FirstName; ?>" data-validation="length" data-validation-length="min2" data-validation-error-msg="Please fill out category name..."    placeholder="">
     </div>
     <div class="form-group ">
       <label class="">Last Name</label>
-      <input class="form-control" type="text" name="last_name" id="description" value="<?php echo $member[0]->LastName; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."    placeholder="">
+      <input class="form-control" type="text" name="last_name" id="description" value="<?php echo $member[0]->LastName; ?>" data-validation="length" data-validation-length="min2" data-validation-error-msg="Please fill out category description..."    placeholder="">
     </div>
     <div class="form-group ">
       <label class="">Company Name</label>
-      <input class="form-control" type="text" name="company_name" id="description" value="<?php echo $member[0]->CompanyName; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."    placeholder="">
+      <input class="form-control" type="text" name="company_name" id="description" value="<?php echo $member[0]->CompanyName; ?>" data-validation="length" data-validation-length="min2" data-validation-error-msg="Please fill out category description..."    placeholder="">
     </div>
     <div class="form-group ">
       <label class="">Zip Code</label>
-      <input class="form-control" type="text" name="zip_code" id="description" value="<?php echo $member[0]->ZipCode; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."    placeholder="">
+      <input class="form-control" type="text" name="zip_code" id="description" value="<?php echo $member[0]->ZipCode; ?>" data-validation="length" data-validation-length="min2" data-validation-error-msg="Please fill out category description..."    placeholder="">
     </div>
     <div class="form-group ">
       <label class="">Address</label>
-      <input class="form-control" type="text" name="address" id="" value="<?php echo $member[0]->Address; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."    placeholder="">
+      <input class="form-control" type="text" name="address" id="" value="<?php echo $member[0]->Address; ?>" data-validation="length" data-validation-length="min2" data-validation-error-msg="Please fill out category description..."    placeholder="">
     </div>
     <div class="form-group ">
       <label class="">City</label>
-      <input class="form-control" type="text" name="city" id="description" value="<?php echo $member[0]->City; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."    placeholder="">
+      <input class="form-control" type="text" name="city" id="description" value="<?php echo $member[0]->City; ?>" data-validation="length" data-validation-length="min2" data-validation-error-msg="Please fill out category description..."    placeholder="">
     </div>
     <div class="form-group ">
       <label class="">Province</label>
-      <input class="form-control" type="text" name="province" id="description" value="<?php echo $member[0]->Province; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."    placeholder="">
+      <input class="form-control" type="text" name="province" id="description" value="<?php echo $member[0]->Province; ?>" data-validation="length" data-validation-length="min2" data-validation-error-msg="Please fill out category description..."    placeholder="">
     </div>
     <div class="form-group ">
       <label class="">State</label>
@@ -88,7 +89,7 @@
     </div>
     <div class="form-group ">
       <label class="">Phone</label>
-      <input class="form-control" type="number" name="phone" id="description" value="<?php echo $member[0]->Phone; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class=""  placeholder="">
+      <input class="form-control" type="number" name="phone" id="description" value="<?php echo $member[0]->Phone; ?>" data-validation="length" data-validation-length="min2" data-validation-error-msg="Please fill out category description..."  class=""  placeholder="">
     </div>
     <div class="radio">
       <?php if ($member[0]->UserLevel == 1){ ?>
@@ -137,6 +138,11 @@
 </section><!-- /.content -->
 <script type="text/javascript">
   $("[data-toggle=popover]").popover();
+</script>
+<script>
+  $.validate({
+    lang: 'es'
+  });
 </script>
 <script type="text/javascript">
 function readUrlProfileImage(input) {

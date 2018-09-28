@@ -1,3 +1,4 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="btn-group btn-breadcrumb">
@@ -34,6 +35,11 @@
   </div>
 </div>
 </section>
+<script>
+  $.validate({
+    lang: 'es'
+  });
+</script>
 <script type="text/javascript">
 $("#Simpan").submit(function() {
   var category = $('#category').val();
