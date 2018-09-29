@@ -189,11 +189,11 @@ function validation(e) {
         content: 'Are You Sure to Save?',
         type: 'blue',
         buttons: {
-            Simpan: function () {
+            Save: function () {
                 $.LoadingOverlay("show");
                 $("#reset_password_form").submit();
             },
-            Batal: function () {
+            Cancel: function () {
 
                 $.alert('data not saved...');
             },

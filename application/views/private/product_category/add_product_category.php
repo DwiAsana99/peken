@@ -53,13 +53,13 @@ $("#Simpan").submit(function() {
       content: 'Are You Sure to Save?',
       type: 'blue',
       buttons: {
-        Simpan: function () {
+        Save: function () {
           $.LoadingOverlay("show");
           $("#Simpan").submit();
         },
-        Batal: function () {
+        Cancel: function () {
 
-          $.alert('Data Tidak Disimpan...');
+          $.alert('Data not saved...');
         },
       }
     });

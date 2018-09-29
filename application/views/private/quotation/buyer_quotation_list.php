@@ -20,13 +20,13 @@ white-space: nowrap;
 <script src="<?php echo base_url('assets/AdminLTE-2.0.5/plugins/datatables/dataTables.bootstrap.min.js') ?>" type="text/javascript"></script>
 
 <div class="container">
-  <h1>Quotation List</h1>
+  <h1>Request for Quotation List</h1>
   <ol class="breadcrumb">
     <li>
       <a href="<?php echo site_url('Home/home_view/') ?>">Home</a>
     </li>
     <li class='active'>
-      Quotation List
+      Request for Quotation List
     </li>
   </ol>
 
@@ -36,7 +36,7 @@ white-space: nowrap;
         <tr>
           <th>Send</th>
           <th>Subject</th>
-          <th>Message</th>
+          <th>Date</th>
 
         </tr>
       </thead>
@@ -48,8 +48,8 @@ white-space: nowrap;
                 <?php echo $q->CompanyName  ?>
               </a>
             </td>
-            <td>Pembelian
-              <?php echo $q->Name  ?>
+            <td>
+              <?php echo $q->Subject  ?>
             </td>
 
             <td>
@@ -70,7 +70,7 @@ $(function () {
     "searching": true,
     "ordering": true,
     "info": true,
-    "autoWidth": false
+    "autoWidth": true
   });
 });
 </script>

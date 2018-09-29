@@ -125,8 +125,7 @@
             <div class="tab-content">
               <div class="tab-pane active" id="home">
 
-                <form method="post" id="Simpan" action="<?php echo base_url().'User/update_company_profile'; ?>" enctype="multipart/form-data"
-                  onfocusout="edit(event)">
+                <form method="post" id="SimpanCompanyProfile" action="<?php echo base_url().'User/update_company_profile'; ?>" enctype="multipart/form-data">
                   <!-- <div class="form-group text-center">
                   <label  for="profile_image">Profil Image</label> <br>
                   <img src="<?php //echo base_url().'assets/suplier_upload/'.$user[0]->Gambar; ?>" id = "fotoview" alt="" class="img-thumbnail" alt="Cinque Terre" width="304" height="236"><br>
@@ -202,58 +201,59 @@
 
                 <div class="form-group col-lg-6">
                   <label class="control-label">First Name</label>
-                  <input type="text" name="first_name" id="category" value="<?php echo $user[0]->FirstName; ?>" data-validation="length" data-validation-length="min4"
-                  data-validation-error-msg="Please fill out category name..." class="form-control " placeholder="">
+                  <input type="text" name="first_name" id="first_name" value="<?php echo $user[0]->FirstName; ?>" data-validation="length" data-validation-length="min1"
+                  data-validation-error-msg="Please fill out first name..." class="form-control " placeholder="">
                 </div>
                 <div class="form-group col-lg-6">
                   <label class="control-label">Last Name</label>
-                  <input type="text" name="last_name" id="description" value="<?php echo $user[0]->LastName; ?>" data-validation="length" data-validation-length="min4"
-                  data-validation-error-msg="Please fill out category description..." class="form-control" placeholder="">
+                  <input type="text" name="last_name" id="last_name" value="<?php echo $user[0]->LastName; ?>" data-validation="length" data-validation-length="min1"
+                  data-validation-error-msg="Please fill out last name..." class="form-control" placeholder="">
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">Zip Code</label>
-                  <input type="text" name="zip_code" id="description" value="<?php echo $user[0]->ZipCode; ?>" data-validation="length" data-validation-length="min4"
-                  data-validation-error-msg="Please fill out category description..." class="form-control" placeholder="">
+                  <input type="text" name="zip_code" id="zip_code" value="<?php echo $user[0]->ZipCode; ?>" data-validation="length" data-validation-length="min1"
+                  data-validation-error-msg="Please fill out zip code..." class="form-control" placeholder="">
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">Company Address</label>
-                  <input type="text" name="address" id="" value="<?php echo $user[0]->Address; ?>" data-validation="length" data-validation-length="min4"
-                  data-validation-error-msg="Please fill out category description..." class="form-control" placeholder="">
+                  <input type="text" name="address" id="address" value="<?php echo $user[0]->Address; ?>" data-validation="length" data-validation-length="min1"
+                  data-validation-error-msg="Please fill out company address..." class="form-control" placeholder="">
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">City</label>
-                  <input type="text" name="city" id="description" value="<?php echo $user[0]->City; ?>" data-validation="length" data-validation-length="min4"
-                  data-validation-error-msg="Please fill out category description..." class="form-control" placeholder="">
+                  <input type="text" name="city" id="city" value="<?php echo $user[0]->City; ?>" data-validation="length" data-validation-length="min1"
+                  data-validation-error-msg="Please fill out city..." class="form-control" placeholder="">
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">Province</label>
-                  <input type="text" name="province" id="description" value="<?php echo $user[0]->Province; ?>" data-validation="length" data-validation-length="min4"
-                  data-validation-error-msg="Please fill out category description..." class="form-control" placeholder="">
+                  <input type="text" name="province" id="province" value="<?php echo $user[0]->Province; ?>" data-validation="length" data-validation-length="min1"
+                  data-validation-error-msg="Please fill out province..." class="form-control" placeholder="">
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">State</label>
-                  <select name="state" data-validation-error-msg="Please fill out category description..." class="form-control">
+                  <select name="state"  class="form-control">
                     <option value="indonesia">Indonesia</option>
                   </select>
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">Company Name</label>
-                  <input type="text" name="company_name" id="description" value="<?php echo $user[0]->CompanyName; ?>" data-validation="length"
-                  data-validation-length="min4" data-validation-error-msg="Please fill out category description..." class="form-control"
+                  <input type="text" name="company_name" id="company_name" value="<?php echo $user[0]->CompanyName; ?>" data-validation="length"
+                  data-validation-length="min1" data-validation-error-msg="Please fill out company name..." class="form-control"
                   placeholder="">
                 </div>
 
                 <div class="form-group col-lg-12">
                   <label class="control-label">Phone Number</label>
-                  <input type="text" name="phone" id="phone" value="<?php echo $user[0]->Phone; ?>" data-validation="length" data-validation-length="min4"
-                  data-validation-error-msg="Please fill out category description..." class="form-control" placeholder="">
+                  <input type="text" name="phone" id="phone" value="<?php echo $user[0]->Phone; ?>" data-validation="length" data-validation-length="min1"
+                  data-validation-error-msg="Please fill out phone number..." class="form-control" placeholder="">
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">Company Description</label>
-                  <textarea name="company_description" rows="6" class="form-control"><?php echo $user[0]->CompanyDescription; ?></textarea>
+                  <textarea name="company_description" rows="6" class="form-control" data-validation="length" data-validation-length="min4"
+                  data-validation-error-msg="Please fill out product description..."><?php echo $user[0]->CompanyDescription; ?></textarea>
                 </div>
                 <div class="form-group ">
-                  <button class="btn btn-primary col-md-12" type="submit">Save</button>
+                  <button  class="btn btn-primary col-md-12" type="submit" value="Validate">Save</button>
                 </div>
               </form>
 
@@ -266,10 +266,10 @@
               <h2></h2>
 
               <hr>
-              <form class="form" action="<?php echo base_url().'User/update_certificate_license'; ?>" enctype="multipart/form-data" method="post">
+              <form id="SimpanCertificateLicense" class="form" action="<?php echo base_url().'User/update_certificate_license'; ?>" enctype="multipart/form-data" method="post">
                 <div class="form-group col-lg-12">
                   <label class="control-label">Taxpayer Registration Number</label>
-                  <input type="text" name="npwp" id="description" value="<?php echo $user[0]->Npwp; ?>" data-validation="length" data-validation-length="min4"
+                  <input type="text" name="npwp" id="description" value="<?php echo $user[0]->Npwp; ?>" data-validation="length" data-validation-length="min1"
                   data-validation-error-msg="Please fill out category description..." class="form-control" placeholder="">
                 </div>
                 <div class="form-group col-lg-6 text-center">
@@ -395,7 +395,7 @@
 
 
               <hr>
-              <form class="form" action="<?php echo base_url().'User/update_supplier_gallery'; ?>" enctype="multipart/form-data" method="post" id="">
+              <form class="form" action="<?php echo base_url().'User/update_supplier_gallery'; ?>" enctype="multipart/form-data" method="post" id="SimpanCompanyGallery">
 
                 <div class="col-md-12">
                   <div class="form-group">
@@ -457,105 +457,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- <a href="">                                                </a> -->
-
-
-
-
-        <!-- <button type="submit" class="btn btn-primary col-md-12" name="button">Save</button> -->
-
-
-        <script>
-        $(document).ready(function() {
-          var $lightbox = $('#lightbox');
-
-          $('[data-target="#lightbox"]').on('click', function(event) {
-            var $img = $(this).find('img'),
-            src = $img.attr('src'),
-            alt = $img.attr('alt'),
-            css = {
-              'maxWidth': $(window).width() - 100,
-              'maxHeight': $(window).height() - 100
-            };
-
-            $lightbox.find('.close').addClass('hidden');
-            $lightbox.find('img').attr('src', src);
-            $lightbox.find('img').attr('alt', alt);
-            $lightbox.find('img').css(css);
-          });
-
-          $lightbox.on('shown.bs.modal', function (e) {
-            var $img = $lightbox.find('img');
-
-            $lightbox.find('.modal-dialog').css({'width': $img.width()});
-            $lightbox.find('.close').removeClass('hidden');
-          });
-        });
-        </script>
-        <style>
-        #lightbox .modal-content {
-          display: inline-block;
-          text-align: center;
-        }
-
-        #lightbox .close {
-          opacity: 1;
-          color: rgb(255, 255, 255);
-          background-color: rgb(25, 25, 25);
-          padding: 5px 8px;
-          border-radius: 30px;
-          border: 2px solid rgb(255, 255, 255);
-          position: absolute;
-          top: -15px;
-          right: -55px;
-
-          z-index:1032;
-        }
-        </style>
         <!-- ______________________lightbox_____________ -->
         <div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
           <div class="modal-dialog ">
@@ -578,8 +479,87 @@
 
 
 </section>
+
 <script src="<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/dropzone/js/dropzone-amd-module.min.js') ?>"></script>
+<script>
+// $.validate({
+//   lang: 'es',
+//   form: '#SimpanCompanyProfile'
+// });
+</script>
+<script type="text/javascript">
+$("#SimpanCompanyProfile").submit(function() {
+  console.log('masuk');
+
+    event.preventDefault();
+    $.confirm({
+      title: 'Confirmation',
+      content: 'Are You Sure to Save?',
+      type: 'blue',
+      buttons: {
+        Save: function () {
+          $.LoadingOverlay("show");
+          $("#SimpanCompanyProfile").submit();
+        },
+        Cancel: function () {
+
+          $.alert('Data not saved...');
+        },
+      }
+    });
+
+
+});
+</script>
+<script type="text/javascript">
+$("#SimpanCertificateLicense").submit(function() {
+  console.log('masuk');
+
+    event.preventDefault();
+    $.confirm({
+      title: 'Confirmation',
+      content: 'Are You Sure to Save?',
+      type: 'blue',
+      buttons: {
+        Save: function () {
+          $.LoadingOverlay("show");
+          $("#SimpanCertificateLicense").submit();
+        },
+        Cancel: function () {
+
+          $.alert('Data not saved...');
+        },
+      }
+    });
+
+
+});
+</script>
+<script type="text/javascript">
+$("#SimpanCompanyGallery").submit(function() {
+  console.log('masuk');
+
+    event.preventDefault();
+    $.confirm({
+      title: 'Confirmation',
+      content: 'Are You Sure to Save?',
+      type: 'blue',
+      buttons: {
+        Save: function () {
+          $.LoadingOverlay("show");
+          $("#SimpanCompanyGallery").submit();
+        },
+        Cancel: function () {
+
+          $.alert('Data not saved...');
+        },
+      }
+    });
+
+
+});
+</script>
 <script type="text/javascript">
 function readURL(input) {
   if (input.files && input.files[0]) {
@@ -653,7 +633,7 @@ function readUrlProfileImage(input) {
 function edit(e){
 e.preventDefault();
 // ambil url pada atribute form action
-var url = $('#Simpan').attr('action');
+var url = $('#SimpanCompanyProfile').attr('action');
 // ambil inputannya
 var data = {
 'first_name'              : $('input[name=first_name]').val(),
@@ -671,7 +651,7 @@ type        : 'POST',
 url         : url,
 data        :  data,
 success: function(response) {
-$('#Simpan').find('input').val();
+$('#SimpanCompanyProfile').find('input').val();
 }
 
 });
@@ -681,61 +661,61 @@ return false;
 </script> -->
 
 <script>
-$(document).on('click', '#tambah_siup', function (e) {
-  e.preventDefault();
-  var file_data = $('#siup').prop('files')[0];
-  var form_data = new FormData();
-
-  form_data.append('siup', file_data);
-  $.ajax({
-    url: '<?php echo base_url().'
-    index.php / Suplier / suplier_upload_siup '; ?>', // point to server-side PHP script
-    dataType: 'json', // what to expect back from the PHP script, if anything
-    cache: false,
-    contentType: false,
-    processData: false,
-    data: form_data,
-    type: 'post',
-    success: function (data, status) {
-      alert(php_script_response); // display response from the PHP script, if any
-      if (data.status != 'error') {
-        $('#siup').val('');
-        alert(data.msg);
-      } else {
-        alert(data.msg);
-      }
-    }
-  });
-})
+// $(document).on('click', '#tambah_siup', function (e) {
+//   e.preventDefault();
+//   var file_data = $('#siup').prop('files')[0];
+//   var form_data = new FormData();
+//
+//   form_data.append('siup', file_data);
+//   $.ajax({
+//    url: '<?php //echo base_url().'
+//    index.php / Suplier / suplier_upload_siup '; ?>', // point to server-side PHP script
+//    dataType: 'json', // what to expect back from the PHP script, if anything
+    // cache: false,
+    // contentType: false,
+    // processData: false,
+    // data: form_data,
+    // type: 'post',
+    // success: function (data, status) {
+    //  alert(php_script_response); // display response from the PHP script, if any
+//       if (data.status != 'error') {
+//         $('#siup').val('');
+//         alert(data.msg);
+//       } else {
+//         alert(data.msg);
+//       }
+//     }
+//   });
+// })
 </script>
 
 <script>
-$(document).on('click', '#tambah_tdp', function (e) {
-  e.preventDefault();
-  var file_data = $('#tdp').prop('files')[0];
-  var form_data = new FormData();
-
-  form_data.append('tdp', file_data);
-  $.ajax({
-    url: '<?php echo base_url().'
-    index.php / Suplier / suplier_upload_tdp '; ?>', // point to server-side PHP script
-    dataType: 'json', // what to expect back from the PHP script, if anything
-    cache: false,
-    contentType: false,
-    processData: false,
-    data: form_data,
-    type: 'post',
-    success: function (data, status) {
-      alert(php_script_response); // display response from the PHP script, if any
-      if (data.status != 'error') {
-        $('#tdp').val('');
-        alert(data.msg);
-      } else {
-        alert(data.msg);
-      }
-    }
-  });
-})
+// $(document).on('click', '#tambah_tdp', function (e) {
+//   e.preventDefault();
+//   var file_data = $('#tdp').prop('files')[0];
+//   var form_data = new FormData();
+//
+//   form_data.append('tdp', file_data);
+//   $.ajax({
+//     url: '<?php //echo base_url().'
+//    index.php / Suplier / suplier_upload_tdp '; ?>', // point to server-side PHP script
+//    dataType: 'json', // what to expect back from the PHP script, if anything
+    // cache: false,
+    // contentType: false,
+    // processData: false,
+  //  data: form_data,
+  //  type: 'post',
+  //  success: function (data, status) {
+//      alert(php_script_response); // display response from the PHP script, if any
+//       if (data.status != 'error') {
+//         $('#tdp').val('');
+//         alert(data.msg);
+//       } else {
+//         alert(data.msg);
+//       }
+//     }
+//   });
+// })
 </script>
 <script type="text/javascript">
 $(document).ready(function () {
@@ -813,3 +793,50 @@ $(document).ready(function () {
   });
 });
 </script>
+<script>
+  $(document).ready(function() {
+    var $lightbox = $('#lightbox');
+
+    $('[data-target="#lightbox"]').on('click', function(event) {
+      var $img = $(this).find('img'),
+      src = $img.attr('src'),
+      alt = $img.attr('alt'),
+      css = {
+        'maxWidth': $(window).width() - 100,
+        'maxHeight': $(window).height() - 100
+      };
+
+      $lightbox.find('.close').addClass('hidden');
+      $lightbox.find('img').attr('src', src);
+      $lightbox.find('img').attr('alt', alt);
+      $lightbox.find('img').css(css);
+    });
+
+    $lightbox.on('shown.bs.modal', function (e) {
+      var $img = $lightbox.find('img');
+
+      $lightbox.find('.modal-dialog').css({'width': $img.width()});
+      $lightbox.find('.close').removeClass('hidden');
+    });
+  });
+</script>
+<style>
+#lightbox .modal-content {
+  display: inline-block;
+  text-align: center;
+}
+
+#lightbox .close {
+  opacity: 1;
+  color: rgb(255, 255, 255);
+  background-color: rgb(25, 25, 25);
+  padding: 5px 8px;
+  border-radius: 30px;
+  border: 2px solid rgb(255, 255, 255);
+  position: absolute;
+  top: -15px;
+  right: -55px;
+
+  z-index:1032;
+}
+</style>

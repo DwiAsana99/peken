@@ -223,6 +223,7 @@
       $this->session->set_userdata('first_name',$this->input->post('first_name'));
       $this->session->set_userdata('company_name',$this->input->post('company_name'));
       $this->M_user->update_user($data,$supplier_id);
+      $this->session->set_flashdata('msg', 'Your company profile has been successfully updated ');
       redirect('User/supplier_account_view');
     }
     function update_certificate_license(){
@@ -260,6 +261,7 @@
   		// print_r($data);
   		// echo "</pre>";exit();
       $this->M_user->update_user($data,$supplier_id);
+      $this->session->set_flashdata('msg', 'Your certificate license has been successfully updated ');
       redirect('User/supplier_account_view');
     }
     function update_supplier_gallery()  {
@@ -269,6 +271,7 @@
   		// print_r($this->input->post('file'));
   		// echo "</pre>";exit();
       $this->M_supplier_gallery_pic->update_supplier_gallery_pic($supplier_id,$supplier_gallery_pic);
+      $this->session->set_flashdata('msg', 'Your company gallery has been successfully updated ');
       redirect('User/supplier_account_view');
     }
     function supplier_upload_siup(){

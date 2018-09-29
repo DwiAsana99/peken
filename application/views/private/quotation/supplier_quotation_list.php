@@ -4,7 +4,7 @@
 <section class="content-header">
   <div class="btn-group btn-breadcrumb">
     <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
-    <a  class="btn btn-default  btn-xs active">Quotation List</a>
+    <a  class="btn btn-default  btn-xs active">Request for Quotation List</a>
   </div>
 </section>
 <section class="content">
@@ -14,7 +14,7 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Quotation List</h3>
+          <h3 class="box-title">Request for Quotation List</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -32,12 +32,12 @@
                 <?php foreach($quotation as $q){ ?>
                   <tr class="click">
                     <td>
-                      <a href="<?php echo base_url().'Quotation/supplier_quotation_detail?quotation_code='.$q->Code; ?>">To:
-                        <?php echo $q->CompanyName  ?>
+                      <a href="<?php echo base_url().'Quotation/supplier_quotation_detail?quotation_code='.$q->Code; ?>">From:
+                        <?php echo $q->LastName  ?>
                       </a>
                     </td>
-                    <td>Pembelian
-                      <?php echo $q->Name  ?>
+                    <td>
+                      <?php echo $q->Subject  ?>
                     </td>
 
                     <td>

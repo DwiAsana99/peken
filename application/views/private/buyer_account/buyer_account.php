@@ -1,7 +1,7 @@
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 <div class="container" style="">
 
-  <form method="post" id="Simpan"  action="<?php echo base_url().'User/edit_buyer_account'; ?>" enctype="multipart/form-data"  onfocusout="edit(event)">
+  <form method="post" id="Simpan"  action="<?php echo base_url().'User/edit_buyer_account'; ?>" enctype="multipart/form-data">
     <!-- <div class=" ">
     <label  for="profile_image">Profil Image</label> <br>
     <img src="<?php //echo base_url().'assets/suplier_upload/'.$buyer[0]->Gambar; ?>" id = "fotoview" alt="" class="img-thumbnail" alt="Cinque Terre" width="304" height="236"><br>
@@ -123,10 +123,44 @@
       <label class="">Phone</label>
       <input class="form-control" type="number" name="phone" id="description" value="<?php echo $buyer[0]->Phone; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class=""  placeholder="">
     </div>
-    <button type="submit" class="btn btn-primary " name="button">Save</button>
+    <button type="submit" class="btn btn-primary " value="Validate" name="button">Save</button>
   </form>
 
 </div>
+
+<script type="text/javascript">
+  $("#Simpan").submit(function () {
+    var category = $('#category').val();
+    var description = $('#description').val();
+    if (category == '' || description == '') {
+      File_Kosong();
+      return false;
+    } else {
+      event.preventDefault();
+      $.confirm({
+        title: 'Confirmation',
+        content: 'Are You Sure to save?',
+        type: 'blue',
+        buttons: {
+          Save: function () {
+           // $.LoadingOverlay("show");
+            $("#Simpan").submit();
+          },
+          Cancel: function () {
+
+            $.alert('Data not saved...');
+          },
+        }
+      });
+    }
+
+  });
+</script>
+<script>
+  // $.validate({
+  //   lang: 'es'
+  // });
+</script>
 <script type="text/javascript">
   $("[data-toggle=popover]").popover();
 </script>

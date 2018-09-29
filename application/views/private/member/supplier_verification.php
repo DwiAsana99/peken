@@ -284,7 +284,7 @@
                                   View Profile Image
                                 </a>
                               </li>
-                              
+
                             </ul>
                           </div>
                         </div>
@@ -317,13 +317,13 @@
               content: 'Are You Sure to Save?',
               type: 'green',
               buttons: {
-                Simpan: function () {
+                Save: function () {
                   $.LoadingOverlay("show");
                   $("#Verify").submit();
                 },
-                Batal: function () {
+                Cancel: function () {
 
-                  $.alert('Data Tidak Disimpan...');
+                  $.alert('Data not saved...');
                 },
               }
             });

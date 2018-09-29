@@ -8,15 +8,15 @@
   function doMathPrice()
   {
       var min_price = document.getElementById('min_price1').value;
-      min_price = min_price.replace(/\./g, "");
+      min_price = min_price.replace(/\,/g, "");
       document.getElementById('min_price').value =  min_price;
 
       var max_price = document.getElementById('max_price1').value;
-      max_price = max_price.replace(/\./g, "");
+      max_price = max_price.replace(/\,/g, "");
       document.getElementById('max_price').value =  max_price;
 
       var supply_ability = document.getElementById('supply_ability1').value;
-      supply_ability = supply_ability.replace(/\./g, "");
+      supply_ability = supply_ability.replace(/\,/g, "");
       document.getElementById('supply_ability').value =  supply_ability;
       // price = parseFloat(price);
       // var service = price * 0.1;
@@ -273,13 +273,13 @@ $("#Simpan").submit(function() {
       content: 'Are You Sure to Save?',
       type: 'blue',
       buttons: {
-        Simpan: function () {
+        Save: function () {
           $.LoadingOverlay("show");
           $("#Simpan").submit();
         },
-        Batal: function () {
+        Cancel: function () {
 
-          $.alert('Data Tidak Disimpan...');
+          $.alert('Data not saved...');
         },
       }
     });
