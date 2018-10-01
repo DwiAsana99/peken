@@ -6,7 +6,7 @@
       parent::__construct();
       $this->load->library(array('form_validation','pagination','email'));
       $this->load->helper(array('form', 'url', 'captcha'));
-      $this->load->model(array('M_user','M_product','M_pagination', 'M_product_category', 'M_product_sub_category', 'M_quotation', 'M_quotation_detail','M_supplier_gallery_pic','M_captcha'));
+      $this->load->model(array('M_user','M_product','M_pagination','M_date', 'M_product_category', 'M_product_sub_category', 'M_quotation', 'M_quotation_detail','M_supplier_gallery_pic','M_captcha'));
     }
     function admin_dashboard_view(){
       $user_id = $this->session->userdata('user_id');
@@ -630,7 +630,7 @@
 
         $this->email->message(" <p><img  src='http://dinilaku.com/assets/front_end_assets/img/2Dinilaku_Logo.png' width='175' alt=''></p>
         <a href='".base_url().
-        "User/member_confirmation_view/".$row->Id.
+        "User/member_confirmation_view/".$row->Email.
         "'><i class='glyphicon glyphicon-time'></i>VERIFY YOUR ACCOUNTS</a>"
         );
         $this->email->set_newline("\r\n");
@@ -661,24 +661,29 @@
         return TRUE;
       }
     }
-    function member_confirmation_view($user_id){
-      $user_rules['filter_value'] =  array('user_id'=>$user_id);
+    function member_confirmation_view($email){
+      $user_rules['filter_value'] =  array('email'=>$email);
       $this->M_user->set_search_user($user_rules);
       $get_user = $this->M_user->get_user();
+      $row = $get_user->row();
       $data['user'] = $get_user->result();
+      if ($row->IsConfirmated == 1) {
+        $this->load->view('public/register/member_confirmated_exist');
+      }else {
+        $this->M_product_category->set_search_product_category();
+        $get_product_category = $this->M_product_category->get_product_category();
+        $this->M_product_sub_category->set_search_product_sub_category();
+        $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
+        $data_nav['product_category'] = $get_product_category->result();
+        $data_nav['product_sub_category'] = $get_product_sub_category->result();
 
-      $this->M_product_category->set_search_product_category();
-      $get_product_category = $this->M_product_category->get_product_category();
-      $this->M_product_sub_category->set_search_product_sub_category();
-      $get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
-      $data_nav['product_category'] = $get_product_category->result();
-      $data_nav['product_sub_category'] = $get_product_sub_category->result();
+        $head_data['page_title'] = "Member Confirmation";
+        $this->load->view('template/front/head_front',$head_data);
+        $this->load->view('template/front/navigation',$data_nav);
+        $this->load->view('public/register/member_confirmation',$data);
+        $this->load->view('template/front/foot_front');
+      }
 
-      $head_data['page_title'] = "Member Confirmation";
-      $this->load->view('template/front/head_front',$head_data);
-      $this->load->view('template/front/navigation',$data_nav);
-      $this->load->view('public/register/member_confirmation',$data);
-      $this->load->view('template/front/foot_front');
     }
 
 
@@ -690,6 +695,7 @@
         'LastName' => $this->input->post('last_name'),
         'CompanyName' => $this->input->post('company_name'),
         'IsConfirmated' => 1,
+        'MemberDate' => $this->M_date->get_date_sql_format(),
         'Phone' => $this->input->post('phone')
         );
       $user_id = $this->input->post('user_id');

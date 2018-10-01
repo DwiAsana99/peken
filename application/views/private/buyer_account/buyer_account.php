@@ -83,35 +83,42 @@
       </div>
     <div class="form-group">
       <label class="">Email</label>
-      <input class="form-control" type="text" name="first_name" id="category" value="<?php echo $buyer[0]->Email; ?>" disabled placeholder="">
+      <input class="form-control" type="text" name="first_name" id="category" value="<?php echo $buyer[0]->Email; ?>" disabled >
     </div>
     <div class="form-group ">
       <label class="">First Name</label>
-      <input class="form-control" type="text" name="first_name" id="category" value="<?php echo $buyer[0]->FirstName; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..."    placeholder="">
+      <input class="form-control" type="text" name="first_name" id="category" value="<?php echo $buyer[0]->FirstName; ?>"
+        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..." placeholder="" required>
     </div>
     <div class="form-group ">
       <label class="">Last Name</label>
-      <input class="form-control" type="text" name="last_name" id="description" value="<?php echo $buyer[0]->LastName; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."    placeholder="">
+      <input class="form-control" type="text" name="last_name" id="description" value="<?php echo $buyer[0]->LastName; ?>"
+        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..." placeholder="" required>
     </div>
     <div class="form-group ">
       <label class="">Company Name</label>
-      <input class="form-control" type="text" name="company_name" id="description" value="<?php echo $buyer[0]->CompanyName; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."    placeholder="">
+      <input class="form-control" type="text" name="company_name" id="description" value="<?php echo $buyer[0]->CompanyName; ?>"
+        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..." placeholder="" required>
     </div>
     <div class="form-group ">
       <label class="">Zip Code</label>
-      <input class="form-control" type="text" name="zip_code" id="description" value="<?php echo $buyer[0]->ZipCode; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."    placeholder="">
+      <input class="form-control" type="text" name="zip_code" id="description" value="<?php echo $buyer[0]->ZipCode; ?>"
+        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..." placeholder="" required>
     </div>
     <div class="form-group ">
       <label class="">Address</label>
-      <input class="form-control" type="text" name="address" id="" value="<?php echo $buyer[0]->Address; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."    placeholder="">
+      <input class="form-control" type="text" name="address" id="" value="<?php echo $buyer[0]->Address; ?>"
+        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..." placeholder="" required>
     </div>
     <div class="form-group ">
       <label class="">City</label>
-      <input class="form-control" type="text" name="city" id="description" value="<?php echo $buyer[0]->City; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."    placeholder="">
+      <input class="form-control" type="text" name="city" id="description" value="<?php echo $buyer[0]->City; ?>"
+        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..." placeholder="" required>
     </div>
     <div class="form-group ">
       <label class="">Province</label>
-      <input class="form-control" type="text" name="province" id="description" value="<?php echo $buyer[0]->Province; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."    placeholder="">
+      <input class="form-control" type="text" name="province" id="description" value="<?php echo $buyer[0]->Province; ?>"
+        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..." placeholder="" required>
     </div>
     <div class="form-group ">
       <label class="">State</label>
@@ -121,7 +128,8 @@
     </div>
     <div class="form-group ">
       <label class="">Phone</label>
-      <input class="form-control" type="number" name="phone" id="description" value="<?php echo $buyer[0]->Phone; ?>" data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class=""  placeholder="">
+      <input class="form-control" type="number" name="phone" id="description" value="<?php echo $buyer[0]->Phone; ?>"
+        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  placeholder="" required>
     </div>
     <button type="submit" class="btn btn-primary " value="Validate" name="button">Save</button>
   </form>

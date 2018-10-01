@@ -202,32 +202,32 @@
                 <div class="form-group col-lg-6">
                   <label class="control-label">First Name</label>
                   <input type="text" name="first_name" id="first_name" value="<?php echo $user[0]->FirstName; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out first name..." class="form-control " placeholder="">
+                  data-validation-error-msg="Please fill out first name..." class="form-control " placeholder="" required>
                 </div>
                 <div class="form-group col-lg-6">
                   <label class="control-label">Last Name</label>
                   <input type="text" name="last_name" id="last_name" value="<?php echo $user[0]->LastName; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out last name..." class="form-control" placeholder="">
+                  data-validation-error-msg="Please fill out last name..." class="form-control" placeholder="" required>
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">Zip Code</label>
                   <input type="text" name="zip_code" id="zip_code" value="<?php echo $user[0]->ZipCode; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out zip code..." class="form-control" placeholder="">
+                  data-validation-error-msg="Please fill out zip code..." class="form-control" placeholder="" required>
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">Company Address</label>
                   <input type="text" name="address" id="address" value="<?php echo $user[0]->Address; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out company address..." class="form-control" placeholder="">
+                  data-validation-error-msg="Please fill out company address..." class="form-control" placeholder="" required>
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">City</label>
                   <input type="text" name="city" id="city" value="<?php echo $user[0]->City; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out city..." class="form-control" placeholder="">
+                  data-validation-error-msg="Please fill out city..." class="form-control" placeholder="" required>
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">Province</label>
                   <input type="text" name="province" id="province" value="<?php echo $user[0]->Province; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out province..." class="form-control" placeholder="">
+                  data-validation-error-msg="Please fill out province..." class="form-control" placeholder="" required>
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">State</label>
@@ -239,18 +239,18 @@
                   <label class="control-label">Company Name</label>
                   <input type="text" name="company_name" id="company_name" value="<?php echo $user[0]->CompanyName; ?>" data-validation="length"
                   data-validation-length="min1" data-validation-error-msg="Please fill out company name..." class="form-control"
-                  placeholder="">
+                  placeholder="" required>
                 </div>
 
                 <div class="form-group col-lg-12">
                   <label class="control-label">Phone Number</label>
                   <input type="text" name="phone" id="phone" value="<?php echo $user[0]->Phone; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out phone number..." class="form-control" placeholder="">
+                  data-validation-error-msg="Please fill out phone number..." class="form-control" placeholder="" required>
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">Company Description</label>
                   <textarea name="company_description" rows="6" class="form-control" data-validation="length" data-validation-length="min4"
-                  data-validation-error-msg="Please fill out product description..."><?php echo $user[0]->CompanyDescription; ?></textarea>
+                  data-validation-error-msg="Please fill out product description..." required><?php echo $user[0]->CompanyDescription; ?></textarea>
                 </div>
                 <div class="form-group ">
                   <button  class="btn btn-primary col-md-12" type="submit" value="Validate">Save</button>

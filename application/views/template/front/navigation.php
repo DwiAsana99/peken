@@ -1,275 +1,89 @@
 <!-- CSS dropdown login -->
 <style media="screen">
-.logo {
-  width: 100px;
-  margin-top: -5px;
-}
-
-#login-dp {
-  min-width: 250px;
-  padding: 14px 14px 0;
-  overflow: hidden;
-  background-color: rgba(255, 255, 255, .8);
-}
-
-#login-dp .help-block {
-  font-size: 12px
-}
-
-#login-dp .bottom {
-  background-color: rgba(255, 255, 255, .8);
-  border-top: 1px solid #ddd;
-  clear: both;
-  padding: 14px;
-}
-
-#login-dp .social-buttons {
-  margin: 12px 0
-}
-
-#login-dp .social-buttons a {
-  width: 49%;
-}
-
-#login-dp .form-group {
-  margin-bottom: 10px;
-}
-
-.btn-fb {
-  color: #fff;
-  background-color: #3b5998;
-}
-
-.btn-fb:hover {
-  color: #fff;
-  background-color: #496ebc
-}
-
-.btn-tw {
-  color: #fff;
-  background-color: #55acee;
-}
-
-.btn-tw:hover {
-  color: #fff;
-  background-color: #59b5fa;
-}
-
-.tes {
-  top: -3px;
-  left: 100%;
-}
-
-.tes a {
-  margin-left: 0px;
-
-}
-
-select {
-  height: 45px;
-  margin: 0;
-  background-color: #ff6e00;
-  color: white;
-  border: none;
-}
-
-select option {
-  background-color: #fff;
-  color: #000;
-}
-
-#search_form {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  margin: auto;
-  margin-top: 3px;
-}
-
-.cont-top {
-  position: relative;
-}
-
-.z-index1 {
-  position: relative;
-  z-index: 1;
-}
-
-input[name="search_value"] {
-  width: 30vw !important;
-}
-
-/* notification */
-
-.navbar-default .dropdown-menu.notify-drop a {
-  text-decoration: none;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.navbar-default .dropdown-menu.notify-drop {
-  min-width: 330px;
-  background-color: #fff;
-  min-height: 360px;
-  max-height: 360px;
-}
-
-.navbar-default .dropdown-menu.notify-drop .notify-drop-title {
-  border-bottom: 1px solid #e2e2e2;
-  padding: 5px 15px 10px 15px;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content {
-  min-height: 280px;
-  max-height: 280px;
-  overflow-y: scroll;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content::-webkit-scrollbar-track {
-  background-color: #F5F5F5;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content::-webkit-scrollbar {
-  width: 8px;
-  background-color: #F5F5F5;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content>li {
-  border-bottom: 1px solid #e2e2e2;
-  padding: 10px 0px 5px 0px;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content>li:nth-child(2n+0) {
-  background-color: #fafafa;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content>li:after {
-  content: "";
-  clear: both;
-  display: block;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content>li:hover {
-  background-color: #fcfcfc;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content>li:last-child {
-  border-bottom: none;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content>li .notify-img {
-  float: left;
-  display: inline-block;
-  width: 45px;
-  height: 45px;
-  margin: 0px 0px 8px 0px;
-}
-
-.navbar-default .dropdown-menu.notify-drop .allRead {
-  margin-right: 7px;
-}
-
-.navbar-default .dropdown-menu.notify-drop .rIcon {
-  float: right;
-  color: #999;
-}
-
-.navbar-default .dropdown-menu.notify-drop .rIcon:hover {
-  color: #333;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content>li a {
-  font-size: 12px;
-  font-weight: normal;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content>li {
-  font-weight: bold;
-  font-size: 11px;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content>li hr {
-  margin: 5px 0;
-  width: 70%;
-  border-color: #e2e2e2;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content .pd-l0 {
-  padding-left: 0;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content>li p {
-  font-size: 11px;
-  color: #666;
-  font-weight: normal;
-  margin: 3px 0;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content>li p.time {
-  font-size: 10px;
-  font-weight: 600;
-  top: -6px;
-  margin: 8px 0px 0px 0px;
-  padding: 0px 3px;
-  border: 1px solid #e2e2e2;
-  position: relative;
-  background-image: linear-gradient(#fff, #f2f2f2);
-  display: inline-block;
-  border-radius: 2px;
-  color: #B97745;
-}
-
-.navbar-default .dropdown-menu.notify-drop .drop-content>li p.time:hover {
-  background-image: linear-gradient(#fff, #fff);
-}
-
-.navbar-default .dropdown-menu.notify-drop .notify-drop-footer {
-  border-top: 1px solid #e2e2e2;
-  bottom: 0;
-  position: relative;
-  padding: 8px 15px;
-}
-
-.navbar-default .dropdown-menu.notify-drop .notify-drop-footer a {
-  color: #777;
-  text-decoration: none;
-}
-
-.navbar-default .dropdown-menu.notify-drop .notify-drop-footer a:hover {
-  color: #333;
-}
-
-/* ini komen bagian akhir notfikasi :) */
-
-@media(max-width:768px) {
-  #login-dp {
-    background-color: inherit;
-    color: #fff;
-  }
-  #login-dp .bottom {
-    background-color: inherit;
-    border-top: 0 none;
-  }
-  .tes a {
-    margin-left: 30px;
-    font-style: italic;
-  }
-
   .logo {
     width: 100px;
-    margin-top: -8px;
+    margin-top: -5px;
+  }
+
+  #login-dp {
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, .8);
+  }
+
+  #login-dp .help-block {
+    font-size: 12px
+  }
+
+  #login-dp .bottom {
+    background-color: rgba(255, 255, 255, .8);
+    border-top: 1px solid #ddd;
+    clear: both;
+    padding: 14px;
+  }
+
+  #login-dp .social-buttons {
+    margin: 12px 0
+  }
+
+  #login-dp .social-buttons a {
+    width: 49%;
+  }
+
+  #login-dp .form-group {
+    margin-bottom: 10px;
+  }
+
+  .btn-fb {
+    color: #fff;
+    background-color: #3b5998;
+  }
+
+  .btn-fb:hover {
+    color: #fff;
+    background-color: #496ebc
+  }
+
+  .btn-tw {
+    color: #fff;
+    background-color: #55acee;
+  }
+
+  .btn-tw:hover {
+    color: #fff;
+    background-color: #59b5fa;
+  }
+
+  .tes {
+    top: -3px;
+    left: 100%;
+  }
+
+  .tes a {
+    margin-left: 0px;
+
+  }
+
+  select {
+    height: 45px;
+    margin: 0;
+    background-color: #ff6e00;
+    color: white;
+    border: none;
+  }
+
+  select option {
+    background-color: #fff;
+    color: #000;
   }
 
   #search_form {
-    position: initial;
-    width: inital;
-    text-align: left;
-    margin: inital;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    margin-top: 3px;
   }
 
   .cont-top {
@@ -282,9 +96,195 @@ input[name="search_value"] {
   }
 
   input[name="search_value"] {
-    width: 100% !important;
+    width: 30vw !important;
   }
-}
+
+  /* notification */
+
+  .navbar-default .dropdown-menu.notify-drop a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop {
+    min-width: 330px;
+    background-color: #fff;
+    min-height: 360px;
+    max-height: 360px;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .notify-drop-title {
+    border-bottom: 1px solid #e2e2e2;
+    padding: 5px 15px 10px 15px;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content {
+    min-height: 280px;
+    max-height: 280px;
+    overflow-y: scroll;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content::-webkit-scrollbar {
+    width: 8px;
+    background-color: #F5F5F5;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content>li {
+    border-bottom: 1px solid #e2e2e2;
+    padding: 10px 0px 5px 0px;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content>li:nth-child(2n+0) {
+    background-color: #fafafa;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content>li:after {
+    content: "";
+    clear: both;
+    display: block;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content>li:hover {
+    background-color: #fcfcfc;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content>li:last-child {
+    border-bottom: none;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content>li .notify-img {
+    float: left;
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    margin: 0px 0px 8px 0px;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .allRead {
+    margin-right: 7px;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .rIcon {
+    float: right;
+    color: #999;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .rIcon:hover {
+    color: #333;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content>li a {
+    font-size: 12px;
+    font-weight: normal;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content>li {
+    font-weight: bold;
+    font-size: 11px;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content>li hr {
+    margin: 5px 0;
+    width: 70%;
+    border-color: #e2e2e2;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content .pd-l0 {
+    padding-left: 0;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content>li p {
+    font-size: 11px;
+    color: #666;
+    font-weight: normal;
+    margin: 3px 0;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content>li p.time {
+    font-size: 10px;
+    font-weight: 600;
+    top: -6px;
+    margin: 8px 0px 0px 0px;
+    padding: 0px 3px;
+    border: 1px solid #e2e2e2;
+    position: relative;
+    background-image: linear-gradient(#fff, #f2f2f2);
+    display: inline-block;
+    border-radius: 2px;
+    color: #B97745;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .drop-content>li p.time:hover {
+    background-image: linear-gradient(#fff, #fff);
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .notify-drop-footer {
+    border-top: 1px solid #e2e2e2;
+    bottom: 0;
+    position: relative;
+    padding: 8px 15px;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .notify-drop-footer a {
+    color: #777;
+    text-decoration: none;
+  }
+
+  .navbar-default .dropdown-menu.notify-drop .notify-drop-footer a:hover {
+    color: #333;
+  }
+
+  /* ini komen bagian akhir notfikasi :) */
+
+  @media(max-width:768px) {
+    #login-dp {
+      background-color: inherit;
+      color: #fff;
+    }
+    #login-dp .bottom {
+      background-color: inherit;
+      border-top: 0 none;
+    }
+    .tes a {
+      margin-left: 30px;
+      font-style: italic;
+    }
+
+    .logo {
+      width: 100px;
+      margin-top: -8px;
+    }
+
+    #search_form {
+      position: initial;
+      width: inital;
+      text-align: left;
+      margin: inital;
+    }
+
+    .cont-top {
+      position: relative;
+    }
+
+    .z-index1 {
+      position: relative;
+      z-index: 1;
+    }
+
+    input[name="search_value"] {
+      width: 100% !important;
+    }
+  }
 </style>
 <script>
 $(document).ready(function () {
@@ -519,12 +519,13 @@ $(document).ready(function () {
                         <span class="glyphicon glyphicon-th-list"></span> Request for Quotation List
                       </a>
                     </li>
-                    <li>
-                      <a href="<?php echo base_url().'User/buyer_account_view';?>">
-                        <span class="glyphicon glyphicon-user"></span> Profile
-                      </a>
-                    </li>
+
                     <?php if ($user_level == 2): ?>
+                      <li>
+                        <a href="<?php echo base_url().'User/buyer_account_view';?>">
+                          <span class="glyphicon glyphicon-user"></span> Profile
+                        </a>
+                      </li>
                       <li>
                         <a href="<?php echo base_url().'User/buyer_reset_password_view';?>">
                           <span class="glyphicon glyphicon-user"></span> Reset Password
@@ -533,6 +534,11 @@ $(document).ready(function () {
                     <?php endif; ?>
 
                     <?php if ($user_level == 3): ?>
+                      <li>
+                        <a href="<?php echo base_url().'User/supplier_account_view';?>">
+                          <span class="glyphicon glyphicon-user"></span> Profile
+                        </a>
+                      </li>
                       <li>
                         <a href="<?php echo base_url().'User/supplier_reset_password_view';?>">
                           <span class="glyphicon glyphicon-user"></span> Reset Password
