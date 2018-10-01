@@ -122,7 +122,7 @@
     </div>
     <div class="form-group ">
       <label class="">State</label>
-      <select class="form-control" name="State" data-validation-error-msg="Please fill out category description..."  >
+      <select class="form-control" name="State"  id="State" data-validation-error-msg="Please fill out category description..."  >
         <option value="indonesia">Indonesia</option>
       </select>
     </div>
@@ -135,7 +135,25 @@
   </form>
 
 </div>
-
+<script type="text/javascript">
+<?php //echo base_url().'assets/country_json/state.json'; ?>
+$(document).ready(function(){
+let state = $('#State');
+state.empty();
+$.getJSON( "<?php echo base_url().'assets/country_json/state.json'; ?>", function( data ) {
+   console.log(data);
+   //let state = $('#State');
+  // return data.responseJSON;
+  $.each(data, function (key, entry) {
+   state.append($('<option></option>').attr('value', entry.code).text(entry.name));
+ })
+//  for (var key in data) {
+//   $("#State").append("<option value='"+data[key].code+"'>"+data[key].name+"</option>");
+//   console.log(data[key].Code);
+// }
+});
+});
+</script>
 <script type="text/javascript">
   $("#Simpan").submit(function () {
     var category = $('#category').val();
