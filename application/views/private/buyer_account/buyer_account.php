@@ -1,4 +1,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+<link href="<?php echo base_url('assets/AdminLTE-2.0.5/plugins/select2/select2.min.css') ?>" rel="stylesheet" type="text/css" />
+<script src="<?php echo base_url('assets/AdminLTE-2.0.5/plugins/select2/select2.full.min.js') ?>" type="text/javascript"></script>
 <div class="container" style="">
 
   <form method="post" id="Simpan"  action="<?php echo base_url().'User/edit_buyer_account'; ?>" enctype="multipart/form-data">
@@ -122,8 +124,8 @@
     </div>
     <div class="form-group ">
       <label class="">State</label>
-      <select class="form-control" name="State"  id="State" data-validation-error-msg="Please fill out category description..."  >
-        <option value="indonesia">Indonesia</option>
+      <select class="form-control select2" name="state"   id="state" data-validation-error-msg="Please fill out category description..."  >
+        <option selected value="<?php echo $buyer[0]->State; ?>"><?php echo $buyer[0]->State; ?></option>
       </select>
     </div>
     <div class="form-group ">
@@ -135,23 +137,24 @@
   </form>
 
 </div>
+
 <script type="text/javascript">
-<?php //echo base_url().'assets/country_json/state.json'; ?>
+
 $(document).ready(function(){
-let state = $('#State');
-state.empty();
-$.getJSON( "<?php echo base_url().'assets/country_json/state.json'; ?>", function( data ) {
-   console.log(data);
-   //let state = $('#State');
-  // return data.responseJSON;
-  $.each(data, function (key, entry) {
-   state.append($('<option></option>').attr('value', entry.code).text(entry.name));
- })
-//  for (var key in data) {
-//   $("#State").append("<option value='"+data[key].code+"'>"+data[key].name+"</option>");
-//   console.log(data[key].Code);
-// }
-});
+  $('.select2').select2();
+  let state = $('#state');
+  //state.empty();
+  //console.log(state.val());
+  $.getJSON( "<?php echo base_url().'assets/country_json/state.json'; ?>", function( data ) {
+    //console.log(data);
+    $.each(data, function (key, entry) {
+      if (state.val() != entry.name) {
+        state.append($('<option></option>').attr('value', entry.name).text(entry.name));
+      }
+
+    })
+
+  });
 });
 </script>
 <script type="text/javascript">

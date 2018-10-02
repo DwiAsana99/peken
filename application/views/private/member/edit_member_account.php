@@ -19,7 +19,7 @@
     <!-- /.box-header -->
     <div class="box-body">
 
-  <form method="post" id="Simpan"  action="<?php echo base_url().'User/edit_member_account/'.$member[0]->Id; ?>" enctype="multipart/form-data"  onfocusout="edit(event)">
+  <form method="post" id="Simpan"  action="<?php echo base_url().'User/edit_member_account/'.$member[0]->Id; ?>" enctype="multipart/form-data"  >
     <!-- <div class=" ">
     <label  for="profile_image">Profil Image</label> <br>
     <img src="<?php //echo base_url().'assets/suplier_upload/'.$member[0]->Gambar; ?>" id = "fotoview" alt="" class="img-thumbnail" alt="Cinque Terre" width="304" height="236"><br>
@@ -83,8 +83,8 @@
     </div>
     <div class="form-group ">
       <label class="">State</label>
-      <select class="form-control" name="State" data-validation-error-msg="Please fill out category description..."  >
-        <option value="indonesia">Indonesia</option>
+      <select class="form-control select2" id="state" name="state" data-validation-error-msg="Please fill out category description..."  >
+        <option selected value="<?php echo $member[0]->State; ?>"><?php echo $member[0]->State; ?></option>
       </select>
     </div>
     <div class="form-group ">
@@ -136,13 +136,30 @@
 <!-- Modal -->
 
 </section><!-- /.content -->
-<script type="text/javascript">
-  $("[data-toggle=popover]").popover();
-</script>
+
 <script>
   $.validate({
     lang: 'es'
   });
+</script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+  $('.select2').select2();
+  let state = $('#state');
+  //state.empty();
+  //console.log(state.val());
+  $.getJSON( "<?php echo base_url().'assets/country_json/state.json'; ?>", function( data ) {
+    //console.log(data);
+    $.each(data, function (key, entry) {
+      if (state.val() != entry.name) {
+        state.append($('<option></option>').attr('value', entry.name).text(entry.name));
+      }
+
+    })
+
+  });
+});
 </script>
 <script type="text/javascript">
 function readUrlProfileImage(input) {

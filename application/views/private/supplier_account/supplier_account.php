@@ -231,8 +231,8 @@
                 </div>
                 <div class="form-group col-lg-12">
                   <label class="control-label">State</label>
-                  <select name="state"  class="form-control">
-                    <option value="indonesia">Indonesia</option>
+                  <select name="state" id="state" class="form-control select2">
+                    <option selected value="<?php echo $user[0]->State; ?>"><?php echo $user[0]->State; ?></option>
                   </select>
                 </div>
                 <div class="form-group col-lg-12">
@@ -487,6 +487,25 @@
 //   lang: 'es',
 //   form: '#SimpanCompanyProfile'
 // });
+</script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+  $('.select2').select2();
+  let state = $('#state');
+  //state.empty();
+  //console.log(state.val());
+  $.getJSON( "<?php echo base_url().'assets/country_json/state.json'; ?>", function( data ) {
+    //console.log(data);
+    $.each(data, function (key, entry) {
+      if (state.val() != entry.name) {
+        state.append($('<option></option>').attr('value', entry.name).text(entry.name));
+      }
+
+    })
+
+  });
+});
 </script>
 <script type="text/javascript">
 $("#SimpanCompanyProfile").submit(function() {
