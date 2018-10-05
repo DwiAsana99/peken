@@ -54,7 +54,7 @@ $("#Simpan").submit(function() {
       type: 'blue',
       buttons: {
         Save: function () {
-          $.LoadingOverlay("show");
+          
           $("#Simpan").submit();
         },
         Cancel: function () {

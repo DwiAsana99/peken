@@ -52,20 +52,3 @@
   <script src= "<?php echo base_url('assets/js/raphael-min.js') ?>" ></script>
   <script src= "<?php echo base_url('assets/AdminLTE-2.0.5/plugins/morris/morris.min.js') ?>" ></script>
   <script src= "<?php echo base_url('assets/AdminLTE-2.0.5/plugins/sparkline/jquery.sparkline.min.js') ?>" ></script>
-  <script src= "<?php echo base_url('assets/AdminLTE-2.0.5/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') ?>" ></script>
-  <script src= "<?php echo base_url('assets/AdminLTE-2.0.5/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') ?>" ></script>
-  <script src= "<?php echo base_url('assets/AdminLTE-2.0.5/plugins/daterangepicker/moment.min.js') ?>" ></script>
-  <script src= "<?php echo base_url('assets/AdminLTE-2.0.5/plugins/daterangepicker/daterangepicker.js') ?>" ></script>
-  <script src= "<?php echo base_url('assets/AdminLTE-2.0.5/plugins/timepicker/bootstrap-timepicker.min.js') ?>" ></script>
-
-
-<script type="text/javascript">
-	$.LoadingOverlaySetup({
-    color           : "rgba(255, 255, 255, 0.8)" ,
-    image           : "<?php echo base_url('assets/img-sistem/loadingsistem.gif') ?>",
-    maxSize         : "200px",
-    minSize         : "200px",
-    resizeInterval  : 0,
-    size            : "100%"
-});
-</script>

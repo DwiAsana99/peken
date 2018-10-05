@@ -286,9 +286,35 @@ class Product extends CI_Controller{
 		//echo $product_id;exit();
 
 		$product_pictures = $this->input->post('file');
+		$deleted_image = $this->input->post('deleted_image');
+		if (isset($deleted_image)) {
+			foreach ($deleted_image as $key => $value) {
+				$product_pic_id = $value;
+				$product_pic_rules['filter_value'] =  array('product_pic_id'=>$product_pic_id);
+				$this->M_product->set_search_product_pic($product_pic_rules);
+				$get_product_pic = $this->M_product->get_product_pic();
+				$get_product_pic_row = $get_product_pic->row();
+
+				$this->db->where('Id', $product_pic_id);
+				$this->db->delete('productpic_tb');
+
+				if(file_exists($file='./assets/supplier_upload/'.str_replace(' ', '_', $get_product_pic_row->FileName))){
+					unlink($file);
+				}
+				echo "{}";
+			}
+		}
+
+		// print_r($this->input->post('file'));
+		// $deleted_image = $this->input->post('deleted_image');
+		// print_r($deleted_image);
+		// foreach ($deleted_image as $key => $value) {
+		// 	echo $value."||";
+		// }
+		//
+		 //exit();
 		$this->M_product->update_product($product_id,$data,$product_pictures);
 
-		// print_r($product_picture);exit();
 		$this->session->set_flashdata('msg', 'Update product successfully ...');
 		redirect('Product/product_view');
 	}
@@ -425,7 +451,7 @@ class Product extends CI_Controller{
 			unlink($file);
 		}
 		echo "{}";
-		}
+	}
 
 
 	}

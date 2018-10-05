@@ -118,12 +118,12 @@
           <h3 class="box-title">Update Product</h3>
         </div>
         <div class="box-body">
-          <form method="post"  enctype="multipart/form-data" id="Simpan"  action="<?php echo base_url().'Product/update_product'; ?>">
+          <form method="post"  enctype="multipart/form-data" id="EditProduct"  action="<?php echo base_url().'Product/update_product'; ?>">
             <div class="form-group">
               <label class="control-label">Product Name</label>
               <input type="text" value="<?php echo $product[0]->Name ?>"
                 name="product_name" id="product_name"  data-validation="length"
-                data-validation-length="min4" data-validation-error-msg="Please fill out product name..."
+                data-validation-length="min1" data-validation-error-msg="Please fill out product name..."
                 class="form-control"  placeholder="">
             </div>
             <div class="form-group">
@@ -167,7 +167,7 @@
               <div class="form-group">
                 <label for="">Unit</label>
                 <input type="text" value="<?php echo $product[0]->Unit ?>" name="unit" class="form-control" value=""
-                  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out unit name..." >
+                  data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out unit name..." >
               </div>
               <div class="form-group">
                 <label class="control-label">Min Price</label>
@@ -205,13 +205,13 @@
               <div class="form-group">
                 <label for="">Product Description</label>
                 <textarea class="form-control" rows="5" name="product_description" data-validation="length"
-                  data-validation-length="min4"
+                  data-validation-length="min1"
                   data-validation-error-msg="Please fill out product description..."><?php echo $product[0]->ProductDescription ?></textarea>
               </div>
               <div class="form-group">
                 <label for="">Packaging & Delivery</label>
                 <textarea class="form-control" rows="5" name="pkg_delivery" data-validation="length"
-                 data-validation-length="min4"
+                 data-validation-length="min1"
                  data-validation-error-msg="Please fill out packaging & delivery..."><?php echo $product[0]->PkgDelivery ?></textarea>
               </div>
               <div class="form-group">
@@ -226,7 +226,7 @@
                   <?php endif; ?>
                 </select>
               </div>
-              <div class="co-md-12 "><label class="control-label ">Product Pictures</label></div>
+              <div id="product_image_div" class="co-md-12 "><label class="control-label ">Product Pictures</label></div>
               <?php foreach ($product_pic as $pp): ?>
               <div id="<?php echo "div".$pp->Id; ?>" class="form-group col-lg-2 text-center">
                 <!-- <img src="<?php //echo base_url().'assets/icon/upload-icon.png'?>" alt="" style="width: 100px"> -->
@@ -237,7 +237,7 @@
                     }else{
                       echo base_url().'assets/supplier_upload/'.$pp->FileName;
                     }?>"  alt="" class="img-thumbnail" alt="Cinque Terre" width="200" >
-                  </div>
+                </div>
                   <!--  -->
                   <!-- <input type="hidden" name="product_id_pic" id="product_id_pic" value="<?php //echo $pp->IdProductPic; ?>"> -->
 
@@ -264,11 +264,11 @@
 
           <!-- <div class="form-group">
           <label class="control-label">Description</label>
-          <input type="text" name="description" id="description"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
+          <input type="text" name="description" id="description"  data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
         </div> -->
         <div class="form-group text-right col-md-12">
           <input type="hidden" name="product_id" value="<?php echo $product[0]->ProductId ?>">
-          <button type="submit" value="Validate" class="btn btn-default "><i class='glyphicon glyphicon-ok'></i> Save</button>
+          <button type="submit" id="btn_submit_edit" value="Validate" class="btn btn-default "><i class='glyphicon glyphicon-ok'></i> Save</button>
         </div>
       </form>
     </div>
@@ -282,7 +282,7 @@
 
 
 <script src= "<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>" ></script>
-<script src= "<?php echo base_url('assets/dropzone/js/dropzone-amd-module.min.js') ?>" ></script>
+<script src= "<?php ///echo base_url('assets/dropzone/js/dropzone-amd-module.min.js') ?>" ></script>
 <script>
   $.validate({
     lang: 'es'
@@ -303,22 +303,62 @@
         }
     }
 </script>
-<script type="text/javascript">
+<script type="text/javascript"> //ganti
 $(function(){
- $(document).click(function(event){
-  var value=$(event.target).val();
-  console.log(value);
-  $.ajax({
-   type:"POST",
-   url: "<?php echo base_url('Product/remove_product_picture_edit') ?>",
-   data:{product_id_pic:value},
-   success: function(respond){
-    var divPic = "#div"+value;
-    $(divPic).remove();
-   }
-  })
- });
+  $(document).click(function(event){
+    var value=$(event.target).val();
+    var id = event.target.id;
+    // console.log(event.target.id);
+    // console.log($(event.target).val());
+    if (id == "delete_pic") {
+      event.preventDefault();
+      $.confirm({
+        title: 'Confirmation',
+        content: 'Are You Sure to delete this product image?',
+        type: 'red',
+        buttons: {
+          Delete: function () {
+
+            //$(event.target).click();
+            var divPic = "#div"+value;
+            $(divPic).remove();
+
+            $('<input>').attr({
+              type: 'hidden',
+              id: value,
+
+              name: 'deleted_image['+value+']',
+              value: value
+            }).appendTo('form');
+
+          },
+          Cancel: function () {
+
+            $.alert('product image not deleted...');
+          },
+        }
+      });
+    }
+
+  });
 })
+</script>
+<script type="text/javascript"> //ganti
+// $(function(){
+//  $(document).click(function(event){
+//   var value=$(event.target).val();
+//   console.log(value);
+//   $.ajax({
+//    type:"POST",
+//    url: "<?php// echo base_url('Product/remove_product_picture_edit') ?>",
+//    data:{product_id_pic:value},
+//    success: function(respond){
+//     var divPic = "#div"+value;
+//     $(divPic).remove();
+//    }
+//   })
+//  });
+// })
 </script>
 <script type="text/javascript">
 // $(function(){
@@ -363,31 +403,31 @@ $(function(){
 //   productCategoryNode.addEventListener("change",getProductSubCategory);
 </script>
 <script type="text/javascript">
-$("#Simpan").submit(function() {
-  var category = $('#category').val();
-  var description = $('#description').val();
-  if (category == ''|| description==''){
-    File_Kosong(); return false;
-  }else{
-    event.preventDefault();
-    $.confirm({
-      title: 'Confirmation',
-      content: 'Are You Sure to Save?',
-      type: 'blue',
-      buttons: {
-        Save: function () {
-          $.LoadingOverlay("show");
-          $("#Simpan").submit();
-        },
-        Cancel: function () {
-
-          $.alert('Data not saved...');
-        },
-      }
-    });
-  }
-
-});
+// $("#EditProduct").submit(function() {
+//   var category = $('#category').val();
+//   var description = $('#description').val();
+//   if (category == ''|| description==''){
+//     File_Kosong(); return false;
+//   }else{
+//     event.preventDefault();
+//     $.confirm({
+//       title: 'Confirmation',
+//       content: 'Are You Sure to Save?',
+//       type: 'blue',
+//       buttons: {
+//         Save: function () {
+//
+//           $("#EditProduct").submit();
+//         },
+//         Cancel: function () {
+//
+//           $.alert('Data not saved...');
+//         },
+//       }
+//     });
+//   }
+//
+// });
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -395,10 +435,12 @@ $(document).ready(function(){
   Dropzone.autoDiscover = false;
   var accept = ".pdf,.png,.jpg,.JPEG";
   var foto_upload= new Dropzone(".dropzone",{
-    url: "<?php echo base_url('index.php/Product/add_product_picture') ?>",
+    url: "<?php echo base_url('Product/add_product_picture') ?>",
     maxFilesize: 2000,
     method:"post",
     acceptedFiles:accept,
+    parallelUploads:5,
+    autoProcessQueue: false,
     paramName:"userfiles",
     dictInvalidFileType:"Type file ini tidak dizinkan",
     addRemoveLinks:true,
@@ -421,6 +463,43 @@ $(document).ready(function(){
       i++;
     }
   });
+
+  $("#btn_submit_edit").click(function(event) {
+
+      event.preventDefault();
+      $.confirm({
+        title: 'Confirmation',
+        content: 'Are You Sure to Save?',
+        type: 'blue',
+        buttons: {
+          Save: function () {
+            foto_upload.processQueue();
+            $.LoadingOverlay("show");
+              // $.LoadingOverlay("show");
+              // $.LoadingOverlay("show");
+              setTimeout( function () {
+                  $("#EditProduct").submit();
+              }, 2800);
+
+          },
+          Cancel: function () {
+
+            $.alert('Data not saved...');
+          },
+        }
+      });
+
+
+  });
+
+  // $("#EditProduct").submit(function() {
+  //   foto_upload.processQueue();
+  //   $.LoadingOverlay("show");
+  //
+  // });
+
+
+
 
   foto_upload.on("addedfile", function(file) {
     if (!file.type.match(/image.*/)) {
@@ -458,5 +537,15 @@ $(document).ready(function(){
       }
     });
   });
+  $.LoadingOverlaySetup({
+    color           : "rgba(255, 255, 255, 0.8)" ,
+    image           : "<?php echo base_url('assets/image-sistem/loading.gif') ?>",
+    maxSize         : "230px",
+    minSize         : "230px",
+    resizeInterval  : 0,
+    size            : "100%"
+  });
 });
+</script>
+<script type="text/javascript">
 </script>

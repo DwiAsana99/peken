@@ -26,7 +26,7 @@ class M_product extends CI_Model{
     $this->filter_value .= isset($rules['filter_value']['search_value']) ? " AND product_tb.Name LIKE "."'%".$rules['filter_value']['search_value']."%'"  : "" ;
   }
 
-  function set_search_product_pic($rules) {
+  function set_search_product_pic($rules = "") {
     $this->other_table_columns = !empty($rules['join']['other_table_columns']) ? $rules['join']['other_table_columns'] : "" ;
     $this->join_table = !empty($rules['join']['join_table']) ? $rules['join']['join_table'] : "" ;
     $this->group_by = !empty($rules['group_by']) ? " GROUP BY ".$rules['group_by'] : "" ;
@@ -34,7 +34,9 @@ class M_product extends CI_Model{
     $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
     $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
     // $this->filter_value = isset($rules['filter_value']['is_published']) ? " AND product_tb.IsPublished = ".$rules['filter_value']['is_published'] : "" ;
-    $this->filter_value = isset($rules['filter_value']['product_id']) ? " AND productpic_tb.ProductId = ".$rules['filter_value']['product_id'] : "" ;
+    $this->filter_value = "1=1";
+    $this->filter_value .= isset($rules['filter_value']['product_pic_id']) ? " AND productpic_tb.Id = ".$rules['filter_value']['product_pic_id'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['product_id']) ? " AND productpic_tb.ProductId = ".$rules['filter_value']['product_id'] : "" ;
 
   }
 
@@ -51,7 +53,7 @@ class M_product extends CI_Model{
   function get_product_pic() {
     $query = "SELECT productpic_tb.* ".$this->other_table_columns."
     FROM productpic_tb ".$this->join_table."
-    WHERE 1=1 ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
+    WHERE ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
     //echo $query;exit();
 
     $query = $this->db->query($query);
@@ -144,7 +146,7 @@ class M_product extends CI_Model{
       FROM tbmember INNER JOIN tbproduct INNER JOIN tbproductsubcategory INNER JOIN tbproductpic
       ON tbproduct.ProductSubCategoryCode = tbproductsubcategory.Code AND
       tbproduct.IdProduct = tbproductpic.IdProduct AND tbmember.IdMember = tbproduct.IdSupplier
-      WHERE tbmember.IsSupplier = 1".$filter_value."
+      WHERE tbmember.IsSupplier = 1 ".$filter_value."
       GROUP BY tbproductpic.IdProduct LIMIT 8"
     );
     return $query->result();
