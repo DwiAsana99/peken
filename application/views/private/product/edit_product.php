@@ -282,26 +282,25 @@
 
 
 <script src= "<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>" ></script>
-<script src= "<?php ///echo base_url('assets/dropzone/js/dropzone-amd-module.min.js') ?>" ></script>
 <script>
   $.validate({
     lang: 'es'
   });
 </script>
 <script type="text/javascript">
-  function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('#fotoview')
-                    .attr('src', e.target.result)
-                    .width(250);
-            };
+    reader.onload = function (e) {
+      $('#fotoview')
+      .attr('src', e.target.result)
+      .width(250);
+    };
 
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 </script>
 <script type="text/javascript"> //ganti
 $(function(){
@@ -344,91 +343,65 @@ $(function(){
 })
 </script>
 <script type="text/javascript"> //ganti
-// $(function(){
-//  $(document).click(function(event){
-//   var value=$(event.target).val();
-//   console.log(value);
-//   $.ajax({
-//    type:"POST",
-//    url: "<?php// echo base_url('Product/remove_product_picture_edit') ?>",
-//    data:{product_id_pic:value},
-//    success: function(respond){
-//     var divPic = "#div"+value;
-//     $(divPic).remove();
-//    }
-//   })
-//  });
-// })
+  // $(function(){
+  //  $(document).click(function(event){
+  //   var value=$(event.target).val();
+  //   console.log(value);
+  //   $.ajax({
+  //    type:"POST",
+  //    url: "<?php// echo base_url('Product/remove_product_picture_edit') ?>",
+  //    data:{product_id_pic:value},
+  //    success: function(respond){
+  //     var divPic = "#div"+value;
+  //     $(divPic).remove();
+  //    }
+  //   })
+  //  });
+  // })
 </script>
 <script type="text/javascript">
-// $(function(){
+  // $(function(){
 
-// $.ajaxSetup({
-// type:"POST",
-// url: "<?php //echo base_url('index.php/Product/generate_product_sub_category') ?>",
-// cache: false,
-// });
+  // $.ajaxSetup({
+  // type:"POST",
+  // url: "<?php //echo base_url('index.php/Product/generate_product_sub_category') ?>",
+  // cache: false,
+  // });
 
-// $("#product_category_code").change(function(){
+  // $("#product_category_code").change(function(){
 
-// var value=$(this).val();
+  // var value=$(this).val();
 
-// $.ajax({
-// data:{product_category_code:value},
-// success: function(respond){
-// $("#product_sub_category_code").html(respond);
-// }
-// })
+  // $.ajax({
+  // data:{product_category_code:value},
+  // success: function(respond){
+  // $("#product_sub_category_code").html(respond);
+  // }
+  // })
 
 
-// });
-// })
-// var productCategoryNode = document.getElementById("product_category_code");
-// var productSubCategoryNode = document.getElementById("product_sub_category_code");
-// console.log(productCategoryNode);
-// console.log(productSubCategoryNode);
-//   function getProductSubCategory() {
-//     var request = new XMLHttpRequest();
-//
-//     request.open("GET", "<?php //echo base_url()."index.php/Product/get_product_sub_category"; ?>", false);
-//     request.send();request.responseText;
-//     console.log(request.responseText);
-//     // productSubCategoryNode.innerHTML = request.responseText;
-//     // request.onreadystatechange = function() {
-//     //   if (request.readyState == 4 && request.status == 200) {
-//     //     productSubCategoryNode.innerHTML = request.responseText;
-//     //   }
-//     //  };
-//   }
-//   productCategoryNode.addEventListener("change",getProductSubCategory);
+  // });
+  // })
+  // var productCategoryNode = document.getElementById("product_category_code");
+  // var productSubCategoryNode = document.getElementById("product_sub_category_code");
+  // console.log(productCategoryNode);
+  // console.log(productSubCategoryNode);
+  //   function getProductSubCategory() {
+  //     var request = new XMLHttpRequest();
+  //
+  //     request.open("GET", "<?php //echo base_url()."index.php/Product/get_product_sub_category"; ?>", false);
+  //     request.send();request.responseText;
+  //     console.log(request.responseText);
+  //     // productSubCategoryNode.innerHTML = request.responseText;
+  //     // request.onreadystatechange = function() {
+  //     //   if (request.readyState == 4 && request.status == 200) {
+  //     //     productSubCategoryNode.innerHTML = request.responseText;
+  //     //   }
+  //     //  };
+  //   }
+  //   productCategoryNode.addEventListener("change",getProductSubCategory);
 </script>
-<script type="text/javascript">
-// $("#EditProduct").submit(function() {
-//   var category = $('#category').val();
-//   var description = $('#description').val();
-//   if (category == ''|| description==''){
-//     File_Kosong(); return false;
-//   }else{
-//     event.preventDefault();
-//     $.confirm({
-//       title: 'Confirmation',
-//       content: 'Are You Sure to Save?',
-//       type: 'blue',
-//       buttons: {
-//         Save: function () {
-//
-//           $("#EditProduct").submit();
-//         },
-//         Cancel: function () {
-//
-//           $.alert('Data not saved...');
-//         },
-//       }
-//     });
-//   }
-//
-// });
-</script>
+
 <script type="text/javascript">
 $(document).ready(function(){
   var i = 1;
@@ -488,8 +461,6 @@ $(document).ready(function(){
           },
         }
       });
-
-
   });
 
   // $("#EditProduct").submit(function() {
@@ -497,9 +468,6 @@ $(document).ready(function(){
   //   $.LoadingOverlay("show");
   //
   // });
-
-
-
 
   foto_upload.on("addedfile", function(file) {
     if (!file.type.match(/image.*/)) {

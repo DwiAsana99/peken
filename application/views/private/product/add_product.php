@@ -231,78 +231,76 @@
 
 
 <script src= "<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>" ></script>
-<script src= "<?php echo base_url('assets/dropzone/js/dropzone-amd-module.min.js') ?>" ></script>
 <script>
   $.validate({
     lang: 'es'
   });
 </script>
 <script type="text/javascript">
-$(function(){
-  $('#BtnSubmit').click(function(event){
-    var productImage ="x";
-    $('input[name^="file"]').each(function() {
-      //console.log($(this).val());
-       productImage = "ada";
-    });
-    //console.log(productImage);
-    if (productImage == "ada") {
-      console.log('silahkan masuk');
-      $("#product_image_alert").removeAttr("class");
-      $("#product_image_error").html('');
-    } else {
-      event.preventDefault();
-      $("#product_image_alert").addClass('alert alert-danger');
-      $("#product_image_error").html('You must fill in the product image');
-      // alert('You must fill in the product image');
-    }
-
-});
-})
+// $(function(){
+//   $('#Simpan').submit(function(event){
+//     var productImage ="x";
+//     $('input[name^="file"]').each(function() {
+//       //console.log($(this).val());
+//        productImage = "ada";
+//     });
+//     //console.log(productImage);
+//     if (productImage == "ada") {
+//       console.log('silahkan masuk');
+//       $("#product_image_alert").removeAttr("class");
+//       $("#product_image_error").html('');
+//     } else {
+//       event.preventDefault();
+//       $("#product_image_alert").addClass('alert alert-danger');
+//       $("#product_image_error").html('You must fill in the product image');
+//       // alert('You must fill in the product image');
+//     }
+//
+// });
+//})
 </script>
 <script type="text/javascript">
-$("#Simpan").submit(function() {
-  var category = $('#category').val();
-  var description = $('#description').val();
-  if (category == ''|| description==''){
-    File_Kosong(); return false;
-  }else{
-    event.preventDefault();
-    $.confirm({
-      title: 'Confirmation',
-      content: 'Are You Sure to Save?',
-      type: 'blue',
-      buttons: {
-        Save: function () {
-          $.LoadingOverlay("show");
-          $("#Simpan").submit();
-        },
-        Cancel: function () {
-
-          $.alert('Data not saved...');
-        },
-      }
-    });
-  }
-
-});
+// $("#Simpan").submit(function() {
+//   var category = $('#category').val();
+//   var description = $('#description').val();
+//   if (category == ''|| description==''){
+//     File_Kosong(); return false;
+//   }else{
+//     event.preventDefault();
+//     $.confirm({
+//       title: 'Confirmation',
+//       content: 'Are You Sure to Save?',
+//       type: 'blue',
+//       buttons: {
+//         Save: function () {
+//           $.LoadingOverlay("show");
+//           $("#Simpan").submit();
+//         },
+//         Cancel: function () {
+//
+//           $.alert('Data not saved...');
+//         },
+//       }
+//     });
+//   }
+//
+// });
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
   var i = 1;
   Dropzone.autoDiscover = false;
-  autoProcessQueue: false;
   var accept = ".pdf,.png,.jpg,.JPEG";
   var foto_upload= new Dropzone(".dropzone",{
     url: "<?php echo base_url('Product/add_product_picture') ?>",
     maxFilesize: 2000,
     method:"post",
     acceptedFiles:accept,
+    parallelUploads:5,
+    autoProcessQueue: false,
     paramName:"userfiles",
-    maxFiles: 5,
     dictInvalidFileType:"Type file ini tidak dizinkan",
     addRemoveLinks:true,
-
     success: function(file,data){
 
       var data_array = data.split(',');
@@ -322,6 +320,55 @@ $(document).ready(function(){
       i++;
     }
   });
+
+  $("#BtnSubmit").click(function(event) {
+    event.preventDefault();
+    foto_upload.processQueue();
+    setTimeout( function () {
+    var productImage ="x";
+    $('input[name^="file"]').each(function() {
+       productImage = "ada";
+    });
+
+    if (productImage == "ada") {
+      console.log('silahkan masuk');
+      $("#product_image_alert").removeAttr("class");
+      $("#product_image_error").html('');
+
+      $.confirm({
+        title: 'Confirmation',
+        content: 'Are You Sure to Save?',
+        type: 'blue',
+        buttons: {
+          Save: function () {
+
+            $.LoadingOverlay("show");
+            console.log('silahkan masuk');
+              setTimeout( function () {
+                  $("#Simpan").submit();
+              }, 2800);
+
+          },
+          Cancel: function () {
+
+            $.alert('Data not saved...');
+          },
+        }
+      });
+    } else {
+      //event.preventDefault();
+      console.log('tidak bisa masuk');
+      $("#product_image_alert").addClass('alert alert-danger');
+      $("#product_image_error").html('You must fill in the product image');
+    }
+  }, 150);
+  });
+
+  // $("#EditProduct").submit(function() {
+  //   foto_upload.processQueue();
+  //   $.LoadingOverlay("show");
+  //
+  // });
 
   foto_upload.on("addedfile", function(file) {
     if (!file.type.match(/image.*/)) {
@@ -347,7 +394,7 @@ $(document).ready(function(){
     $.ajax({
       type:"post",
       data:{nama:namafile},
-      url:"<?php echo base_url('Product/remove_product_picture') ?>",
+      url:"<?php echo base_url('index.php/Product/remove_product_picture') ?>",
       cache:false,
       dataType: 'json',
       success: function(){
@@ -358,6 +405,14 @@ $(document).ready(function(){
 
       }
     });
+  });
+  $.LoadingOverlaySetup({
+    color           : "rgba(255, 255, 255, 0.8)" ,
+    image           : "<?php echo base_url('assets/image-sistem/loading.gif') ?>",
+    maxSize         : "230px",
+    minSize         : "230px",
+    resizeInterval  : 0,
+    size            : "100%"
   });
 });
 </script>
