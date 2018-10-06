@@ -207,6 +207,9 @@
                   <h4> Click or Drop product image here..<br>Max File Size 1,8 MB</h4>
                 </div>
               </div>
+                <button type="button" style="margin-bottom: 10px"  class="btn btn-info col-md-12" id="BtnUpload">
+                  <i class='glyphicon glyphicon-ok'></i> Upload Image
+                </button>
             </div>
             <div id="product_image_alert" class="" role="alert">
               <p id="product_image_error"></p>
@@ -216,7 +219,7 @@
             <input type="text" name="description" id="description"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
           </div> -->
           <div class="form-group text-right">
-            <button type="submit" value="Validate" class="btn btn-default " id="BtnSubmit"><i class='glyphicon glyphicon-ok'></i> Save</button>
+            <button type="submit" value="Validate" class="btn btn-primary " id="BtnSubmit"><i class='glyphicon glyphicon-ok'></i> Save</button>
             <!-- <button type="button" id="BtnTest"  class="btn btn-default "><i class='glyphicon glyphicon-ok'></i> TEST</button> -->
           </div>
         </form>
@@ -237,55 +240,29 @@
   });
 </script>
 <script type="text/javascript">
-// $(function(){
-//   $('#Simpan').submit(function(event){
-//     var productImage ="x";
-//     $('input[name^="file"]').each(function() {
-//       //console.log($(this).val());
-//        productImage = "ada";
-//     });
-//     //console.log(productImage);
-//     if (productImage == "ada") {
-//       console.log('silahkan masuk');
-//       $("#product_image_alert").removeAttr("class");
-//       $("#product_image_error").html('');
-//     } else {
-//       event.preventDefault();
-//       $("#product_image_alert").addClass('alert alert-danger');
-//       $("#product_image_error").html('You must fill in the product image');
-//       // alert('You must fill in the product image');
-//     }
-//
-// });
-//})
+  // $(function(){
+  //   $('#Simpan').submit(function(event){
+  //     var productImage ="x";
+  //     $('input[name^="file"]').each(function() {
+  //       //console.log($(this).val());
+  //        productImage = "ada";
+  //     });
+  //     //console.log(productImage);
+  //     if (productImage == "ada") {
+  //       console.log('silahkan masuk');
+  //       $("#product_image_alert").removeAttr("class");
+  //       $("#product_image_error").html('');
+  //     } else {
+  //       event.preventDefault();
+  //       $("#product_image_alert").addClass('alert alert-danger');
+  //       $("#product_image_error").html('You must fill in the product image');
+  //       // alert('You must fill in the product image');
+  //     }
+  //
+  // });
+  //})
 </script>
-<script type="text/javascript">
-// $("#Simpan").submit(function() {
-//   var category = $('#category').val();
-//   var description = $('#description').val();
-//   if (category == ''|| description==''){
-//     File_Kosong(); return false;
-//   }else{
-//     event.preventDefault();
-//     $.confirm({
-//       title: 'Confirmation',
-//       content: 'Are You Sure to Save?',
-//       type: 'blue',
-//       buttons: {
-//         Save: function () {
-//           $.LoadingOverlay("show");
-//           $("#Simpan").submit();
-//         },
-//         Cancel: function () {
-//
-//           $.alert('Data not saved...');
-//         },
-//       }
-//     });
-//   }
-//
-// });
-</script>
+
 <script type="text/javascript">
 $(document).ready(function(){
   var i = 1;
@@ -320,37 +297,32 @@ $(document).ready(function(){
       i++;
     }
   });
-
+  $("#BtnUpload").click(function(event) {
+    foto_upload.processQueue();
+  });
   $("#BtnSubmit").click(function(event) {
     event.preventDefault();
-    foto_upload.processQueue();
-    setTimeout( function () {
     var productImage ="x";
     $('input[name^="file"]').each(function() {
        productImage = "ada";
     });
-
     if (productImage == "ada") {
       console.log('silahkan masuk');
       $("#product_image_alert").removeAttr("class");
       $("#product_image_error").html('');
-
       $.confirm({
         title: 'Confirmation',
         content: 'Are You Sure to Save?',
         type: 'blue',
         buttons: {
           Save: function () {
-
             $.LoadingOverlay("show");
             console.log('silahkan masuk');
               setTimeout( function () {
                   $("#Simpan").submit();
               }, 2800);
-
           },
           Cancel: function () {
-
             $.alert('Data not saved...');
           },
         }
@@ -361,7 +333,6 @@ $(document).ready(function(){
       $("#product_image_alert").addClass('alert alert-danger');
       $("#product_image_error").html('You must fill in the product image');
     }
-  }, 150);
   });
 
   // $("#EditProduct").submit(function() {
