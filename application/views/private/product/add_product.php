@@ -296,7 +296,7 @@ $(document).ready(function(){
       i++;
     }
   });
-  $("#BtnUpload").click(function(event) {
+  $("#BtnUpload").click(function() {
     foto_upload.processQueue();
   });
   $("#BtnSubmit").click(function(event) {
@@ -319,7 +319,7 @@ $(document).ready(function(){
             console.log('silahkan masuk');
               setTimeout( function () {
                   $("#Simpan").submit();
-              }, 2800);
+              }, 2000);
           },
           Cancel: function () {
             $.alert('Data not saved...');

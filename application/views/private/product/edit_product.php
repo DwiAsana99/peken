@@ -255,6 +255,9 @@
                   <button type="button" style="margin-bottom: 10px"  class="btn btn-info col-md-12" id="BtnUpload">
                     <i class='glyphicon glyphicon-ok'></i> Upload Image
                   </button>
+                  <div id="product_image_alert" class="" role="alert">
+                    <p id="product_image_error"></p>
+                  </div>
                 </div>
                 <!-- <div class="form-group",>
                 <label class="control-label">Product Image</label>
@@ -433,34 +436,90 @@ $(document).ready(function(){
       i++;
     }
   });
-  $("#BtnUpload").click(function(event) {
+  $("#BtnUpload").click(function() {
     foto_upload.processQueue();
+    setTimeout( function () {
+      var productImage ="x";
+      var productImageAfter ="x after";
+      $('input[name^="file"]').each(function() {
+        productImage = "ada";
+      });
+      $('div[id^="div"]').each(function() {
+        productImageAfter = "ada after";
+      });
+      if (productImage == "ada" || productImageAfter == "ada after") {
+
+        $("#product_image_alert").removeAttr("class");
+        $("#product_image_error").html('');
+
+      }
+    }, 500);
   });
   $("#btn_submit_edit").click(function(event) {
-
-      event.preventDefault();
+    event.preventDefault();
+    var productImage ="x";
+    var productImageAfter ="x after";
+    $('input[name^="file"]').each(function() {
+       productImage = "ada";
+    });
+    $('div[id^="div"]').each(function() {
+       productImageAfter = "ada after";
+    });
+    console.log(productImage);
+    console.log(productImageAfter);
+    if (productImage == "ada" || productImageAfter == "ada after") {
+      console.log('silahkan masuk');
+      $("#product_image_alert").removeAttr("class");
+      $("#product_image_error").html('');
       $.confirm({
         title: 'Confirmation',
         content: 'Are You Sure to Save?',
         type: 'blue',
         buttons: {
           Save: function () {
-            foto_upload.processQueue();
             $.LoadingOverlay("show");
-              // $.LoadingOverlay("show");
-              // $.LoadingOverlay("show");
+            console.log('silahkan masuk');
               setTimeout( function () {
                   $("#EditProduct").submit();
-              }, 2800);
-
+              }, 2000);
           },
           Cancel: function () {
-
             $.alert('Data not saved...');
           },
         }
       });
+    } else {
+      //event.preventDefault();
+      console.log('tidak bisa masuk');
+      $("#product_image_alert").addClass('alert alert-danger');
+      $("#product_image_error").html('You must fill in the product image');
+    }
   });
+  // $("#btn_submit_edit").click(function(event) {
+  //
+  //     event.preventDefault();
+  //     $.confirm({
+  //       title: 'Confirmation',
+  //       content: 'Are You Sure to Save?',
+  //       type: 'blue',
+  //       buttons: {
+  //         Save: function () {
+  //           foto_upload.processQueue();
+  //           $.LoadingOverlay("show");
+  //             // $.LoadingOverlay("show");
+  //             // $.LoadingOverlay("show");
+  //             setTimeout( function () {
+  //                 $("#EditProduct").submit();
+  //             }, 2000);
+  //
+  //         },
+  //         Cancel: function () {
+  //
+  //           $.alert('Data not saved...');
+  //         },
+  //       }
+  //     });
+  // });
 
   // $("#EditProduct").submit(function() {
   //   foto_upload.processQueue();
