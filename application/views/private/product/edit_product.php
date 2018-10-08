@@ -25,15 +25,15 @@
         });
       })
         </script>
-<script type="text/javascript">
+        <script type="text/javascript">
         function get_product_category(){
           //$("#product_category_code").empty();
           //var xx = "";
           //var service_category_code_request = $("#service_category_code_request").val();
           $.getJSON( "<?php echo base_url().'Product_category/get_product_category/'; ?>/", function( data ) {
-             console.log(data);
+            console.log(data);
             // return data.responseJSON;
-             for (var key in data) {
+            for (var key in data) {
               $("#product_category_code").append("<option value='"+data[key].Code+"'>"+data[key].ProductCategory+"</option>");
               console.log(data[key].Code);
             }
@@ -54,7 +54,7 @@
             }
           })
         }
-      </script>
+        </script>
 <script type="text/javascript">
   function doMathPrice()
   {
@@ -252,6 +252,9 @@
                       <h4> Click or Drop product picture here..<br>Max File Size 1,8 MB</h4>
                     </div>
                   </div>
+                  <button type="button" style="margin-bottom: 10px"  class="btn btn-info col-md-12" id="BtnUpload">
+                    <i class='glyphicon glyphicon-ok'></i> Upload Image
+                  </button>
                 </div>
                 <!-- <div class="form-group",>
                 <label class="control-label">Product Image</label>
@@ -317,28 +320,22 @@ $(function(){
         type: 'red',
         buttons: {
           Delete: function () {
-
             //$(event.target).click();
             var divPic = "#div"+value;
             $(divPic).remove();
-
             $('<input>').attr({
               type: 'hidden',
               id: value,
-
               name: 'deleted_image['+value+']',
               value: value
             }).appendTo('form');
-
           },
           Cancel: function () {
-
             $.alert('product image not deleted...');
           },
         }
       });
     }
-
   });
 })
 </script>
@@ -436,7 +433,9 @@ $(document).ready(function(){
       i++;
     }
   });
-
+  $("#BtnUpload").click(function(event) {
+    foto_upload.processQueue();
+  });
   $("#btn_submit_edit").click(function(event) {
 
       event.preventDefault();

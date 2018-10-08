@@ -279,7 +279,6 @@ $(document).ready(function(){
     dictInvalidFileType:"Type file ini tidak dizinkan",
     addRemoveLinks:true,
     success: function(file,data){
-
       var data_array = data.split(',');
       var nama =data_array[0];
       var namafile =  nama.replace('"', '');
