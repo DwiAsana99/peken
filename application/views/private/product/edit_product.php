@@ -258,6 +258,9 @@
                   <div id="product_image_alert" class="" role="alert">
                     <p id="product_image_error"></p>
                   </div>
+                  <div id="max_upload_product_image_alert" class="" role="alert">
+                    <p id="max_upload_product_image_error"></p>
+                  </div>
                 </div>
                 <!-- <div class="form-group",>
                 <label class="control-label">Product Image</label>
@@ -437,23 +440,41 @@ $(document).ready(function(){
     }
   });
   $("#BtnUpload").click(function() {
-    foto_upload.processQueue();
-    setTimeout( function () {
-      var productImage ="x";
-      var productImageAfter ="x after";
-      $('input[name^="file"]').each(function() {
-        productImage = "ada";
-      });
-      $('div[id^="div"]').each(function() {
-        productImageAfter = "ada after";
-      });
-      if (productImage == "ada" || productImageAfter == "ada after") {
-
-        $("#product_image_alert").removeAttr("class");
-        $("#product_image_error").html('');
-
-      }
-    }, 500);
+    var qty_dropzone_preview_image = 0;
+    var qty_productImageAfter = 0 ;
+    var qty_all_upload = 0;
+    $('div[class^="dz-preview dz-image-preview"]').each(function() {
+      qty_dropzone_preview_image = qty_dropzone_preview_image+1;
+    });
+    $('div[id^="div"]').each(function() {
+      qty_productImageAfter = qty_productImageAfter+1;
+    });
+    qty_all_upload = qty_dropzone_preview_image+qty_productImageAfter;
+    console.log(qty_dropzone_preview_image);
+    console.log(qty_productImageAfter);
+    console.log(qty_all_upload);
+    if (qty_all_upload == 5) {
+      foto_upload.processQueue();
+      setTimeout( function () {
+        var productImage ="x";
+        var productImageAfter ="x after";
+        $('input[name^="file"]').each(function() {
+          productImage = "ada";
+        });
+        $('div[id^="div"]').each(function() {
+          productImageAfter = "ada after";
+        });
+        if (productImage == "ada" || productImageAfter == "ada after") {
+          $("#product_image_alert").removeAttr("class");
+          $("#product_image_error").html('');
+          $("#max_upload_product_image_alert").removeAttr("class");
+          $("#max_upload_product_image_error").html('');
+        }
+      }, 500);
+    }else {
+      $("#max_upload_product_image_alert").addClass('alert alert-danger');
+      $("#max_upload_product_image_error").html('One product can only have five images');
+    }
   });
   $("#btn_submit_edit").click(function(event) {
     event.preventDefault();

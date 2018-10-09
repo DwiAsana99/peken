@@ -315,7 +315,7 @@ class Product extends CI_Controller{
 		 //exit();
 		$this->M_product->update_product($product_id,$data,$product_pictures);
 
-		$this->session->set_flashdata('msg', 'Update product successfully ...');
+		$this->session->set_flashdata('msg', $this->input->post('product_name').' successfully updated  ...');
 		redirect('Product/product_view');
 	}
 	function product_add_view(){

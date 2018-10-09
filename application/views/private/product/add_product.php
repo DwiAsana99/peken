@@ -214,6 +214,9 @@
             <div id="product_image_alert" class="" role="alert">
               <p id="product_image_error"></p>
             </div>
+            <div id="max_upload_product_image_alert" class="" role="alert">
+              <p id="max_upload_product_image_error"></p>
+            </div>
             <!-- <div class="form-group">
             <label class="control-label">Description</label>
             <input type="text" name="description" id="description"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
@@ -297,7 +300,24 @@ $(document).ready(function(){
     }
   });
   $("#BtnUpload").click(function() {
-    foto_upload.processQueue();
+    var qty_dropzone_preview_image = 0;
+    $('div[class^="dz-preview dz-image-preview"]').each(function() {
+      qty_dropzone_preview_image = qty_dropzone_preview_image+1;
+    });
+    console.log(qty_dropzone_preview_image);
+    if (qty_dropzone_preview_image < 6) {
+      foto_upload.processQueue();
+      setTimeout( function () {
+        $("#product_image_alert").removeAttr("class");
+        $("#product_image_error").html('');
+        $("#max_upload_product_image_alert").removeAttr("class");
+        $("#max_upload_product_image_error").html('');
+
+      }, 500);
+    }else if(qty_dropzone_preview_image > 5){
+      $("#max_upload_product_image_alert").addClass('alert alert-danger');
+      $("#max_upload_product_image_error").html('One product can only have five images');
+    }
   });
   $("#BtnSubmit").click(function(event) {
     event.preventDefault();
