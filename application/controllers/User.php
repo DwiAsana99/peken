@@ -113,6 +113,7 @@
     function supplier_mini_site_view(){
       $page = $this->input->get('per_page');
       $supplier_id = $this->input->get('supplier_id');
+      //echo $supplier_id;exit();
       $product_rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.*, productcategory_tb.*, productsubcategory_tb.* ";
       $product_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN productpic_tb INNER JOIN productcategory_tb INNER JOIN productsubcategory_tb
       ON product_tb.Id = productpic_tb.ProductId
@@ -120,7 +121,7 @@
       AND product_tb.ProductSubCategoryCode = productsubcategory_tb.Code
       AND productcategory_tb.Code = productsubcategory_tb.ProductCategoryCode";
       $product_rules['group_by'] = ' productpic_tb.ProductId ';
-      $product_rules['filter_value'] =  array('user_id'=>$supplier_id);
+      $product_rules['filter_value'] =  array('supplier_id'=>$supplier_id, 'is_published' => 1);
       $this->M_product->set_search_product($product_rules);
       $get_product = $this->M_product->get_product();
       $this->M_pagination->set_config(
@@ -134,11 +135,11 @@
       $this->M_product->set_search_product($product_rules);
       $get_product = $this->M_product->get_product();
 
-      $supplier_gallery_pic_rules['filter_value'] =  array('user_id'=>$supplier_id);
+      $supplier_gallery_pic_rules['filter_value'] =  array('supplier_id'=>$supplier_id);
       $this->M_supplier_gallery_pic->set_search_supplier_gallery_pic($supplier_gallery_pic_rules);
       $get_supplier_gallery_pic = $this->M_supplier_gallery_pic->get_supplier_gallery_pic();
 
-      $user_rules['filter_value'] =  array('user_id'=>$supplier_id, 'user_level'=>1);
+      $user_rules['filter_value'] =  array('user_id'=>$supplier_id, 'user_levels'=>' AND (user_tb.UserLevel = 1 OR user_tb.UserLevel = 3) ');
       $this->M_user->set_search_user($user_rules);
       $get_supplier = $this->M_user->get_user();
 
@@ -176,7 +177,7 @@
       $get_supplier = $this->M_user->get_user();
       $data['user'] = $get_supplier->result();
 
-      $supplier_gallery_pic_rules['filter_value'] =  array('user_id'=>$user_id);
+      $supplier_gallery_pic_rules['filter_value'] =  array('supplier_id'=>$user_id);
       $this->M_supplier_gallery_pic->set_search_supplier_gallery_pic($supplier_gallery_pic_rules);
       $get_supplier_gallery_pic = $this->M_supplier_gallery_pic->get_supplier_gallery_pic();
       $data['supplier_gallery_pic'] = $get_supplier_gallery_pic->result();

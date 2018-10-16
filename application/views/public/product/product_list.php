@@ -247,7 +247,7 @@
         <h6>
           <?php echo number_format($p->SupplyAbility, 0, '.', '.')." ".$p->Unit; ?> (Supply Ability)</h6>
         <h6>
-          <?php echo $p->PeriodSupplyAbility; ?> (Period Ability)</h6>
+          <?php echo $p->PeriodSupplyAbility; ?> (Period Supply Ability)</h6>
       </div>
       <hr>
       <div class="text-center">

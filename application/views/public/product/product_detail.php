@@ -209,7 +209,7 @@
         <?php echo $product[0]->Name; ?>
       </h1>
       <h3>US $
-        <?php echo number_format($p->MinPrice, 2, '.', ','); ?> - <?php echo number_format($p->MaxPrice, 2, '.', ','); ?>
+        <?php echo number_format($p->MinPrice, 2, '.', ','); ?> - <?php echo number_format($p->MaxPrice, 2, '.', ','); ?>/<?php echo $p->Unit; ?>
       </h3>
       <p>Category :
         <?php echo $product[0]->ProductCategory; ?>

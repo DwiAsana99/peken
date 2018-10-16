@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/front_end_assets/css/product_detail.css') ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/front_end_assets/css/product_list.css') ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/front_end_assets/css/minisite.css') ?>">
-<link rel="stylesheet" href="<?php echo base_url('assets/front_end_assets/bower_components/summernote/dist/summernote-lite.css') ?>" />
+<!-- <link rel="stylesheet" href="<?php //echo base_url('assets/front_end_assets/bower_components/summernote/dist/summernote-lite.css') ?>" /> -->
 <link rel="stylesheet" href="<?php echo base_url('assets/front_end_assets/css/req_quotation.css') ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/front_end_assets/css/quotation_list.css') ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/front_end_assets/css/quotation_detail.css') ?>">

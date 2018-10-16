@@ -315,7 +315,7 @@ class Product extends CI_Controller{
 		 //exit();
 		$this->M_product->update_product($product_id,$data,$product_pictures);
 
-		$this->session->set_flashdata('msg', $this->input->post('product_name').' successfully updated  ...');
+		$this->session->set_flashdata('msg', $this->input->post('product_name').' successfully updated  ');
 		redirect('Product/product_view');
 	}
 	function product_add_view(){
@@ -356,14 +356,14 @@ class Product extends CI_Controller{
 		// 	redirect('Product/product_add_view');
 		// }
 		$product_id = $this->M_product->add_product($data,$product_pictures);
-		$this->session->set_flashdata('msg', 'Add Product successfully ...');
+		$this->session->set_flashdata('msg', $this->input->post('product_name').' successfully added  ');
 		redirect('Product/product_view');
 	}
 
 	function add_product_picture(){
 		$config['upload_path']   = './assets/supplier_upload';
-		$config['allowed_types'] = 'gif|jpg|png|ico|pdf|docx';
-		$config['max_size']             = 6000;
+		$config['allowed_types'] = 'gif|jpg|jpeg|png|ico|pdf|docx';
+		$config['max_size']             = 2000;
 		//mengganti nama asli file menjadi cstom
 
 		//!!!!harus tambah id user!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -455,3 +455,4 @@ class Product extends CI_Controller{
 
 
 	}
+?>

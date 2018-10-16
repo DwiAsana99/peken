@@ -223,6 +223,7 @@
           </div> -->
           <div class="form-group text-right">
             <button type="submit" value="Validate" class="btn btn-primary " id="BtnSubmit"><i class='glyphicon glyphicon-ok'></i> Save</button>
+            <button type="button"  class="btn btn-primary" style="display:none" id="BtnInvisible"><i class='glyphicon glyphicon-ok'></i> Save</button>
             <!-- <button type="button" id="BtnTest"  class="btn btn-default "><i class='glyphicon glyphicon-ok'></i> TEST</button> -->
           </div>
         </form>
@@ -236,12 +237,12 @@
 
 
 
-<script src= "<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>" ></script>
 <script>
-  $.validate({
-    lang: 'es'
-  });
+$.validate({
+  lang: 'es'
+});
 </script>
+<script src= "<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>" ></script>
 <script type="text/javascript">
   // $(function(){
   //   $('#Simpan').submit(function(event){
@@ -319,13 +320,37 @@ $(document).ready(function(){
       $("#max_upload_product_image_error").html('One product can only have five images');
     }
   });
-  $("#BtnSubmit").click(function(event) {
-    event.preventDefault();
+
+
+	$("#BtnSubmit").click(function(event) {
+    var xi =0;
+    $('div[class^="form-group has-error"]').each(function() {
+       xi = xi+1;
+    });
+    var zi =0;
+    $('div[class^="form-group has-success"]').each(function() {
+       zi = zi+1;
+    });
+    var productImage ="x";
+    $('input[name^="file"]').each(function() {
+       productImage = "ada";
+    });
+    console.log(xi);
+    console.log(zi);
+    if (xi == 0 && zi == 11 && productImage == "ada") {
+      event.preventDefault();
+      $("#BtnInvisible").click();
+    }
+  });
+  $("#BtnInvisible").click(function(event) {
+    console.log("masuk btn invisible");
+    // $("#Simpan").valid();
     var productImage ="x";
     $('input[name^="file"]').each(function() {
        productImage = "ada";
     });
     if (productImage == "ada") {
+
       console.log('silahkan masuk');
       $("#product_image_alert").removeAttr("class");
       $("#product_image_error").html('');
@@ -347,12 +372,58 @@ $(document).ready(function(){
         }
       });
     } else {
-      //event.preventDefault();
-      console.log('tidak bisa masuk');
+      event.preventDefault();
+     console.log('tidak bisa masuk');
       $("#product_image_alert").addClass('alert alert-danger');
       $("#product_image_error").html('You must fill in the product image');
     }
   });
+
+
+
+//  $("#BtnSubmit").click(function(event) {
+  //   //event.preventDefault();
+  //   setTimeout( function () {
+  //       event.preventDefault();
+  //   }, 50);
+  //   // $("#Simpan").valid();
+  //   var productImage ="x";
+  //   $('input[name^="file"]').each(function() {
+  //      productImage = "ada";
+  //   });
+  //   if (productImage == "ada") {
+  //     // setTimeout( function () {
+  //     //     event.preventDefault();
+  //     // }, 250);
+  //     console.log('silahkan masuk');
+  //     $("#product_image_alert").removeAttr("class");
+  //     $("#product_image_error").html('');
+  //     $.confirm({
+  //       title: 'Confirmation',
+  //       content: 'Are You Sure to Save?',
+  //       type: 'blue',
+  //       buttons: {
+  //         Save: function () {
+  //           $.LoadingOverlay("show");
+  //           console.log('silahkan masuk');
+  //             setTimeout( function () {
+  //                 $("#Simpan").submit();
+  //             }, 2000);
+  //         },
+  //         Cancel: function () {
+  //           $.alert('Data not saved...');
+  //         },
+  //       }
+  //     });
+  //   } else {
+  //     // setTimeout( function () {
+  //     //     event.preventDefault();
+  //     // }, 250);
+  //     console.log('tidak bisa masuk');
+  //     $("#product_image_alert").addClass('alert alert-danger');
+  //     $("#product_image_error").html('You must fill in the product image');
+  //   }
+//  });
 
   // $("#EditProduct").submit(function() {
   //   foto_upload.processQueue();

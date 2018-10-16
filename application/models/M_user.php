@@ -22,7 +22,9 @@ class M_user extends CI_Model{
     $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ;
     $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
     $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
-    $this->filter_value = isset($rules['filter_value']['user_level']) ? " AND user_tb.UserLevel = ".$rules['filter_value']['user_level'] : "" ;
+    $this->filter_value = '1=1';
+    $this->filter_value .= isset($rules['filter_value']['user_level']) ? " AND user_tb.UserLevel = ".$rules['filter_value']['user_level'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['user_levels']) ? $rules['filter_value']['user_levels'] : "" ;
     $this->filter_value .= isset($rules['filter_value']['user_id']) ? " AND user_tb.Id = ".$rules['filter_value']['user_id'] : "" ;
     $this->filter_value .= isset($rules['filter_value']['email']) ? " AND user_tb.Email = "."'".$rules['filter_value']['email']."'" : "" ;
     $this->filter_value .= isset($rules['filter_value']['password']) ? " AND user_tb.Password = "."'".$rules['filter_value']['password']."'" : "" ;
@@ -31,7 +33,7 @@ class M_user extends CI_Model{
   function get_user() {
     $query = "SELECT user_tb.* ".$this->other_table_columns."
     FROM user_tb ".$this->join_table."
-    WHERE 1=1 ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
+    WHERE ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
     //echo $query;exit();
     $query = $this->db->query($query);
     return $query;

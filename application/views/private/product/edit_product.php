@@ -453,7 +453,7 @@ $(document).ready(function(){
     console.log(qty_dropzone_preview_image);
     console.log(qty_productImageAfter);
     console.log(qty_all_upload);
-    if (qty_all_upload == 5) {
+    if (qty_all_upload < 6) {
       foto_upload.processQueue();
       setTimeout( function () {
         var productImage ="x";
