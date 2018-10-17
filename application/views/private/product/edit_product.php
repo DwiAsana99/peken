@@ -542,11 +542,6 @@ $(document).ready(function(){
   //     });
   // });
 
-  // $("#EditProduct").submit(function() {
-  //   foto_upload.processQueue();
-  //   $.LoadingOverlay("show");
-  //
-  // });
 
   foto_upload.on("addedfile", function(file) {
     if (!file.type.match(/image.*/)) {

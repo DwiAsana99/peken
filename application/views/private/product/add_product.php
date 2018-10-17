@@ -146,7 +146,7 @@
               <label for="">Product Category</label>
               <select class="form-control" name="product_category_code" id="product_category_code" data-validation="length"
                 data-validation-length="min1">
-                <option value=''>--Choose Product Category--</option>
+                <option value='0'>--Choose Product Category--</option>
               </select>
               <span id="spanProductCategory" class=""></span>
             </div>
@@ -154,7 +154,7 @@
               <label for="">Product Sub Category</label>
               <select class="form-control" name="product_sub_category_code" id="product_sub_category_code" data-validation="length"
                 data-validation-length="min1">
-                <option value=''>--Choose Product Sub Category--</option>
+                <option value="0">--Choose Product Sub Category--</option>
               </select>
               <span id="spanProductSubCategory" class=""></span>
             </div>
@@ -188,6 +188,7 @@
             <div class="form-group" id="formGroupPeriodSupplyAbility">
               <label for="">Period Supply Ability</label>
               <select class="form-control" name="period_supply_ability" id="period_supply_ability" data-validation="length" data-validation-length="min1">
+                <option value="">--Choose Product Status--</option>
                 <option value="daily">Daily</option>
                 <option value="weekly">Weekly</option>
                 <option value="monthly">Monthly</option>
@@ -216,7 +217,7 @@
               </select>
               <span id="spanStatus" class=""></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="formGroupProductImage">
               <label class="control-label ">Product Image</label>
               <div class="dropzone">
                 <div class="dz-message">
@@ -226,13 +227,14 @@
                 <button type="button" style="margin-bottom: 10px"  class="btn btn-info col-md-12" id="BtnUpload">
                   <i class='glyphicon glyphicon-ok'></i> Upload Image
                 </button>
+                <div id="product_image_alert" class="" role="alert" style="margin-bottom: 0px">
+                  <p id="product_image_error"></p>
+                </div>
+                <div id="max_upload_product_image_alert" class="" role="alert">
+                  <p id="max_upload_product_image_error"></p>
+                </div>
             </div>
-            <div id="product_image_alert" class="" role="alert">
-              <p id="product_image_error"></p>
-            </div>
-            <div id="max_upload_product_image_alert" class="" role="alert">
-              <p id="max_upload_product_image_error"></p>
-            </div>
+
             <!-- <div class="form-group">
             <label class="control-label">Description</label>
             <input type="text" name="description" id="description"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
@@ -325,9 +327,13 @@ $(document).ready(function(){
         $("#product_image_error").html('');
         $("#max_upload_product_image_alert").removeAttr("class");
         $("#max_upload_product_image_error").html('');
-
+        $("#formGroupProductImage").addClass("has-success").removeClass( "has-error" );
       }, 500);
     }else if(qty_dropzone_preview_image > 5){
+      // $(".dropzone dz-clickable dz-started").css( "border-color", "#dd4b39" );
+      // /$(".dropzone dz-clickable dz-started").attr("style","border-color:#dd4b39");
+      //console.log($(".dropzone dz-clickable dz-started"));
+      $("#formGroupProductImage").addClass("has-error").removeClass( "has-success" );
       $("#max_upload_product_image_alert").addClass('alert alert-danger');
       $("#max_upload_product_image_error").html('One product can only have five images');
     }
@@ -354,148 +360,182 @@ $(document).ready(function(){
   //   }
   // });
   $("#BtnSubmit").click(function(event) {
-    var product_name = $("#product_name").val();
-    var product_category_code = $("#product_category_code").val();
-    var product_sub_category_code = $("#product_sub_category_code").val();
-    var unit = $("#unit").val();
-    var min_price = $("#min_price").val();
-    var max_price = $("#max_price").val();
-    var supply_ability = $("#supply_ability").val();
-    var period_supply_ability = $("#period_supply_ability").val();
-    var product_description = $("#product_description").val();
-    var pkg_delivery = $("#pkg_delivery").val();
-    var status = $("#status").val();
     var productImage ="x";
     $('input[name^="file"]').each(function() {
        productImage = "ada";
     });
     var product_name_error = "";
-    if (product_name.trim() === "") {
+    if ($("#product_name").val().trim() === "") {
       product_name_error = "Please fill out product name...";
     }
     if (product_name_error !== "") {
       $("#spanProductName").html(product_name_error);
       $("#spanProductName").addClass("help-block");
-      $("#formGroupProductName").addClass("has-error");
+      $("#formGroupProductName").addClass("has-error").removeClass( "has-success" );
       event.preventDefault();
     } else {
-      $("#formGroupProductName").addClass("has-success");
+      $("#spanProductName").html("");
+      $("#formGroupProductName").addClass("has-success").removeClass( "has-error" );
     }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     var product_category_code_error = "";
-    if (product_category_code === "") {
+    if ($("#product_category_code").val() == "0") {
       product_category_code_error = "Please fill out product category...";
     }
     if (product_category_code_error !== "") {
       $("#spanProductCategory").html(product_category_code_error);
       $("#spanProductCategory").addClass("help-block");
-      $("#formGroupProductCategory").addClass("has-error");
+      $("#formGroupProductCategory").addClass("has-error").removeClass( "has-success" );
       event.preventDefault();
     } else {
-      $("#formGroupProductCategory").addClass("has-success");
+      $("#spanProductCategory").html("");
+      $("#formGroupProductCategory").addClass("has-success").removeClass( "has-error" );
     }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     var product_sub_category_code_error = "";
-    if (product_sub_category_code.trim() === "") {
-      product_sub_category_code_error = "Please fill out product name...";
+    if ($("#product_sub_category_code").val() == "0") {
+      product_sub_category_code_error = "Please fill out product sub category...";
     }
     if (product_sub_category_code_error !== "") {
       $("#spanProductSubCategory").html(product_sub_category_code_error);
       $("#spanProductSubCategory").addClass("help-block");
-      $("#formGroupProductSubCategory").addClass("has-error");
+      $("#formGroupProductSubCategory").addClass("has-error").removeClass( "has-success" );
       event.preventDefault();
     } else {
-      $("#formGroupProductSubCategory").addClass("has-success");
+      $("#spanProductSubCategory").html("");
+      $("#formGroupProductSubCategory").addClass("has-success").removeClass( "has-error" );
     }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    var product_name_error = "";
-    if (product_name.trim() === "") {
-      product_name_error = "Please fill out product name...";
+    var unit_error = "";
+    if ($("#unit").val().trim() === "") {
+      unit_error = "Please fill out unit...";
     }
-    if (product_name_error !== "") {
-      $("#spanProductName").html(product_name_error);
-      $("#spanProductName").addClass("help-block");
-      $("#formGroupProductName").addClass("has-error");
+    if (unit_error !== "") {
+      $("#spanUnit").html(unit_error);
+      $("#spanUnit").addClass("help-block");
+      $("#formGroupUnit").addClass("has-error").removeClass( "has-success" );
       event.preventDefault();
     } else {
-      $("#formGroupProductName").addClass("has-success");
+      $("#spanUnit").html("");
+      $("#formGroupUnit").addClass("has-success").removeClass( "has-error" );
     }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    var product_name_error = "";
-    if (product_name.trim() === "") {
-      product_name_error = "Please fill out product name...";
+    var min_price_error = "";
+    if ($("#min_price").val().trim() === "") {
+      min_price_error = "Please fill out min price...";
     }
-    if (product_name_error !== "") {
-      $("#spanProductName").html(product_name_error);
-      $("#spanProductName").addClass("help-block");
-      $("#formGroupProductName").addClass("has-error");
+    if (min_price_error !== "") {
+      $("#spanMinPrice").html(min_price_error);
+      $("#spanMinPrice").addClass("help-block");
+      $("#formGroupMinPrice").addClass("has-error").removeClass( "has-success" );
       event.preventDefault();
     } else {
-      $("#formGroupProductName").addClass("has-success");
+      $("#spanMinPrice").html("");
+      $("#formGroupMinPrice").addClass("has-success").removeClass( "has-error" );
     }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    var product_name_error = "";
-    if (product_name.trim() === "") {
-      product_name_error = "Please fill out product name...";
+    var max_price_error = "";
+    if ($("#max_price").val().trim() === "") {
+      max_price_error = "Please fill out max price...";
     }
-    if (product_name_error !== "") {
-      $("#spanProductName").html(product_name_error);
-      $("#spanProductName").addClass("help-block");
-      $("#formGroupProductName").addClass("has-error");
+    if (max_price_error !== "") {
+      $("#spanMaxPrice").html(max_price_error);
+      $("#spanMaxPrice").addClass("help-block");
+      $("#formGroupMaxPrice").addClass("has-error").removeClass( "has-success" );
       event.preventDefault();
     } else {
-      $("#formGroupProductName").addClass("has-success");
+      $("#spanMaxPrice").html("");
+      $("#formGroupMaxPrice").addClass("has-success").removeClass( "has-error" );
     }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    var product_name_error = "";
-    if (product_name.trim() === "") {
-      product_name_error = "Please fill out product name...";
+    var supply_ability_error = "";
+    if ($("#supply_ability").val().trim() === "") {
+      supply_ability_error = "Please fill out supply ability...";
     }
-    if (product_name_error !== "") {
-      $("#spanProductName").html(product_name_error);
-      $("#spanProductName").addClass("help-block");
-      $("#formGroupProductName").addClass("has-error");
+    if (supply_ability_error !== "") {
+      $("#spanSupplyAbility").html(supply_ability_error);
+      $("#spanSupplyAbility").addClass("help-block");
+      $("#formGroupSupplyAbility").addClass("has-error").removeClass( "has-success" );
       event.preventDefault();
     } else {
-      $("#formGroupProductName").addClass("has-success");
+      $("#spanSupplyAbility").html("");
+      $("#formGroupSupplyAbility").addClass("has-success").removeClass( "has-error" );
     }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    var product_name_error = "";
-    if (product_name.trim() === "") {
-      product_name_error = "Please fill out product name...";
+    var period_supply_ability_error = "";
+    if ($("#period_supply_ability").val() === "") {
+      period_supply_ability_error = "Please fill out period supply ability...";
     }
-    if (product_name_error !== "") {
-      $("#spanProductName").html(product_name_error);
-      $("#spanProductName").addClass("help-block");
-      $("#formGroupProductName").addClass("has-error");
+    if (period_supply_ability_error !== "") {
+      $("#spanPeriodSupplyAbility").html(period_supply_ability_error);
+      $("#spanPeriodSupplyAbility").addClass("help-block");
+      $("#formGroupPeriodSupplyAbility").addClass("has-error").removeClass( "has-success" );
       event.preventDefault();
     } else {
-      $("#formGroupProductName").addClass("has-success");
+      $("#spanPeriodSupplyAbility").html("");
+      $("#formGroupPeriodSupplyAbility").addClass("has-success").removeClass( "has-error" );
     }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    var product_name_error = "";
-    if (product_name.trim() === "") {
-      product_name_error = "Please fill out product name...";
+    var product_description_error = "";
+    if ($("#product_description").val().trim() === "") {
+      product_description_error = "Please fill out product description...";
     }
-    if (product_name_error !== "") {
-      $("#spanProductName").html(product_name_error);
-      $("#spanProductName").addClass("help-block");
-      $("#formGroupProductName").addClass("has-error");
+    if (product_description_error !== "") {
+      $("#spanProductDescription").html(product_description_error);
+      $("#spanProductDescription").addClass("help-block");
+      $("#formGroupProductDescription").addClass("has-error").removeClass( "has-success" );
       event.preventDefault();
     } else {
-      $("#formGroupProductName").addClass("has-success");
+      $("#spanProductDescription").html("");
+      $("#formGroupProductDescription").addClass("has-success").removeClass( "has-error" );
     }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    var pkg_delivery_error = "";
+    if ($("#pkg_delivery").val().trim() === "") {
+      pkg_delivery_error = "Please fill out pkg delivery...";
+    }
+    if (pkg_delivery_error !== "") {
+      $("#spanPkgDelivery").html(pkg_delivery_error);
+      $("#spanPkgDelivery").addClass("help-block");
+      $("#formGroupPkgDelivery").addClass("has-error").removeClass( "has-success" );
+      event.preventDefault();
+    } else {
+      $("#spanPkgDelivery").html("");
+      $("#formGroupPkgDelivery").addClass("has-success").removeClass( "has-error" );
+    }
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    var status_error = "";
+    if ($("#status").val() === "") {
+      status_error = "Please fill out product status...";
+    }
+    if (status_error !== "") {
+      $("#spanStatus").html(status_error);
+      $("#spanStatus").addClass("help-block");
+      $("#formGroupStatus").addClass("has-error").removeClass( "has-success" );
+      event.preventDefault();
+    } else {
+      $("#spanStatus").html("");
+      $("#formGroupStatus").addClass("has-success").removeClass( "has-error" );
+    }
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    var all_error = "";
+    all_error += product_name_error;
+    all_error += product_category_code_error;
+    all_error += product_sub_category_code_error;
+    all_error += unit_error;
+    all_error += min_price_error;
+    all_error += max_price_error;
+    all_error += supply_ability_error;
+    all_error += period_supply_ability_error;
+    all_error += product_description_error;
+    all_error += pkg_delivery_error;
+    all_error += status_error;
+    // console.log(all_error);
+    // event.preventDefault();
 
-
-
-
-
-
-
-
-    if (productImage == "ada") {
+    if (all_error == "" && productImage == "ada") {
       console.log('silahkan masuk');
+      event.preventDefault();
       $("#product_image_alert").removeAttr("class");
       $("#product_image_error").html('');
       $.confirm({
@@ -515,65 +555,63 @@ $(document).ready(function(){
           },
         }
       });
-    } else {
+    } else if(productImage == "x"){
       event.preventDefault();
      console.log('tidak bisa masuk');
       $("#product_image_alert").addClass('alert alert-danger');
       $("#product_image_error").html('You must fill in the product image');
+    } else if(productImage == "ada"){
+      event.preventDefault();
+     console.log('tidak bisa masuk');
+     $("#product_image_alert").removeAttr("class");
+     $("#product_image_error").html('');
     }
   });
+  $("#product_name").focus(function() {
+    $("#spanProductName").html("");
+    $("#formGroupProductName").removeClass("has-success").removeClass("has-error");
+  });
+  $("#product_category_code").focus(function() {
+    $("#spanProductCategory").html("");
+    $("#formGroupProductCategory").removeClass("has-success").removeClass("has-error");
+  });
+  $("#product_sub_category_code").focus(function() {
+    $("#spanProductSubCategory").html("");
+    $("#formGroupProductSubCategory").removeClass("has-success").removeClass("has-error");
+  });
+  $("#unit").focus(function() {
+    $("#spanUnit").html("");
+    $("#formGroupUnit").removeClass("has-success").removeClass("has-error");
+  });
+  $("#min_price1").focus(function() {
+    $("#spanMinPrice").html("");
+    $("#formGroupMinPrice").removeClass("has-success").removeClass("has-error");
+  });
+  $("#max_price1").focus(function() {
+    $("#spanMaxPrice").html("");
+    $("#formGroupMaxPrice").removeClass("has-success").removeClass("has-error");
+  });
+  $("#supply_ability1").focus(function() {
+    $("#spanSupplyAbility").html("");
+    $("#formGroupSupplyAbility").removeClass("has-success").removeClass("has-error");
+  });
+  $("#period_supply_ability").focus(function() {
+    $("#spanPeriodSupplyAbility").html("");
+    $("#formGroupPeriodSupplyAbility").removeClass("has-success").removeClass("has-error");
+  });
+  $("#product_description").focus(function() {
+    $("#spanProductDescription").html("");
+    $("#formGroupProductDescription").removeClass("has-success").removeClass("has-error");
+  });
+  $("#pkg_delivery").focus(function() {
+    $("#spanPkgDelivery").html("");
+    $("#formGroupPkgDelivery").removeClass("has-success").removeClass("has-error");
+  });
+  $("#status").focus(function() {
+    $("#spanStatus").html("");
+    $("#formGroupStatus").removeClass("has-success").removeClass("has-error");
+  });
 
-
-
-//  $("#BtnSubmit").click(function(event) {
-  //   //event.preventDefault();
-  //   setTimeout( function () {
-  //       event.preventDefault();
-  //   }, 50);
-  //   // $("#Simpan").valid();
-  //   var productImage ="x";
-  //   $('input[name^="file"]').each(function() {
-  //      productImage = "ada";
-  //   });
-  //   if (productImage == "ada") {
-  //     // setTimeout( function () {
-  //     //     event.preventDefault();
-  //     // }, 250);
-  //     console.log('silahkan masuk');
-  //     $("#product_image_alert").removeAttr("class");
-  //     $("#product_image_error").html('');
-  //     $.confirm({
-  //       title: 'Confirmation',
-  //       content: 'Are You Sure to Save?',
-  //       type: 'blue',
-  //       buttons: {
-  //         Save: function () {
-  //           $.LoadingOverlay("show");
-  //           console.log('silahkan masuk');
-  //             setTimeout( function () {
-  //                 $("#Simpan").submit();
-  //             }, 2000);
-  //         },
-  //         Cancel: function () {
-  //           $.alert('Data not saved...');
-  //         },
-  //       }
-  //     });
-  //   } else {
-  //     // setTimeout( function () {
-  //     //     event.preventDefault();
-  //     // }, 250);
-  //     console.log('tidak bisa masuk');
-  //     $("#product_image_alert").addClass('alert alert-danger');
-  //     $("#product_image_error").html('You must fill in the product image');
-  //   }
-//  });
-
-  // $("#EditProduct").submit(function() {
-  //   foto_upload.processQueue();
-  //   $.LoadingOverlay("show");
-  //
-  // });
 
   foto_upload.on("addedfile", function(file) {
     if (!file.type.match(/image.*/)) {
