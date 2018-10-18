@@ -138,57 +138,50 @@
           <form method="post"  enctype="multipart/form-data" id="Simpan"  action="<?php echo base_url().'Product/add_product'; ?>">
             <div class="form-group" id="formGroupProductName">
               <label class="control-label">Product Name</label>
-              <input type="text"  name="product_name" id="product_name"  data-validation="length" data-validation-length="min4"
-                data-validation-error-msg="Please fill out product name..."  class="form-control"  placeholder="">
+              <input type="text"  name="product_name" id="product_name" class="form-control"  placeholder="">
               <span id="spanProductName" class=""></span>
             </div>
             <div class="form-group" id="formGroupProductCategory">
               <label for="">Product Category</label>
-              <select class="form-control" name="product_category_code" id="product_category_code" data-validation="length"
-                data-validation-length="min1">
+              <select class="form-control" name="product_category_code" id="product_category_code" >
                 <option value='0'>--Choose Product Category--</option>
               </select>
               <span id="spanProductCategory" class=""></span>
             </div>
             <div class="form-group" id="formGroupProductSubCategory">
               <label for="">Product Sub Category</label>
-              <select class="form-control" name="product_sub_category_code" id="product_sub_category_code" data-validation="length"
-                data-validation-length="min1">
+              <select class="form-control" name="product_sub_category_code" id="product_sub_category_code">
                 <option value="0">--Choose Product Sub Category--</option>
               </select>
               <span id="spanProductSubCategory" class=""></span>
             </div>
             <div class="form-group" id="formGroupUnit">
               <label for="">Unit</label>
-              <input type="text" name="unit" id="unit" class="form-control"  data-validation="length" data-validation-length="min4"
-                data-validation-error-msg="Please fill out unit name..." value="">
+              <input type="text" name="unit" id="unit" class="form-control" value="">
               <span id="spanUnit" class=""></span>
             </div>
             <div class="form-group" id="formGroupMinPrice">
               <label class="control-label">Min Price</label>
-              <input type="text" name="min_price1" id="min_price1" onkeyup="doMathPrice()" data-validation="length"
-                data-validation-length="min1" data-validation-error-msg="Please fill out product price..."  class="form-control input-1"  placeholder="">
+              <input type="text" name="min_price1" id="min_price1" onkeyup="doMathPrice()" class="form-control input-1"  placeholder="">
               <input type="hidden" name="min_price" id="min_price" onkeyup="doMathPrice()"class="form-control"  placeholder="">
               <span id="spanMinPrice" class=""></span>
             </div>
             <div class="form-group" id="formGroupMaxPrice">
               <label class="control-label">Max Price</label>
-              <input type="text" name="max_price1" id="max_price1" onkeyup="doMathPrice()" data-validation="length"
-                data-validation-length="min1" data-validation-error-msg="Please fill out product price..."  class="form-control input-3"  placeholder="">
-              <input type="hidden" name="max_price" id="max_price" onkeyup="doMathPrice()"class="form-control"  placeholder="">
+              <input type="text" name="max_price1" id="max_price1" onkeyup="doMathPrice()" class="form-control input-3"  placeholder="">
+              <input type="hidden" name="max_price" id="max_price" onkeyup="doMathPrice()" class="form-control"  placeholder="">
               <span id="spanMaxPrice" class=""></span>
             </div>
             <div class="form-group" id="formGroupSupplyAbility">
               <label class="control-label">Supply Ability</label>
-              <input type="text" name="supply_ability1" id="supply_ability1" onkeyup="doMathPrice()" data-validation="length"
-                data-validation-length="min1" data-validation-error-msg="Please fill out supply ability..."  class="form-control input-2"  placeholder="">
-              <input type="hidden" name="supply_ability" id="supply_ability" onkeyup="doMathPrice()"   class="form-control"  placeholder="">
+              <input type="text" name="supply_ability1" id="supply_ability1" onkeyup="doMathPrice()" class="form-control input-2"  placeholder="">
+              <input type="hidden" name="supply_ability" id="supply_ability" onkeyup="doMathPrice()" class="form-control"  placeholder="">
               <span id="spanSupplyAbility" class=""></span>
             </div>
             <div class="form-group" id="formGroupPeriodSupplyAbility">
               <label for="">Period Supply Ability</label>
-              <select class="form-control" name="period_supply_ability" id="period_supply_ability" data-validation="length" data-validation-length="min1">
-                <option value="">--Choose Product Status--</option>
+              <select class="form-control" name="period_supply_ability" id="period_supply_ability">
+                <option value="">--Choose Period Supply Ability--</option>
                 <option value="daily">Daily</option>
                 <option value="weekly">Weekly</option>
                 <option value="monthly">Monthly</option>
@@ -198,19 +191,17 @@
             </div>
             <div class="form-group" id="formGroupProductDescription">
               <label for="">Product Description</label>
-              <textarea class="form-control" rows="5" name="product_description" id="product_description" data-validation="length"
-                data-validation-length="min4" data-validation-error-msg="Please fill out product description..."></textarea>
+              <textarea class="form-control" rows="5" name="product_description" id="product_description"></textarea>
               <span id="spanProductDescription" class=""></span>
             </div>
             <div class="form-group" id="formGroupPkgDelivery">
               <label for="">Packaging & Delivery</label>
-              <textarea class="form-control" rows="5" name="pkg_delivery" id="pkg_delivery" data-validation="length" data-validation-length="min4"
-                data-validation-error-msg="Please fill out packaging & delivery..."></textarea>
+              <textarea class="form-control" rows="5" name="pkg_delivery" id="pkg_delivery"></textarea>
                <span id="spanPkgDelivery" class=""></span>
             </div>
             <div class="form-group" id="formGroupStatus">
               <label for="">Product Status</label>
-              <select class="form-control" name="status" id="status" data-validation="length" data-validation-length="min1">
+              <select class="form-control" name="status" id="status">
                 <option value="">--Choose Product Status--</option>
                 <option value="1">Published</option>
                 <option value="0">Do not publish</option>
@@ -538,6 +529,7 @@ $(document).ready(function(){
       event.preventDefault();
       $("#product_image_alert").removeAttr("class");
       $("#product_image_error").html('');
+      $("#formGroupProductImage").addClass("has-success").removeClass( "has-error" );
       $.confirm({
         title: 'Confirmation',
         content: 'Are You Sure to Save?',
@@ -558,11 +550,13 @@ $(document).ready(function(){
     } else if(productImage == "x"){
       event.preventDefault();
      console.log('tidak bisa masuk');
+      $("#formGroupProductImage").addClass("has-error").removeClass( "has-success" );
       $("#product_image_alert").addClass('alert alert-danger');
       $("#product_image_error").html('You must fill in the product image');
     } else if(productImage == "ada"){
       event.preventDefault();
      console.log('tidak bisa masuk');
+     $("#formGroupProductImage").addClass("has-success").removeClass( "has-error" );
      $("#product_image_alert").removeAttr("class");
      $("#product_image_error").html('');
     }
