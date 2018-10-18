@@ -133,7 +133,7 @@
       <input class="form-control" type="number" name="phone" id="description" value="<?php echo $buyer[0]->Phone; ?>"
         data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  placeholder="" required>
     </div>
-    <button type="submit" class="btn btn-primary " value="Validate" name="button">Save</button>
+    <button type="submit" class="btn btn-primary " id="btnSimpan" value="Validate" name="button">Save</button>
   </form>
 
 </div>
@@ -158,13 +158,8 @@ $(document).ready(function(){
 });
 </script>
 <script type="text/javascript">
-  $("#Simpan").submit(function () {
-    var category = $('#category').val();
-    var description = $('#description').val();
-    if (category == '' || description == '') {
-      File_Kosong();
-      return false;
-    } else {
+  $("#btnSimpan").click(function (event) {
+
       event.preventDefault();
       $.confirm({
         title: 'Confirmation',
@@ -172,16 +167,17 @@ $(document).ready(function(){
         type: 'blue',
         buttons: {
           Save: function () {
-           // $.LoadingOverlay("show");
-            $("#Simpan").submit();
+            $.LoadingOverlay("show");
+            setTimeout( function () {
+              $("#Simpan").submit();
+            }, 2000);
           },
           Cancel: function () {
-
             $.alert('Data not saved...');
           },
         }
       });
-    }
+
 
   });
 </script>
@@ -290,3 +286,15 @@ $(document).ready(function() {
   });
   </script>
 <?php endif; ?>
+<script type="text/javascript">
+$(document).ready(function(){
+$.LoadingOverlaySetup({
+  color           : "rgba(255, 255, 255, 0.8)" ,
+  image           : "<?php echo base_url('assets/image-sistem/loading.gif') ?>",
+  maxSize         : "230px",
+  minSize         : "230px",
+  resizeInterval  : 0,
+  size            : "100%"
+});
+});
+</script>

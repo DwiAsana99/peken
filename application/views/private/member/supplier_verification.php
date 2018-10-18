@@ -67,7 +67,7 @@
                         <?php endif; ?>
                       </select>
                       <span class="input-group-btn">
-                        <button class="btn btn-success" type="submit">Save</button>
+                        <button class="btn btn-success" id="btnVerify" type="submit">Save</button>
                       </span>
                   </div><!-- /input-group -->
                 </form>
@@ -397,3 +397,39 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $("#btnVerify").click(function (event) {
+
+      event.preventDefault();
+      $.confirm({
+        title: 'Confirmation',
+        content: 'Are You Sure to verify?',
+        type: 'green',
+        buttons: {
+          Save: function () {
+            $.LoadingOverlay("show");
+            setTimeout( function () {
+              $("#Verify").submit();
+            }, 2000);
+          },
+          Cancel: function () {
+            $.alert('Data not saved...');
+          },
+        }
+      });
+
+
+  });
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+$.LoadingOverlaySetup({
+  color           : "rgba(255, 255, 255, 0.8)" ,
+  image           : "<?php echo base_url('assets/image-sistem/loading.gif') ?>",
+  maxSize         : "230px",
+  minSize         : "230px",
+  resizeInterval  : 0,
+  size            : "100%"
+});
+});
+</script>

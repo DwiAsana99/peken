@@ -127,7 +127,7 @@
 
 
     </div>
-    <button type="submit" class="btn btn-primary " name="button">Save</button>
+    <button type="submit" id="btnSimpan" class="btn btn-primary " name="button">Save</button>
   </form>
 </div><!-- /.box-body -->
 </div><!-- /.box -->
@@ -183,3 +183,39 @@ function readUrlProfileImage(input) {
 <div class='col-md-9'>
 
 </div>
+<script type="text/javascript">
+  $("#btnSimpan").click(function (event) {
+
+      event.preventDefault();
+      $.confirm({
+        title: 'Confirmation',
+        content: 'Are You Sure to save?',
+        type: 'blue',
+        buttons: {
+          Save: function () {
+            $.LoadingOverlay("show");
+            setTimeout( function () {
+              $("#Simpan").submit();
+            }, 2000);
+          },
+          Cancel: function () {
+            $.alert('Data not saved...');
+          },
+        }
+      });
+
+
+  });
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+$.LoadingOverlaySetup({
+  color           : "rgba(255, 255, 255, 0.8)" ,
+  image           : "<?php echo base_url('assets/image-sistem/loading.gif') ?>",
+  maxSize         : "230px",
+  minSize         : "230px",
+  resizeInterval  : 0,
+  size            : "100%"
+});
+});
+</script>

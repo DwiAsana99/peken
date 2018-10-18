@@ -15,16 +15,16 @@
   }
 </style>
 <script>
-  $(document).ready(function () {
-    $('#summernote').summernote({
-      height: 300, // set editor height
-      minHeight: null, // set minimum height of editor
-      maxHeight: null, // set maximum height of editor
-      focus: true // set focus to editable area after initializing summernote
-    });
-  });
+  // $(document).ready(function () {
+  //   $('#summernote').summernote({
+  //     height: 300, // set editor height
+  //     minHeight: null, // set minimum height of editor
+  //     maxHeight: null, // set maximum height of editor
+  //     focus: true // set focus to editable area after initializing summernote
+  //   });
+  // });
 </script>
-<form action="<?php echo base_url().'Quotation/add_quotation'; ?>" method="post">
+<form action="<?php echo base_url().'Quotation/add_quotation'; ?>" id="Simpan" method="post">
   <div id="info" class="container">
     <ol class="breadcrumb">
       <?php if (isset($breadcrumb)): ?>
@@ -63,12 +63,48 @@
     <!-- <textarea name="name" id="summernote" rows="8" cols="80"></textarea> -->
 
 
-    <button class="btn btn-warning pull-right" type="submit" value="Validate">Send RFQ</button>
+    <button class="btn btn-warning pull-right" type="submit" id="btnSend" value="Validate">Send RFQ</button>
 
   </div>
 </form>
 <script>
 $.validate({
   lang: 'es'
+});
+</script>
+<script type="text/javascript">
+  $("#btnSend").click(function (event) {
+
+      event.preventDefault();
+      $.confirm({
+        title: 'Confirmation',
+        content: 'Are You Sure to save?',
+        type: 'blue',
+        buttons: {
+          Save: function () {
+            $.LoadingOverlay("show");
+            setTimeout( function () {
+              $("#Simpan").submit();
+            }, 2000);
+          },
+          Cancel: function () {
+            $.alert('Data not saved...');
+          },
+        }
+      });
+
+
+  });
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+$.LoadingOverlaySetup({
+  color           : "rgba(255, 255, 255, 0.8)" ,
+  image           : "<?php echo base_url('assets/image-sistem/loading.gif') ?>",
+  maxSize         : "230px",
+  minSize         : "230px",
+  resizeInterval  : 0,
+  size            : "100%"
+});
 });
 </script>

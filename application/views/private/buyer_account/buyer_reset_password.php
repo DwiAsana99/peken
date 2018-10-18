@@ -137,8 +137,10 @@ function validation(e) {
       type: 'blue',
       buttons: {
         Save: function () {
-          //$.LoadingOverlay("show");
-          $("#reset_password_form").submit();
+          $.LoadingOverlay("show");
+          setTimeout( function () {
+            $("#reset_password_form").submit();
+          }, 2000);
         },
         Cancel: function () {
 
@@ -181,3 +183,15 @@ old_password.addEventListener("focus", deleteOldPaswwordError);
   });
   </script>
 <?php endif; ?>
+<script type="text/javascript">
+$(document).ready(function(){
+$.LoadingOverlaySetup({
+  color           : "rgba(255, 255, 255, 0.8)" ,
+  image           : "<?php echo base_url('assets/image-sistem/loading.gif') ?>",
+  maxSize         : "230px",
+  minSize         : "230px",
+  resizeInterval  : 0,
+  size            : "100%"
+});
+});
+</script>

@@ -519,7 +519,9 @@ $("#SimpanCompanyProfile").submit(function() {
       buttons: {
         Save: function () {
           $.LoadingOverlay("show");
-          $("#SimpanCompanyProfile").submit();
+          setTimeout( function () {
+            $("#SimpanCompanyProfile").submit();
+          }, 2000);
         },
         Cancel: function () {
 
@@ -543,7 +545,9 @@ $("#SimpanCertificateLicense").submit(function() {
       buttons: {
         Save: function () {
           $.LoadingOverlay("show");
-          $("#SimpanCertificateLicense").submit();
+          setTimeout( function () {
+            $("#SimpanCertificateLicense").submit();
+          }, 2000);
         },
         Cancel: function () {
 
@@ -567,7 +571,9 @@ $("#SimpanCompanyGallery").submit(function() {
       buttons: {
         Save: function () {
           $.LoadingOverlay("show");
-          $("#SimpanCompanyGallery").submit();
+          setTimeout( function () {
+            $("#SimpanCompanyGallery").submit();
+          }, 2000);
         },
         Cancel: function () {
 
@@ -859,3 +865,15 @@ $(document).ready(function () {
   z-index:1032;
 }
 </style>
+<script type="text/javascript">
+$(document).ready(function(){
+$.LoadingOverlaySetup({
+  color           : "rgba(255, 255, 255, 0.8)" ,
+  image           : "<?php echo base_url('assets/image-sistem/loading.gif') ?>",
+  maxSize         : "230px",
+  minSize         : "230px",
+  resizeInterval  : 0,
+  size            : "100%"
+});
+});
+</script>

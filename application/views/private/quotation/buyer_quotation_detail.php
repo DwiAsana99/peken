@@ -139,13 +139,8 @@
   </div>
 </div>
 <script type="text/javascript">
-  $("#form_reject").submit(function () {
-    var category = $('#category').val();
-    var description = $('#description').val();
-    if (category == '' || description == '') {
-      File_Kosong();
-      return false;
-    } else {
+  $("#btn_reject").click(function (event) {
+
       event.preventDefault();
       $.confirm({
         title: 'Confirmation',
@@ -153,8 +148,10 @@
         type: 'red',
         buttons: {
           Reject: function () {
-           // $.LoadingOverlay("show");
+            $.LoadingOverlay("show");
+          setTimeout( function () {
             $("#form_reject").submit();
+          }, 2000);
           },
           Cancel: function () {
 
@@ -162,18 +159,13 @@
           },
         }
       });
-    }
+
 
   });
 </script>
 <script type="text/javascript">
-  $("#form_accept").submit(function () {
-    var category = $('#category').val();
-    var description = $('#description').val();
-    if (category == '' || description == '') {
-      File_Kosong();
-      return false;
-    } else {
+  $("#btn_accept").click(function (event) {
+
       event.preventDefault();
       $.confirm({
         title: 'Confirmation',
@@ -181,8 +173,10 @@
         type: 'green',
         buttons: {
           Accept: function () {
-            //$.LoadingOverlay("show");
-            $("#form_accept").submit();
+            $.LoadingOverlay("show");
+            setTimeout( function () {
+              $("#form_accept").submit();
+            }, 2000);
           },
           Cancel: function () {
 
@@ -190,7 +184,7 @@
           },
         }
       });
-    }
+
 
   });
 </script>
@@ -283,4 +277,28 @@
       });
     });
   });
+</script>
+<?php if($this->session->flashdata('msg')): ?>
+  <script type="text/javascript">
+  $(function(){
+    new PNotify({
+      title: 'Success!',
+      text: ' <?php echo $this->session->flashdata('msg'); ?>',
+      delay: 5000,
+      type: 'success'
+    });
+  });
+  </script>
+<?php endif; ?>
+<script type="text/javascript">
+$(document).ready(function(){
+$.LoadingOverlaySetup({
+  color           : "rgba(255, 255, 255, 0.8)" ,
+  image           : "<?php echo base_url('assets/image-sistem/loading.gif') ?>",
+  maxSize         : "230px",
+  minSize         : "230px",
+  resizeInterval  : 0,
+  size            : "100%"
+});
+});
 </script>

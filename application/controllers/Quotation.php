@@ -571,7 +571,11 @@ class Quotation extends CI_Controller{
     $status = $this->input->post('status');
     $data = array('IsAccepted' => $status);
     $this->M_quotation->update_quotation($data,$quotation_code) ;
-    //$this->session->set_flashdata('msg', 'Edit Product Category successfully...');
+    if ($status == 1) {
+      $this->session->set_flashdata('msg', 'Accept quotation successfully');
+    } elseif ($status == 0) {
+      $this->session->set_flashdata('msg', 'Reject quotation successfully');
+    }
     redirect('Quotation/buyer_quotation_detail/'.$quotation_code);
 
   }
@@ -617,7 +621,7 @@ class Quotation extends CI_Controller{
 
     // $product_pic  = $get_product_pic->result();
     $buyer = $get_buyer->row();
-    $content = " <p><img  src='http://dinilaku.com/assets/front_end_assets/img/2Dinilaku_Logo.png' width='175' alt=''></p>
+    $content = " <p><img  src='".base_url()."assets/front_end_assets/img/2Dinilaku_Logo.png' width='175' alt=''></p>
                 <h2>Request for Quotation Code <b>".$quotation_code."</b></h2>
                 <table>
                   <tr>
@@ -663,7 +667,8 @@ class Quotation extends CI_Controller{
 //    //Email Failed To Send
 //    echo $this->email->print_debugger();
 // }
-      redirect('Home');
+    $this->session->set_flashdata('msg', 'Request for quotation successfully');
+    redirect('Quotation/buyer_quotation_detail/'.$quotation_code);
       // exit();
   }
   function get_supplier_all_notifications_chat_json()

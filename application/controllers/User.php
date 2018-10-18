@@ -553,7 +553,7 @@
         'Phone' => $this->input->post('phone')
       );
       $this->M_user->update_user($data,$buyer_id);
-      $this->session->set_flashdata('msg', 'Your profile has changed ...');
+      $this->session->set_flashdata('msg', 'Your profile has changed');
       redirect('User/buyer_account_view');
     }
     function edit_member_account($user_id){
@@ -629,7 +629,7 @@
         $this->email->to($email);
         $this->email->subject('Email Konfirmasi Akun');
 
-        $this->email->message(" <p><img  src='http://dinilaku.com/assets/front_end_assets/img/2Dinilaku_Logo.png' width='175' alt=''></p>
+        $this->email->message(" <p><img  src='".base_url()."assets/front_end_assets/img/2Dinilaku_Logo.png' width='175' alt=''></p>
         <a href='".base_url().
         "User/member_confirmation_view/".$row->Email.
         "'><i class='glyphicon glyphicon-time'></i>VERIFY YOUR ACCOUNTS</a>"
@@ -747,7 +747,7 @@
       $this->M_supplier_gallery_pic->set_search_supplier_gallery_pic($supplier_gallery_pic_rules);
       $get_supplier_gallery_pic = $this->M_supplier_gallery_pic->get_supplier_gallery_pic();
       $data['supplier_gallery_pic'] = $get_supplier_gallery_pic->result();
-
+      $this->session->set_flashdata('msg', 'Supplier verify successfully');
       $this->load->view('template/back_admin/admin_head');
       $this->load->view('template/back_admin/admin_navigation');
       $this->load->view('template/back_admin/admin_sidebar');
@@ -811,7 +811,7 @@
       $this->M_user->update_user($data,$user_id);
       if ($user_level == 1 || $user_level == 3) {
         $this->session->set_flashdata('msg', 'Your password has changed ...');
-        redirect('User/supplier_reset_password_view');
+        redirect('User/supplier_dashboard_view');
       } elseif ($user_level == 2) {
         $this->session->set_flashdata('msg', 'Your password has changed ...');
         redirect('User/buyer_reset_password_view');

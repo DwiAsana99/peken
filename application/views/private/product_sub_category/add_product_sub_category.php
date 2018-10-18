@@ -36,7 +36,7 @@
             <input type="text" name="description" id="description"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  class="form-control"  placeholder="">
           </div> -->
           <div class="form-group">
-            <button type="submit" value="Validate" class="btn btn-default"><i class='glyphicon glyphicon-ok'></i> Save</button>
+            <button type="submit" id="btnSimpan" value="Validate" class="btn btn-default"><i class='glyphicon glyphicon-ok'></i> Save</button>
           </div>
         </form>
       </div>
@@ -50,29 +50,38 @@
   });
 </script>
 <script type="text/javascript">
-$("#Simpan").submit(function() {
-  var category = $('#category').val();
-  var description = $('#description').val();
-  if (category == ''|| description==''){
-    File_Kosong(); return false;
-  }else{
-    event.preventDefault();
-    $.confirm({
-      title: 'Confirmation',
-      content: 'Are You Sure to Save?',
-      type: 'blue',
-      buttons: {
-        Save: function () {
-          $.LoadingOverlay("show");
-          $("#Simpan").submit();
-        },
-        Cancel: function () {
+  $("#btnSimpan").click(function (event) {
 
-          $.alert('Data not saved...');
-        },
-      }
-    });
-  }
+      event.preventDefault();
+      $.confirm({
+        title: 'Confirmation',
+        content: 'Are You Sure to save?',
+        type: 'blue',
+        buttons: {
+          Save: function () {
+            $.LoadingOverlay("show");
+            setTimeout( function () {
+              $("#Simpan").submit();
+            }, 2000);
+          },
+          Cancel: function () {
+            $.alert('Data not saved...');
+          },
+        }
+      });
 
+
+  });
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+$.LoadingOverlaySetup({
+  color           : "rgba(255, 255, 255, 0.8)" ,
+  image           : "<?php echo base_url('assets/image-sistem/loading.gif') ?>",
+  maxSize         : "230px",
+  minSize         : "230px",
+  resizeInterval  : 0,
+  size            : "100%"
+});
 });
 </script>
