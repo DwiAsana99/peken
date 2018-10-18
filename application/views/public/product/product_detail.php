@@ -186,10 +186,10 @@ f
       <div class="mag">
         <?php $i = 1; foreach($product as $p){
         if ($i == 1 ) { ?>
-        <img data-toggle="magnify" src="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" id="image<?php echo $i ?>"
+        <img height="250" data-toggle="magnify" src="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" id="image<?php echo $i ?>"
           class="image-toggle">
         <?php } elseif($i > 1 AND $i < 6) {?>
-        <img data-toggle="magnify" src="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" title="image 2" alt="image 2"
+        <img height="250" data-toggle="magnify" src="<?php echo base_url('assets/supplier_upload/').$p->FileName;?>" title="image 2" alt="image 2"
           id="image<?php echo $i ?>" class="image-toggle" style="display:none;">
         <?php }
         $i++;
@@ -218,7 +218,7 @@ f
         <?php echo $product[0]->ProductSubCategory; ?>
       </p>
       <p>Supply Ability :
-        <?php echo $product[0]->SupplyAbility; ?>
+        <?php echo number_format($product[0]->SupplyAbility, 0, '.', ','); ?>
       </p>
       <p>Period Supply Ability :
         <?php echo $product[0]->PeriodSupplyAbility; ?>

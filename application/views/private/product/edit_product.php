@@ -185,7 +185,7 @@ jQuery(document).ready(function($) {
             </div>
             <div class="form-group" id="formGroupSupplyAbility">
               <label class="control-label">Supply Ability</label>
-              <input type="text" value="<?php echo $product[0]->SupplyAbility ?>" name="supply_ability1" id="supply_ability1"
+              <input type="text" value="<?php echo number_format($product[0]->SupplyAbility, 0, '.', ','); ?>" name="supply_ability1" id="supply_ability1"
                 onkeyup="doMathPrice()" class="form-control input-3"  placeholder="">
               <input type="hidden" value="<?php echo $product[0]->SupplyAbility ?>" name="supply_ability" id="supply_ability"
                 onkeyup="doMathPrice()"   class="form-control"  placeholder="">

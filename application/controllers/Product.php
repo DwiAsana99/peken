@@ -430,7 +430,7 @@ class Product extends CI_Controller{
 		<p class=''>US $".number_format($row->MaxPrice, 2, '.', ',')."</p>".
 		"
 		<h4 class=''><b>Supply Ability</b></h4>
-		<p class=''>".$row->SupplyAbility."</p>".
+		<p class=''>".number_format($product[0]->SupplyAbility, 0, '.', ',')."</p>".
 		"
 		<h4 class=''><b>Period Supply Ability</b></h4>
 		<p class=''>".$row->PeriodSupplyAbility."</p>".
