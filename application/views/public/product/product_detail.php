@@ -217,12 +217,7 @@ f
       <p>Sub Category :
         <?php echo $product[0]->ProductSubCategory; ?>
       </p>
-      <p>Supply Ability :
-        <?php echo number_format($product[0]->SupplyAbility, 0, '.', ','); ?>
-      </p>
-      <p>Period Supply Ability :
-        <?php echo $product[0]->PeriodSupplyAbility; ?>
-      </p>
+
       <?php if ($product[0]->IsPublished == 1): ?>
       <a class="btn btn-primary contact" href="<?php echo site_url('Quotation/rfq_view?')." product_id=".$product[0]->ProductId."
         & "."supplier_id=".$p->SupplierId ?>">Contact Supplier
@@ -237,7 +232,7 @@ f
   </div>
   <ul class="nav nav-tabs">
     <li class="active">
-      <a href="#1a" data-toggle="tab">Description</a>
+      <a href="#1a" data-toggle="tab">Product Detail</a>
     </li>
     <li>
       <a href="#2a" data-toggle="tab">Seller</a>
@@ -246,7 +241,37 @@ f
   <div class="tab-content clearfix">
     <div class="tab-pane active" id="1a">
       <div style="margin-top:20px">
-        <?php echo $product[0]->ProductDescription; ?>
+        <div class="col-md-2">
+          Product Unit
+        </div>
+        <div class="col-md-10">
+          : <?php echo $product[0]->Unit; ?>
+        </div>
+        <div class="col-md-2">
+          Supply Ability
+        </div>
+        <div class="col-md-10">
+          : <?php echo number_format($product[0]->SupplyAbility, 0, '.', ','); ?>
+        </div>
+        <div class="col-md-2">
+          Period Supply Ability
+        </div>
+        <div class="col-md-10">
+          : <?php echo $product[0]->PeriodSupplyAbility; ?>
+        </div>
+        <div class="col-md-2">
+          Packaging and Delivery
+        </div>
+        <div class="col-md-10">
+          : <?php echo $product[0]->PkgDelivery; ?>
+        </div>
+        <div class="col-md-2">
+          Product Description
+        </div>
+        <div class="col-md-10">
+          : <?php echo $product[0]->ProductDescription; ?>
+        </div>
+
       </div>
     </div>
     <div class="tab-pane seller_detail" id="2a">

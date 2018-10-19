@@ -15,13 +15,16 @@ class Quotation extends CI_Controller{
   function rfq_view(){
     $user_id = $this->session->userdata('user_id');
     $user_level = $this->session->userdata('user_level');
+    $product_id = $this->input->get('product_id');
+    $supplier_id = $this->input->get('supplier_id');
     if (empty($user_id) || ($user_level != 2 && $user_level != 3)) {
       $this->session->set_flashdata('msg', 'Request for Quotation can only be made by  Buyer Member Level, if you want to be Supplier & Buyer Member Level please contact dinilaku@gmail.com');
       redirect('Home/home_view');
     }
-
-    $product_id = $this->input->get('product_id');
-    $supplier_id = $this->input->get('supplier_id');
+    if ($user_id == $supplier_id) {
+      $this->session->set_flashdata("msg", "Oops you cant request for quotation your own product");
+      redirect('Home/home_view');
+    }
     $product_rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.*, productcategory_tb.*, productsubcategory_tb.* ";
 		$product_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN productpic_tb INNER JOIN productcategory_tb INNER JOIN productsubcategory_tb
 		ON product_tb.Id = productpic_tb.ProductId
