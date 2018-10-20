@@ -271,6 +271,32 @@
       // echo "<pre>";
   		// print_r($this->input->post('file'));
   		// echo "</pre>";exit();
+
+
+
+
+      $deleted_image = $this->input->post('deleted_image');
+      if (isset($deleted_image)) {
+        foreach ($deleted_image as $key => $value) {
+          $supplier_gallery_pic_id = $value;
+          $supplier_gallery_pic_rules['filter_value'] =  array('supplier_gallery_pic_id'=>$supplier_gallery_pic_id);
+          $this->M_supplier_gallery_pic->set_search_supplier_gallery_pic($supplier_gallery_pic_rules);
+          $get_supplier_gallery_pic = $this->M_supplier_gallery_pic->get_supplier_gallery_pic();
+          $get_supplier_gallery_pic_row = $get_supplier_gallery_pic->row();
+
+          $this->db->where('Id', $supplier_gallery_pic_id);
+          $this->db->delete('suppliergallerypic_tb');
+
+          if(file_exists($file='./assets/supplier_upload/'.str_replace(' ', '_', $get_supplier_gallery_pic_row->FileName))){
+            unlink($file);
+          }
+          echo "{}";
+        }
+      }
+
+
+
+
       $this->M_supplier_gallery_pic->update_supplier_gallery_pic($supplier_id,$supplier_gallery_pic);
       $this->session->set_flashdata('msg', 'Your company gallery has been successfully updated ');
       redirect('User/supplier_account_view');

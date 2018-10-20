@@ -293,8 +293,6 @@
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="margin-left: 50%; margin-right: 50%;">
                         <li><a href="#"><label for="siup" class="" style="font-weight:400">Change Profile Image</label></a></li>
 
-
-
                         <?php if (!empty($user[0]->Siup)): ?>
                           <li>
                             <a href="#" data-toggle="modal" data-target="#lightbox">
@@ -398,7 +396,7 @@
               <form class="form" action="<?php echo base_url().'User/update_supplier_gallery'; ?>" enctype="multipart/form-data" method="post" id="SimpanCompanyGallery">
 
                 <div class="col-md-12">
-                  <div class="form-group">
+                  <div class="form-group" id="formGroupSupplierGalleryImage">
                     <label class="control-label">Company Gallery</label>
                   </div>
                   <?php foreach ($supplier_gallery_pic as $sgp): ?>
@@ -432,13 +430,19 @@
                   <?php endforeach; ?>
 
                 </div>
-                <div class="form-group">
+                <div class="form-group" >
                   <label class="control-label"></label>
                   <div class="dropzone">
                     <div class="dz-message">
                       <h4> Click or Drop gallery picture here..
                         <br>Max File Size 1,8 MB</h4>
                       </div>
+                    </div>
+                    <button type="button" style="margin-bottom: 10px"  class="btn btn-info col-md-12" id="BtnUpload">
+                      <i class='glyphicon glyphicon-ok'></i> Upload Image
+                    </button>
+                    <div id="max_upload_product_image_alert" class="" role="alert">
+                      <p id="max_upload_product_image_error"></p>
                     </div>
                   </div>
                   <div class="form-group ">
@@ -481,7 +485,7 @@
 </section>
 
 <script src="<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/dropzone/js/dropzone-amd-module.min.js') ?>"></script>
+
 <script>
 // $.validate({
 //   lang: 'es',
@@ -606,23 +610,57 @@ $(document).ready(function(){
 });
 </script>
 <script type="text/javascript">
-$(function () {
-  $(document).click(function (event) {
+$(function(){
+  $(document).click(function(event){
+    // var value=$(event.target).val();
     var value = $(event.target).attr('class');
-    console.log(value);
-    $.ajax({
-      type: "POST",
-      url: "<?php echo base_url('User/remove_supplier_gallery_pic_button') ?>",
-      data: {
-        supplier_gallery_pic_id: value
-      },
-      success: function (respond) {
-        var divPic = "#div" + value;
-        $(divPic).remove();
-      }
-    })
+    var id = event.target.id;
+    console.log(value+" value");
+    console.log(id+" id");
+    if (id == "delete_pic") {
+      event.preventDefault();
+      $.confirm({
+        title: 'Confirmation',
+        content: 'Are You Sure to delete this company gallery image?',
+        type: 'red',
+        buttons: {
+          Delete: function () {
+            //$(event.target).click();
+            var divPic = "#div"+value;
+            $(divPic).remove();
+            $('<input>').attr({
+              type: 'hidden',
+              id: value,
+              name: 'deleted_image['+value+']',
+              value: value
+            }).appendTo('#SimpanCompanyGallery');
+          },
+          Cancel: function () {
+            $.alert('company gallery image not deleted...');
+          },
+        }
+      });
+    }
   });
-})
+});
+// ++++++++++++++++++++++++++++++++++++++Persiapan Penggantian dan hapus++++++++++++++++++++++++++++++++++++++++++++++++
+// $(function () {
+//   $(document).click(function (event) {
+//     var value = $(event.target).attr('class');
+//     console.log(value);
+//     $.ajax({
+//       type: "POST",
+//       url: "<?php //echo base_url('User/remove_supplier_gallery_pic_button') ?>",
+//       data: {
+//         supplier_gallery_pic_id: value
+//       },
+//       success: function (respond) {
+//         var divPic = "#div" + value;
+//         $(divPic).remove();
+//       }
+//     })
+//   });
+// })
 </script>
 <script type="text/javascript">
 function readUrlTdp(input) {
@@ -753,8 +791,10 @@ $(document).ready(function () {
     maxFilesize: 2000,
     method: "post",
     acceptedFiles: accept,
+    parallelUploads:4,
+    autoProcessQueue: false,
     paramName: "userfiles",
-    maxFiles: 5,
+    maxFiles: 4,
     dictInvalidFileType: "Type file ini tidak dizinkan",
     addRemoveLinks: true,
 
@@ -777,6 +817,79 @@ $(document).ready(function () {
       i++;
     }
   });
+
+
+
+
+
+  $("#BtnUpload").click(function() {
+    var qty_dropzone_preview_image = 0;
+    var qty_productImageAfter = 0 ;
+    var qty_all_upload = 0;
+    $('div[class^="dz-preview dz-image-preview"]').each(function() {
+      qty_dropzone_preview_image = qty_dropzone_preview_image+1;
+    });
+    $('div[id^="div"]').each(function() {
+      qty_productImageAfter = qty_productImageAfter+1;
+    });
+    qty_all_upload = qty_dropzone_preview_image+qty_productImageAfter;
+    console.log(qty_dropzone_preview_image);
+    console.log(qty_productImageAfter);
+    console.log(qty_all_upload);
+    if (qty_all_upload < 5) {
+      foto_upload.processQueue();
+      setTimeout( function () {
+        var productImage ="x";
+        var productImageAfter ="x after";
+        $('input[name^="file"]').each(function() {
+          productImage = "ada";
+        });
+        $('div[id^="div"]').each(function() {
+          productImageAfter = "ada after";
+        });
+        if (productImage == "ada" || productImageAfter == "ada after") {
+          $("#max_upload_product_image_alert").removeAttr("class");
+          $("#max_upload_product_image_error").html('');
+          $("#formGroupSupplierGalleryImage").addClass("has-success").removeClass( "has-error" );
+        }
+      }, 500);
+    }else {
+      $("#formGroupSupplierGalleryImage").addClass("has-error").removeClass( "has-success" );
+      $("#max_upload_product_image_alert").addClass('alert alert-danger');
+      $("#max_upload_product_image_error").html('You can only have four gallery images');
+    }
+  });
+
+
+
+
+// +++++++++++++++++++++++++++++++
+  //
+  // $("#BtnUpload").click(function() {
+  //   var qty_dropzone_preview_image = 0;
+  //   $('div[class^="dz-preview dz-image-preview"]').each(function() {
+  //     qty_dropzone_preview_image = qty_dropzone_preview_image+1;
+  //   });
+  //   console.log(qty_dropzone_preview_image);
+  //   if (qty_dropzone_preview_image < 6) {
+  //     foto_upload.processQueue();
+  //     setTimeout( function () {
+  //
+  //       $("#max_upload_product_image_alert").removeAttr("class");
+  //       $("#max_upload_product_image_error").html('');
+  //       $("#formGroupSupplierGalleryImage").addClass("has-success").removeClass( "has-error" );
+  //     }, 500);
+  //   }else if(qty_dropzone_preview_image > 5){
+  //     // $(".dropzone dz-clickable dz-started").css( "border-color", "#dd4b39" );
+  //     // /$(".dropzone dz-clickable dz-started").attr("style","border-color:#dd4b39");
+  //     //console.log($(".dropzone dz-clickable dz-started"));
+  //     $("#formGroupSupplierGalleryImage").addClass("has-error").removeClass( "has-success" );
+  //     $("#max_upload_product_image_alert").addClass('alert alert-danger');
+  //     $("#max_upload_product_image_error").html('You can only have five gallery images');
+  //   }
+  // });
+
+// ++++++++++++++
 
   foto_upload.on("addedfile", function (file) {
     if (!file.type.match(/image.*/)) {

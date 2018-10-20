@@ -23,13 +23,15 @@ class M_supplier_gallery_pic extends CI_Model{
     $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
     $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
     // $this->filter_value = isset($rules['filter_value']['user_level']) ? " AND user_tb.UserLevel = ".$rules['filter_value']['user_level'] : "" ;
-    $this->filter_value = isset($rules['filter_value']['supplier_id']) ? " AND suppliergallerypic_tb.SupplierId = ".$rules['filter_value']['supplier_id'] : "" ;
+    $this->filter_value = "1=1";
+    $this->filter_value .= isset($rules['filter_value']['supplier_id']) ? " AND suppliergallerypic_tb.SupplierId = ".$rules['filter_value']['supplier_id'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['supplier_gallery_pic_id']) ? " AND suppliergallerypic_tb.Id = ".$rules['filter_value']['supplier_gallery_pic_id'] : "" ;
     // $this->filter_value .= isset($rules['filter_value']['search_value']) ? " AND user_tb.CompanyName LIKE "."'%".$rules['filter_value']['search_value']."%'"  : "" ;
   }
   function get_supplier_gallery_pic() {
     $query = "SELECT suppliergallerypic_tb.* ".$this->other_table_columns."
     FROM suppliergallerypic_tb ".$this->join_table."
-    WHERE 1=1 ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
+    WHERE ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
     //echo $query;exit();
     $query = $this->db->query($query);
     return $query;

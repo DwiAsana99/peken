@@ -19,7 +19,7 @@ $(function(){
   $("#product_category_code").change(function(){
 
     var code=$(this).val();
-    get_product_sub_category(code)
+    get_product_sub_category(code);
 
 
   });
@@ -329,7 +329,7 @@ function readURL(input) {
   }
 }
 </script>
-<script type="text/javascript"> //ganti
+<script type="text/javascript"> 
 $(function(){
   $(document).click(function(event){
     var value=$(event.target).val();
