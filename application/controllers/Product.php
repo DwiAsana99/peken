@@ -34,7 +34,7 @@ class Product extends CI_Controller{
 			if (!empty($this->input->get('search_value'))) {
 				$search_value = $this->input->get('search_value');
 				$data_nav['search_value'] = $search_value;
-				$product_rules['filter_value'] =  array('is_published' => 1, 'search_value'=>$search_value);
+				$product_rules['filter_value'] =  array('is_published' => 1, 'search_value'=>$search_value, 'is_verified_supplier' =>1);
 				$this->M_product->set_search_product($product_rules);
 				$get_product = $this->M_product->get_product();
 				$this->M_pagination->set_config(
@@ -52,7 +52,7 @@ class Product extends CI_Controller{
 			}
 			elseif ( !empty($this->input->get('product_category_code'))) {
 				$product_category_code = $this->input->get('product_category_code');
-				$product_rules['filter_value'] =  array('is_published' => 1, 'product_category_code'=>$product_category_code);
+				$product_rules['filter_value'] =  array('is_published' => 1, 'product_category_code'=>$product_category_code, 'is_verified_supplier' =>1);
 				$this->M_product->set_search_product($product_rules);
 				$get_product = $this->M_product->get_product();
 				$this->M_pagination->set_config(
@@ -74,7 +74,7 @@ class Product extends CI_Controller{
 			else {
 
 				$product_sub_category_code = $this->input->get('product_sub_category_code');
-				$product_rules['filter_value'] =  array('is_published' => 1, 'product_sub_category_code'=>$product_sub_category_code);
+				$product_rules['filter_value'] =  array('is_published' => 1, 'product_sub_category_code'=>$product_sub_category_code, 'is_verified_supplier' =>1);
 				$this->M_product->set_search_product($product_rules);
 				$get_product = $this->M_product->get_product();
 				$this->M_pagination->set_config(
@@ -106,7 +106,7 @@ class Product extends CI_Controller{
 		}
 		/*menampilkan semua product secara acak*/
 		else {
-			$product_rules['filter_value'] =  array('is_published' => 1);
+			$product_rules['filter_value'] =  array('is_published' => 1, 'is_verified_supplier' =>1);
 
 			$this->M_product->set_search_product($product_rules);
 
@@ -399,7 +399,7 @@ class Product extends CI_Controller{
 
 		$product = $get_product->result();
 		$row = $get_product->row();
-		echo "<div class'text-right'><a href='".site_url('Product/public_product_detail_view/').$row->ProductId."' class=' btn btn-info'><span class='glyphicon glyphicon-eye-open'></span> Preview Product Detail in Published</a><div><br>";
+		echo "<div class'text-right'><a href='".site_url('Product/public_product_detail_view/').$row->ProductId."' class=' btn btn-info' target='_blank'><span class='glyphicon glyphicon-eye-open'></span> Preview Product Detail in Published</a><div><br>";
 		// print_r($row);exit();
 		foreach ($product as $key ) {
 			// echo $row->Name;

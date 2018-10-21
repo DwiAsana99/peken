@@ -32,7 +32,7 @@
                 <?php foreach($quotation as $q){ ?>
                   <tr class="click">
                     <td>
-                      <a href="<?php echo base_url().'Quotation/supplier_quotation_detail?quotation_code='.$q->Code; ?>">From:
+                      <a target="_blank" href="<?php echo base_url().'Quotation/supplier_quotation_detail?quotation_code='.$q->Code; ?>">From:
                         <?php echo $q->LastName  ?>
                       </a>
                     </td>
@@ -54,12 +54,12 @@
   </div><!-- /.box -->
 </section>
 <script>
-$(document).ready(function () {
-  $('#example').DataTable();
-  $('.click').click(function () {
-    window.location = $(this).find('a').attr('href');
-  }).hover(function () {
-    $(this).toggleClass('hover');
-  });
-});
+// $(document).ready(function () {
+//   $('#example').DataTable();
+//   $('.click').click(function () {
+//     window.location = $(this).find('a').attr('href');
+//   }).hover(function () {
+//     $(this).toggleClass('hover');
+//   });
+// });
 </script>

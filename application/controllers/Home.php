@@ -48,11 +48,14 @@ class Home extends CI_Controller{
 		$product_rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.* ";
 		$product_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN productpic_tb
 		ON product_tb.Id = productpic_tb.ProductId AND user_tb.Id = product_tb.SupplierId ";
-		$product_rules['filter_value'] =  array('is_published' => 1);
+		$product_rules['filter_value'] =  array('is_published' => 1, 'is_verified_supplier' =>1);
 		$product_rules['group_by'] = ' productpic_tb.ProductId ';
 		$this->M_product->set_search_product($product_rules);
 		$get_product= $this->M_product->get_product();
 		$data['product'] = $get_product->result();
+		// echo "<pre>";
+		// print_r($data['product']); exit();
+		// echo "</pre>";
 
 		$user_rules['limit'] = 8;
 		// $rules['join']['other_table_columns'] = " ,user_tb.*, productpic_tb.* ";
@@ -60,6 +63,7 @@ class Home extends CI_Controller{
 		// ON product_tb.Id = productpic_tb.ProductId AND user_tb.Id = product_tb.SupplierId ";
 		//$rules['filter_value'] =  array('is_published' => 1);
 		//$rules['group_by'] = ' productpic_tb.ProductId ';
+		$user_rules['filter_value'] =  array('is_verified_supplier' =>1);
 		$this->M_user->set_search_user($user_rules);
 		$get_user = $this->M_user->get_user();
 		$data['supplier'] = $get_user->result();

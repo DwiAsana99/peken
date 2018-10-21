@@ -31,7 +31,7 @@
       <div class="my-container seller_column">
         <?php foreach($supplier as $s){ ?>
         <div class="tes-hover text-center">
-          <a
+          <a target="_blank"
           href="<?php echo site_url('user/supplier_mini_site_view?supplier_id=').$s->Id ?>">
             <img
               src="<?php echo base_url('assets/supplier_upload/').$s->ProfileImage; ?>"
@@ -39,16 +39,22 @@
               alt="">
           </a>
           <div class="detail-display">
-            <h6><b>
-              <?php $lengt = strlen($s->CompanyName);
-              if ($lengt>14) {
-              echo trim(substr($s->CompanyName,0,12))." <b>...</b>";
-              } else {
-                echo $s->CompanyName;
-              }
-               ?>
-            </b> </h6>
-
+            <?php if ($s->IsVerifiedSupplier): ?>
+              <h6>
+                <b>
+                <img src="<?php echo base_url().'assets/supplier_upload/'.'verified.png' ?>" alt="" width="25">
+                <?php $lengt = strlen($s->CompanyName);
+                if ($lengt>14) {
+                echo trim(substr($s->CompanyName,0,14))." <b>...</b>";
+                } else {
+                  echo $s->CompanyName;
+                }
+                 ?>
+                 </b>
+              </h6>
+            <?php else: ?>
+              <h6><b><?php echo $s->CompanyName; ?></b></h6>
+            <?php endif; ?>
           </div>
         </div>
         <?php } ?>

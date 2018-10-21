@@ -347,7 +347,7 @@ class Quotation extends CI_Controller{
           $profile_image = $ucnb->ProfileImage;
           $profile_image = !empty($profile_image) ? $profile_image : "user_without_profile_image.png" ;
           $var .= "<li>
-            <a href=".base_url()."Quotation/supplier_quotation_detail?quotation_code=".$ucnb->QuotationCode.">
+            <a target='_blank' href=".base_url()."Quotation/supplier_quotation_detail?quotation_code=".$ucnb->QuotationCode.">
               <div class='pull-left'>
                 <img src=".base_url()."assets/supplier_upload/".$profile_image." height='50' width='50' class='img-circle' alt=''>
               </div>
@@ -361,7 +361,7 @@ class Quotation extends CI_Controller{
         }
         $var .= "</ul>
       </li>
-      <li class='footer'><a href='".base_url()."Quotation/supplier_all_notifications_rfq_view'>See All Notifications</a></li>
+      <li class='footer'><a target='_blank' href='".base_url()."Quotation/supplier_all_notifications_rfq_view'>See All Notifications</a></li>
     </ul>";
       echo $var;
   }
@@ -397,7 +397,7 @@ class Quotation extends CI_Controller{
           <div class='drop-content'>";
         foreach ($unread_chat_notification_bell as $ucnb) {
           $var .= "<li>
-                    <a href=".base_url()."Quotation/buyer_quotation_detail/".$ucnb->QuotationCode.">
+                    <a target='_blank' href=".base_url()."Quotation/buyer_quotation_detail/".$ucnb->QuotationCode.">
                     <div class='col-md-3 col-sm-3 col-xs-3'><div class='notify-img'><img src=".base_url()."assets/supplier_upload/".$ucnb->ProfileImage." height='40' width='40' class='img-circle' alt=''></div></div>
                     <div class='col-md-9 col-sm-9 col-xs-9 pd-l0'>
                       <h5 style='margin-top: -5px; margin-bottom: -2px;'><b>".$ucnb->CompanyName."</b></h5>
@@ -409,7 +409,7 @@ class Quotation extends CI_Controller{
         }
         $var .= "</div>
         <div class='notify-drop-footer text-center' style='padding-bottom: 300px;'>
-          <a href='".base_url()."Quotation/buyer_all_notifications_chat_view'><i class='fa fa-eye'></i> See All Notifications</a>
+          <a target='_blank' href='".base_url()."Quotation/buyer_all_notifications_chat_view'><i class='fa fa-eye'></i> See All Notifications</a>
         </div>
       </ul>";
       echo $var;
@@ -446,7 +446,7 @@ class Quotation extends CI_Controller{
           $profile_image = $ucnb->ProfileImage;
           $profile_image = !empty($profile_image) ? $profile_image : "user_without_profile_image.png" ;
           $var .= "<li>
-            <a href=".base_url()."Quotation/supplier_quotation_detail?quotation_code=".$ucnb->QuotationCode.">
+            <a target='_blank' href=".base_url()."Quotation/supplier_quotation_detail?quotation_code=".$ucnb->QuotationCode.">
               <div class='pull-left'>
                 <img src=".base_url()."assets/supplier_upload/".$profile_image." height='50' width='50' class='img-circle' alt=''>
               </div>
@@ -459,7 +459,7 @@ class Quotation extends CI_Controller{
         }
         $var .= "</ul>
       </li>
-      <li class='footer'><a href='".base_url()."Quotation/supplier_all_notifications_chat_view'>See All Notifications</a></li>
+      <li class='footer'><a target='_blank' href='".base_url()."Quotation/supplier_all_notifications_chat_view'>See All Notifications</a></li>
     </ul>";
       echo $var;
 
@@ -650,7 +650,7 @@ class Quotation extends CI_Controller{
       'BuyerId' => $buyer_id,
       'SupplierId' => $supplier_id,
       'Subject' => $subject,
-      'Content' => $content,
+      'Content' => $message,
       'ProductId' => $product_id,
       'IsAccepted' => -1,
       'Qty' => $qty

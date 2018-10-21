@@ -74,7 +74,7 @@
         $data['breadcrumb'] .= "<li class='active'>"."Search for '".$search_value."''</li>";
       }
       else {
-        $user_rules['filter_value'] =  array('user_level'=>"1 OR user_tb.UserLevel = 3");
+        $user_rules['filter_value'] =  array('user_level'=>"1 OR user_tb.UserLevel = 3", 'is_verified_supplier' =>1);
         $this->M_user->set_search_user($user_rules);
         $get_supplier = $this->M_user->get_user();
         $this->M_pagination->set_config(
@@ -85,6 +85,7 @@
         $offset = $this->M_pagination->get_offset($page);
         $user_rules['limit'] = $config["per_page"];
         $user_rules['offset'] = $offset;
+        $user_rules['filter_value'] =  array('user_level'=>"1 OR user_tb.UserLevel = 3", 'is_verified_supplier' =>1);
         $this->M_user->set_search_user($user_rules);
         $get_supplier = $this->M_user->get_user();
         $data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";

@@ -29,12 +29,13 @@ class M_user extends CI_Model{
     $this->filter_value .= isset($rules['filter_value']['email']) ? " AND user_tb.Email = "."'".$rules['filter_value']['email']."'" : "" ;
     $this->filter_value .= isset($rules['filter_value']['password']) ? " AND user_tb.Password = "."'".$rules['filter_value']['password']."'" : "" ;
     $this->filter_value .= isset($rules['filter_value']['search_value']) ? " AND user_tb.CompanyName LIKE "."'%".$rules['filter_value']['search_value']."%'"  : "" ;
+    $this->filter_value .= isset($rules['filter_value']['is_verified_supplier']) ? " AND user_tb.IsVerifiedSupplier = ".$rules['filter_value']['is_verified_supplier'] : "" ;
   }
   function get_user() {
     $query = "SELECT user_tb.* ".$this->other_table_columns."
     FROM user_tb ".$this->join_table."
     WHERE ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
-    //echo $query;exit();
+    echo $query;exit();
     $query = $this->db->query($query);
     return $query;
   }

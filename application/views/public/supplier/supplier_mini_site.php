@@ -64,8 +64,12 @@
 
 <div class="container-fluid bg-1 text-center">
   <img src="<?php echo base_url('assets/supplier_upload/').$supplier[0]->ProfileImage; ?>" class="img-responsive " style="display:inline" width="250" height="250">
-  <!-- Semboyan <h3><em>"Jewelry is something that has todo wtih emotion"</em></h3>-->
-  <h2 class="margin"><b><?php echo $supplier[0]->CompanyName?></b</h2>
+  <?php if ($supplier[0]->IsVerifiedSupplier): ?>
+    <h2 class="margin"><b><img src="<?php echo base_url().'assets/supplier_upload/'.'verified.png' ?>" alt="" width="25"><?php echo $supplier[0]->CompanyName; ?></b></h2>
+  <?php else: ?>
+    <h2 class="margin"><b><?php echo $supplier[0]->CompanyName?></b></h2>
+  <?php endif; ?>
+
     <h4><?php echo ucwords($supplier[0]->State)?></h4>
     <h4><a href="mailto:<?php echo $supplier[0]->Email?>?Subject="><?php echo $supplier[0]->Email?></a></h4>
     <h4><a href="tel:<?php echo $supplier[0]->Phone?>"><?php echo $supplier[0]->Phone?></a></h4>
@@ -105,7 +109,11 @@
                   </div>
                   <hr>
                   <div class="text-center">
-                    <h6><?php echo $p->CompanyName; ?></h6>
+                    <?php if ($p->IsVerifiedSupplier): ?>
+                      <h6><img src="<?php echo base_url().'assets/supplier_upload/'.'verified.png' ?>" alt="" width="25"><?php echo $p->CompanyName; ?></h6>
+                    <?php else: ?>
+                      <h6><?php echo $p->CompanyName; ?></h6>
+                    <?php endif; ?>
                     <a href="<?php echo site_url('Quotation/rfq_view?')."product_id=".$p->ProductId."&"."supplier_id=".$p->SupplierId ?>" class="btn btn-default">Contact Supplier</a>
                   </div>
                 </div>

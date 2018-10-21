@@ -52,7 +52,7 @@
 
 
           <td>
-           <a class="btn btn-warning" style="padding: 0px 0px;"  href="<?php echo base_url('Product/product_edit_view/').$u->ProductId;?>" data-toggle="tooltip"
+           <a class="btn btn-warning"  style="padding: 0px 0px;"  href="<?php echo base_url('Product/product_edit_view/').$u->ProductId;?>" data-toggle="tooltip"
               data-placement="bottom" title="Edit Product">
             <span class="fa fa-fw fa-edit" >
             </span>

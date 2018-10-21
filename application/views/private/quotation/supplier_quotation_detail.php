@@ -80,7 +80,43 @@
       <!-- /.box-header -->
       <div class="box-body">
         <div class="col-md-6">
-          <p><?php echo $quotation[0]->Content; ?></p>
+          <h2>Request for Quotation Code <b><?php echo $quotation[0]->Code; ?></b></h2>
+          <p>
+          <?php foreach($product_pic as $pc){ ?>
+
+          <img width="100" src="<?php echo base_url('assets/supplier_upload/').$pc->FileName;?>" alt="">
+          <?php } ?>
+          </p>
+          <div class="col-md-3">
+          Date
+          </div>
+          <div class="col-md-9">
+            : <?php echo $quotation[0]->SendDate; ?>
+          </div>
+          <div class="col-md-3">
+            Buyer Name
+          </div>
+          <div class="col-md-9">
+            : <?php echo $product[0]->CompanyName; ?>
+          </div>
+          <div class="col-md-3">
+            Product Name
+          </div>
+          <div class="col-md-9">
+            : <?php echo $product[0]->Name; ?>
+          </div>
+          <div class="col-md-3">
+            Qty
+          </div>
+          <div class="col-md-9">
+            : <?php echo $quotation[0]->Qty; ?>
+          </div>
+          <div class="col-md-3">
+            Message
+          </div>
+          <div class="col-md-9">
+            : <?php echo $quotation[0]->Content; ?>
+          </div>
         </div>
 
 

@@ -28,7 +28,7 @@
     display: none;
     width: 300px;
     height: 300px;
-f
+
     -webkit-box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
     box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
@@ -281,9 +281,19 @@ f
           <img class=" img-responsive seller_img" src="<?php echo base_url('assets/supplier_upload/').$p->ProfileImage;  ?>" width="100"
             height="100" alt="">
         </p>
-        <p>
-          <img src="<?php echo base_url().'assets/supplier_upload/'.'verified.png' ?>" alt="" width="25"><?php echo $p->CompanyName; ?>
-        </p>
+
+
+        <?php if ($p->IsVerifiedSupplier): ?>
+          <p>
+            <img src="<?php echo base_url().'assets/supplier_upload/'.'verified.png' ?>" alt="" width="25"><?php echo $p->CompanyName; ?>
+          </p>
+        <?php else: ?>
+          <p>
+            <?php echo $p->CompanyName; ?>
+          </p>
+        <?php endif; ?>
+
+
       </a>
       <div>kfc@gmail.com</div>
       <div>Ngurah rai street no 23</div>

@@ -54,7 +54,7 @@
               <?php endif; ?>
               <p>
                 <?php $supplier_id = $this->session->userdata('user_id'); ?>
-                <a href="<?php echo site_url('User/supplier_mini_site_view?')."supplier_id=".$supplier_id ?>" class="text-center ">
+                <a target='_blank' href="<?php echo site_url('User/supplier_mini_site_view?')."supplier_id=".$supplier_id ?>" class="text-center ">
                   <span class="glyphicon glyphicon-eye-open"></span> Preview Mini Site</a>
                 </p>
 

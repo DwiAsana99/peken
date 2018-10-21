@@ -105,7 +105,7 @@
     <div class="my-container">
       <?php $i = 1; foreach($product as $p){ ?>
       <div class="tes-hover">
-        <a href="<?php echo site_url('Product/public_product_detail_view/').$p->ProductId ?>">
+        <a target="_blank" href="<?php echo site_url('Product/public_product_detail_view/').$p->ProductId ?>">
           <img class="img-responsive" src="<?php echo base_url('assets/supplier_upload/').$p->FileName?>" alt="">
         </a>
         <h4>US $
@@ -122,20 +122,25 @@
         </div>
         <hr>
         <div class="text-center">
-          <h6><img src="<?php echo base_url().'assets/supplier_upload/'.'verified.png' ?>" alt="" width="25"><?php echo $p->CompanyName; ?></h6>
+          <?php if ($p->IsVerifiedSupplier): ?>
+            <h6><img src="<?php echo base_url().'assets/supplier_upload/'.'verified.png' ?>" alt="" width="25"><?php echo $p->CompanyName; ?></h6>
+          <?php else: ?>
+            <h6><?php echo $p->CompanyName; ?></h6>
+          <?php endif; ?>
+
           <a href="<?php echo site_url('Quotation/rfq_view?')."product_id=".$p->ProductId."&"."supplier_id=".$p->SupplierId ?>" class="btn btn-default">Contact Supplier</a>
         </div>
       </div>
       <?php } ?>
     </div>
     <div class="text-right">
-      <a href="<?php echo site_url('Product/public_product_list_view') ?>" class="btn btn-warning more">See More Product Today</a>
+      <a target="_blank" href="<?php echo site_url('Product/public_product_list_view') ?>" class="btn btn-warning more">See More Product Today</a>
     </div>
   </div>
   <!-- <div class="row"> -->
   <div class="divider" style="margin: 10% 0"></div>
     <div class="flex_shadow seller">
-      <h2>Seller</h2>
+      <h2>Supplier</h2>
       <div class="my-container seller_column">
         <?php foreach($supplier as $s){ ?>
         <div class="tes-hover text-center">
@@ -147,22 +152,37 @@
               alt="">
           </a>
           <div class="detail-display">
-            <h6><b>
-            <?php $lengt = strlen($s->CompanyName);
-            if ($lengt>14) {
-            echo trim(substr($s->CompanyName,0,12))." <b>...</b>";
-            } else {
-              echo $s->CompanyName;
-            }
-             ?>
-           </b> </h6>
+
+
+
+                <?php if ($s->IsVerifiedSupplier): ?>
+                  <h6>
+                    <b>
+                    <img src="<?php echo base_url().'assets/supplier_upload/'.'verified.png' ?>" alt="" width="25">
+                    <?php $lengt = strlen($s->CompanyName);
+                    if ($lengt>14) {
+                    echo trim(substr($s->CompanyName,0,14))." <b>...</b>";
+                    } else {
+                      echo $s->CompanyName;
+                    }
+                     ?>
+                     </b>
+                  </h6>
+                <?php else: ?>
+                  <h6><b><?php echo $s->CompanyName; ?></b></h6>
+                <?php endif; ?>
+
+
+
+
+
 
           </div>
         </div>
         <?php } ?>
       </div>
       <div class="text-right">
-        <a href="<?php echo site_url('user/public_supplier_list_view') ?>" class="btn btn-warning more">See More Supplier</a>
+        <a  href="<?php echo site_url('user/public_supplier_list_view') ?>" class="btn btn-warning more">See More Supplier</a>
       </div>
     </div>
   <!-- </div> row comment -->

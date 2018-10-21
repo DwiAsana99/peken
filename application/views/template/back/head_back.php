@@ -17,7 +17,7 @@
   <div class="wrapper">
     <header class="main-header">
       <!-- Logo -->
-      <a href="<?php echo site_url('Home/home_view/') ;?>" class="logo" style="position:fixed">
+      <a target="_blank" href="<?php echo site_url('Home/home_view/') ;?>" class="logo" style="position:fixed">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">
           <b>D</b>L</span>
@@ -223,7 +223,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="<?php echo site_url('Home/home_view/') ;?>" class="btn btn-default btn-flat">Visite Site</a>
+                    <a target="_blank" href="<?php echo site_url('Home/home_view/') ;?>" class="btn btn-default btn-flat">Visite Site</a>
                   </div>
                   <div class="pull-right">
                     <a href="<?php echo base_url().'User/logout';?>" class="btn btn-default btn-flat">Sign out</a>

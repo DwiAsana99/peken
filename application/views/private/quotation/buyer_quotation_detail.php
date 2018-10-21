@@ -12,22 +12,47 @@
   <div class="row">
     <div class="col-md-7 detail">
       <div class="block cover-container">
+        <h2>Request for Quotation Code <b><?php echo $quotation[0]->Code; ?></b></h2>
         <?php foreach($product_pic as $pc){ ?>
 
         <img src="<?php echo base_url('assets/supplier_upload/').$pc->FileName;?>" alt="">
         <?php } ?>
       </div>
       <br>
-      <!-- Quotation id  : 1 <br> -->
-      Supplier Name :
-      <?php echo $product[0]->CompanyName; ?><br>
-      Product Name :
-      <?php echo $product[0]->Name; ?><br>
-      Qty : 10 <br><br>
 
-      <p>
-        <?php echo $quotation[0]->Content; ?>
-      </p>
+
+
+      <div class="col-md-3">
+      Date
+      </div>
+      <div class="col-md-9">
+        : <?php echo $quotation[0]->SendDate; ?>
+      </div>
+      <div class="col-md-3">
+        Supplier Name
+      </div>
+      <div class="col-md-9">
+        : <?php echo $product[0]->CompanyName; ?>
+      </div>
+      <div class="col-md-3">
+        Product Name
+      </div>
+      <div class="col-md-9">
+        : <?php echo $product[0]->Name; ?>
+      </div>
+      <div class="col-md-3">
+        Qty
+      </div>
+      <div class="col-md-9">
+        : <?php echo $quotation[0]->Qty; ?>
+      </div>
+      <div class="col-md-3">
+        Message
+      </div>
+      <div class="col-md-9">
+        : <?php echo $quotation[0]->Content; ?>
+      </div>
+
     </div>
 
 

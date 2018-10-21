@@ -44,7 +44,7 @@ white-space: nowrap;
         <?php foreach($quotation as $q){ ?>
           <tr class="click">
             <td>
-              <a href="<?php echo base_url().'Quotation/buyer_quotation_detail/'.$q->Code; ?>">To:
+              <a target='_blank' href="<?php echo base_url().'Quotation/buyer_quotation_detail/'.$q->Code; ?>">To:
                 <?php echo $q->CompanyName  ?>
               </a>
             </td>
@@ -75,12 +75,12 @@ $(function () {
 });
 </script>
 <script>
-$(document).ready(function () {
-  $('#example').DataTable();
-  $('.click').click(function () {
-    window.location = $(this).find('a').attr('href');
-  }).hover(function () {
-    $(this).toggleClass('hover');
-  });
-});
+// $(document).ready(function () {
+//   $('#example').DataTable();
+//   $('.click').click(function () {
+//     window.location = $(this).find('a').attr('href');
+//   }).hover(function () {
+//     $(this).toggleClass('hover');
+//   });
+// });
 </script>

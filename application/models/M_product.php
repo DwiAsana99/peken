@@ -18,12 +18,14 @@ class M_product extends CI_Model{
     $this->order_by = !empty($rules['order_by']) ? " ORDER BY ".$rules['order_by'] : "" ;
     $this->limit = isset($rules['limit']) ? " LIMIT ".$rules['limit'] : "" ;
     $this->offset = isset($rules['offset'])  ? " OFFSET ".$rules['offset'] : "" ;
-    $this->filter_value = isset($rules['filter_value']['is_published']) ? " AND product_tb.IsPublished = ".$rules['filter_value']['is_published'] : "" ;
+    $this->filter_value = "1=1";
+    $this->filter_value .= isset($rules['filter_value']['is_published']) ? " AND product_tb.IsPublished = ".$rules['filter_value']['is_published'] : "" ;
     $this->filter_value .= isset($rules['filter_value']['product_id']) ? " AND product_tb.Id = ".$rules['filter_value']['product_id'] : "" ;
     $this->filter_value .= isset($rules['filter_value']['supplier_id']) ? " AND product_tb.SupplierId = ".$rules['filter_value']['supplier_id'] : "" ;
     $this->filter_value .= isset($rules['filter_value']['product_category_code']) ? " AND productsubcategory_tb.ProductCategoryCode = ".$rules['filter_value']['product_category_code'] : "" ;
     $this->filter_value .= isset($rules['filter_value']['product_sub_category_code']) ? " AND product_tb.ProductSubCategoryCode = ".$rules['filter_value']['product_sub_category_code'] : "" ;
     $this->filter_value .= isset($rules['filter_value']['search_value']) ? " AND product_tb.Name LIKE "."'%".$rules['filter_value']['search_value']."%'"  : "" ;
+    $this->filter_value .= isset($rules['filter_value']['is_verified_supplier']) ? " AND user_tb.IsVerifiedSupplier = ".$rules['filter_value']['is_verified_supplier'] : "" ;
   }
 
   function set_search_product_pic($rules = "") {
@@ -43,7 +45,7 @@ class M_product extends CI_Model{
   function get_product() {
     $query = "SELECT product_tb.* ".$this->other_table_columns."
     FROM product_tb ".$this->join_table."
-    WHERE 1=1 ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
+    WHERE  ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
     //echo $query;exit();
 
     $query = $this->db->query($query);
