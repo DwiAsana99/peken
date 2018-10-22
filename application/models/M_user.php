@@ -35,7 +35,7 @@ class M_user extends CI_Model{
     $query = "SELECT user_tb.* ".$this->other_table_columns."
     FROM user_tb ".$this->join_table."
     WHERE ".$this->filter_value.$this->group_by.$this->order_by.$this->limit.$this->offset;
-    echo $query;exit();
+    //echo $query;exit();
     $query = $this->db->query($query);
     return $query;
   }

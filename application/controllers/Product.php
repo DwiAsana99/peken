@@ -173,12 +173,7 @@ class Product extends CI_Controller{
 
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
-		// if ($this->session->userdata('user_id')) {
-		// 	$buyer_id = $this->session->userdata('user_id');
-		// 	$get_unread_qutation_detail = $this->M_quotation_detail->get_unread_qutation_detail("",$buyer_id);
-		// 	$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
-		// 	$data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
-		// }
+
 		$head_data['page_title'] = "Dinilaku";
 		$baris = $get_product->row();
 		$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
