@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dropzone/css/dropzone.min.css') ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dropzone/css/basic.min.css') ?>" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/theme-default.min.css" rel="stylesheet" type="text/css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 
 <section class="content">
@@ -193,67 +194,62 @@
 
                 </div>
 
-
-
-
-
-
-
-                <div class="form-group col-lg-6">
+                <div class="form-group col-md-6" id="form_group_first_name">
                   <label class="control-label">First Name</label>
-                  <input type="text" name="first_name" id="first_name" value="<?php echo $user[0]->FirstName; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out first name..." class="form-control " placeholder="" required>
+                  <input type="text" name="first_name" id="first_name" value="<?php echo $user[0]->FirstName; ?>" class="form-control " placeholder="" >
+                  <span id="span_first_name" class=""></span>
                 </div>
-                <div class="form-group col-lg-6">
+                <div class="form-group col-md-6" id="form_group_last_name">
                   <label class="control-label">Last Name</label>
-                  <input type="text" name="last_name" id="last_name" value="<?php echo $user[0]->LastName; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out last name..." class="form-control" placeholder="" required>
+                  <input type="text" name="last_name" id="last_name" value="<?php echo $user[0]->LastName; ?>" class="form-control" placeholder="" >
+                  <span id="span_last_name" class=""></span>
                 </div>
-                <div class="form-group col-lg-12">
+                <div class="form-group col-md-12" id="form_group_zip_code">
                   <label class="control-label">Zip Code</label>
-                  <input type="text" name="zip_code" id="zip_code" value="<?php echo $user[0]->ZipCode; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out zip code..." class="form-control" placeholder="" required>
+                  <input type="text" name="zip_code" id="zip_code" value="<?php echo $user[0]->ZipCode; ?>" class="form-control" placeholder="" >
+                  <span id="span_zip_code" class=""></span>
                 </div>
-                <div class="form-group col-lg-12">
+                <div class="form-group col-md-12" id="form_group_address">
                   <label class="control-label">Company Address</label>
-                  <input type="text" name="address" id="address" value="<?php echo $user[0]->Address; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out company address..." class="form-control" placeholder="" required>
+                  <input type="text" name="address" id="address" value="<?php echo $user[0]->Address; ?>" class="form-control" placeholder="" >
+                  <span id="span_address" class=""></span>
                 </div>
-                <div class="form-group col-lg-12">
+                <div class="form-group col-md-12" id="form_group_city">
                   <label class="control-label">City</label>
-                  <input type="text" name="city" id="city" value="<?php echo $user[0]->City; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out city..." class="form-control" placeholder="" required>
+                  <input type="text" name="city" id="city" value="<?php echo $user[0]->City; ?>" class="form-control" placeholder="" >
+                  <span id="span_city" class=""></span>
                 </div>
-                <div class="form-group col-lg-12">
+                <div class="form-group col-md-12" id="form_group_province">
                   <label class="control-label">Province</label>
-                  <input type="text" name="province" id="province" value="<?php echo $user[0]->Province; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out province..." class="form-control" placeholder="" required>
+                  <input type="text" name="province" id="province" value="<?php echo $user[0]->Province; ?>" class="form-control" placeholder="" >
+                  <span id="span_province" class=""></span>
                 </div>
-                <div class="form-group col-lg-12">
+                <div class="form-group col-md-12" id="form_group_state">
                   <label class="control-label">State</label>
-                  <select name="state" id="state" class="form-control select2">
+                  <select name="state" id="state" class="form-control select2 ">
                     <option selected value="<?php echo $user[0]->State; ?>"><?php echo $user[0]->State; ?></option>
                   </select>
+                  <span id="span_state" class=""></span>
                 </div>
-                <div class="form-group col-lg-12">
+                <div class="form-group col-md-12" id="form_group_company_name">
                   <label class="control-label">Company Name</label>
-                  <input type="text" name="company_name" id="company_name" value="<?php echo $user[0]->CompanyName; ?>" data-validation="length"
-                  data-validation-length="min1" data-validation-error-msg="Please fill out company name..." class="form-control"
-                  placeholder="" required>
+                  <input type="text" name="company_name" id="company_name" value="<?php echo $user[0]->CompanyName; ?>" class="form-control" placeholder="" >
+                  <span id="span_company_name" class=""></span>
                 </div>
 
-                <div class="form-group col-lg-12">
+                <div class="form-group col-md-12" id="form_group_phone">
                   <label class="control-label">Phone Number</label>
-                  <input type="text" name="phone" id="phone" value="<?php echo $user[0]->Phone; ?>" data-validation="length" data-validation-length="min1"
-                  data-validation-error-msg="Please fill out phone number..." class="form-control" placeholder="" required>
+                  <input type="text" name="phone" id="phone" value="<?php echo $user[0]->Phone; ?>"
+                   class="form-control" placeholder="" >
+                   <span id="span_phone" class=""></span>
                 </div>
-                <div class="form-group col-lg-12">
+                <div class="form-group col-md-12" id="form_group_company_description">
                   <label class="control-label">Company Description</label>
-                  <textarea name="company_description" rows="6" class="form-control" data-validation="length" data-validation-length="min4"
-                  data-validation-error-msg="Please fill out product description..." required><?php echo $user[0]->CompanyDescription; ?></textarea>
+                  <textarea name="company_description" id="company_description" rows="6" class="form-control"><?php echo $user[0]->CompanyDescription; ?></textarea>
+                  <span id="span_company_description" class=""></span>
                 </div>
                 <div class="form-group ">
-                  <button  class="btn btn-primary col-md-12" type="submit" value="Validate">Save</button>
+                  <button  class="btn btn-primary col-md-12" type="submit" id="BtnSimpanCompanyProfile" value="Validate">Save</button>
                 </div>
               </form>
 
@@ -484,14 +480,233 @@
 
 </section>
 
-<script src="<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>"></script>
 
 <script>
-// $.validate({
-//   lang: 'es',
-//   form: '#SimpanCompanyProfile'
-// });
+
+$("#BtnSimpanCompanyProfile").click(function(event) {
+  // var productImage ="x";
+  // $('input[name^="file"]').each(function() {
+  //    productImage = "ada";
+  // });
+  var first_name_error = "";
+  if ($("#first_name").val().trim() === "") {
+    first_name_error = "Please fill out first name...";
+  }
+  if (first_name_error !== "") {
+    $("#span_first_name").html(first_name_error);
+    $("#span_first_name").addClass("help-block");
+    $("#form_group_first_name").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_first_name").html("");
+    $("#form_group_first_name").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var last_name_error = "";
+  if ($("#last_name").val().trim() === "") {
+    last_name_error = "Please fill out last name...";
+  }
+  if (last_name_error !== "") {
+    $("#span_last_name").html(last_name_error);
+    $("#span_last_name").addClass("help-block");
+    $("#form_group_last_name").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_last_name").html("");
+    $("#form_group_last_name").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var zip_code_error = "";
+  if ($("#zip_code").val().trim() === "") {
+    zip_code_error = "Please fill out zip code...";
+  }
+  if (zip_code_error !== "") {
+    $("#span_zip_code").html(zip_code_error);
+    $("#span_zip_code").addClass("help-block");
+    $("#form_group_zip_code").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_zip_code").html("");
+    $("#form_group_zip_code").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var address_error = "";
+  if ($("#address").val().trim() === "") {
+    address_error = "Please fill out company address...";
+  }
+  if (address_error !== "") {
+    $("#span_address").html(address_error);
+    $("#span_address").addClass("help-block");
+    $("#form_group_address").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_address").html("");
+    $("#form_group_address").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var city_error = "";
+  if ($("#city").val().trim() === "") {
+    city_error = "Please fill out city...";
+  }
+  if (city_error !== "") {
+    $("#span_city").html(city_error);
+    $("#span_city").addClass("help-block");
+    $("#form_group_city").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_city").html("");
+    $("#form_group_city").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var province_error = "";
+  if ($("#province").val().trim() === "") {
+    province_error = "Please fill out province...";
+  }
+  if (province_error !== "") {
+    $("#span_province").html(province_error);
+    $("#span_province").addClass("help-block");
+    $("#form_group_province").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_province").html("");
+    $("#form_group_province").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var state_error = "";
+  if ($("#state").val().trim() === "") {
+    state_error = "Please fill out state...";
+  }
+  if (state_error !== "") {
+    $("#span_state").html(state_error);
+    $("#span_state").addClass("help-block");
+    $("#form_group_state").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_state").html("");
+    $("#form_group_state").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var company_name_error = "";
+  if ($("#company_name").val() === "") {
+    company_name_error = "Please fill out company name...";
+  }
+  if (company_name_error !== "") {
+    $("#span_company_name").html(company_name_error);
+    $("#span_company_name").addClass("help-block");
+    $("#form_group_company_name").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_company_name").html("");
+    $("#form_group_company_name").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var phone_error = "";
+  if ($("#phone").val().trim() === "") {
+    phone_error = "Please fill out phone number...";
+  }
+  if (phone_error !== "") {
+    $("#span_phone").html(phone_error);
+    $("#span_phone").addClass("help-block");
+    $("#form_group_phone").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_phone").html("");
+    $("#form_group_phone").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var company_description_error = "";
+  if ($("#company_description").val().trim() === "") {
+    company_description_error = "Please fill out company description...";
+  }
+  if (company_description_error !== "") {
+    $("#span_company_description").html(company_description_error);
+    $("#span_company_description").addClass("help-block");
+    $("#form_group_company_description").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_company_description").html("");
+    $("#form_group_company_description").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  var all_error = "";
+  all_error += first_name_error;
+  all_error += last_name_error;
+  all_error += zip_code_error;
+  all_error += address_error;
+  all_error += city_error;
+  all_error += province_error;
+  all_error += state_error;
+  all_error += company_name_error;
+  all_error += phone_error;
+  all_error += company_description_error;
+
+  // console.log(all_error);
+  // event.preventDefault();
+
+  if (all_error == "" ) {
+    event.preventDefault();
+    $.confirm({
+      title: 'Confirmation',
+      content: 'Are You Sure to Save?',
+      type: 'blue',
+      buttons: {
+        Save: function () {
+          $.LoadingOverlay("show");
+          setTimeout( function () {
+            $("#SimpanCompanyProfile").submit();
+          }, 2000);
+        },
+        Cancel: function () {
+
+          $.alert('Data not saved...');
+        },
+      }
+    });
+  }
+});
+$("#first_name").focus(function() {
+  $("#span_first_name").html("");
+  $("#form_group_first_name").removeClass("has-success").removeClass("has-error");
+});
+$("#last_name").focus(function() {
+  $("#span_last_name").html("");
+  $("#form_group_last_name").removeClass("has-success").removeClass("has-error");
+});
+$("#zip_code").focus(function() {
+  $("#span_zip_code").html("");
+  $("#form_group_zip_code").removeClass("has-success").removeClass("has-error");
+});
+$("#address").focus(function() {
+  $("#span_address").html("");
+  $("#form_group_address").removeClass("has-success").removeClass("has-error");
+});
+$("#city").focus(function() {
+  $("#span_city").html("");
+  $("#form_group_city").removeClass("has-success").removeClass("has-error");
+});
+$("#province").focus(function() {
+  $("#span_province").html("");
+  $("#form_group_province").removeClass("has-success").removeClass("has-error");
+});
+$("#state").focus(function() {
+  $("#span_state").html("");
+  $("#form_group_state").removeClass("has-success").removeClass("has-error");
+});
+$("#company_name").focus(function() {
+  $("#span_company_name").html("");
+  $("#form_group_company_name").removeClass("has-success").removeClass("has-error");
+});
+$("#phone").focus(function() {
+  $("#span_phone").html("");
+  $("#form_group_phone").removeClass("has-success").removeClass("has-error");
+});
+$("#company_description").focus(function() {
+  $("#span_company_description").html("");
+  $("#form_group_company_description").removeClass("has-success").removeClass("has-error");
+});
 </script>
+<script src="<?php echo base_url('assets/dropzone/js/dropzone.min.js') ?>"></script>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -512,30 +727,7 @@ $(document).ready(function(){
 });
 </script>
 <script type="text/javascript">
-$("#SimpanCompanyProfile").submit(function() {
-  console.log('masuk');
 
-    event.preventDefault();
-    $.confirm({
-      title: 'Confirmation',
-      content: 'Are You Sure to Save?',
-      type: 'blue',
-      buttons: {
-        Save: function () {
-          $.LoadingOverlay("show");
-          setTimeout( function () {
-            $("#SimpanCompanyProfile").submit();
-          }, 2000);
-        },
-        Cancel: function () {
-
-          $.alert('Data not saved...');
-        },
-      }
-    });
-
-
-});
 </script>
 <script type="text/javascript">
 $("#SimpanCertificateLicense").submit(function() {

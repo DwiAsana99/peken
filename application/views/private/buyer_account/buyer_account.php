@@ -85,53 +85,54 @@
       </div>
     <div class="form-group">
       <label class="">Email</label>
-      <input class="form-control" type="text" name="first_name" id="category" value="<?php echo $buyer[0]->Email; ?>" disabled >
+      <input class="form-control" type="text" name="email" id="email" value="<?php echo $buyer[0]->Email; ?>" disabled >
     </div>
-    <div class="form-group ">
-      <label class="">First Name</label>
-      <input class="form-control" type="text" name="first_name" id="category" value="<?php echo $buyer[0]->FirstName; ?>"
-        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..." placeholder="" required>
+    <div class="form-group " id="form_group_first_name">
+      <label class="control-label">First Name</label>
+      <input class="form-control" type="text" name="first_name" id="first_name" value="<?php echo $buyer[0]->FirstName; ?>" placeholder="" >
+      <span id="span_first_name" class=""></span>
     </div>
-    <div class="form-group ">
-      <label class="">Last Name</label>
-      <input class="form-control" type="text" name="last_name" id="description" value="<?php echo $buyer[0]->LastName; ?>"
-        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..." placeholder="" required>
+    <div class="form-group " id="form_group_last_name">
+      <label class="control-label">Last Name</label>
+      <input class="form-control" type="text" name="last_name" id="last_name" value="<?php echo $buyer[0]->LastName; ?>" placeholder="" >
+      <span id="span_last_name" class=""></span>
     </div>
-    <div class="form-group ">
-      <label class="">Company Name</label>
-      <input class="form-control" type="text" name="company_name" id="description" value="<?php echo $buyer[0]->CompanyName; ?>"
-        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..." placeholder="" required>
+    <div class="form-group " id="form_group_company_name">
+      <label class="control-label">Company Name</label>
+      <input class="form-control" type="text" name="company_name" id="company_name" value="<?php echo $buyer[0]->CompanyName; ?>" placeholder="" >
+      <span id="span_company_name" class=""></span>
     </div>
-    <div class="form-group ">
-      <label class="">Zip Code</label>
-      <input class="form-control" type="text" name="zip_code" id="description" value="<?php echo $buyer[0]->ZipCode; ?>"
-        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..." placeholder="" required>
+    <div class="form-group " id="form_group_zip_code">
+      <label class="control-label">Zip Code</label>
+      <input class="form-control" type="text" name="zip_code" id="zip_code" value="<?php echo $buyer[0]->ZipCode; ?>" placeholder="" >
+      <span id="span_zip_code" class=""></span>
     </div>
-    <div class="form-group ">
-      <label class="">Address</label>
-      <input class="form-control" type="text" name="address" id="" value="<?php echo $buyer[0]->Address; ?>"
-        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..." placeholder="" required>
+    <div class="form-group " id="form_group_address">
+      <label class="control-label">Address</label>
+      <input class="form-control" type="text" name="address" id="address" value="<?php echo $buyer[0]->Address; ?>"  placeholder="" >
+      <span id="span_address" class=""></span>
     </div>
-    <div class="form-group ">
-      <label class="">City</label>
-      <input class="form-control" type="text" name="city" id="description" value="<?php echo $buyer[0]->City; ?>"
-        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..." placeholder="" required>
+    <div class="form-group " id="form_group_city">
+      <label class="control-label">City</label>
+      <input class="form-control" type="text" name="city" id="city" value="<?php echo $buyer[0]->City; ?>" placeholder="" >
+      <span id="span_city" class=""></span>
     </div>
-    <div class="form-group ">
-      <label class="">Province</label>
-      <input class="form-control" type="text" name="province" id="description" value="<?php echo $buyer[0]->Province; ?>"
-        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..." placeholder="" required>
+    <div class="form-group " id="form_group_province">
+      <label class="control-label">Province</label>
+      <input class="form-control" type="text" name="province" id="province" value="<?php echo $buyer[0]->Province; ?>" placeholder="" >
+      <span id="span_province" class=""></span>
     </div>
-    <div class="form-group ">
-      <label class="">State</label>
-      <select class="form-control select2" name="state"   id="state" data-validation-error-msg="Please fill out category description..."  >
+    <div class="form-group " id="form_group_state">
+      <label class="control-label">State</label>
+      <select class="form-control select2" name="state"   id="state"  >
         <option selected value="<?php echo $buyer[0]->State; ?>"><?php echo $buyer[0]->State; ?></option>
       </select>
+      <span id="span_state" class=""></span>
     </div>
-    <div class="form-group ">
-      <label class="">Phone</label>
-      <input class="form-control" type="number" name="phone" id="description" value="<?php echo $buyer[0]->Phone; ?>"
-        data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category description..."  placeholder="" required>
+    <div class="form-group " id="form_group_phone">
+      <label class="control-label">Phone</label>
+      <input class="form-control" type="number" name="phone" id="phone" value="<?php echo $buyer[0]->Phone; ?>" placeholder="" >
+      <span id="span_phone" class=""></span>
     </div>
     <button type="submit" class="btn btn-primary " id="btnSimpan" value="Validate" name="button">Save</button>
   </form>
@@ -157,29 +158,217 @@ $(document).ready(function(){
   });
 });
 </script>
-<script type="text/javascript">
-  $("#btnSimpan").click(function (event) {
+<script>
 
-      event.preventDefault();
-      $.confirm({
-        title: 'Confirmation',
-        content: 'Are You Sure to save?',
-        type: 'blue',
-        buttons: {
-          Save: function () {
-            $.LoadingOverlay("show");
-            setTimeout( function () {
-              $("#Simpan").submit();
-            }, 2000);
-          },
-          Cancel: function () {
-            $.alert('Data not saved...');
-          },
-        }
-      });
+$("#btnSimpan").click(function(event) {
+  // var productImage ="x";
+  // $('input[name^="file"]').each(function() {
+  //    productImage = "ada";
+  // });
+  var first_name_error = "";
+  if ($("#first_name").val().trim() === "") {
+    first_name_error = "Please fill out first name...";
+  }
+  if (first_name_error !== "") {
+    $("#span_first_name").html(first_name_error);
+    $("#span_first_name").addClass("help-block");
+    $("#form_group_first_name").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_first_name").html("");
+    $("#form_group_first_name").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var last_name_error = "";
+  if ($("#last_name").val().trim() === "") {
+    last_name_error = "Please fill out last name...";
+  }
+  if (last_name_error !== "") {
+    $("#span_last_name").html(last_name_error);
+    $("#span_last_name").addClass("help-block");
+    $("#form_group_last_name").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_last_name").html("");
+    $("#form_group_last_name").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var zip_code_error = "";
+  if ($("#zip_code").val().trim() === "") {
+    zip_code_error = "Please fill out zip code...";
+  }
+  if (zip_code_error !== "") {
+    $("#span_zip_code").html(zip_code_error);
+    $("#span_zip_code").addClass("help-block");
+    $("#form_group_zip_code").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_zip_code").html("");
+    $("#form_group_zip_code").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var address_error = "";
+  if ($("#address").val().trim() === "") {
+    address_error = "Please fill out company address...";
+  }
+  if (address_error !== "") {
+    $("#span_address").html(address_error);
+    $("#span_address").addClass("help-block");
+    $("#form_group_address").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_address").html("");
+    $("#form_group_address").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var city_error = "";
+  if ($("#city").val().trim() === "") {
+    city_error = "Please fill out city...";
+  }
+  if (city_error !== "") {
+    $("#span_city").html(city_error);
+    $("#span_city").addClass("help-block");
+    $("#form_group_city").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_city").html("");
+    $("#form_group_city").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var province_error = "";
+  if ($("#province").val().trim() === "") {
+    province_error = "Please fill out province...";
+  }
+  if (province_error !== "") {
+    $("#span_province").html(province_error);
+    $("#span_province").addClass("help-block");
+    $("#form_group_province").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_province").html("");
+    $("#form_group_province").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var state_error = "";
+  if ($("#state").val().trim() === "") {
+    state_error = "Please fill out state...";
+  }
+  if (state_error !== "") {
+    $("#span_state").html(state_error);
+    $("#span_state").addClass("help-block");
+    $("#form_group_state").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_state").html("");
+    $("#form_group_state").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var company_name_error = "";
+  if ($("#company_name").val() === "") {
+    company_name_error = "Please fill out company name...";
+  }
+  if (company_name_error !== "") {
+    $("#span_company_name").html(company_name_error);
+    $("#span_company_name").addClass("help-block");
+    $("#form_group_company_name").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_company_name").html("");
+    $("#form_group_company_name").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var phone_error = "";
+  if ($("#phone").val().trim() === "") {
+    phone_error = "Please fill out phone number...";
+  }
+  if (phone_error !== "") {
+    $("#span_phone").html(phone_error);
+    $("#span_phone").addClass("help-block");
+    $("#form_group_phone").addClass("has-error").removeClass( "has-success" );
+    event.preventDefault();
+  } else {
+    $("#span_phone").html("");
+    $("#form_group_phone").addClass("has-success").removeClass( "has-error" );
+  }
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-  });
+  var all_error = "";
+  all_error += first_name_error;
+  all_error += last_name_error;
+  all_error += zip_code_error;
+  all_error += address_error;
+  all_error += city_error;
+  all_error += province_error;
+  all_error += state_error;
+  all_error += company_name_error;
+  all_error += phone_error;
+
+
+  // console.log(all_error);
+  // event.preventDefault();
+
+  if (all_error == "" ) {
+    event.preventDefault();
+    $.confirm({
+      title: 'Confirmation',
+      content: 'Are You Sure to Save?',
+      type: 'blue',
+      buttons: {
+        Save: function () {
+          $.LoadingOverlay("show");
+          setTimeout( function () {
+            $("#Simpan").submit();
+          }, 2000);
+        },
+        Cancel: function () {
+
+          $.alert('Data not saved...');
+        },
+      }
+    });
+  }
+});
+$("#first_name").focus(function() {
+  $("#span_first_name").html("");
+  $("#form_group_first_name").removeClass("has-success").removeClass("has-error");
+});
+$("#last_name").focus(function() {
+  $("#span_last_name").html("");
+  $("#form_group_last_name").removeClass("has-success").removeClass("has-error");
+});
+$("#zip_code").focus(function() {
+  $("#span_zip_code").html("");
+  $("#form_group_zip_code").removeClass("has-success").removeClass("has-error");
+});
+$("#address").focus(function() {
+  $("#span_address").html("");
+  $("#form_group_address").removeClass("has-success").removeClass("has-error");
+});
+$("#city").focus(function() {
+  $("#span_city").html("");
+  $("#form_group_city").removeClass("has-success").removeClass("has-error");
+});
+$("#province").focus(function() {
+  $("#span_province").html("");
+  $("#form_group_province").removeClass("has-success").removeClass("has-error");
+});
+$("#state").focus(function() {
+  $("#span_state").html("");
+  $("#form_group_state").removeClass("has-success").removeClass("has-error");
+});
+$("#company_name").focus(function() {
+  $("#span_company_name").html("");
+  $("#form_group_company_name").removeClass("has-success").removeClass("has-error");
+});
+$("#phone").focus(function() {
+  $("#span_phone").html("");
+  $("#form_group_phone").removeClass("has-success").removeClass("has-error");
+});
+$("#company_description").focus(function() {
+  $("#span_company_description").html("");
+  $("#form_group_company_description").removeClass("has-success").removeClass("has-error");
+});
 </script>
 <script>
   // $.validate({
