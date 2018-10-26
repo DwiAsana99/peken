@@ -96,9 +96,9 @@ visibility: hidden;
                 <th>Company Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Province</th>
                 <th>State</th>
                 <th>Member Level</th>
+                <th>Is Verified Supplier</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -108,7 +108,7 @@ visibility: hidden;
                   <td><?php echo $m->CompanyName?></td>
                   <td><?php echo $m->Email?></td>
                   <td><?php echo $m->Phone?></td>
-                  <td><?php echo $m->Province?></td>
+
                   <td><?php echo $m->State?></td>
                   <?php if ($m->UserLevel == 1): ?>
                     <td>Supplier Only</td>
@@ -117,7 +117,19 @@ visibility: hidden;
                   <?php elseif ($m->UserLevel == 3): ?>
                     <td>Supplier & Buyer</td>
                   <?php endif; ?>
-
+                  <td>
+                    <?php
+                    if ($m->IsVerifiedSupplier == -1) {
+                      echo "Waiting";
+                    }
+                      if ($m->IsVerifiedSupplier == 0) {
+                        echo "Not Verified";
+                      }
+                      if ($m->IsVerifiedSupplier == 1) {
+                        echo "Verified";
+                      }
+                    ?>
+                  </td>
                   <td>
                     <?php if ($m->UserLevel == 1 || $m->UserLevel == 3): ?>
                       <a target="_blank" class="btn btn-info" href="<?php echo site_url('User/edit_member_account_view/').$m->Id ?>" style="padding: 0px 0px;" data-toggle="tooltip"

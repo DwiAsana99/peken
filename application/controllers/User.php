@@ -774,7 +774,7 @@
       $this->M_supplier_gallery_pic->set_search_supplier_gallery_pic($supplier_gallery_pic_rules);
       $get_supplier_gallery_pic = $this->M_supplier_gallery_pic->get_supplier_gallery_pic();
       $data['supplier_gallery_pic'] = $get_supplier_gallery_pic->result();
-      $this->session->set_flashdata('msg', 'Supplier verify successfully');
+
       $this->load->view('template/back_admin/admin_head');
       $this->load->view('template/back_admin/admin_navigation');
       $this->load->view('template/back_admin/admin_sidebar');
@@ -788,6 +788,7 @@
         'IsVerifiedSupplier' => $this->input->post('is_verified_supplier')
       );
       $this->M_user->update_user($data,$user_id);
+      $this->session->set_flashdata('msg', 'Supplier verify successfully');
       redirect('User/supplier_verification_view/'.$user_id);
     }
 

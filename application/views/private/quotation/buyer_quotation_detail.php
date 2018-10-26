@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Pembelian Necklace Bahla</h1>
+  <h2>Request for Quotation Code <b><?php echo $quotation[0]->Code; ?></b></h2>
   <ol class="breadcrumb">
     <li>
       <a href="<?php echo site_url('Home/home_view/') ?>">Home</a>
@@ -12,7 +12,7 @@
   <div class="row">
     <div class="col-md-7 detail">
       <div class="block cover-container">
-        <h2>Request for Quotation Code <b><?php echo $quotation[0]->Code; ?></b></h2>
+
         <?php foreach($product_pic as $pc){ ?>
 
         <img src="<?php echo base_url('assets/supplier_upload/').$pc->FileName;?>" alt="">

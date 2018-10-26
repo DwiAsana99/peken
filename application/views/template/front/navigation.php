@@ -580,7 +580,28 @@ $(document).ready(function () {
                   </li>
                 </ul>
               </li>
-            <?php endif; ?>
+
+          <?php elseif ($user_level == 0): ?>
+            <li class="dropdown">
+              <a href="#" id="signOut" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+                ADMIN
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="<?php echo base_url().'User/admin_dashboard_view';?>">
+                    <span class="glyphicon glyphicon-dashboard"></span> Back to admin  page
+                  </a>
+                </li>
+                <li>
+                  <a href="<?php echo base_url().'User/logout';?>">
+                    <span class="glyphicon glyphicon-log-out"></span> Sign Out
+                  </a>
+                </li>
+              </ul>
+            </li>
+          <?php endif; ?>
           </ul>
           <!--  -->
           <script>

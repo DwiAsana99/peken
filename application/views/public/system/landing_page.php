@@ -208,7 +208,7 @@
     new PNotify({
       title: 'Sorry',
       text: ' <?php echo $this->session->flashdata('msg'); ?>',
-      delay: 12000,
+      delay: 5000,
       type: 'warning'
     });
   });

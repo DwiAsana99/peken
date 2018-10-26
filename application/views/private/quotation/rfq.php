@@ -26,6 +26,7 @@
 </script>
 <form action="<?php echo base_url().'Quotation/add_quotation'; ?>" id="Simpan" method="post">
   <div id="info" class="container">
+    <h2>Request for Quotation</h2>
     <ol class="breadcrumb">
       <?php if (isset($breadcrumb)): ?>
       <?php echo $breadcrumb ?>

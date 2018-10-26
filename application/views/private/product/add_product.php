@@ -212,7 +212,7 @@
               <label class="control-label ">Product Image</label>
               <div class="dropzone">
                 <div class="dz-message">
-                  <h4> Click or Drop product image here..<br>Max File Size 1,8 MB</h4>
+                  <h4> Click or Drop product image here..<br>Max File Size 1,8 MB <br>Max File Upload is 5 pcs  </h4>
                 </div>
               </div>
                 <button type="button" style="margin-bottom: 10px"  class="btn btn-info col-md-12" id="BtnUpload">

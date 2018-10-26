@@ -295,13 +295,13 @@
 
 
       </a>
-      <div>kfc@gmail.com</div>
-      <div>Ngurah rai street no 23</div>
-      <div>081234567890</div>
-      <div>This is static description</div>
+      <div><?php echo $p->State; ?></div>
+      <div><?php echo $p->Email; ?></div>
+      <div><?php echo $p->Phone; ?></div>
+
     </div>
   </div>
-  <h2>Related products</h2>
+  <!-- <h2>Related products</h2>
   <div class="my-container">
     <div>
       <img class="img-responsive" src="https://img10.jd.id/Indonesia/s800x800_/nHBfsgAABwAAAAYAJwAZ9QAAy9I.jpg?_ga=2.31647994.598327110.1516764553-1000888939.1509532365"
@@ -355,7 +355,7 @@
         <a href="#" class="btn btn-default">Contact Seller</a>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 

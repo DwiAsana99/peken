@@ -16,7 +16,7 @@
 
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-            
+
 
               <!-- Notifications: style can be found in dropdown.less -->
 
@@ -58,9 +58,7 @@
                 </ul>
               </li>
               <!-- Control Sidebar Toggle Button -->
-              <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-              </li>
+
             </ul>
           </div>
         </nav>

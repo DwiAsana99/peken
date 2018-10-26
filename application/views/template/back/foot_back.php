@@ -9,7 +9,7 @@
     <div class="pull-right hidden-xs">
         <b>Version</b> 2.0
     </div>
-    <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Maxinuos-Bali</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">SBM</a>.</strong> All rights reserved.
 </footer>
 </div><!-- ./wrapper -->
 

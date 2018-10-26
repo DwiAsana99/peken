@@ -31,20 +31,20 @@ white-space: nowrap;
   </ol>
 
   <div class="table-responsive">
-    <table id="example" class="table table-striped table-bordered" >
+    <table id="example1" class="table table-striped table-bordered" >
       <thead class="text-center">
         <tr>
-          <th>Send</th>
+          <th>Send To</th>
           <th>Subject</th>
           <th>Date</th>
-
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
         <?php foreach($quotation as $q){ ?>
           <tr class="click">
             <td>
-              <a target='_blank' href="<?php echo base_url().'Quotation/buyer_quotation_detail/'.$q->Code; ?>">To:
+              <a target='_blank' href="<?php echo base_url().'Quotation/buyer_quotation_detail/'.$q->Code; ?>">
                 <?php echo $q->CompanyName  ?>
               </a>
             </td>
@@ -54,6 +54,19 @@ white-space: nowrap;
 
             <td>
               <?php echo $q->SendDate  ?>
+            </td>
+            <td>
+              <?php
+                if ($q->IsAccepted == -1) {
+                  echo "Waiting";
+                }
+                if ($q->IsAccepted == 0) {
+                  echo "Rejected";
+                }
+                if ($q->IsAccepted == 1) {
+                  echo "Accepted";
+                }
+              ?>
             </td>
           </tr>
         <?php } ?>

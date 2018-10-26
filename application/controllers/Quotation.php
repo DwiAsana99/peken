@@ -17,7 +17,11 @@ class Quotation extends CI_Controller{
     $user_level = $this->session->userdata('user_level');
     $product_id = $this->input->get('product_id');
     $supplier_id = $this->input->get('supplier_id');
-    if (empty($user_id) || ($user_level != 2 && $user_level != 3)) {
+    if (empty($user_id)) {
+      $this->session->set_flashdata("msg", "Oops you You must login to make a request for quotation");
+      redirect('Home/home_view');
+    }
+    if ($user_level != 2 && $user_level != 3) {
       $this->session->set_flashdata('msg', 'Request for Quotation can only be made by  Buyer Member Level, if you want to be Supplier & Buyer Member Level please contact dinilaku@gmail.com');
       redirect('Home/home_view');
     }
@@ -131,12 +135,6 @@ class Quotation extends CI_Controller{
       }
     }
 
-
-    //$quotation_code = $this->input->get('quotation_code');
-    // $set_quotation_detail_data = array('IsRead' => 1);
-    // $this->M_quotation_detail->update_quotation_detail($set_quotation_detail_data,$quotation_id);
-
-    //$get_quotation = $this->M_quotation->get_quotation($user_id,"",$quotation_id);
     $quotation_rules['filter_value'] =  array('supplier_id' => $user_id, 'quotation_code'=>$quotation_code);
 		$this->M_quotation->set_search_quotation($quotation_rules);
     $get_quotation = $this->M_quotation->get_quotation();
@@ -233,8 +231,8 @@ class Quotation extends CI_Controller{
     }
 
     //$quotation_code = $this->input->get('quotation_code');
-    $set_quotation_data = array('IsRead' => 1);
-    $this->M_quotation->update_quotation($set_quotation_data,$quotation_code);
+    // $set_quotation_data = array('IsRead' => 1);
+    // $this->M_quotation->update_quotation($set_quotation_data,$quotation_code);
 
     $unread_quotation_detail_rules['join']['other_table_columns'] = " , user_tb.Id AS UserId,  quotationdetail_tb.Id AS QuotationDetailId, user_tb.*  ";
     $unread_quotation_detail_rules['join']['join_table'] = " INNER JOIN user_tb
@@ -249,10 +247,6 @@ class Quotation extends CI_Controller{
         $this->M_quotation_detail->update_quotation_detail($set_quotation_detail_data,"",$unread_quotation_detail->QuotationDetailId);
       }
     }
-    // $set_quotation_detail_data = array('IsRead' => 1);
-    // $this->M_quotation_detail->update_quotation_detail($set_quotation_detail_data,$quotation_id);
-
-    //$get_quotation = $this->M_quotation->get_quotation($user_id,"",$quotation_id);
     $quotation_rules['filter_value'] =  array('buyer_id' => $user_id, 'quotation_code'=>$quotation_code);
 		$this->M_quotation->set_search_quotation($quotation_rules);
     $get_quotation = $this->M_quotation->get_quotation();
