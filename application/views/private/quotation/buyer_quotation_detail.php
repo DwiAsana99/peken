@@ -22,35 +22,69 @@
 
 
 
-      <div class="col-md-3">
-      Date
+      <div class="hidden-md  hidden-lg">
+        <div class="">
+          <b>Date</b>
+        </div>
+        <div class="">
+          <?php echo $quotation[0]->SendDate; ?>
+        </div>
+        <div class="">
+          <b>Supplier Name</b>
+        </div>
+        <div class="">
+          <?php echo $product[0]->CompanyName; ?>
+        </div>
+        <div class="">
+          <b>Product Name</b>
+        </div>
+        <div class="">
+          <?php echo $product[0]->Name; ?>
+        </div>
+        <div class="">
+          <b>Qty</b>
+        </div>
+        <div class="">
+          <?php echo $quotation[0]->Qty; ?>
+        </div>
+        <div class="">
+          <b>Message</b>
+        </div>
+        <div class="">
+          <?php echo $quotation[0]->Content; ?>
+        </div>
       </div>
-      <div class="col-md-9">
-        : <?php echo $quotation[0]->SendDate; ?>
-      </div>
-      <div class="col-md-3">
-        Supplier Name
-      </div>
-      <div class="col-md-9">
-        : <?php echo $product[0]->CompanyName; ?>
-      </div>
-      <div class="col-md-3">
-        Product Name
-      </div>
-      <div class="col-md-9">
-        : <?php echo $product[0]->Name; ?>
-      </div>
-      <div class="col-md-3">
-        Qty
-      </div>
-      <div class="col-md-9">
-        : <?php echo $quotation[0]->Qty; ?>
-      </div>
-      <div class="col-md-3">
-        Message
-      </div>
-      <div class="col-md-9">
-        : <?php echo $quotation[0]->Content; ?>
+      <div class="hidden-xs hidden-sm">
+        <div class="col-md-3">
+        Date
+        </div>
+        <div class="col-md-9">
+          : <?php echo $quotation[0]->SendDate; ?>
+        </div>
+        <div class="col-md-3">
+          Buyer Name
+        </div>
+        <div class="col-md-9">
+          : <?php echo $product[0]->CompanyName; ?>
+        </div>
+        <div class="col-md-3">
+          Product Name
+        </div>
+        <div class="col-md-9">
+          : <?php echo $product[0]->Name; ?>
+        </div>
+        <div class="col-md-3">
+          Qty
+        </div>
+        <div class="col-md-9">
+          : <?php echo $quotation[0]->Qty; ?>
+        </div>
+        <div class="col-md-3">
+          Message
+        </div>
+        <div class="col-md-9">
+          : <?php echo $quotation[0]->Content; ?>
+        </div>
       </div>
 
     </div>
@@ -142,18 +176,18 @@
         <div class="col-md-12 text-center">
           <p style="font-size: large;">Accept or Reject Quotation</p>
         </div>
-        <div class="col-md-6 text-right">
+        <div class="col-md-6 text-right ">
           <form id="form_accept" action="<?php echo base_url().'Quotation/update_quotation_status'; ?>" method="post">
             <input type="hidden" name="quotation_code" value="<?php echo $quotation[0]->Code; ?>">
             <input type="hidden" name="status" value="1">
-            <button id="btn_accept" type="submit" class="btn btn-success">Accept</button>
+            <button id="btn_accept" type="submit" class="btn btn-success col-xs-12 col-sm-12">Accept</button>
           </form>
         </div>
-        <div class="col-md-6 text-left">
+        <div class="col-md-6 text-left ">
           <form id="form_reject" action="<?php echo base_url().'Quotation/update_quotation_status'; ?>" method="post">
             <input type="hidden" name="quotation_code" value="<?php echo $quotation[0]->Code; ?>">
             <input type="hidden" name="status" value="0">
-            <button id="btn_reject" type="submit" class="btn btn-danger">Reject</button>
+            <button id="btn_reject" type="submit" class="btn btn-danger col-xs-12 col-sm-12">Reject</button>
           </form>
         </div>
       <?php endif; ?>

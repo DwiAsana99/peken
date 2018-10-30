@@ -25,7 +25,7 @@
   // });
 </script>
 <form action="<?php echo base_url().'Quotation/add_quotation'; ?>" id="Simpan" method="post">
-  <div id="info" class="container">
+  <div id="info" class="container" style="margin-bottom:0px">
     <h2>Request for Quotation</h2>
     <ol class="breadcrumb">
       <?php if (isset($breadcrumb)): ?>
@@ -33,7 +33,7 @@
       <?php endif; ?>
     </ol>
     <div class="col-md-4">
-      <img class="img-responsive" src="<?php echo base_url('assets/supplier_upload/').$product[0]->FileName;?>" alt="" srcset="">
+      <img class="img-responsive" src="<?php echo base_url('assets/supplier_upload/').$product[0]->FileName;?>" alt="" width="200">
     </div>
     <div class="col-md-4">
       <h2>
@@ -44,29 +44,25 @@
       </h5>
       <br>
       <div class="form-group">
-        <label for="qty">Quantity(
+        <label class="control-label"  for="qty">Quantity(
           <?php echo $product[0]->Unit; ?>)</label>
         <input name="qty" type="number" class="form-control" id="qty" data-validation="number" data-validation-allowing="range[1;1000000]" data-validation-error-msg="Please fill out quantity...">
       </div>
     </div>
   </div>
-
-  <div class="container">
-    <textarea name="message" rows="10" cols="160"  data-validation="length" data-validation-length="min1"
+<div class="container">
+  <div class="form-group">
+    <label for="message" class="control-label">Message</label>
+    <textarea name="message"  id="message" rows="10" class="form-control"  data-validation="length" data-validation-length="min1"
     data-validation-error-msg="Please fill out message..."></textarea>
+  </div>
     <input type="hidden" name="supplier_email" value="<?php echo $supplier[0]->Email; ?>">
     <input type="hidden" name="supplier_id" value="<?php echo $supplier[0]->Id; ?>">
     <input type="hidden" name="product_id" value="<?php echo $product[0]->ProductId; ?>">
-
     <input type="hidden" name="product_name" value="<?php echo $product[0]->Name; ?>">
-
-    <!-- "Editor Text" Untuk Request for Quotation dipending  -->
-    <!-- <textarea name="name" id="summernote" rows="8" cols="80"></textarea> -->
-
-
     <button class="btn btn-warning pull-right" type="submit" id="btnSend" value="Validate">Send RFQ</button>
+</div>
 
-  </div>
 </form>
 <script>
 $.validate({

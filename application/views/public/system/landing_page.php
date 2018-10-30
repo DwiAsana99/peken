@@ -17,38 +17,24 @@
     <ol class="carousel-indicators">
       <li data-target="#carousel-example-generic" data-slide-to="0"></li>
       <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-      <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-      <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
+        <img src="<?php echo base_url('assets/supplier_upload/')."diamond-jewelers.jpg"?>"
+        alt="...">
+        <div class="carousel-caption">
+          <h3>Banner 1</h3>
+        </div>
+      </div>
+      <div class="item ">
         <a href="#" target="_blank">
-          <img src="http://glimageurl.golocall.com/golocal-post/image/72114_fusionplus_1493037430.jpeg" alt="...">
+          <img src="<?php echo base_url('assets/supplier_upload/')."Jewelry-banner-1.jpg"?>" alt="...">
         </a>
         <div class="carousel-caption">
-          <h2>Heading</h2>
-        </div>
-      </div>
-      <div class="item">
-        <img src="https://ae01.alicdn.com/kf/HTB1ZhomHVXXXXXwXFXXq6xXFXXXb/Girl-jewelry-Golden-Plated-Blue-belive-it-back-R-N-fashion-Jewellry-sets-coupon-african-jewelry.jpg_640x640.jpg"
-          alt="...">
-        <div class="carousel-caption">
-          <h2>Heading</h2>
-        </div>
-      </div>
-      <div class="item">
-        <img src="https://s-media-cache-ak0.pinimg.com/originals/e1/ee/ba/e1eeba10640b058ba881c55fcc1d45fb.jpg" alt="...">
-        <div class="carousel-caption">
-          <h2>Heading</h2>
-        </div>
-      </div>
-      <div class="item">
-        <img src="http://www.uniquejewells.co.uk/ekmps/shops/5da030/images/18k-gold-plated-stellux-crystal-phoenix-pendant-necklace-earrings-bridal-jewellry-73-p.jpg"
-          alt="...">
-        <div class="carousel-caption">
-          <h2>Heading</h2>
+          <h3>Banner 2</h3>
         </div>
       </div>
     </div>
@@ -101,7 +87,7 @@
     </div>
   </div> -->
   <div class="flex_shadow seller_list">
-      <h2>Product Today</h2>
+      <h2>Most request product</h2>
     <div class="my-container">
       <?php $i = 1; foreach($product as $p){ ?>
       <div class="tes-hover">
@@ -134,13 +120,13 @@
       <?php } ?>
     </div>
     <div class="text-right">
-      <a target="_blank" href="<?php echo site_url('Product/public_product_list_view') ?>" class="btn btn-warning more">See More Product Today</a>
+      <a target="_blank" href="<?php echo site_url('Product/public_product_list_view') ?>" class="btn btn-warning more">See More Product </a>
     </div>
   </div>
   <!-- <div class="row"> -->
   <div class="divider" style="margin: 10% 0"></div>
     <div class="flex_shadow seller">
-      <h2>Supplier</h2>
+      <h2>Explore reputable supplier in Dinilaku</h2>
       <div class="my-container seller_column">
         <?php foreach($supplier as $s){ ?>
         <div class="tes-hover text-center">

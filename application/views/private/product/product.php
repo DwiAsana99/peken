@@ -32,7 +32,7 @@
          <th>Unit</th>
          <th>Min Price</th>
          <th>Max Price</th>
-
+         <th>Status</th>
          <th>Action</th>
 
         </tr>
@@ -49,7 +49,11 @@
           <td><?php echo $u->Unit?></td>
           <td class="text-right"><?php echo number_format($u->MinPrice, 2, '.', ',')?></td>
           <td class="text-right"><?php echo number_format($u->MaxPrice, 2, '.', ',')?></td>
-
+          <?php if ($u->IsPublished == 0): ?>
+            <td>Not Published</td>
+          <?php elseif ($u->IsPublished == 1): ?>
+            <td>Published</td>
+          <?php endif; ?>
 
           <td>
            <a class="btn btn-warning"  style="padding: 0px 0px;"  href="<?php echo base_url('Product/product_edit_view/').$u->ProductId;?>" data-toggle="tooltip"

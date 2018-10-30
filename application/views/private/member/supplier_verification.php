@@ -61,9 +61,15 @@
                         <?php if ($user[0]->IsVerifiedSupplier == 1): ?>
                           <option value="0" >Unverify</option>
                           <option value="1" selected>Verify</option>
-                        <?php else: ?>
+                          <option value="-1" >Waiting</option>
+                        <?php elseif ($user[0]->IsVerifiedSupplier == 0): ?>
                           <option value="0" selected>Unverify</option>
                           <option value="1" >Verify</option>
+                          <option value="-1" >Waiting</option>
+                        <?php elseif ($user[0]->IsVerifiedSupplier == -1): ?>
+                          <option value="0" >Unverify</option>
+                          <option value="1" >Verify</option>
+                          <option value="-1" selected>Waiting</option>
                         <?php endif; ?>
                       </select>
                       <span class="input-group-btn">

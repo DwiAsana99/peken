@@ -402,7 +402,7 @@ $(document).ready(function () {
               <span class="glyphicon glyphicon-user"></span> Sign Up
             </a>
           </li>
-          <li class="dropdown">
+          <li class="dropdown ">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <span class="glyphicon glyphicon-log-in"></span> Login
             </a>
@@ -412,6 +412,9 @@ $(document).ready(function () {
                   <div class="col-md-12">
                     <form class="form" role="form" method="post" action="<?php echo base_url().'user/login';?>" accept-charset="UTF-8"
                       id="login-nav">
+                      <!-- <div id="max_upload_product_image_alert" class="alert alert-danger" role="alert">
+                        <p id="max_upload_product_image_error"> <span class="glyphicon glyphicon-exclamation-sign"> </span> Wrong e-mail or password</p>
+                      </div> -->
                       <div class="form-group">
                         <label class="sr-only" for="exampleInputEmail2">Email address</label>
                         <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>

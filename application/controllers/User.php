@@ -191,9 +191,9 @@
     function update_company_profile(){
       $supplier_id = $this->session->userdata('user_id');
       $config['upload_path']   = './assets/supplier_upload/';
-      $config['allowed_types'] = 'gif|jpg|png|pdf';
+      $config['allowed_types'] = 'gif|jpg|jpeg|png|pdf';
       $config['overwrite'] = TRUE;
-      $config['max_size']      = 1000;
+      $config['max_size']      = 2000;
       //$config['max_width']     = 1024;
       //$config['max_height']    = 1000;
 
@@ -512,8 +512,22 @@
         redirect('User/admin_dashboard_view');
       }
       else {
-        echo "sinf ada";exit();
-        redirect('Home/index');
+        $this->M_product_category->set_search_product_category();
+    		$get_product_category = $this->M_product_category->get_product_category();
+
+    		$this->M_product_sub_category->set_search_product_sub_category();
+    		$get_product_sub_category = $this->M_product_sub_category->get_product_sub_category();
+
+    		$data_nav['product_category'] = $get_product_category->result();
+    		$data_nav['product_sub_category'] = $get_product_sub_category->result();
+
+    		$head_data['page_title'] = "Dinilaku";
+    		$this->load->view('template/front/head_front',$head_data);
+    		$this->load->view('template/front/navigation',$data_nav);
+    		$this->load->view('public/system/landing_page',$data);
+    		$this->load->view('template/front/foot_front');
+        // echo "sinf ada";exit();
+        // redirect('Home/index');
       }
 
 
@@ -723,6 +737,7 @@
         'LastName' => $this->input->post('last_name'),
         'CompanyName' => $this->input->post('company_name'),
         'IsConfirmated' => 1,
+        'IsVerifiedSupplier' => -1,
         'MemberDate' => $this->M_date->get_date_sql_format(),
         'Phone' => $this->input->post('phone')
         );
@@ -839,7 +854,7 @@
       $this->M_user->update_user($data,$user_id);
       if ($user_level == 1 || $user_level == 3) {
         $this->session->set_flashdata('msg', 'Your password has changed ...');
-        redirect('User/supplier_dashboard_view');
+        redirect('User/supplier_reset_password_view');
       } elseif ($user_level == 2) {
         $this->session->set_flashdata('msg', 'Your password has changed ...');
         redirect('User/buyer_reset_password_view');
