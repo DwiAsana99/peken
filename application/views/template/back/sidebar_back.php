@@ -42,7 +42,7 @@
         </li> -->
       <li>
         <a href="<?php echo base_url().'User/supplier_dashboard_view' ?>">
-          <i class="fa fa-dashboard"></i>
+          <i class="glyphicon glyphicon-home"></i>
           <span>Dashboard</span>
         </a>
       </li>

@@ -1,4 +1,10 @@
-
+<section class="content-header">
+  <div class="btn-group btn-breadcrumb">
+    <a href="<?php echo base_url().'User/admin_dashboard_view' ?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
+    <a href="<?php echo base_url('User/member_view');?>" class="btn btn-default  btn-xs">Member List</a>
+    <a  class="btn btn-default  btn-xs active">Supplier Verification</a>
+  </div>
+</section>
 <section class="content">
   <!-- <div class="text-center">
   <?php //$supplier_id = $this->session->userdata('user_id'); ?>
@@ -61,15 +67,9 @@
                         <?php if ($user[0]->IsVerifiedSupplier == 1): ?>
                           <option value="0" >Unverify</option>
                           <option value="1" selected>Verify</option>
-                          <option value="-1" >Waiting</option>
                         <?php elseif ($user[0]->IsVerifiedSupplier == 0): ?>
                           <option value="0" selected>Unverify</option>
                           <option value="1" >Verify</option>
-                          <option value="-1" >Waiting</option>
-                        <?php elseif ($user[0]->IsVerifiedSupplier == -1): ?>
-                          <option value="0" >Unverify</option>
-                          <option value="1" >Verify</option>
-                          <option value="-1" selected>Waiting</option>
                         <?php endif; ?>
                       </select>
                       <span class="input-group-btn">

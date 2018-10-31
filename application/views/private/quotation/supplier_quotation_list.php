@@ -3,7 +3,7 @@
 <link href="<?php echo base_url('assets/email_design/email_table.css') ?>" rel="stylesheet" type="text/css" />
 <section class="content-header">
   <div class="btn-group btn-breadcrumb">
-    <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
+    <a href="<?php echo base_url().'User/supplier_dashboard_view' ?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
     <a  class="btn btn-default  btn-xs active">Request for Quotation List</a>
   </div>
 </section>
@@ -32,7 +32,7 @@
                 <?php foreach($quotation as $q){ ?>
                   <tr class="click">
                     <td>
-                      <a target="_blank" href="<?php echo base_url().'Quotation/supplier_quotation_detail?quotation_code='.$q->Code; ?>">
+                      <a  href="<?php echo base_url().'Quotation/supplier_quotation_detail?quotation_code='.$q->Code; ?>">
                         <?php echo $q->LastName  ?>
                       </a>
                     </td>

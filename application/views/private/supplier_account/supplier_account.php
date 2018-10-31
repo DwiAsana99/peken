@@ -2,7 +2,15 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dropzone/css/basic.min.css') ?>" />
 <link href="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/theme-default.min.css" rel="stylesheet" type="text/css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
-
+<section class="content-header">
+  <div class="btn-group btn-breadcrumb">
+    <a href="<?php echo base_url().'User/supplier_dashboard_view' ?>" class="btn btn-default btn-xs">
+      <i class="glyphicon glyphicon-home"></i>
+    </a>
+    <a href="#" class="btn btn-default  btn-xs">Profile</a>
+    <!-- <a  class="btn btn-default  btn-xs active">Add Product Category</a> -->
+  </div>
+</section>
 <section class="content">
   <!-- <div class="text-center">
   <?php //$supplier_id = $this->session->userdata('user_id'); ?>
@@ -14,7 +22,7 @@
   <div class="col-md-12">
     <div class="box box-info">
       <div class="box-header">
-        <h2 class="box-title">Account</h2>
+        <h2 class="box-title">profile</h2>
       </div>
 
       <?php //echo $error;?>

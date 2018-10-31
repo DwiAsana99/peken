@@ -287,21 +287,21 @@
   }
 </style>
 <script>
-$(document).ready(function () {
-  $('.dropdown-submenu a.test').on("click", function (e) {
-    $(this).next('ul').toggle();
-    $('.dropdown-submenu a.test').not(this).each(function () {
-      $(this).next('ul').css('display', 'none')
+  $(document).ready(function () {
+    $('.dropdown-submenu a.test').on("click", function (e) {
+      $(this).next('ul').toggle();
+      $('.dropdown-submenu a.test').not(this).each(function () {
+        $(this).next('ul').css('display', 'none')
+      });
+      e.stopPropagation();
+      e.preventDefault();
     });
-    e.stopPropagation();
-    e.preventDefault();
+    $('#signOut').click(function () {
+      $("#myNavbar").animate({
+        scrollTop: $('#myNavbar').prop("scrollHeight")
+      }, 1000);
+    });
   });
-  $('#signOut').click(function () {
-    $("#myNavbar").animate({
-      scrollTop: $('#myNavbar').prop("scrollHeight")
-    }, 1000);
-  });
-});
 </script>
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container cont-top">
@@ -411,20 +411,23 @@ $(document).ready(function () {
                 <div class="row">
                   <div class="col-md-12">
                     <form class="form" role="form" method="post" action="<?php echo base_url().'user/login';?>" accept-charset="UTF-8"
-                      id="login-nav">
-                      <!-- <div id="max_upload_product_image_alert" class="alert alert-danger" role="alert">
-                        <p id="max_upload_product_image_error"> <span class="glyphicon glyphicon-exclamation-sign"> </span> Wrong e-mail or password</p>
-                      </div> -->
-                      <div class="form-group">
-                        <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                        <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                      id="loginForm">
+
+                      <div id="login_alert" class="" role="alert">
+                        <p id="login_error"></p>
+                      </div>
+                      <div class="form-group"  id="formGroupEmail">
+                        <label class="sr-only" for="email">Email address</label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="Email address" >
+                        <span id="spanEmail" class=""></span>
+                      </div>
+                      <div class="form-group" id="formGroupPassword">
+                        <label class="sr-only" for="password" >Password</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password" >
+                        <span id="spanPassword" class=""></span>
                       </div>
                       <div class="form-group">
-                        <label class="sr-only" for="exampleInputPassword2">Password</label>
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                      </div>
-                      <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                        <button type="submit" class="btn btn-primary btn-block" id="btnLogin">Log in</button>
                       </div>
                     </form>
                   </div>
@@ -432,6 +435,73 @@ $(document).ready(function () {
               </li>
             </ul>
           </li>
+          <script type="text/javascript">
+          $(function(){
+            $('#btnLogin').click(function(event){
+              event.preventDefault();
+              var password = $('#password').val();
+              var email = $('#email').val();
+              var password_error = "";
+              var email_error = "";
+              var emailPatern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+              var data = {
+                'password': password,
+                'email': email
+              };
+              $.ajax({
+                type: 'POST',
+                dataType: 'html',
+                url: "<?php echo base_url().'User/get_user_credential'; ?>",
+                cache: false,
+                data: data,
+                success: function (response) {
+                  //console.log(response);
+                  if (email.trim() == "") {
+                    email_error = "Please fill out email address...";
+                    $("#spanEmail").html(email_error);
+                    $("#spanEmail").addClass("help-block");
+                    $("#formGroupEmail").addClass("has-error").removeClass( "has-success" );
+                  } else if (emailPatern.test(email) ==  false) {
+                    email_error = email+" is not valid email";
+                    $("#spanEmail").html(email_error);
+                    $("#spanEmail").addClass("help-block");
+                    $("#formGroupEmail").addClass("has-error").removeClass( "has-success" );
+                  }
+                  if (password.trim() == "") {
+                    password_error = "Please fill out password...";
+                    $("#spanPassword").html(password_error);
+                    $("#spanPassword").addClass("help-block");
+                    $("#formGroupPassword").addClass("has-error").removeClass( "has-success" );
+                  }
+                  if (email_error == "" && password_error == "") {
+                    if (response == 0 ) {
+                      $("#login_alert").addClass('alert alert-danger');
+                      $("#login_error").html('Wrong e-mail or password');
+                    } else if (response == 1 ){
+                      $.LoadingOverlay("show");
+                      console.log('silahkan masuk');
+                      setTimeout( function () {
+                        $("#loginForm").submit();
+                      }, 2000);
+                    }
+                  }
+
+                }
+              });
+            });
+            $("#password").focus(function() {
+              // $("#iconSpan").removeAttr("class");
+              $("#login_alert").removeAttr("class");
+              $("#login_error").html('');
+            });
+            $("#email").focus(function() {
+              $("#spanEmail").html("");
+              $("#formGroupEmail").removeClass("has-success").removeClass("has-error");
+              $("#login_alert").removeAttr("class");
+              $("#login_error").html('');
+            });
+          })
+        </script>
         <?php elseif ($user_level == 2 OR $user_level == 3): ?>
           <!-- _____________||_____________ -->
           <li class="dropdown" id="unread_chat_notification_bell">

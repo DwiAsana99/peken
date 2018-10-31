@@ -737,7 +737,7 @@
         'LastName' => $this->input->post('last_name'),
         'CompanyName' => $this->input->post('company_name'),
         'IsConfirmated' => 1,
-        'IsVerifiedSupplier' => -1,
+        'IsVerifiedSupplier' => 0,
         'MemberDate' => $this->M_date->get_date_sql_format(),
         'Phone' => $this->input->post('phone')
         );
@@ -877,7 +877,20 @@
       } else {
         echo "0";
       }
-
+    }
+    function get_user_credential() {
+      $password = $this->input->post('password');
+      $email = $this->input->post('email');
+      //echo $old_password." ".$member_id;exit();
+      $user_rules['filter_value'] =  array('email'=>$email, 'password'=>sha1($password));
+      $this->M_user->set_search_user($user_rules);
+      $get_user = $this->M_user->get_user();
+      $num_rows = $get_user->num_rows();
+      if ($num_rows == 1) {
+        echo "1";
+      } else {
+        echo "0";
+      }
     }
     function get_user_box_stats()
     {

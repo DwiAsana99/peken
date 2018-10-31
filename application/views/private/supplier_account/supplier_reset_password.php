@@ -1,7 +1,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="btn-group btn-breadcrumb">
-    <a href="#" class="btn btn-default btn-xs">
+    <a href="<?php echo base_url().'User/supplier_dashboard_view' ?>" class="btn btn-default btn-xs">
       <i class="glyphicon glyphicon-home"></i>
     </a>
     <a href="#" class="btn btn-default  btn-xs">Reset Password</a>

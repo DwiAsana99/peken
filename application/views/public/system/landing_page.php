@@ -200,3 +200,15 @@
   });
   </script>
 <?php endif; ?>
+<script type="text/javascript">
+$(document).ready(function(){
+  $.LoadingOverlaySetup({
+    color           : "rgba(255, 255, 255, 0.8)" ,
+    image           : "<?php echo base_url('assets/image-sistem/loading.gif') ?>",
+    maxSize         : "230px",
+    minSize         : "230px",
+    resizeInterval  : 0,
+    size            : "100%"
+  });
+});
+</script>

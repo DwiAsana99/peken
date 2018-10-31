@@ -2,7 +2,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="btn-group btn-breadcrumb">
-    <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
+    <a href="<?php echo base_url().'User/admin_dashboard_view' ?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
     <a href="<?php echo base_url('index.php/Product_sub_category/product_sub_category_view');?>" class="btn btn-default  btn-xs">Product Sub Category</a>
     <a href="<?php echo base_url('index.php/Product_sub_category/product_sub_category_add_view');?>" class="btn btn-default  btn-xs active">Add Product Sub Category</a>
   </div>

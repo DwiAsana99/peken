@@ -44,7 +44,7 @@ white-space: nowrap;
         <?php foreach($quotation as $q){ ?>
           <tr class="click">
             <td>
-              <a target='_blank' href="<?php echo base_url().'Quotation/buyer_quotation_detail/'.$q->Code; ?>">
+              <a href="<?php echo base_url().'Quotation/buyer_quotation_detail/'.$q->Code; ?>">
                 <?php echo $q->CompanyName  ?>
               </a>
             </td>

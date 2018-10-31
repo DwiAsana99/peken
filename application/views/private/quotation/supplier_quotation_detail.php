@@ -65,7 +65,7 @@
 </style>
 <section class="content-header">
   <div class="btn-group btn-breadcrumb">
-    <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
+    <a href="<?php echo base_url().'User/supplier_dashboard_view' ?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
     <a href="<?php echo base_url('Quotation/supplier_quotation_list');?>" class="btn btn-default  btn-xs">Quotation List</a>
     <a  class="btn btn-default  btn-xs active">Quotation Detail</a>
   </div>

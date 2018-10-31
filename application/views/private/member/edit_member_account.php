@@ -1,7 +1,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 <section class="content-header">
   <div class="btn-group btn-breadcrumb">
-    <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
+    <a href="<?php echo base_url().'User/admin_dashboard_view' ?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
     <a href="<?php echo base_url('User/member_view');?>" class="btn btn-default  btn-xs">Member List</a>
     <a  class="btn btn-default  btn-xs active">Edit Member Account</a>
   </div>

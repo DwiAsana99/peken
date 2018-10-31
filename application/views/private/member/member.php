@@ -1,6 +1,6 @@
 <section class="content-header">
   <div class="btn-group btn-breadcrumb">
-    <a href="#" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
+    <a href="<?php echo base_url().'User/admin_dashboard_view' ?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-home"></i></a>
     <a  class="btn btn-default  btn-xs active">Member List</a>
   </div>
 </section>
@@ -119,9 +119,7 @@ visibility: hidden;
                   <?php endif; ?>
                   <td>
                     <?php
-                    if ($m->IsVerifiedSupplier == -1) {
-                      echo "Waiting";
-                    }
+
                       if ($m->IsVerifiedSupplier == 0) {
                         echo "Not Verified";
                       }
@@ -132,16 +130,16 @@ visibility: hidden;
                   </td>
                   <td>
                     <?php if ($m->UserLevel == 1 || $m->UserLevel == 3): ?>
-                      <a target="_blank" class="btn btn-info" href="<?php echo site_url('User/edit_member_account_view/').$m->Id ?>" style="padding: 0px 0px;" data-toggle="tooltip"
+                      <a  class="btn btn-info" href="<?php echo site_url('User/edit_member_account_view/').$m->Id ?>" style="padding: 0px 0px;" data-toggle="tooltip"
                          data-placement="bottom" title="Edit Member Account">
                         <span class="glyphicon glyphicon-edit" style="padding-right: 5px; padding-left: 5px;"> </span>
                       </a>
-                      <a target="_blank" class="btn btn-success" href="<?php echo site_url('User/supplier_verification_view/').$m->Id ?>"
+                      <a  class="btn btn-success" href="<?php echo site_url('User/supplier_verification_view/').$m->Id ?>"
                          style="padding: 0px 0px;" data-toggle="tooltip" data-placement="bottom" title="Supplier Verification">
                         <span class="glyphicon glyphicon-certificate" style="padding-right: 5px; padding-left: 5px;"> </span>
                       </a>
                     <?php else: ?>
-                      <a target="_blank" class="btn btn-info" href="<?php echo site_url('User/edit_member_account_view/').$m->Id ?>" style="padding: 0px 0px;" data-toggle="tooltip" data-placement="bottom" title="Edit Member Account">
+                      <a  class="btn btn-info" href="<?php echo site_url('User/edit_member_account_view/').$m->Id ?>" style="padding: 0px 0px;" data-toggle="tooltip" data-placement="bottom" title="Edit Member Account">
                         <span class="glyphicon glyphicon-edit" style="padding-right: 5px; padding-left: 5px;"></span>
                       </a>
                     <?php endif; ?>
