@@ -47,7 +47,7 @@ visibility: hidden;
                   </div>
 
                   <div class="form-group">
-                    <label for="filter">Filter by member category</label>
+                    <label for="user_level">Filter by member category</label>
                     <select class="form-control" name="user_level" id="user_level">
                       <?php if ($user_level == 1){ ?>
                         <option value="-1" >All Category</option>
@@ -74,6 +74,24 @@ visibility: hidden;
                         <option value="1" >Supplier</option>
                         <option value="2" >Buyer</option>
                         <option value="3">Both</option>
+                      <?php } ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="is_verified_supplier">Is Verified Supplier</label>
+                    <select class="form-control" name="is_verified_supplier" id="is_verified_supplier">
+                      <?php if ($is_verified_supplier == 0){ ?>
+                        <option value="-1" >All</option>
+                        <option value="0" selected>Not Verified</option>
+                        <option value="1" >Verified</option>
+                      <?php }elseif($is_verified_supplier == 1){ ?>
+                        <option value="-1" >All</option>
+                        <option value="0" >Not Verified</option>
+                        <option value="1" selected>Verified</option>
+                      <?php }else{ ?>
+                        <option value="-1" selected>All</option>
+                        <option value="0" >Not Verified</option>
+                        <option value="1" >Verified</option>
                       <?php } ?>
                     </select>
                   </div>
@@ -161,10 +179,12 @@ visibility: hidden;
 var search_btn = document.getElementById('search_btn');
 var search_company_name = document.getElementById('search_company_name');
 var user_level = document.getElementById('user_level');
+var is_verified_supplier = document.getElementById('is_verified_supplier');
 function get_member() {
   user_level = "user_level="+user_level.value;
   search_company_name = "search_company_name="+search_company_name.value;
-  search_btn.setAttribute("href","<?php echo site_url('User/member_view?'); ?>"+user_level+"&"+search_company_name);
+  is_verified_supplier = "is_verified_supplier="+is_verified_supplier.value;
+  search_btn.setAttribute("href","<?php echo site_url('User/member_view?'); ?>"+user_level+"&"+search_company_name+"&"+is_verified_supplier);
 }
 search_btn.addEventListener("click", get_member);
 </script>

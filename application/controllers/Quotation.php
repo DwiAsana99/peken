@@ -618,25 +618,67 @@ class Quotation extends CI_Controller{
 
     // $product_pic  = $get_product_pic->result();
     $buyer = $get_buyer->row();
-    $content = " <p><img  src='".base_url()."assets/front_end_assets/img/2Dinilaku_Logo.png' width='175' alt=''></p>
-                <h2>Request for Quotation Code <b>".$quotation_code."</b></h2>
-                <table>
-                  <tr>
-                  <td><p style='font-size:large'>Request by </p></td><td><p style='font-size:large'> : ".$buyer->LastName."</p></td>
-                  </tr>
-                  <tr>
-                  <td><p style='font-size:large'>Email </p></td><td><p style='font-size:large'> : ".$buyer->Email."</p></td>
-                  </tr>
-                  <tr>
-                  <td><p style='font-size:large'>To buy </p></td><td><p style='font-size:large'> : ".$product_name."</p></td>
-                  </tr>
-                  <tr>
-                  <td><p style='font-size:large'>Quantity </p></td><td><p style='font-size:large'> : ".$qty."</p></td>
-                  </tr>
-                  <tr>
-                  <td><p style='font-size:large'>Message </p></td><td><p style='font-size:large'> : ".$message."</p></td>
-                  </tr>
-                </table>";
+    // $content = " <p style='text-align: center'><img  src='https://dinilaku.files.wordpress.com/2017/04/cropped-web.jpg' width='175' alt=''></p>
+    //             <h2 style='text-align: center'>Request for Quotation Code <b>".$quotation_code."</b></h2>
+    //
+    //
+    //               <p style='font-size:medium;text-align: center;'><b>Request by</b></p>
+    //               <p style='font-size:medium;text-align: center;'>".$buyer->LastName."</p>
+    //
+    //               <p style='font-size:medium;text-align: center;'><b>Email</b></p>
+    //               <p style='font-size:medium;text-align: center;'>".$buyer->Email."</p>
+    //
+    //               <p style='font-size:medium;text-align: center;'><b>To buy</b></p>
+    //               <p style='font-size:medium;text-align: center;'>".$product_name."</p>
+    //
+    //               <p style='font-size:medium;text-align: center;'><b>Quantity</b></p>
+    //               <p style='font-size:medium;text-align: center;'>".$qty."</p>
+    //
+    //               <p style='font-size:medium;text-align: center;'><b>Message</b></p>
+    //               <p style='font-size:medium;text-align: center;'>".$message."</p>
+    //
+    //
+    //             ";
+    $content = " <p style='text-align: center'><img  src='".base_url()."assets/front_end_assets/img/2Dinilaku_Logo.png' width='175' alt=''></p>
+                <h2 style='text-align: center'>Request for Quotation Code <b>".$quotation_code."</b></h2>
+
+
+                  <p style='font-size:medium;text-align: center;'><b>Request by</b></p>
+                  <p style='font-size:medium;text-align: center;'>".$buyer->LastName."</p>
+
+                  <p style='font-size:medium;text-align: center;'><b>Email</b></p>
+                  <p style='font-size:medium;text-align: center;'>".$buyer->Email."</p>
+
+                  <p style='font-size:medium;text-align: center;'><b>To buy</b></p>
+                  <p style='font-size:medium;text-align: center;'>".$product_name."</p>
+
+                  <p style='font-size:medium;text-align: center;'><b>Quantity</b></p>
+                  <p style='font-size:medium;text-align: center;'>".$qty."</p>
+
+                  <p style='font-size:medium;text-align: center;'><b>Message</b></p>
+                  <p style='font-size:medium;text-align: center;'>".$message."</p>
+
+
+                ";
+    // $content = " <p><img  src='".base_url()."assets/front_end_assets/img/2Dinilaku_Logo.png' width='175' alt=''></p>
+    //             <h2>Request for Quotation Code <b>".$quotation_code."</b></h2>
+    //             <table>
+    //               <tr>
+    //               <td><p style='font-size:large'>Request by </p></td><td><p style='font-size:large'> : ".$buyer->LastName."</p></td>
+    //               </tr>
+    //               <tr>
+    //               <td><p style='font-size:large'>Email </p></td><td><p style='font-size:large'> : ".$buyer->Email."</p></td>
+    //               </tr>
+    //               <tr>
+    //               <td><p style='font-size:large'>To buy </p></td><td><p style='font-size:large'> : ".$product_name."</p></td>
+    //               </tr>
+    //               <tr>
+    //               <td><p style='font-size:large'>Quantity </p></td><td><p style='font-size:large'> : ".$qty."</p></td>
+    //               </tr>
+    //               <tr>
+    //               <td><p style='font-size:large'>Message </p></td><td><p style='font-size:large'> : ".$message."</p></td>
+    //               </tr>
+    //             </table>";
     $subject = " Request for quotation from ".$buyer->LastName." to buy ".$product_name;
     $data = array(
       "Code" => $quotation_code,

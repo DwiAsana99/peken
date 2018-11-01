@@ -399,28 +399,41 @@
 
     function member_view(){
       $user_id = $this->session->userdata('user_id');
-      $user_level = $this->session->userdata('user_level');
-      if (empty($user_id) || $user_level != 0) {
+      $user_level_account = $this->session->userdata('user_level');
+      if (empty($user_id) || $user_level_account != 0) {
         $this->session->sess_destroy();
         redirect('Home/home_view');
       }
       $filter_num = 0;
+      $user_rules = "";
       if (!empty($this->input->get())) {
-        if (!empty($this->input->get('user_level'))) {
+        if (is_numeric($this->input->get('user_level'))) {
           $user_level = $this->input->get('user_level');
-          $user_level = ($user_level == -1) ? "-1 OR user_tb.UserLevel <> 0 " : $user_level ;
           $filter_num = ($user_level == -1) ? $filter_num+0 : $filter_num+1 ;
+          $user_level = ($user_level == -1) ? "-1 OR user_tb.UserLevel <> 0 " : $user_level ;
           $user_rules['filter_value']['user_level'] = $user_level;
           $data['user_level'] = $this->input->get('user_level');
+
         }
-        if (!empty($this->input->get('search_company_name'))) {
+        if (is_numeric($this->input->get('is_verified_supplier'))) {
+          $is_verified_supplier = $this->input->get('is_verified_supplier');
+          $filter_num = ($is_verified_supplier == -1) ? $filter_num+0 : $filter_num+1 ;
+          $is_verified_supplier = ($is_verified_supplier == -1) ? " AND (user_tb.IsVerifiedSupplier = 0 OR user_tb.IsVerifiedSupplier = 1)  " : " AND user_tb.IsVerifiedSupplier = ".$is_verified_supplier ;
+          $user_rules['filter_value']['is_verified_suppliers'] = $is_verified_supplier;
+          $data['is_verified_supplier'] = $this->input->get('is_verified_supplier');
+
+        }
+        if ($this->input->get('search_company_name') != "") {
           $search_company_name = $this->input->get('search_company_name');
           $user_rules['filter_value']['search_value'] = $search_company_name;
-          $filter_num = !empty($search_company_name) ? $filter_num+1 : $filter_num+0 ;
+          $filter_num = ($search_company_name != "") ? $filter_num+1 : $filter_num+0 ;
           $data['search_company_name'] = $this->input->get('search_company_name');
+
         }
         $this->M_user->set_search_user($user_rules);
       } else {
+        $data['user_level'] = -1;
+        $data['is_verified_supplier'] = -1;
         $user_rules['filter_value']['user_level'] = "1 OR user_tb.UserLevel = 2 OR user_tb.UserLevel = 3";
         $this->M_user->set_search_user($user_rules);
       }
@@ -429,6 +442,10 @@
       $data['filter_num']= $filter_num;
       $get_member = $this->M_user->get_user();
       $data['member'] = $get_member->result();
+
+      // echo "<pre>";
+      // print_r($data);
+      // echo "</pre>";exit();
       $this->load->view('template/back_admin/admin_head');
       $this->load->view('template/back_admin/admin_navigation');
       $this->load->view('template/back_admin/admin_sidebar');
@@ -882,6 +899,11 @@
       $password = $this->input->post('password');
       $email = $this->input->post('email');
       //echo $old_password." ".$member_id;exit();
+      // if (isset($email) && isset($password)) {
+      //   $user_rules['filter_value'] =  array('email'=>$email, 'password'=>sha1($password));
+      // }elseif (isset($email)) {
+      //   $user_rules['filter_value'] =  array('email'=>$email);
+      // }
       $user_rules['filter_value'] =  array('email'=>$email, 'password'=>sha1($password));
       $this->M_user->set_search_user($user_rules);
       $get_user = $this->M_user->get_user();

@@ -30,6 +30,7 @@ class M_user extends CI_Model{
     $this->filter_value .= isset($rules['filter_value']['password']) ? " AND user_tb.Password = "."'".$rules['filter_value']['password']."'" : "" ;
     $this->filter_value .= isset($rules['filter_value']['search_value']) ? " AND user_tb.CompanyName LIKE "."'%".$rules['filter_value']['search_value']."%'"  : "" ;
     $this->filter_value .= isset($rules['filter_value']['is_verified_supplier']) ? " AND user_tb.IsVerifiedSupplier = ".$rules['filter_value']['is_verified_supplier'] : "" ;
+    $this->filter_value .= isset($rules['filter_value']['is_verified_suppliers']) ? $rules['filter_value']['is_verified_suppliers'] : "" ;
   }
   function get_user() {
     $query = "SELECT user_tb.* ".$this->other_table_columns."
