@@ -566,11 +566,73 @@ class Quotation extends CI_Controller{
   function update_quotation_status(){
     $quotation_code = $this->input->post('quotation_code');
     $status = $this->input->post('status');
+    $supplier_email = $this->input->post('supplier_email');
+
+    $quotation_rules['join']['other_table_columns'] = " ,user_tb.*, product_tb.* ";
+		$quotation_rules['join']['join_table'] = " INNER JOIN user_tb INNER JOIN product_tb
+		ON quotation_tb.BuyerId = user_tb.Id
+    AND quotation_tb.ProductId = product_tb.Id ";
+    $quotation_rules['filter_value'] =  array('quotation_code' => $quotation_code);
+		$this->M_quotation->set_search_quotation($quotation_rules);
+    $get_quotation = $this->M_quotation->get_quotation();
+    $row = $get_quotation->row();
+    //
+    // echo "<pre>";
+    // print_r($data['quotation'] = $get_quotation->result());
+    // echo "</pre>";exit();
     $data = array('IsAccepted' => $status);
     $this->M_quotation->update_quotation($data,$quotation_code) ;
     if ($status == 1) {
+      $content = " <p style='text-align: center'><img  src='".base_url()."assets/front_end_assets/img/2Dinilaku_Logo.png' width='200' alt=''></p>
+                  <h2 style='text-align: center'>Your Quotation Accepted</h2>
+
+                    <p style='font-size:medium;text-align: center;'><b>Request for Quotation Code</b></p>
+                    <p style='font-size:medium;text-align: center;'>".$quotation_code."</p>
+
+                    <p style='font-size:medium;text-align: center;'><b>Buyer Email</b></p>
+                    <p style='font-size:medium;text-align: center;'>".$row->Email."</p>
+
+                    <p style='font-size:medium;text-align: center;'><b>To buy</b></p>
+                    <p style='font-size:medium;text-align: center;'>".$row->Name."</p>
+
+                    <p style='font-size:medium;text-align: center;'><b>Quantity</b></p>
+                    <p style='font-size:medium;text-align: center;'>".$row->Qty."</p>
+
+                    <p style='font-size:medium;text-align: center;'><a href='".base_url()."Quotation/supplier_quotation_detail?quotation_code=".$quotation_code."' style='background-color: #4CAF50; border-radius: 50px; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block;font-size: 16px; margin: 4px 2px;cursor: pointer;' >Go to Quotation Detail</a></p>
+
+                  ";
+      $this->email->from('marketplacesilver@gmail.com', 'marketplacesilver');
+      $this->email->to($supplier_email);
+      $this->email->subject("Your Quotation Accepted");
+      $this->email->message($content);
+      $this->email->set_newline("\r\n");
+      $this->email->send();
       $this->session->set_flashdata('msg', 'Accept quotation successfully');
     } elseif ($status == 0) {
+      $content = " <p style='text-align: center'><img  src='".base_url()."assets/front_end_assets/img/2Dinilaku_Logo.png' width='200' alt=''></p>
+                  <h2 style='text-align: center'>Your Quotation Accepted</h2>
+
+                    <p style='font-size:medium;text-align: center;'><b>Request for Quotation Code</b></p>
+                    <p style='font-size:medium;text-align: center;'>".$quotation_code."</p>
+
+                    <p style='font-size:medium;text-align: center;'><b>Buyer Email</b></p>
+                    <p style='font-size:medium;text-align: center;'>".$row->Email."</p>
+
+                    <p style='font-size:medium;text-align: center;'><b>To buy</b></p>
+                    <p style='font-size:medium;text-align: center;'>".$row->Name."</p>
+
+                    <p style='font-size:medium;text-align: center;'><b>Quantity</b></p>
+                    <p style='font-size:medium;text-align: center;'>".$row->Qty."</p>
+
+                    <p style='font-size:medium;text-align: center;'><a href='".base_url()."Quotation/supplier_quotation_detail?quotation_code=".$quotation_code."' style='background-color: #e00606; border-radius: 50px; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block;font-size: 16px; margin: 4px 2px;cursor: pointer;' >Go to Quotation Detail</a></p>
+
+                  ";
+      $this->email->from('marketplacesilver@gmail.com', 'marketplacesilver');
+      $this->email->to($supplier_email);
+      $this->email->subject("Your Quotation Rejected");
+      $this->email->message($content);
+      $this->email->set_newline("\r\n");
+      $this->email->send();
       $this->session->set_flashdata('msg', 'Reject quotation successfully');
     }
     redirect('Quotation/buyer_quotation_detail/'.$quotation_code);
@@ -639,7 +701,7 @@ class Quotation extends CI_Controller{
     //
     //
     //             ";
-    $content = " <p style='text-align: center'><img  src='".base_url()."assets/front_end_assets/img/2Dinilaku_Logo.png' width='175' alt=''></p>
+    $content = " <p style='text-align: center'><img  src='".base_url()."assets/front_end_assets/img/2Dinilaku_Logo.png' width='200' alt=''></p>
                 <h2 style='text-align: center'>Request for Quotation Code <b>".$quotation_code."</b></h2>
 
 

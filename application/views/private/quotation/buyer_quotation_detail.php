@@ -180,6 +180,7 @@
           <form id="form_accept" action="<?php echo base_url().'Quotation/update_quotation_status'; ?>" method="post">
             <input type="hidden" name="quotation_code" value="<?php echo $quotation[0]->Code; ?>">
             <input type="hidden" name="status" value="1">
+            <input type="hidden" name="supplier_email" value="<?php echo $product[0]->Email; ?>">
             <button id="btn_accept" type="submit" class="btn btn-success col-xs-12 col-sm-12">Accept</button>
           </form>
         </div>
@@ -187,6 +188,7 @@
           <form id="form_reject" action="<?php echo base_url().'Quotation/update_quotation_status'; ?>" method="post">
             <input type="hidden" name="quotation_code" value="<?php echo $quotation[0]->Code; ?>">
             <input type="hidden" name="status" value="0">
+            <input type="hidden" name="supplier_email" value="<?php echo $product[0]->Email; ?>">
             <button id="btn_reject" type="submit" class="btn btn-danger col-xs-12 col-sm-12">Reject</button>
           </form>
         </div>
