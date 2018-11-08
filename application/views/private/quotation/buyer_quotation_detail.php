@@ -62,7 +62,7 @@
           : <?php echo $quotation[0]->SendDate; ?>
         </div>
         <div class="col-md-3">
-          Buyer Name
+          Supplier Name
         </div>
         <div class="col-md-9">
           : <?php echo $product[0]->CompanyName; ?>

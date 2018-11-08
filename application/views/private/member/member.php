@@ -18,7 +18,7 @@ visibility: hidden;
       <div class="box">
         <div class="box-header">
           <h3 class="box-title">Member List</h3>
-          <button type="button" style="float:right" class="btn btn-info " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-filter"></span> Add Filter <span  class="badge"><?php echo $filter_num ?></span></button>
+          <button type="button" style="float:right" class="btn btn-info " data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-filter"></span> Advanced Filter <span  class="badge"><?php echo $filter_num ?></span></button>
           <!-- <a style="float:right"  href="" class="btn btn-primary">
           <i class="glyphicon glyphicon-saved"></i>
           Add Supplier
@@ -38,7 +38,7 @@ visibility: hidden;
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Add Filter</h4>
+                  <h4 class="modal-title" id="myModalLabel">Advanced Filter</h4>
                 </div>
                 <div class="modal-body">
                   <div class="form-group">

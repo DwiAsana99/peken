@@ -21,7 +21,7 @@
                     <form method="post" id="Simpan" action="<?php echo base_url().'Product_category/edit_product_category'; ?>">
                     <div class="form-group">
                             <label class="control-label">Product Category</label>
-                            <input type="text" name="product_category"  value="<?php echo $data[0]->ProductCategory; ?>"  data-validation="length" data-validation-length="min2" data-validation-error-msg="Please fill out category name..."  class="form-control"  placeholder="">
+                            <input type="text" name="product_category"  value="<?php echo $data[0]->ProductCategory; ?>"  data-validation="length" data-validation-length="min2" data-validation-error-msg="Please fill out product category name..."  class="form-control"  placeholder="">
                             <input type="hidden" name="product_category_code"  value="<?php echo $data[0]->Code; ?>" class="form-control"  placeholder="">
                     </div>
 

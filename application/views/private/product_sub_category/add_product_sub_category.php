@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
               <label class="control-label">Product Sub Category</label>
-              <input type="text" name="product_sub_category" id="product_sub_category"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out category name..."  class="form-control"  placeholder="">
+              <input type="text" name="product_sub_category" id="product_sub_category"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out product sub category name..."  class="form-control"  placeholder="">
             </div>
             <!-- <div class="form-group">
             <label class="control-label">Description</label>

@@ -98,7 +98,13 @@
               <b>Buyer Name</b>
             </div>
             <div class="">
-              <?php echo $product[0]->CompanyName; ?>
+              <?php echo $buyer_data[0]->LastName; ?>
+            </div>
+            <div class="">
+              <b>Company Name</b>
+            </div>
+            <div class="">
+              <?php echo $buyer_company_name = ($buyer_data[0]->CompanyName !== "" || !empty($buyer_data[0]->CompanyName)) ? $buyer_data[0]->CompanyName : "-" ;  ?>
             </div>
             <div class="">
               <b>Product Name</b>
@@ -130,7 +136,13 @@
               Buyer Name
             </div>
             <div class="col-md-9">
-              : <?php echo $product[0]->CompanyName; ?>
+              : <?php echo $buyer_data[0]->LastName; ?>
+            </div>
+            <div class="col-md-3">
+              Company Name
+            </div>
+            <div class="col-md-9">
+              : <?php echo $buyer_company_name = ($buyer_data[0]->CompanyName !== "" || !empty($buyer_data[0]->CompanyName)) ? $buyer_data[0]->CompanyName : "-" ;  ?>
             </div>
             <div class="col-md-3">
               Product Name

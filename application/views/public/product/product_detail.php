@@ -240,7 +240,39 @@
   </ul>
   <div class="tab-content clearfix">
     <div class="tab-pane active" id="1a">
-      <div style="margin-top:20px">
+      <div style="margin-top:20px" class="hidden-md  hidden-lg">
+        <div class="">
+           <b>Product Unit</b>
+        </div>
+        <div class="">
+          <?php echo $product[0]->Unit; ?>
+        </div>
+        <div class="">
+           <b>Supply Ability</b>
+        </div>
+        <div class="">
+          <?php echo number_format($product[0]->SupplyAbility, 0, '.', ','); ?>
+        </div>
+        <div class="">
+           <b>Period Supply Ability</b>
+        </div>
+        <div class="">
+          <?php echo $product[0]->PeriodSupplyAbility; ?>
+        </div>
+        <div class="">
+           <b>Packaging and Delivery</b>
+        </div>
+        <div class="">
+          <?php echo $product[0]->PkgDelivery; ?>
+        </div>
+        <div class="">
+           <b>Product Description</b>
+        </div>
+        <div class="">
+          <?php echo $product[0]->ProductDescription; ?>
+        </div>
+      </div>
+      <div style="margin-top:20px" class="hidden-xs hidden-sm">
         <div class="col-md-2">
           Product Unit
         </div>
@@ -271,7 +303,6 @@
         <div class="col-md-10">
           : <?php echo $product[0]->ProductDescription; ?>
         </div>
-
       </div>
     </div>
     <div class="tab-pane seller_detail" id="2a">

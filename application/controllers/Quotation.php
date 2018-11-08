@@ -134,24 +134,27 @@ class Quotation extends CI_Controller{
         $this->M_quotation_detail->update_quotation_detail($set_quotation_detail_data,"",$unread_quotation_detail->QuotationDetailId);
       }
     }
-
+    // mencegah supplier lain mengakses halaman quotation detail supplier lain
     $quotation_rules['filter_value'] =  array('supplier_id' => $user_id, 'quotation_code'=>$quotation_code);
 		$this->M_quotation->set_search_quotation($quotation_rules);
     $get_quotation = $this->M_quotation->get_quotation();
-    // mencegah supplier lain mengakses halaman quotation detail supplier lain
     if ($get_quotation->num_rows() == 0) {
 			redirect('Quotation/supplier_quotation_list');
 		}
-
+    // mencari data buyer
+    $quotation_rules['join']['other_table_columns'] = " ,user_tb.* ";
+		$quotation_rules['join']['join_table'] = " INNER JOIN user_tb
+		ON quotation_tb.BuyerId = user_tb.Id ";
+    $quotation_rules['filter_value'] =  array('quotation_code'=>$quotation_code);
+		$this->M_quotation->set_search_quotation($quotation_rules);
+    $get_buyer_data = $this->M_quotation->get_quotation();
+    // Data untuk chat
     $this->M_quotation_detail->set_search_quotation_detail();// memastikan untuk bersih
     $quotation_detail_rules['join']['other_table_columns'] = " , user_tb.*  ";
 		$quotation_detail_rules['join']['join_table'] = " INNER JOIN user_tb
 		ON user_tb.Id = quotationdetail_tb.MemberId  ";
     $quotation_detail_rules['filter_value'] =  array('quotation_code' => $quotation_code, 'is_read' => 1);
     $quotation_detail_rules['order_by'] =  " quotationdetail_tb.SendDate ASC ";
-    // echo "<pre>";
-		// print_r($quotation_detail_rules);
-		// echo "</pre>";exit();
 		$this->M_quotation_detail->set_search_quotation_detail($quotation_detail_rules);
     $get_quotation_detail = $this->M_quotation_detail->get_quotation_detail();
 
@@ -175,7 +178,10 @@ class Quotation extends CI_Controller{
     $data['product'] = $get_product->result();
     $data['product_pic'] = $get_product_pic->result();
     $data['quotation_detail'] = $get_quotation_detail->result();
-
+    $data['buyer_data'] = $get_buyer_data->result();
+    // echo "<pre>";
+    // print_r($data['get_buyer_data']);
+    // echo "</pre>";exit();
     $this->load->view('template/back/head_back');
     $this->load->view('template/back/sidebar_back');
     $this->load->view('private/quotation/supplier_quotation_detail',$data);

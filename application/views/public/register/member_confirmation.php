@@ -18,13 +18,13 @@
         <div class="row">
           <div class="col-xs-12 ">
             <div class="form-group">
-              <label for="first_name">First Name</label>
+              <label class="control-label" for="first_name">First Name</label>
               <input type="text" class="form-control" name="first_name" value="<?php echo $user[0]->FirstName; ?>" id="first_name" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out first name...">
             </div>
           </div>
           <div class="col-xs-12 ">
             <div class="form-group">
-              <label for="last_name">Last Name</label>
+              <label class="control-label" for="last_name">Last Name</label>
               <input type="text" class="form-control" value="<?php echo $user[0]->LastName; ?>" name="last_name" id="last_name" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out last name...">
             </div>
           </div>
@@ -32,7 +32,7 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="company_name">Company Name</label>
+              <label class="control-label" for="company_name">Company Name</label>
               <input type="text" class="form-control" value="<?php echo $user[0]->CompanyName; ?>" name="company_name" id="company_name" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out company name...">
             </div>
           </div>
@@ -40,7 +40,7 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="company_name">Phone</label>
+              <label class="control-label" for="company_name">Phone</label>
               <input type="text" class="form-control" value="<?php echo $user[0]->Phone; ?>" name="phone" id="phone" placeholder="" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out phone...">
             </div>
           </div>
@@ -48,7 +48,7 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="password">Password</label>
+              <label class="control-label" for="password">Password</label>
               <input type="password" class="form-control" value="" name="password" id="password" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out password...">
             </div>
           </div>
@@ -56,7 +56,7 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="c_password">Confirm Password</label>
+              <label class="control-label" for="c_password">Confirm Password</label>
               <input type="password" class="form-control" value="" name="c_password" id="c_password" data-validation="length" data-validation-length="min1" data-validation-error-msg="Please fill out password...">
             </div>
           </div>

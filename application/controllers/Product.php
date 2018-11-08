@@ -69,7 +69,7 @@ class Product extends CI_Controller{
 				$baris = $get_product_category->row();
 				$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
 				$data['breadcrumb'] .= "<li class='active'>".$baris->ProductCategory."</li>";
-
+				$head_data['page_title'] = $baris->ProductCategory;
 			}
 			else {
 
@@ -100,7 +100,7 @@ class Product extends CI_Controller{
 				$baris->ProductCategoryCode."'>".$baris->ProductCategory."</a>"."</li>";
 				$data['breadcrumb'] .= "<li class='active'>".$baris->ProductSubCategory."</li>";
 					// $data['breadcrumb'] .= "<li class='active'>"."<a  href='".site_url('Product/public_product_list_view?')."product_sub_category_code=".$product_sub_category_code."'>".$baris->ProductSubCategory."</a>"."</li>";
-
+				$head_data['page_title'] = $baris->ProductSubCategory;
 
 			}
 		}
@@ -142,7 +142,7 @@ class Product extends CI_Controller{
 		// 	$data_nav['unread_quotation_detail'] = $get_unread_qutation_detail->result();
 		// 	$data_nav['unread_quotation_detail_num_rows'] = $get_unread_qutation_detail->num_rows();
 		// }
-		$head_data['page_title'] = "Dinilaku";
+		$head_data['page_title'] = isset($head_data['page_title']) ? $head_data['page_title'] : "Dinilaku" ;
 		//print_r($str_links);exit();
 		$this->load->view('template/front/head_front',$head_data);
 		$this->load->view('template/front/navigation',$data_nav);
@@ -174,8 +174,8 @@ class Product extends CI_Controller{
 		$data_nav['product_category'] = $get_product_category->result();
 		$data_nav['product_sub_category'] = $get_product_sub_category->result();
 
-		$head_data['page_title'] = "Dinilaku";
 		$baris = $get_product->row();
+		$head_data['page_title'] = $baris->Name;
 		$data['breadcrumb'] = "<li>"."<a href='".site_url('Home/home_view/')."'>Home</a>"."</li>";
 		$data['breadcrumb'] .= "<li>"."<a href='".site_url('Product/public_product_list_view?')."product_category_code=".$baris->ProductCategoryCode."'>".$baris->ProductCategory."</a>"."</li>";
 		$data['breadcrumb'] .= "<li >"."<a  href='".site_url('Product/public_product_list_view?')."product_sub_category_code=".$baris->ProductSubCategoryCode."'>".$baris->ProductSubCategory."</a>"."</li>";

@@ -28,7 +28,7 @@
               </div>
               <div class="form-group">
                 <label class="control-label">Product Sub Category</label>
-                <input type="text" name="product_sub_category"  value="<?php echo $data[0]->ProductSubCategory; ?>"  data-validation="length" data-validation-length="min2" data-validation-error-msg="Please fill out category name..."  class="form-control"  placeholder="">
+                <input type="text" name="product_sub_category"  value="<?php echo $data[0]->ProductSubCategory; ?>"  data-validation="length" data-validation-length="min2" data-validation-error-msg="Please fill out product sub category name..."  class="form-control"  placeholder="">
                 <input type="hidden" name="product_sub_category_code"  value="<?php echo $data[0]->ProductSubCategoryCode; ?>" class="form-control"  placeholder="">
               </div>
 
