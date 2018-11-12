@@ -13,11 +13,11 @@
 
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini fixed">
   <div class="wrapper">
     <header class="main-header">
       <!-- Logo -->
-      <a target="_blank" href="<?php echo site_url('Home/home_view/') ;?>" class="logo" style="position:fixed">
+      <a target="_blank" href="<?php echo site_url('Home/home_view/') ;?>" class="logo" >
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">
           <b>D</b>L</span>

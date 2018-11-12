@@ -80,7 +80,7 @@
     <div class="nav-center">
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home">Our Products</a></li>
-        <li><a data-toggle="tab" href="#about">About Us</a></li>
+        <li><a data-toggle="tab" href="#about">Our Gallery</a></li>
       </ul>
     </div>
   </div>

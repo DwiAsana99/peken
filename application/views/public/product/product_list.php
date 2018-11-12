@@ -230,8 +230,10 @@
 
 
   </ol>
+  <?php if (empty($product)): ?>
+    <h2 class="text-center">Sorry, no search results were found</h2>
+  <?php endif; ?>
   <div class="my-container">
-
     <?php $i = 1; foreach($product as $p){ ?>
     <div class="tes-hover">
       <a target="_blank" href="<?php echo site_url('Product/public_product_detail_view/').$p->ProductId ?>">
