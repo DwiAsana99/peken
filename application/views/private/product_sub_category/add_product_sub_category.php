@@ -20,7 +20,7 @@
           <form method="post" id="Simpan"  action="<?php echo base_url().'Product_sub_category/add_product_sub_category'; ?>">
             <div class="form-group">
               <label for="">Product Category</label>
-              <select class="form-control" name="product_category_code" id="product_category_code"  data-validation="length" data-validation-length="min2">
+              <select class="form-control" name="product_category_code" id="product_category_code"  data-validation="length" data-validation-length="min2" data-validation-error-msg="Please fill out product category...">
                 <option value=''>--Choose Product Category--</pilih>
                 <?php $i = 1; foreach($product_category as $pc){?>
                 <option value="<?php echo $pc->Code?>"><?php echo $pc->ProductCategory?></option>

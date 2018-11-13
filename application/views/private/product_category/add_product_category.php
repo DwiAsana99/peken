@@ -20,7 +20,8 @@
           <form method="post" id="Simpan"  action="<?php echo base_url().'Product_category/add_product_category'; ?>">
             <div class="form-group">
               <label class="control-label">Product Category</label>
-              <input type="text" name="product_category" id="product_category"  data-validation="length" data-validation-length="min4" data-validation-error-msg="Please fill out product category name..."  class="form-control"  placeholder="">
+              <input type="text" name="product_category" id="product_category"  data-validation="length" data-validation-length="min4"
+                data-validation-error-msg="Please fill out product category name..."  class="form-control"  placeholder="">
             </div>
             <!-- <div class="form-group">
             <label class="control-label">Description</label>

@@ -685,13 +685,14 @@
 
         $this->email->from('marketplacesilver@gmail.com', 'marketplacesilver');
         $this->email->to($email);
-        $this->email->subject('Email Konfirmasi Akun');
+        $this->email->subject('Account Confirmation Email');
 
-        $this->email->message(" <p><img  src='".base_url()."assets/front_end_assets/img/2Dinilaku_Logo.png' width='175' alt=''></p>
-        <a href='".base_url().
-        "User/member_confirmation_view/".$row->Email.
-        "'><i class='glyphicon glyphicon-time'></i>VERIFY YOUR ACCOUNTS</a>"
-        );
+        $content = " <p style='text-align: center'><img  src='".base_url()."assets/front_end_assets/img/2Dinilaku_Logo.png' width='200' alt=''></p>
+                    <h2 style='text-align: center'>Account Confirmation Email</h2>
+                    <p style='font-size:medium;text-align: center;'><a href='".base_url()."User/member_confirmation_view/".$row->Email."' style='background-color: #4CAF50; border-radius: 50px; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block;font-size: 16px; margin: 4px 2px;cursor: pointer;' >Confirm Your Account</a></p>
+                    ";
+
+        $this->email->message($content);
         $this->email->set_newline("\r\n");
         $this->email->send();
 
@@ -702,7 +703,7 @@
         $data_nav['product_category'] = $get_product_category->result();
         $data_nav['product_sub_category'] = $get_product_sub_category->result();
 
-        $head_data['page_title'] = "Quotation Detail";
+        $head_data['page_title'] = "Registration";
         $data['email'] = $email;
         $this->load->view('template/front/head_front',$head_data);
         $this->load->view('template/front/navigation',$data_nav);
@@ -768,14 +769,14 @@
           //$this->session->set_userdata('profile_image',$row->ProfilImage);
           $this->session->set_userdata('last_name',$this->input->post('last_name'));
           //echo "both";exit();
-          redirect('User/supplier_dashboard_view');
+          redirect('User/supplier_account_view');
         } elseif ($user_level==2) {
           $this->session->set_userdata('user_id',$user_id);
           $this->session->set_userdata('user_level',$user_level);
           $this->session->set_userdata('company_name',$this->input->post('company_name'));
           //$this->session->set_userdata('profile_image',$row->ProfilImage);
           $this->session->set_userdata('last_name',$this->input->post('last_name'));
-          redirect('Home/home_view');
+          redirect('User/buyer_account_view');
         } else {
           // $this->session->set_userdata('user_id',$user_id);
           // $this->session->set_userdata('user_level',$user_level);
